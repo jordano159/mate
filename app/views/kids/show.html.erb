@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @kid.name %>
+</p>
+<p>
+  <strong>Group:</strong>
+  <%= Group.find(@kid.group_id).name %>
+</p>
+
+<%= link_to 'Edit', edit_kid_path(@kid) %> |
+<%= link_to 'Back', kids_path %>

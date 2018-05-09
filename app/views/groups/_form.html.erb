@@ -1,0 +1,26 @@
+<%= simple_form_for(@group, html: { class: 'form-inline' }) do |form| %>
+  <% if group.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(group.errors.count, "error") %>
+        prohibited this group from being saved:
+      </h2>
+      <ul>
+        <% group.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.input :name %>
+  </div>
+  <div class="field">
+    <%= form.input :head_id, collection: @heads, as: :radio_buttons %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,26 @@
+<%= simple_form_for(@head, html: { class: 'form-inline' }) do |form| %>
+  <% if head.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(head.errors.count, "error") %>
+        prohibited this head from being saved:
+      </h2>
+      <ul>
+        <% head.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.input :name %>
+  </div>
+  <div class="field">
+    <%= form.input :axis_id, collection: @axes, as: :radio_buttons %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

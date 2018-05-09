@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @head.name %>
+</p>
+<p>
+  <strong>Axis:</strong>
+  <%= Axis.find(@head.axis_id).name %>
+</p>
+
+<%= link_to 'Edit', edit_head_path(@head) %> |
+<%= link_to 'Back', heads_path %>
