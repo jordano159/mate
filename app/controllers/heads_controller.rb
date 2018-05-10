@@ -1,6 +1,5 @@
 class HeadsController < ApplicationController
   before_action :set_head, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_staff!
 
   # GET /heads
   # GET /heads.json
