@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :staffs
   root 'axes#index'
   resources :kids
   resources :groups do

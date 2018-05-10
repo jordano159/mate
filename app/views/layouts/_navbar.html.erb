@@ -1,0 +1,30 @@
+<nav class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<%= link_to 'מטה', root_path, :class => 'navbar-brand' %>
+		</div>
+
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><%= link_to('', '#') %></li>
+				<li><%= link_to('', '#') %></li>
+				<li><%= link_to('', '#') %></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<% if staff_signed_in? %>
+					<li><%= link_to('My Account', edit_staff_registration_path) %></li>
+					<li><%= link_to "Sign out", destroy_staff_session_path, :method => :delete %></li>
+				<% else %>
+					<li><%= link_to('Sign in', new_staff_session_path) %></li>
+					<li><%= link_to('Sign up', new_staff_registration_path) %></li>
+				<% end %>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div><!--/.container-fluid -->
+</nav>
