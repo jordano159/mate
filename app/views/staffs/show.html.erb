@@ -6,8 +6,16 @@
 </p>
 <p>
   <strong>תפקיד:</strong>
-  לממש
+  <% case @staff.staffable_type %>
+  <% when "Group" %>
+    מדריך.ת קבוצת
+  <% when "Head" %>
+    ראשראש.ית
+  <% when "Axis" %>
+    רכז.ת ציר
+  <% end %>
+  <%= @staff.staffable.name %>
 </p>
 
-<%= link_to 'עריכה', edit_staff_path(@kid) %> |
-<%= link_to 'חזרה', staffs_path %>
+<%#= link_to 'עריכה', edit_staff_path(@kid) %>
+<%# link_to 'חזרה', staffs_path %>

@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   resources :axes do
     resources :staffs
   end
+  get '/staffs/:id', to: 'staffs#show', as: 'staff'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

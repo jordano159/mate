@@ -42,7 +42,7 @@
     <tbody>
       <% @head.staffs.each do |s|%>
         <tr>
-          <td><%= link_to s.name, '#', class: "btn btn-primary" %></td>
+          <td><%= link_to s.name, s, class: "btn btn-primary" %></td>
           <td><%# link_to 'עריכה', edit_staff_path(s), class: "btn btn-warning" %></td>
           <td><%# link_to 'מחיקה', s, method: :delete, class: "btn btn-danger" %></td>
         </tr>

@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  before_action :load_staffable
+  before_action :load_staffable, :set_staff, only: [:show, :edit, :update, :destroy]
 
   def index
     @staffs = @staffable.staffs
@@ -49,6 +49,10 @@ def destroy
 end
 
   private
+
+  def set_staff
+    @staff = Staff.find(params[:id])
+  end
 
   def load_staffable
     resource, id = request.path.split('/')[1,2]
