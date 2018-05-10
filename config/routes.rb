@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'kids#index'
+  root 'axes#index'
   resources :kids
   resources :groups do
     resources :staffs

@@ -1,12 +1,55 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>קבוצת
   <%= @group.name %>
+  </strong>
+</p>
+<p class="btn btn-primary">
+  <strong>ראש
+  <%= link_to @group.head.name, @group.head, :style=>'color:#FFFFFF;' %>
+  </strong>
 </p>
 <p>
-  <strong>Head:</strong>
-  <%= Head.find(@group.head_id).name %>
+  <strong>חניכים:</strong>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @group.kids.each do |kid|%>
+        <tr>
+          <td><%= link_to kid.name, kid, class: "btn btn-primary" %></td>
+          <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" %></td>
+          <td><%= link_to 'מחיקה', kid, method: :delete, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </p>
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<p>
+  <strong> מדריכות ומדריכים:</strong>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @group.staffs.each do |s|%>
+        <tr>
+          <td><%= link_to s.name, '#', class: "btn btn-primary" %></td>
+          <td><%# link_to 'עריכה', edit_staff_path(s), class: "btn btn-warning" %></td>
+          <td><%# link_to 'מחיקה', s, method: :delete, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+
+<%= link_to 'עריכה', edit_group_path(@group) %> |
+<%= link_to 'חזרה לרשימה', groups_path %>

@@ -1,11 +1,18 @@
 class StaffsController < ApplicationController
   before_action :load_staffable
+
   def index
     @staffs = @staffable.staffs
   end
 
+  def show
+  end
+
   def new
     @staff = Staff.new
+  end
+
+  def edit
   end
 
   def create
@@ -14,6 +21,30 @@ class StaffsController < ApplicationController
     redirect_to [@staffable, :staffs], notice: 'Staff created'
   else
     render :new
+  end
+end
+
+# PATCH/PUT /staffs/1
+# PATCH/PUT /staffs/1.json
+def update
+  respond_to do |format|
+    if @staff.update(staff_params)
+      format.html { redirect_to @staff, notice: 'Staff was successfully updated.' }
+      format.json { render :show, status: :ok, location: @staff }
+    else
+      format.html { render :edit }
+      format.json { render json: @staff.errors, status: :unprocessable_entity }
+    end
+  end
+end
+
+# DELETE /staffs/1
+# DELETE /staffs/1.json
+def destroy
+  @staff.destroy
+  respond_to do |format|
+    format.html { redirect_to staffs_url, notice: 'Staff was successfully destroyed.' }
+    format.json { head :no_content }
   end
 end
 

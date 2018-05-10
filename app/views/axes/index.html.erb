@@ -1,22 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Axes</h1>
+<h1>צירים</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
+      <th>שם</th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @axes.each do |axis| %>
       <tr>
-        <td><%= axis.name %></td>
-        <td><%= link_to 'Show', axis %></td>
-        <td><%= link_to 'Edit', edit_axis_path(axis) %></td>
-        <td><%= link_to 'Destroy', axis, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to axis.name, axis, class: "btn btn-primary" %></td>
+        <td><%= link_to 'עריכה', edit_axis_path(axis), class: "btn btn-warning" %></td>
+        <td><%= link_to 'מחיקה', axis, method: :delete, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Axis', new_axis_path %>
+<%= link_to 'ציר חדש', new_axis_path %>

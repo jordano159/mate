@@ -1,13 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>
   <%= @kid.name %>
+  </strong>
+</p>
+<p class="btn btn-primary">
+  <strong>קבוצת
+  <%= link_to @kid.group.name, @kid.group, :style=>'color:#FFFFFF;' %>
+  </strong>
 </p>
 <p>
-  <strong>Group:</strong>
-  <%= Group.find(@kid.group_id).name %>
+  <strong> מדריכות ומדריכים:</strong>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @kid.group.staffs.each do |s|%>
+        <tr>
+          <td><%= link_to s.name, '#', class: "btn btn-primary" %></td>
+          <td><%# link_to 'עריכה', edit_staff_path(s), class: "btn btn-warning" %></td>
+          <td><%# link_to 'מחיקה', s, method: :delete, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </p>
 
-<%= link_to 'Edit', edit_kid_path(@kid) %> |
-<%= link_to 'Back', kids_path %>
+<%= link_to 'עריכה', edit_kid_path(@kid) %> |
+<%= link_to 'חזרה לרשימה', kids_path %>

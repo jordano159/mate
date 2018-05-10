@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>שם:</strong>
+  <%= @staff.name %>
+</p>
+<p>
+  <strong>תפקיד:</strong>
+  לממש
+</p>
+
+<%= link_to 'עריכה', edit_staff_path(@kid) %> |
+<%= link_to 'חזרה', staffs_path %>
