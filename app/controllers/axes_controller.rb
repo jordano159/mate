@@ -1,6 +1,5 @@
 class AxesController < ApplicationController
   before_action :set_axis, only: [:show, :edit, :update, :destroy]
-  before_action :set_level
 
   # GET /axes
   # GET /axes.json
@@ -73,18 +72,4 @@ class AxesController < ApplicationController
       params.require(:axis).permit(:name)
     end
 
-    def set_level
-      if staff_signed_in?
-        case current_staff.staffable_type
-        when Group
-          @level = 1
-        when Head
-          @level = 2
-        when Axis
-          @level = 3
-        end
-      else
-        @level = 0
-      end
-    end
 end

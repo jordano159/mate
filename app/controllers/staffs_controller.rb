@@ -6,9 +6,9 @@ class StaffsController < ApplicationController
     @staffs = @staffable.staffs
   end
 
-  def show
-    sign_in(Staff.find(params[:id]), scope: :staff)
-  end
+  # def show
+  #   sign_in(Staff.find(params[:id]), scope: :staff)
+  # end
 
   def new
     @staff = Staff.new
@@ -63,6 +63,6 @@ end
   end
 
   def staff_params
-    params.require(:staff).permit(:name, :staffable_id, :staffable_type, :email, :password)
+    params.require(:staff).permit(:name, :staffable_id, :staffable_type, :email, :password, :username)
   end
 end
