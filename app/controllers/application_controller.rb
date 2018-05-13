@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_staff!
+  # before_action :authenticate_staff!
   before_action :level
   before_action :clearence
 
@@ -21,19 +21,19 @@ class ApplicationController < ActionController::Base
     case controller_name
     when "axes"
       if @level < 3
-        redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה'
+        redirect_to heads_path, notice: 'אין לך הרשאה לצפות בזה'
       end
     when "heads"
       if @level < 2
-        redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה'
+        redirect_to groups_path, notice: 'אין לך הרשאה לצפות בזה'
       end
     when "groups"
       if @level < 1
-        redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה'
+        redirect_to new_staff_session_path, notice: 'אין לך הרשאה לצפות בזה'
       end
     when "kids"
       if @level < 1
-        redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה'
+        redirect_to new_staff_session_path, notice: 'אין לך הרשאה לצפות בזה'
       end
     end
   end
