@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # before_action :authenticate_staff!
   before_action :level
-  before_action :clearence
+  # before_action :clearence
 
   private
 
