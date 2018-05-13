@@ -29,11 +29,11 @@ class ApplicationController < ActionController::Base
       end
     when "groups"
       if @level < 1
-        redirect_to new_staff_session_path, notice: 'אין לך הרשאה לצפות בזה'
+        redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה'
       end
     when "kids"
       if @level < 1
-        redirect_to new_staff_session_path, notice: 'אין לך הרשאה לצפות בזה'
+        redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה'
       end
     end
   end
