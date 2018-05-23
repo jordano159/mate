@@ -1,6 +1,5 @@
 class HeadsController < ApplicationController
   before_action :set_head, only: [:show, :edit, :update, :destroy]
-
   # GET /heads
   # GET /heads.json
   def index

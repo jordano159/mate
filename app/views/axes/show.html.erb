@@ -37,7 +37,9 @@
     <tbody>
       <% @axis.staffs.each do |s|%>
         <tr>
-          <td class = "btn btn-primary"><%= s.name %></td>
+          <% if s.user? %>
+            <td class = "btn btn-primary"><%= s.name %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
