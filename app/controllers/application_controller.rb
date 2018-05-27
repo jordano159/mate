@@ -3,6 +3,18 @@ class ApplicationController < ActionController::Base
   before_action :level
   before_action :clearence
 
+def root
+  if staff_signed_in?
+    if current_staff.admin?
+      root 'axes#index'
+    else
+      redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: "show", id: current_staff.staffable_id
+    end
+  else
+    root 'axes#index'
+  end
+end
+
   private
 
   def level

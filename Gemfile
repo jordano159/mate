@@ -42,6 +42,8 @@ gem 'jquery-rails'
 gem 'devise'
 gem "font-awesome-rails"
 gem 'rails_real_favicon'
+gem "select2-rails"
+
 
 
 group :development, :test do

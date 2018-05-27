@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :staffs
-  root 'axes#index'
+  root 'application#root'
   resources :kids
   resources :groups do
     resources :staffs
@@ -12,5 +12,4 @@ Rails.application.routes.draw do
     resources :staffs
   end
   get '/staffs/:id', to: 'staffs#show', as: 'staff'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

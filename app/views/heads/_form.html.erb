@@ -17,8 +17,8 @@
   <div class="field">
     <%= form.input :name %>
   </div>
-  <div class="field">
-    <%= form.input :axis_id, collection: @axes, as: :radio_buttons %>
+  <div class="field select">
+    <%= form.input :axis_id, collection: @axes %>
   </div>
   <div class="actions">
     <%= form.submit %>
