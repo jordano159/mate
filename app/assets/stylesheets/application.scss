@@ -1,8 +1,12 @@
+/*
+*= require select2
+*= require select2-bootstrap
+*= require easy-autocomplete
+*= require easy-autocomplete.themes
+*/
+
 @import "bootstrap";
 @import "font-awesome";
-
-@import "select2";
-@import "select2-bootstrap";
 
 html {
   direction: rtl;

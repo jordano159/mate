@@ -6,7 +6,14 @@ class KidsController < ApplicationController
   # GET /kids.json
   def index
     @kids = Kid.all
+    if params[:search]
+      @kids = Kid.search(params[:search]).order("created_at DESC")
+    else
+      @kids = Kid.all.order("created_at DESC")
+    end
   end
+
+
 
   # GET /kids/1
   # GET /kids/1.json

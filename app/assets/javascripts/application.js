@@ -19,3 +19,4 @@
 //= require bootstrap-sprockets
 //= require select2
 //= require select2_locale_he
+//= require jquery.easy-autocomplete

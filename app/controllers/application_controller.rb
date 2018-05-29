@@ -37,11 +37,11 @@ end
     case controller_name
     when "axes"
       if @level < 3
-        redirect_to heads_path, notice: 'אין לך הרשאה לצפות בזה'
+        redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה'
       end
     when "heads"
       if @level < 2
-        redirect_to groups_path, notice: 'אין לך הרשאה לצפות בזה'
+        redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה'
       end
     when "groups"
       if @level < 1

@@ -9,31 +9,16 @@
         <%= link_to "בית", root_path, class: "nav-link" %>
       </li>
       <% if staff_signed_in? %>
-        <% if current_staff.admin? %>
-          <li class="nav-item active">
-            <%= link_to "צירים", axes_path, class: "nav-link" %>
-          </li>
-        <% end %>
-          <% if @level > 2 %>
-          <li class="nav-item active">
-            <%= link_to "ראשים", heads_path, class: "nav-link" %>
-          </li>
-        <% end %>
-        <% if @level > 1 %>
-          <li class="nav-item active">
-            <%= link_to "קבוצות", groups_path, class: "nav-link" %>
-          </li>
-        <% end %>
-        <li class="nav-item active">
-          <%= link_to "חניכים", kids_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item active">
-          <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        שלום <%= current_staff.name %>
-      </span>
-    <% end %>
+      <li class="nav-item active">
+        <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item active">
+        <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      שלום <%= current_staff.name %>
+    </span>
+<% end %>
   </div>
 </nav>
