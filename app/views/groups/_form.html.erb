@@ -26,17 +26,15 @@
   <div class="field">
     <%= form.input :name %>
   </div>
-  <div class="field select">
-    <%= form.input :head_id, collection: @heads %>
+  <div class="field">
+    <%= form.input_field :head_id, collection: @heads, input_html: { class: 'select' } %>
   </div>
-  <div class="field select" multiple="multiple">
-    <%= form.input :kid_ids, collection: Kid.all %>
-  </div>
-  <select class="field select" multiple="multiple">
+  <select name="group[kid_ids][]" class="field select" multiple="multiple">
     <% Kid.all.each do |k| %>
-       <option><%=k.name%></option>
+       <option value = "<%= k.id %>" ><%=k.name%> <%= k.last_name %></option>
     <% end %>
 </select>
+<%#= select_tag "group[kid_ids]", options_for_select(Kid.all.collect{ |u| [u.name, u.id] }) %>
   <div class="actions">
     <%= form.submit %>
   </div>
