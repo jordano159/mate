@@ -12,7 +12,7 @@ namespace :import do
       kid = Kid.create(name: row["שם"], last_name: row["שם משפחה"], sex: row["מין"],
         phone: row["פלאפון"], medical: row["רגישות ובעיות רפואיות"], meds: row["תרופות"],
         food: row["אוכל"], city: row["מקום מגורים"], ken: row["קן מקור"], dad: row["שם אבא"],
-        dad_phone: row["טלפון אבא"], mom: row["שם אמא"], mom_phone: row["טלפון אמא"], size: row["מידת חולצה"])
+        dad_phone: row["טלפון אבא"], mom: row["שם אמא"], mom_phone: row["טלפון אמא"], size: row["מידת חולצה"], group_id: row ["מספר קבוצה"].to_i)
         puts "#{name} + " " + #{last_name} - #{kid.errors.full_messages.join(",")}" if kid.errors.any?
         counter += 1 if kid.persisted?
       end
