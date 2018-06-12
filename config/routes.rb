@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :checks
   devise_for :staffs
   root 'application#root'
   resources :kids

@@ -1,5 +1,8 @@
 class Kid < ApplicationRecord
   belongs_to :group, optional: true
+  has_many :attendances, :dependent => :destroy
+  has_many :checks, through: :attendances
+    accepts_nested_attributes_for :attendances, :allow_destroy => true
 
   def self.search(search_term)
     Kid.where(
