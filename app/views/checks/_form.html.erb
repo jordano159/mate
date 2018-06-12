@@ -1,0 +1,26 @@
+<%= simple_form_for(@check) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+
+    <%= form_for @check do |f| %>
+      <%# @check.inspect %>
+      <br />
+      <% if @check.attendances.present? %>
+        <%= f.fields_for :attendances do |ff| %>
+          <% kid = ff.object.kid %>
+          <%= kid.name %>
+          נוכח?
+          <%= ff.check_box :status %>
+          <%= ff.text_field :cause %>
+          <br />
+        <% end %>
+      <% else %>
+        No kids in this check yet
+      <% end %>
+      <%= f.submit 'Update check', class: "form-actions" %>
+    <% end %>
+  </div>
+<% end %>
