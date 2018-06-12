@@ -18,6 +18,8 @@
       <% @check.kids.each do |kid|%>
         <tr>
           <td><%= link_to kid.name, kid, class: "btn btn-primary" %></td>
+          <td><%= (@check.attendances & kid.attendances).first.status %></td>
+          <td><%= (@check.attendances & kid.attendances).first.cause %></td>
           <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" %></td>
           <td><%= link_to 'מחיקה', kid, method: :delete, class: "btn btn-danger" %></td>
         </tr>
