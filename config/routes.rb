@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :checks
   devise_for :staffs
-  root 'application#root'
+  root 'application#home_page'
   resources :kids
   resources :groups do
     resources :staffs

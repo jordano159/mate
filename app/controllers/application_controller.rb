@@ -3,15 +3,15 @@ class ApplicationController < ActionController::Base
   before_action :level
   before_action :clearence
 
-def root
+def home_page
   if staff_signed_in?
     if current_staff.admin?
-      root 'axes#index'
+      redirect_to controller: "axes", action: "index"
     else
       redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: "show", id: current_staff.staffable_id
     end
   else
-    root 'axes#index'
+    redirect_to controller: "axes", action: "index"
   end
 end
 
