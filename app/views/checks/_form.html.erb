@@ -11,7 +11,7 @@
       <% if @check.attendances.present? %>
         <%= f.fields_for :attendances do |ff| %>
           <% kid = ff.object.kid %>
-          <%= kid.name %>
+          <%= kid.name + " " + kid.last_name %>
           נוכח?
           <%= ff.check_box :status %>
           <%= ff.text_field :cause %>

@@ -5,6 +5,11 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     @groups = Group.all
+    if params[:search]
+      @groups = Group.search(params[:search]).order("created_at DESC")
+    else
+      @groups = Group.all.order("created_at DESC")
+    end
   end
 
   # GET /groups/1

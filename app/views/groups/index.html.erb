@@ -1,5 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<%= form_tag(groups_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+<%= text_field_tag :search, params[:search], placeholder: "חיפוש...", class: "form-control mr-sm-2" %>
+<%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+<% end %>
+
+<% if @groups.blank? %>
+  <h4>אין קבוצות שתואמות את החיפוש <%= params[:search] %>.</h4>
+<% else %>
+
 <h1>קבוצות</h1>
 
 <table>
@@ -19,7 +28,7 @@
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>
 
 <%= link_to 'קבוצה חדשה', new_group_path %>
