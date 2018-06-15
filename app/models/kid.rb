@@ -32,4 +32,18 @@ class Kid < ApplicationRecord
     end
   end
 
+  def self.my_import(file)
+    columns = ["שם", "שם משפחה", "מין", "פלאפון", "רגישות ובעיות רפואיות", "תרופות",
+      "אוכל", "מקום מגורים", "קן מקור", "שם אבא", "טלפון אבא", "שם אמא", "טלפון אמא",
+    "מידת חולצה", "מספר קבוצה"]
+    kids = []
+    CSV.foreach(file.path, headers: true) do |row|
+      kids << Kid.new(name: row["שם"], last_name: row["שם משפחה"], sex: row["מין"],
+        phone: row["פלאפון"], medical: row["רגישות ובעיות רפואיות"], meds: row["תרופות"],
+        food: row["אוכל"], city: row["מקום מגורים"], ken: row["קן מקור"], dad: row["שם אבא"],
+        dad_phone: row["טלפון אבא"], mom: row["שם אמא"], mom_phone: row["טלפון אמא"], size: row["מידת חולצה"], group_id: row ["מספר קבוצה"].to_i)
+      # kids << Kid.new(:name => "book #{i}")
+    end
+    Kid.import kids, recursive: true
+  end
 end

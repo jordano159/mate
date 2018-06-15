@@ -78,6 +78,11 @@ class KidsController < ApplicationController
     end
   end
 
+  def import
+    Kid.my_import(params[:file])
+    redirect_to kids_path, notice: "הייבוא עבר בהצלחה!"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_kid

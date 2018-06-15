@@ -9,6 +9,13 @@
   <h4>אין חניכימות שתואמות את החיפוש <%= params[:search] %>.</h4>
 <% else %>
 <h1>חניכים</h1>
+<div>
+  <h4>ייבוא מידע!</h4>
+  <%= form_tag kids_import_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "ייבוא מקובץ" %>
+  <% end %>
+</div>
 
 <table>
   <thead>
