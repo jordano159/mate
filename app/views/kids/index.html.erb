@@ -49,7 +49,7 @@
     </tr>
     <% @kids.each do |kid| %>
     <tr>
-      <td><%= kid.name %></td>
+      <td><%= link_to kid.name, kid_path(kid) %></td>
       <td><%= kid.last_name %></td>
       <td><%= kid.sex %></td>
       <td><%= kid.phone %></td>
