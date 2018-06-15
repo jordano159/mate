@@ -71,4 +71,7 @@
 
 <br>
 
-<%= link_to 'חניך.ה חדש.ה', new_kid_path %>
+<%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
+<% if current_staff.admin? %>
+  <%= link_to  'ייצוא הטבלה', kids_path(format: :csv), class: "btn btn-primary" %>
+<% end %>

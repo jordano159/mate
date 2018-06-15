@@ -15,4 +15,21 @@ class Kid < ApplicationRecord
       "%#{search_term}%", "%#{search_term}%", "%#{search_term}%", "%#{search_term}%",
       "%#{search_term}%", "%#{search_term}%").distinct
   end
+
+  def self.to_csv
+    attributes = %w{name last_name sex phone medical
+      meds food city ken dad dad_phone mom mom_phone size group_id}
+    heb_names = ["שם", "שם משפחה", "מין", "פלאפון", "רגישות ובעיות רפואיות", "תרופות",
+      "אוכל", "מקום מגורים", "קן מקור", "שם אבא", "טלפון אבא", "שם אמא", "טלפון אמא",
+    "מידת חולצה", "מספר קבוצה"]
+
+    CSV.generate(headers: true) do |csv|
+      csv << heb_names
+
+      all.each do |kid|
+        csv << attributes.map{ |attr| kid.send(attr) }
+      end
+    end
+  end
+
 end

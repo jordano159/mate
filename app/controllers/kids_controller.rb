@@ -11,6 +11,11 @@ class KidsController < ApplicationController
     else
       @kids = Kid.all.order("created_at DESC")
     end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @kids.to_csv, filename: "חניכי המדצופי-#{Date.today}.csv" }
+    end
   end
 
 
