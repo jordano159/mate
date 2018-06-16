@@ -1,73 +1,75 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>
-  <%= @kid.name %>
-  </strong>
-</p>
-<table>
-  <thead>
-    <tr>
-      <th colspan="3">שם פרטי</th>
-      <th colspan="3">שם משפחה</th>
-      <th colspan="3">מין</th>
-      <th colspan="3">טלפון</th>
-      <th colspan="3">רגישות ובעיות רפואיות</th>
-      <th colspan="3">תרופות</th>
-      <th colspan="3">אוכל</th>
-      <th colspan="3">מקום מגורים</th>
-      <th colspan="3">קן מקור</th>
-      <th colspan="3">שם אבא</th>
-      <th colspan="3">טלפון אבא</th>
-      <th colspan="3">שם אמא</th>
-      <th colspan="3">טלפון אמא</th>
-      <th colspan="3">גודל חולצה</th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="table-responsive-lg">
+  <table class = "table">
+    <thead class="thead-light">
       <tr>
-        <td><%= @kid.name %></td>
-        <td><%= @kid.last_name %></td>
-        <td><%= @kid.sex %></td>
-        <td><%= @kid.phone %></td>
-        <td><%= @kid.medical %></td>
-        <td><%= @kid.meds %></td>
-        <td><%= @kid.food %></td>
-        <td><%= @kid.city %></td>
-        <td><%= @kid.ken %></td>
-        <td><%= @kid.dad %></td>
-        <td><%= @kid.dad_phone %></td>
-        <td><%= @kid.mom %></td>
-        <td><%= @kid.mom_phone %></td>
-        <td><%= @kid.size %></td>
-      </tr>
-  </tbody>
-</table>
-<% if @kid.group_id != nil %>
-  <p class="btn btn-primary">
-    <strong>קבוצת
-    <%= link_to @kid.group.name, @kid.group, :style=>'color:#FFFFFF;' %>
-    </strong>
-  </p>
-<p>
-  <strong> מדריכות ומדריכים:</strong>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="3"></th>
+        <th>שם פרטי</th>
+        <th>שם משפחה</th>
+        <th>מין</th>
+        <th>טלפון</th>
+        <th>רגישות ובעיות רפואיות</th>
+        <th>תרופות</th>
+        <th>אוכל</th>
+        <th>מקום מגורים</th>
+        <th>קן מקור</th>
+        <th>שם אבא</th>
+        <th>טלפון אבא</th>
+        <th>שם אמא</th>
+        <th>טלפון אמא</th>
+        <th>גודל חולצה</th>
+        <th>קבוצה</th>
+        <th>סטטוס עדכני</th>
+        <th>סיבה</th>
       </tr>
     </thead>
 
     <tbody>
-      <% @kid.group.staffs.each do |s|%>
         <tr>
-          <td class = "btn btn-primary"><%= s.name %></td>
+          <td><%= @kid.name %></td>
+          <td><%= @kid.last_name %></td>
+          <td><%= @kid.sex %></td>
+          <td><%= @kid.phone %></td>
+          <td><%= @kid.medical %></td>
+          <td><%= @kid.meds %></td>
+          <td><%= @kid.food %></td>
+          <td><%= @kid.city %></td>
+          <td><%= @kid.ken %></td>
+          <td><%= @kid.dad %></td>
+          <td><%= @kid.dad_phone %></td>
+          <td><%= @kid.mom %></td>
+          <td><%= @kid.mom_phone %></td>
+          <td><%= @kid.size %></td>
+          <% if @kid.group %>
+            <td><%= link_to @kid.group.name, @kid.group %></td>
+          <% end %>
+          <% if @kid.checks.exists? && @kid.checks.last.attendances.exists? %>
+            <td><%= @kid.checks.last.attendances.where(kid_id: @kid.id).first.status %></td>
+            <td><%= @kid.checks.last.attendances.where(kid_id: @kid.id).first.cause %></td>
+          <% end %>
         </tr>
-      <% end %>
     </tbody>
   </table>
-</p>
+</div>
+<% if @kid.group_id != nil %>
+  <p>
+    <strong> מדריכות ומדריכים:</strong>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @kid.group.staffs.each do |s|%>
+          <tr>
+            <td class = "btn btn-primary"><%= s.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </p>
 <% end %>
 
 <%= link_to 'עריכה', edit_kid_path(@kid) %> |

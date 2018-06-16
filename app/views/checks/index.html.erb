@@ -2,14 +2,14 @@
 
 <h1>נוכחויות</h1>
 
+<div class="table-responsive-lg">
 <table class = "table table-hover">
-  <thead>
+  <thead class="thead-light">
     <tr>
         <th>שם</th>
         <th>תאריך</th>
         <th>קבוצה</th>
         <th>הצגה</th>
-        <th>עריכה</th>
         <th>מחיקה</th>
       </tr>
   </thead>
@@ -18,12 +18,12 @@
     <% @checks.each do |check| %>
       <tr>
         <td><%= check.name %></td>
-        <td><%= check.created_at.strftime("%b %d") %> </td>
+        <td><%= check.created_at.strftime("%d.%-m") %> </td>
         <td><%= link_to Group.find(check.kids.last.group_id).name, group_path(Group.find(check.kids.last.group_id)), class: "btn btn-primary" %> </td>
         <td><%= link_to 'הצגה', check, class: "btn btn-primary" %></td>
-        <td><%= link_to 'עריכה', edit_check_path(check), class: "btn btn-warning" %></td>
         <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"  %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>

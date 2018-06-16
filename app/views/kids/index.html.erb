@@ -17,7 +17,7 @@
   <% end %>
 </div>
 
-<div class="table-responsive">
+<div class="table-responsive-lg">
   <table class = "table table-hover">
     <thead class="thead-light">
       <tr>
@@ -35,6 +35,9 @@
         <th>שם אמא</th>
         <th>טלפון אמא</th>
         <th>גודל חולצה</th>
+        <th>קבוצה</th>
+        <th>סטטוס עדכני</th>
+        <th>סיבה</th>
       </tr>
     </thead>
 
@@ -55,6 +58,13 @@
         <td><%= kid.mom %></td>
         <td><%= kid.mom_phone %></td>
         <td><%= kid.size %></td>
+        <% if kid.group %>
+          <td><%= link_to kid.group.name, kid.group %></td>
+        <% end %>
+        <% if kid.checks.exists? && kid.checks.last.attendances.exists? %>
+          <td><%= kid.checks.last.attendances.where(kid_id: kid.id).first.status %></td>
+          <td><%= kid.checks.last.attendances.where(kid_id: kid.id).first.cause %></td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>
