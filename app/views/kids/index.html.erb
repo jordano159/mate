@@ -17,63 +17,49 @@
   <% end %>
 </div>
 
-<table>
-  <thead>
-    <!-- <tr>
-      <th colspan="3">שם פרטי</th>
-      <th colspan="3">שם משפחה</th>
-      <th colspan="3">מין</th>
-      <th colspan="3">טלפון</th>
-      <th colspan="3">רגישות ובעיות רפואיות</th>
-      <th colspan="3">תרופות</th>
-      <th colspan="3">אוכל</th>
-      <th colspan="3">מקום מגורים</th>
-      <th colspan="3">קן מקור</th>
-      <th colspan="3">שם אבא</th>
-      <th colspan="3">טלפון אבא</th>
-      <th colspan="3">שם אמא</th>
-      <th colspan="3">טלפון אמא</th>
-      <th colspan="3">גודל חולצה</th>
-    </tr> -->
-  </thead>
+<div class="table-responsive">
+  <table class = "table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>שם פרטי</th>
+        <th>שם משפחה</th>
+        <th>מין</th>
+        <th>טלפון</th>
+        <th>רגישות ובעיות רפואיות</th>
+        <th>תרופות</th>
+        <th>אוכל</th>
+        <th>מקום מגורים</th>
+        <th>קן מקור</th>
+        <th>שם אבא</th>
+        <th>טלפון אבא</th>
+        <th>שם אמא</th>
+        <th>טלפון אמא</th>
+        <th>גודל חולצה</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr>
-      <td>שם פרטי</th>
-      <td>שם משפחה</th>
-      <td>מין</th>
-      <td>טלפון</th>
-      <td>רגישות ובעיות רפואיות</th>
-      <td>תרופות</th>
-      <td>אוכל</th>
-      <td>מקום מגורים</th>
-      <td>קן מקור</th>
-      <td>שם אבא</th>
-      <td>טלפון אבא</th>
-      <td>שם אמא</th>
-      <td>טלפון אמא</th>
-      <td>גודל חולצה</th>
-    </tr>
-    <% @kids.each do |kid| %>
-    <tr>
-      <td><%= link_to kid.name, kid_path(kid) %></td>
-      <td><%= kid.last_name %></td>
-      <td><%= kid.sex %></td>
-      <td><%= kid.phone %></td>
-      <td><%= kid.medical %></td>
-      <td><%= kid.meds %></td>
-      <td><%= kid.food %></td>
-      <td><%= kid.city %></td>
-      <td><%= kid.ken %></td>
-      <td><%= kid.dad %></td>
-      <td><%= kid.dad_phone %></td>
-      <td><%= kid.mom %></td>
-      <td><%= kid.mom_phone %></td>
-      <td><%= kid.size %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% @kids.each do |kid| %>
+      <tr>
+        <td><%= link_to kid.name, kid_path(kid) %></td>
+        <td><%= kid.last_name %></td>
+        <td><%= kid.sex %></td>
+        <td><%= kid.phone %></td>
+        <td><%= kid.medical %></td>
+        <td><%= kid.meds %></td>
+        <td><%= kid.food %></td>
+        <td><%= kid.city %></td>
+        <td><%= kid.ken %></td>
+        <td><%= kid.dad %></td>
+        <td><%= kid.dad_phone %></td>
+        <td><%= kid.mom %></td>
+        <td><%= kid.mom_phone %></td>
+        <td><%= kid.size %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <% end %>
 
 <br>
