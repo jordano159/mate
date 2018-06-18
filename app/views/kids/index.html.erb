@@ -17,12 +17,23 @@
   <% end %>
 </div>
 
+<%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
+<% if current_staff.admin? %>
+  <%= link_to  'ייצוא הטבלה', kids_path(format: :csv), class: "btn btn-primary" %>
+<% end %>
+
+<%# counter = 0 %>
+<%# counter += kid.checks.last.attendances.where(kid_id: kid.id).first.status %>
+
+
+<%= paginate @kids %>
+
 <div class="table-responsive-lg">
   <table class = "table table-hover">
     <thead class="thead-light">
       <tr>
-        <th>שם פרטי</th>
-        <th>שם משפחה</th>
+        <th><%= sortable "name", "שם פרטי" %></th>
+        <th><%= sortable "last_name", "שם משפחה" %></th>
         <th>מין</th>
         <th>טלפון</th>
         <th>רגישות ובעיות רפואיות</th>
@@ -72,9 +83,4 @@
 </div>
 <% end %>
 
-<br>
-
-<%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
-<% if current_staff.admin? %>
-  <%= link_to  'ייצוא הטבלה', kids_path(format: :csv), class: "btn btn-primary" %>
-<% end %>
+כרגע יש <%= Kid.all.count %> חניכים <%# counter %>

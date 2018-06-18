@@ -44,6 +44,8 @@ gem "font-awesome-rails"
 gem 'rails_real_favicon'
 gem "select2-rails"
 gem "activerecord-import"
+gem 'kaminari'
+
 
 
 

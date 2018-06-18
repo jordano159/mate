@@ -1,15 +1,15 @@
 class KidsController < ApplicationController
   before_action :set_kid, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_staff!
+  helper_method :sort_column, :sort_direction
 
   # GET /kids
   # GET /kids.json
   def index
-    @kids = Kid.all
     if params[:search]
-      @kids = Kid.search(params[:search]).order("created_at DESC")
+      @kids = Kid.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
     else
-      @kids = Kid.all.order("created_at DESC")
+      @kids = Kid.order(sort_column + " " + sort_direction).page(params[:page]).per(50)
     end
 
     respond_to do |format|
@@ -84,6 +84,19 @@ class KidsController < ApplicationController
   end
 
   private
+
+    def sortable_columns
+      ["name", "last_name"]
+    end
+
+    def sort_column
+      sortable_columns.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_kid
       @kid = Kid.find(params[:id])
