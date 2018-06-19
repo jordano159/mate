@@ -9,19 +9,28 @@
   <h4>אין חניכימות שתואמות את החיפוש <%= params[:search] %>.</h4>
 <% else %>
 <h1>חניכים</h1>
+
+<% if current_staff.admin? %>
+<%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
 <div>
   <h4>ייבוא מידע!</h4>
   <%= form_tag kids_import_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag "ייבוא מקובץ" %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "ייבוא מקובץ" %>
   <% end %>
 </div>
-
-<%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
-<% if current_staff.admin? %>
   <%= link_to  'ייצוא הטבלה', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
 
+<%
+counter = 0
+Kid.all.each do |kid|
+  if kid.checks.exists? && kid.checks.last.attendances.exists?
+    counter += kid.checks.last.attendances.where(kid_id: kid.id).first.status
+  end
+end
+ %>
+ יש <%= counter %> חניכים נוכחים (לא עובד)
 <%# counter = 0 %>
 <%# counter += kid.checks.last.attendances.where(kid_id: kid.id).first.status %>
 

@@ -4,6 +4,12 @@ class Kid < ApplicationRecord
   has_many :checks, through: :attendances
     accepts_nested_attributes_for :attendances, :allow_destroy => true
 
+    def current_status
+      if checks.exists? && checks.last.attendances.exists?
+        checks.last.attendances.first.status
+      end
+    end
+
   def self.search(search_term)
     Kid.where(
       "kids.name LIKE ? OR kids.sex LIKE ? OR kids.last_name LIKE ? OR kids.phone LIKE ? OR
@@ -46,4 +52,5 @@ class Kid < ApplicationRecord
     end
     Kid.import kids, recursive: true
   end
+
 end
