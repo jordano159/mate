@@ -81,8 +81,8 @@ end
           <td><%= link_to kid.group.name, kid.group %></td>
         <% end %>
         <% if kid.checks.exists? && kid.checks.last.attendances.exists? %>
-          <td><%= kid.checks.last.attendances.where(kid_id: kid.id).first.status %></td>
-          <td><%= kid.checks.last.attendances.where(kid_id: kid.id).first.cause %></td>
+          <td><%= kid.current_status %></td>
+          <td><%= kid.checks.last.attendances.where(kid_id: kid.id).last.cause %></td>
         <% end %>
       </tr>
       <% end %>

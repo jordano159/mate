@@ -31,7 +31,11 @@ class ChecksController < ApplicationController
 
   # GET /checks/1/edit
   def edit
-    @kids = current_staff.staffable.kids
+    if @level == 1
+      @kids = current_staff.staffable.kids
+    else
+      @kids = @check.my_group.kids
+    end
   end
 
   # POST /checks

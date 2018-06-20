@@ -38,7 +38,5 @@
   </table>
 </div>
 </p>
-<% if @level == 1 %>
-  <%= link_to 'Edit', edit_check_path(@check) %> |
-<% end %>
-<%= link_to 'Back', checks_path %>
+<%= link_to 'Edit', edit_check_path(@check), class: "btn btn-primary" %>
+<%= link_to 'Back', checks_path, class: "btn btn-primary" %>
