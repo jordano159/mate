@@ -6,12 +6,22 @@ class ChecksController < ApplicationController
   def index
     if @level < 2
       @checks = []
-      Attendance.all.each do |c|
-        if Kid.find(c.kid_id).group.id == current_staff.staffable.id
+      Check.all.each do |c|
+        if c.my_group.id == current_staff.staffable.id
           if !@checks.include? c.check
             @checks << c.check
           end
         end
+      end
+      # @checks = []
+      # Attendance.all.each do |c|
+      #   if Kid.find(c.kid_id) && Kid.find(c.kid_id).group.id
+      #     if Kid.find(c.kid_id).group.id == current_staff.staffable.id
+      #       if !@checks.include? c.check
+      #         @checks << c.check
+      #       end
+      #     end
+      #   end
       end
     else
       @checks = Check.all
