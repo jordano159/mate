@@ -8,11 +8,10 @@ class ChecksController < ApplicationController
       @checks = []
       Check.all.each do |c|
         if c.my_group.id == current_staff.staffable.id
-          if !@checks.include? c.check
-            @checks << c.check
+          if !@checks.include? c
+            @checks << c
           end
         end
-      end
       # @checks = []
       # Attendance.all.each do |c|
       #   if Kid.find(c.kid_id) && Kid.find(c.kid_id).group.id
