@@ -5,11 +5,6 @@
 <%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
 <% end %>
 
-<% if @kids.blank? %>
-  <h4>אין חניכימות שתואמות את החיפוש <%= params[:search] %>.</h4>
-<% else %>
-<h1>חניכים</h1>
-
 <% if current_staff.admin? %>
 <%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
 <div>
@@ -19,18 +14,22 @@
   <%= submit_tag "ייבוא מקובץ" %>
   <% end %>
 </div>
-  <%= link_to  'ייצוא הטבלה', kids_path(format: :csv), class: "btn btn-primary" %>
+<%= link_to  'ייצוא הטבלה', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
+
+<% if @kids.blank? %>
+  <h4>אין חניכימות שתואמות את החיפוש <%= params[:search] %>.</h4>
+<% else %>
+<h1>חניכים</h1>
+
 
 <%
 counter = 0
 Kid.all.each do |kid|
-  if kid.checks.exists? && kid.checks.last.attendances.exists?
-    counter += kid.checks.last.attendances.where(kid_id: kid.id).first.status
-  end
+  counter += kid.current_status if kid.current_status
 end
  %>
- יש <%= counter %> חניכים נוכחים (לא עובד)
+ יש <%= counter %> חניכים נוכחים
 <%# counter = 0 %>
 <%# counter += kid.checks.last.attendances.where(kid_id: kid.id).first.status %>
 

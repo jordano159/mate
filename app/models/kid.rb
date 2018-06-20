@@ -6,7 +6,7 @@ class Kid < ApplicationRecord
 
     def current_status
       if checks.exists? && checks.last.attendances.exists?
-        checks.last.attendances.first.status
+        checks.last.attendances.where(kid_id: id).last.status
       end
     end
 
