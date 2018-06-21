@@ -7,9 +7,11 @@ class ChecksController < ApplicationController
     if @level < 2
       @checks = []
       Check.all.each do |c|
-        if c.my_group.id == current_staff.staffable.id
-          if !@checks.include? c
-            @checks << c
+        if c.kids.exists?
+          if c.my_group.id == current_staff.staffable.id
+            if !@checks.include? c
+              @checks << c
+            end
           end
         end
       # @checks = []
