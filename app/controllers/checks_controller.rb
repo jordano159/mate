@@ -4,30 +4,20 @@ class ChecksController < ApplicationController
   # GET /checks
   # GET /checks.json
   def index
-    if @level < 2
-      @checks = []
-      Check.all.each do |c|
-        if c.kids.exists?
-          if c.my_group.id == current_staff.staffable.id
-            if !@checks.include? c
-              @checks << c
-            end
+    if params[:search]
+      @checks = Check.search(params[:search]).order("created_at DESC")
+    else
+      if @level < 2
+        @checks = []
+        Check.all.each do |c|
+          if (c.kids.exists?) && (c.my_group.id == current_staff.staffable.id) && (!@checks.include? c)
+            @checks << c
           end
         end
-      # @checks = []
-      # Attendance.all.each do |c|
-      #   if Kid.find(c.kid_id) && Kid.find(c.kid_id).group.id
-      #     if Kid.find(c.kid_id).group.id == current_staff.staffable.id
-      #       if !@checks.include? c.check
-      #         @checks << c.check
-      #       end
-      #     end
-      #   end
+      else
+        @checks = Check.all.order("created_at DESC")
       end
-    else
-      @checks = Check.all
-  end
-    # @checks = Check.includes(:attendances).where(attendances: { Kid.find(attendances.first.kid_id).group.id = current_staff.staffable.id }
+    end
   end
 
   # GET /checks/1

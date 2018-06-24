@@ -8,4 +8,10 @@ class Check < ApplicationRecord
   def my_group
     Group.find(kids.last.group_id)
   end
+
+  def self.search(search_term)
+    Check.where(
+      "checks.name LIKE ?, checks.my_group.name LIKE ?", "%#{search_term}%", "%#{search_term}%" ).distinct
+  end
+
 end

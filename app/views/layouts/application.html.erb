@@ -13,9 +13,51 @@
   </head>
 
   <body>
-    <%= render 'layouts/navbar' %>
-    <div class="container" align="right">
-      <%= yield %>
+    <!-- <%= render 'layouts/navbar' %> -->
+    <div id="wrapper">
+
+      <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+
+                    <li class="sidebar-brand">
+                      <%= link_to root_path do %>
+                        <h2>המטה</h2>
+                        <% end %>
+                    </li>
+                    <% if staff_signed_in? %>
+                      <% if current_staff.admin? %>
+                      <li class="nav-item active">
+                        <%= link_to "נוכחויות", checks_path, class: "nav-link" %>
+                      </li>
+                      <li class="nav-item active">
+                        <%= link_to "צירים", axes_path, class: "nav-link" %>
+                      </li>
+                      <li class="nav-item active">
+                        <%= link_to "ראשים", heads_path, class: "nav-link" %>
+                      </li>
+                      <li class="nav-item active">
+                        <%= link_to "קבוצות", groups_path, class: "nav-link" %>
+                      </li>
+                      <% end %>
+                        <li class="nav-item active">
+                          <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
+                        </li>
+                        <li class="nav-item active">
+                          <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
+                        </li>
+                        <% end %>
+                </ul>
+                <span class="navbar-text" style="color: white;">
+                  שלום <%= current_staff.name %>
+                </span>
+            </div>
+
+        <div id="page-content-wrapper">
+            <div class="container" align="right">
+            <%= yield %>
+          </div>
+        </div>
+
     </div>
   </body>
 </html>

@@ -1,5 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+<%= text_field_tag :search, params[:search], placeholder: "חיפוש...", class: "form-control mr-sm-2" %>
+<%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+<% end %>
+
+<% if @checks.blank? %>
+  <h4>אין נוכחויות שתואמות את החיפוש <%= params[:search] %>.</h4>
+<% else %>
+
 <h1>נוכחויות</h1>
 
 <div class="table-responsive-lg">
@@ -31,3 +40,4 @@
   </tbody>
 </table>
 </div>
+<% end %>

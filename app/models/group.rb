@@ -5,7 +5,7 @@ class Group < ApplicationRecord
 
   def self.search(search_term)
     Group.where(
-      "groups.name LIKE ?", "%#{search_term}%", ).distinct
+      "groups.name LIKE ?", "%#{search_term}%" ).distinct
   end
 
 end
