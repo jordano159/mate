@@ -45,11 +45,11 @@
                         <li class="nav-item active">
                           <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
                         </li>
+                        <span class="navbar-text" style="color: white;">
+                          שלום <%= current_staff.name %>
+                        </span>
                         <% end %>
                 </ul>
-                <span class="navbar-text" style="color: white;">
-                  שלום <%= current_staff.name %>
-                </span>
             </div>
 
         <div id="page-content-wrapper">
