@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>שם:</strong>
   <%= @check.name %>
+</p>
+
+<p>
+  <strong>קבוצה:</strong>
+  <%= @check.group_id %>
 </p>
 
 <p>
@@ -38,5 +43,5 @@
   </table>
 </div>
 </p>
-<%= link_to 'Edit', edit_check_path(@check), class: "btn btn-primary" %>
-<%= link_to 'Back', checks_path, class: "btn btn-primary" %>
+<%= link_to 'עריכה', edit_check_path(@check), class: "btn btn-primary" %>
+<%= link_to 'חזרה לרשימת הנוכחויות', checks_path, class: "btn btn-primary" %>

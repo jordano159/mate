@@ -1,5 +1,6 @@
 class ChecksController < ApplicationController
   before_action :set_check, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /checks
   # GET /checks.json
@@ -89,6 +90,6 @@ class ChecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def check_params
-      params.require(:check).permit(:name, attendances_attributes: [:status, :id, :cause], kid_ids: [])
+      params.require(:check).permit(:name, :group_id, attendances_attributes: [:status, :id, :cause], kid_ids: [])
     end
 end

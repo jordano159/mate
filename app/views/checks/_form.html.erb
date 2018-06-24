@@ -3,27 +3,26 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
+    <%= f.input :name, label: "שם הנוכחות" %>
 
     <% causes = ["בבית מסיבות רפואיות ויחזור", "בבית מסיבות רפואיות ולא יחזור", "בבית מסיבות אישיות ויחזור", "בבית מסיבות אישיות ולא יחזור", "פינוי רפואי", "מרפאה", "אחר"] %>
 
-    <%= form_for @check do |f| %>
-      <%# @check.inspect %>
+    <%= f.input :group_id, input_html: {value: current_staff.staffable.id}, as: :hidden  %>
+    <%# form_for @check do |f| %>
+    <br />
+      <%# if @check.attendances.present? %>
+    <%= f.simple_fields_for :attendances do |ff| %>
+      <% kid = ff.object.kid %>
+      <%= kid.name + " " + kid.last_name %>
+      נוכח?
+      <%= ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last %>
+      <%= ff.input :cause, label: "סיבת היעדרות:", collection: causes %>
       <br />
-      <% if @check.attendances.present? %>
-        <%= f.simple_fields_for :attendances do |ff| %>
-          <% kid = ff.object.kid %>
-          <%= kid.name + " " + kid.last_name %>
-          נוכח?
-          <%# ff.input, as: :checkboxes, :status %>
-          <%= ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last %>
-          <%= ff.input :cause, collection: causes %>
-          <br />
-        <% end %>
-      <% else %>
-        No kids in this check yet
-      <% end %>
-      <%= f.submit 'Update check', class: "form-actions" %>
     <% end %>
+      <%# else %>
+        <!-- No kids in this check yet -->
+      <%# end %>
+      <%= f.submit 'עדכון פרטים', class: "form-actions" %>
+    <%# end %>
   </div>
 <% end %>
