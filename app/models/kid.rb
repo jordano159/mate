@@ -10,6 +10,12 @@ class Kid < ApplicationRecord
       end
     end
 
+    def current_cause
+      if checks.exists? && checks.last.attendances.exists?
+        checks.last.attendances.where(kid_id: id).last.cause
+      end
+    end
+
   def self.search(search_term)
     Kid.where(
       "kids.name LIKE ? OR kids.sex LIKE ? OR kids.last_name LIKE ? OR kids.phone LIKE ? OR

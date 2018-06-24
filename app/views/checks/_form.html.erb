@@ -5,16 +5,19 @@
   <div class="form-inputs">
     <%= f.input :name %>
 
+    <% causes = ["בבית מסיבות רפואיות ויחזור", "בבית מסיבות רפואיות ולא יחזור", "בבית מסיבות אישיות ויחזור", "בבית מסיבות אישיות ולא יחזור", "פינוי רפואי", "מרפאה", "אחר"] %>
+
     <%= form_for @check do |f| %>
       <%# @check.inspect %>
       <br />
       <% if @check.attendances.present? %>
-        <%= f.fields_for :attendances do |ff| %>
+        <%= f.simple_fields_for :attendances do |ff| %>
           <% kid = ff.object.kid %>
           <%= kid.name + " " + kid.last_name %>
           נוכח?
-          <%= ff.check_box :status %>
-          <%= ff.text_field :cause %>
+          <%# ff.input, as: :checkboxes, :status %>
+          <%= ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last %>
+          <%= ff.input :cause, collection: causes %>
           <br />
         <% end %>
       <% else %>

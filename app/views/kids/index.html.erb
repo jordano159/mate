@@ -29,7 +29,7 @@ Kid.all.each do |kid|
   counter += kid.current_status if kid.current_status
 end
  %>
- יש <%= counter %> חניכים נוכחים
+ יש <%= counter %> חניכימות נוכחימות מתוך <%= Kid.all.count %>
 <%# counter = 0 %>
 <%# counter += kid.checks.last.attendances.where(kid_id: kid.id).first.status %>
 
@@ -81,8 +81,12 @@ end
           <td><%= link_to kid.group.name, kid.group %></td>
         <% end %>
         <% if kid.checks.exists? && kid.checks.last.attendances.exists? %>
-          <td><%= kid.current_status %></td>
-          <td><%= kid.checks.last.attendances.where(kid_id: kid.id).last.cause %></td>
+          <td><%= if kid.current_status == 1
+            "נוכח/ת"
+          else
+            "לא נוכח/ת"
+          end %><%= kid.current_status %></td>
+          <td><%= kid.current_cause %></td>
         <% end %>
       </tr>
       <% end %>
@@ -90,5 +94,3 @@ end
   </table>
 </div>
 <% end %>
-
-כרגע יש <%= Kid.all.count %> חניכים <%# counter %>
