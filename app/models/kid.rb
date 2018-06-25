@@ -53,7 +53,7 @@ class Kid < ApplicationRecord
       kids << Kid.new(name: row["שם"], last_name: row["שם משפחה"], sex: row["מין"],
         phone: row["פלאפון"], medical: row["רגישות ובעיות רפואיות"], meds: row["תרופות"],
         food: row["אוכל"], city: row["מקום מגורים"], ken: row["קן מקור"], dad: row["שם אבא"],
-        dad_phone: row["טלפון אבא"], mom: row["שם אמא"], mom_phone: row["טלפון אמא"], size: row["מידת חולצה"], group_id: row ["מספר קבוצה"].to_i)
+        dad_phone: row["טלפון אבא"], mom: row["שם אמא"], mom_phone: row["טלפון אמא"], size: row["מידת חולצה"], group_id: (row ["מספר קבוצה"].to_i + Group.first.id - 1))
       # kids << Kid.new(:name => "book #{i}")
     end
     Kid.import kids, recursive: true

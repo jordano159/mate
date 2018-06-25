@@ -20,8 +20,9 @@ end
 
 # Seeding twenty Groups
 puts "Creating Groups..."
+ActiveRecord::Base.connection.reset_pk_sequence!('groups') 
 for i in 1..20
-  Group.create!(name: "#{i}", head_id: "#{Head.find_by(name: "#{i/5+1}").id}") if Group.find_by(name: "#{i}").nil?
+  Group.create!(name: "#{i}", head_id: "#{Head.find_by(name: "#{i/5}").id}") if Group.find_by(name: "#{i}").nil?
 end
 
 # Seeding Admin
