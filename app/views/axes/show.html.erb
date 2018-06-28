@@ -9,8 +9,10 @@
     <thead class="thead-light">
       <tr>
         <th>שם</th>
-        <th></th>
-        <th></th>
+        <% if current_staff.admin? %>
+          <th>עריכה</th>
+          <th>מחיקה </th>
+        <% end %>
       </tr>
     </thead>
 
@@ -18,8 +20,8 @@
       <% @axis.heads.each do |head|%>
         <tr>
           <td><%= link_to head.name, head %></td>
-          <td><%= link_to 'עריכה', edit_head_path(head), class: "btn btn-warning" %></td>
-          <td><%= link_to 'מחיקה', head, method: :delete, class: "btn btn-danger" %></td>
+          <td><%= link_to 'עריכה', edit_head_path(head), class: "btn btn-warning" if current_staff.admin? %></td>
+          <td><%= link_to 'מחיקה', head, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
         </tr>
       <% end %>
     </tbody>
@@ -45,8 +47,8 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "יצירת רכז.ת ציר חדש.ה", new_axis_staff_path(@axis) %>
+  <%= link_to "יצירת רכז.ת ציר חדש.ה", new_axis_staff_path(@axis) if current_staff.admin? %>
 </p>
 
-<%= link_to 'עריכה', edit_axis_path(@axis) %> |
+<%= link_to 'עריכה', edit_axis_path(@axis) if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', axes_path %>

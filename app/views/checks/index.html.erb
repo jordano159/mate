@@ -20,7 +20,9 @@
         <th>קבוצה</th>
         <th>הצגה</th>
         <th>עריכה</th>
-        <th>מחיקה</th>
+        <% if current_staff.admin? %>
+          <th>מחיקה</th>
+        <% end %>
       </tr>
   </thead>
 
@@ -34,7 +36,7 @@
         <% end %>
         <td><%= link_to 'הצגה', check, class: "btn btn-primary" %></td>
         <td><%= link_to 'עריכה', edit_check_path(check), class: "btn btn-warning" %></td>
-        <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"  %></td>
+        <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin?  %></td>
       </tr>
     <% end %>
   </tbody>

@@ -2,6 +2,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_staff!
   before_action :level
   before_action :clearence
+  before_action :only_admin
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
 
 def home_page
   if staff_signed_in?
@@ -15,7 +18,22 @@ def home_page
   end
 end
 
-  private
+def only_admin
+  blocked = %w(kids groups heads axes)
+  if staff_signed_in? && current_staff.admin? == false
+    if blocked.include?(controller_name) && (action_name == "new" or action_name == "edit" or action_name == "destroy")
+      redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: "show", id: current_staff.staffable_id
+    end
+  end
+end
+
+private
+
+  def configure_permitted_parameters
+    attributes = [:name, :email]
+    devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
+    devise_parameter_sanitizer.permit(:account_update, keys: attributes)
+  end
 
   def level
     if staff_signed_in?

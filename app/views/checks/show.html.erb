@@ -20,7 +20,9 @@
         <th>סטטוס</th>
         <th>סיבה</th>
         <th>עריכה</th>
-        <th>מחיקה</th>
+        <% if current_staff.admin? %>
+          <th>מחיקה</th>
+        <% end %>
       </tr>
     </thead>
 
@@ -36,7 +38,7 @@
             end %></td>
           <td><%= (@check.attendances & kid.attendances).first.cause %></td>
           <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" %></td>
-          <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+          <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin? %></td>
         </tr>
       <% end %>
     </tbody>

@@ -8,8 +8,10 @@
   <thead class="thead-light">
     <tr>
       <th>שם</th>
-      <th></th>
-      <th></th>
+      <% if current_staff.admin? %>
+        <th>עריכה</th>
+        <th>מחיקה </th>
+      <% end %>
     </tr>
   </thead>
 
@@ -17,8 +19,8 @@
     <% @axes.each do |axis| %>
       <tr>
         <td><%= link_to axis.name, axis %></td>
-        <td><%= link_to 'עריכה', edit_axis_path(axis), class: "btn btn-warning" %></td>
-        <td><%= link_to 'מחיקה', axis, method: :delete, class: "btn btn-danger" %></td>
+        <td><%= link_to 'עריכה', edit_axis_path(axis), class: "btn btn-warning" if current_staff.admin? %></td>
+        <td><%= link_to 'מחיקה', axis, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +28,4 @@
 </div>
 <br>
 
-<%= link_to 'ציר חדש', new_axis_path %>
+<%= link_to 'ציר חדש', new_axis_path if current_staff.admin? %>

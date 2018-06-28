@@ -7,9 +7,9 @@ class KidsController < ApplicationController
   # GET /kids.json
   def index
     if params[:search]
-      @kids = Kid.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
+      @kids = current_staff.staffable.kids.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
     else
-      @kids = Kid.order(sort_column + " " + sort_direction).page(params[:page]).per(50)
+      @kids = current_staff.staffable.kids.order(sort_column + " " + sort_direction).page(params[:page]).per(50)
     end
 
     respond_to do |format|
@@ -86,7 +86,7 @@ class KidsController < ApplicationController
   private
 
     def sortable_columns
-      ["name", "last_name"]
+      ["name", "last_name", "ken"]
     end
 
     def sort_column

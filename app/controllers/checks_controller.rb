@@ -1,6 +1,6 @@
 class ChecksController < ApplicationController
   before_action :set_check, only: [:show, :edit, :update, :destroy]
-  
+
 
   # GET /checks
   # GET /checks.json
@@ -44,6 +44,7 @@ class ChecksController < ApplicationController
   # POST /checks.json
   def create
     @check = Check.new(check_params)
+    @check.group_id = current_staff.staffable.id
     @kids = current_staff.staffable.kids
     @check.kids << @kids
 

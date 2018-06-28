@@ -57,7 +57,7 @@
     <table>
       <thead>
         <tr>
-          <th colspan="3"></th>
+          <th></th>
         </tr>
       </thead>
 
@@ -72,5 +72,5 @@
   </p>
 <% end %>
 
-<%= link_to 'עריכה', edit_kid_path(@kid) %> |
+<%= link_to 'עריכה', edit_kid_path(@kid) if current_staff.admin? %> 
 <%= link_to 'חזרה לרשימה', kids_path %>

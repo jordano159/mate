@@ -17,8 +17,10 @@
     <thead class="thead-light">
       <tr>
         <th>שם</th>
-        <th>עריכה</th>
-        <th>מחיקה</th>
+        <% if current_staff.admin? %>
+          <th>עריכה</th>
+          <th>מחיקה </th>
+        <% end %>
       </tr>
     </thead>
 
@@ -26,8 +28,8 @@
       <% @head.groups.each do |group|%>
         <tr>
           <td><%= link_to group.name, group, class: "btn btn-primary" %></td>
-          <td><%= link_to 'עריכה', edit_group_path(group), class: "btn btn-warning" %></td>
-          <td><%= link_to 'מחיקה', group, method: :delete, class: "btn btn-danger" %></td>
+          <td><%= link_to 'עריכה', edit_group_path(group), class: "btn btn-warning" if current_staff.admin? %></td>
+          <td><%= link_to 'מחיקה', group, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
         </tr>
       <% end %>
     </tbody>
@@ -51,8 +53,8 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "יצירת ראשראש.ית חדש.ה", new_head_staff_path(@head) %>
+  <%= link_to "יצירת ראשראש.ית חדש.ה", new_head_staff_path(@head) if current_staff.admin? %>
 </p>
 
-<%= link_to 'עריכה', edit_head_path(@head) %> |
+<%= link_to 'עריכה', edit_head_path(@head) if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', heads_path %>

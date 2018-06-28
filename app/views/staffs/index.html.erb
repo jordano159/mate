@@ -13,7 +13,7 @@
   <tbody>
     <% @staffs.each do |staff| %>
       <tr>
-        <td><%= staff.name %></td>
+        <td><%= link_to staff.name, staff %></td>
 
       </tr>
     <% end %>

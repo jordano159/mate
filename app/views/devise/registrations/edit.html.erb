@@ -1,27 +1,27 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>עריכת משתמש</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :name, label: "שם" %>
+    <%= f.input :email, required: true, autofocus: true if current_staff.admin? %>
+    <%#= f.input :username %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false if current_staff.admin? %>
+    <%= f.input :password_confirmation, required: false if current_staff.admin? %>
+    <%= f.input :current_password, label: "סיסמה נוכחית", hint: "אנחנו צריכים את הסיסמה הנוכחית שלך", required: true %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, "עדכון" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<%= link_to "מחיקת המשתמש", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete if current_staff.admin? %>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<%= link_to "אחורה", :back %>

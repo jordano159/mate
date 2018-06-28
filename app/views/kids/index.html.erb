@@ -42,19 +42,12 @@ end
       <tr>
         <th><%= sortable "name", "שם פרטי" %></th>
         <th><%= sortable "last_name", "שם משפחה" %></th>
-        <th>מין</th>
         <th>טלפון</th>
         <th>רגישות ובעיות רפואיות</th>
         <th>תרופות</th>
         <th>אוכל</th>
-        <th>מקום מגורים</th>
-        <th>קן מקור</th>
-        <th>שם אבא</th>
-        <th>טלפון אבא</th>
-        <th>שם אמא</th>
-        <th>טלפון אמא</th>
-        <th>גודל חולצה</th>
-        <th>קבוצה</th>
+        <th><%= sortable "ken", "קן מקור" %></th>
+        <% if @level > 1 %> <th>קבוצה</th> <% end %>
         <th>סטטוס עדכני</th>
         <th>סיבה</th>
       </tr>
@@ -65,20 +58,13 @@ end
       <tr>
         <td><%= link_to kid.name, kid_path(kid) %></td>
         <td><%= kid.last_name %></td>
-        <td><%= kid.sex %></td>
         <td><%= kid.phone %></td>
         <td><%= kid.medical %></td>
         <td><%= kid.meds %></td>
         <td><%= kid.food %></td>
-        <td><%= kid.city %></td>
         <td><%= kid.ken %></td>
-        <td><%= kid.dad %></td>
-        <td><%= kid.dad_phone %></td>
-        <td><%= kid.mom %></td>
-        <td><%= kid.mom_phone %></td>
-        <td><%= kid.size %></td>
-        <% if kid.group %>
-          <td><%= link_to kid.group.name, kid.group %></td>
+        <%  if kid.group && @level > 1 %>
+          <td><%= link_to kid.group.name, kid.group %> </td>
         <% end %>
         <% if kid.checks.exists? && kid.checks.last.attendances.exists? %>
           <td><%= if kid.current_status == 1
