@@ -10,6 +10,8 @@ def home_page
   if staff_signed_in?
     if current_staff.admin?
       redirect_to controller: "axes", action: "index"
+    elsif @level == 1
+      redirect_to kids_path
     else
       redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: "show", id: current_staff.staffable_id
     end

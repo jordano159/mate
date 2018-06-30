@@ -1,10 +1,10 @@
 <% case current_staff.staffable_type %>
 <% when "Group" %>
-  <h1>חניכי קבוצת <%= current_staff.staffable.name %> </h1>
+  <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי קבוצת <%= current_staff.staffable.name %> </h1>
 <% when "Head" %>
-  <h1>חניכי ראש <%= current_staff.staffable.name %> </h1>
+  <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי ראש <%= current_staff.staffable.name %> </h1>
 <% when "Axis" %>
-  <h1>חניכי ציר <%= current_staff.staffable.name %> </h1>
+  <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי ציר <%= current_staff.staffable.name %> </h1>
 <% end %>
 
 <%= form_tag(kids_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
@@ -80,6 +80,29 @@
     </tbody>
   </table>
 </div>
+<% end %>
+
+<% if @level == 1 %>
+  <p>
+    <strong> מדריכות ומדריכים:</strong>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% current_staff.staffable.staffs.each do |s|%>
+          <tr>
+            <td class = "btn btn-primary"><%= s.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to "יצירת מדריך.ה חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
+    <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1%>
+  </p>
 <% end %>
 
 <%= paginate @kids %>

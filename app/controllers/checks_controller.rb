@@ -8,13 +8,21 @@ class ChecksController < ApplicationController
     if params[:search]
       @checks = Check.search(params[:search]).order("created_at DESC")
     else
-      if @level < 2
+      if @level == 1
         @checks = []
         Check.all.each do |c|
           if (c.kids.exists?) && (c.my_group.id == current_staff.staffable.id) && (!@checks.include? c)
             @checks << c
           end
         end
+      elsif @level == 2
+        @checks = []
+        Check.all.each do |c|
+          if (c.kids.exists?) && (current_staff.staffable.groups.map(&:id).include? (c.my_group.id) && (!@checks.include? c)
+            @checks << c
+          end
+        end
+      end
       else
         @checks = Check.all.order("created_at DESC")
       end
