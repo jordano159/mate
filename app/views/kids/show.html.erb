@@ -1,5 +1,52 @@
 <p id="notice"><%= notice %></p>
 
+<h1 style="font-weight:bold;color:#0984e3;"><%= @kid.name %> <%= @kid.last_name %></h1>
+<br>
+
+<div class="kid-info">
+  <ul style="float:right;">
+    <li>מין: </li>
+    <li>טלפון: </li>
+    <li>רגישות ובעיות רפואיות:</li>
+    <li>תרופות: </li>
+    <li>אוכל: </li>
+    <li>מקום מגורים:</li>
+    <li>קן מקור: </li>
+    <li>שם אבא: </li>
+    <li>טלפון אבא:</li>
+    <li>שם אמא: </li>
+    <li>טלפון אמא: </li>
+    <li>גודל חולצה:</li>
+    <li>קבוצה</li>
+    <li>סטטוס עדכני</li>
+    <li>סיבה</li>
+
+  </ul>
+
+  <ul style="float:right;font-weight:bold;">
+    <li><%= @kid.sex %></li>
+    <li><%= @kid.phone %></li>
+    <li><%= @kid.medical %></li>
+    <li><%= @kid.meds %></li>
+    <li><%= @kid.food %></li>
+    <li><%= @kid.city %></li>
+    <li><%= @kid.ken %></li>
+    <li><%= @kid.dad %></li>
+    <li><%= @kid.dad_phone %></li>
+    <li><%= @kid.mom %></li>
+    <li><%= @kid.mom_phone %></li>
+    <li><%= @kid.size %></li>
+    <% if @kid.group %>
+      <li><%= link_to @kid.group.name, @kid.group %></li>
+    <% end %>
+    <% if @kid.checks.exists? && @kid.checks.last.attendances.exists? %>
+      <li><%= @kid.checks.last.attendances.where(kid_id: @kid.id).first.status %></li>
+      <li><%= @kid.checks.last.attendances.where(kid_id: @kid.id).first.cause %></li>
+    <% end %>
+  </ul>
+
+</div>
+<!--
 <div class="table-responsive-lg">
   <table class = "table">
     <thead class="thead-light">
@@ -18,9 +65,7 @@
         <th>שם אמא</th>
         <th>טלפון אמא</th>
         <th>גודל חולצה</th>
-        <th>קבוצה</th>
-        <th>סטטוס עדכני</th>
-        <th>סיבה</th>
+
       </tr>
     </thead>
 
@@ -50,7 +95,7 @@
         </tr>
     </tbody>
   </table>
-</div>
+</div> -->
 <% if @kid.group_id != nil %>
   <p>
     <strong> מדריכות ומדריכים:</strong>
@@ -72,5 +117,5 @@
   </p>
 <% end %>
 
-<%= link_to 'עריכה', edit_kid_path(@kid) if current_staff.admin? %> 
+<%= link_to 'עריכה', edit_kid_path(@kid) if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', kids_path %>

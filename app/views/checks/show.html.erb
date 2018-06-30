@@ -7,7 +7,7 @@
 
 <p>
   <strong>קבוצה:</strong>
-  <%= @check.group_id %>
+  <%= Group.find(@check.group_id).name %>
 </p>
 
 <p>
@@ -19,8 +19,8 @@
         <th>שם</th>
         <th>סטטוס</th>
         <th>סיבה</th>
-        <th>עריכה</th>
         <% if current_staff.admin? %>
+          <th>עריכה</th>
           <th>מחיקה</th>
         <% end %>
       </tr>
@@ -37,7 +37,7 @@
               "לא נוכח/ת"
             end %></td>
           <td><%= (@check.attendances & kid.attendances).first.cause %></td>
-          <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" %></td>
+          <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" if current_staff.admin? %></td>
           <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin? %></td>
         </tr>
       <% end %>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
   <%= link_to "מטה", root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -25,6 +25,9 @@
         <% end %>
           <li class="nav-item active">
             <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "עריכת משתמש", edit_staff_registration_path, class: "nav-link" %>
           </li>
           <li class="nav-item active">
             <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>

@@ -1,10 +1,10 @@
 <div id="sidebar-wrapper">
-  <ul class="sidebar-nav">
-              <li class="sidebar-brand">
+              <div class="sidebar-brand">
                 <%= link_to root_path do %>
-                  <h2>המטה</h2>
+                  <h1>המטה</h1>
                   <% end %>
-              </li>
+              </div>
+              <ul class="sidebar-nav">
               <% if staff_signed_in? %>
                 <% if current_staff.admin? %>
                 <li class="nav-item active">
@@ -23,15 +23,19 @@
                   <li class="nav-item active">
                     <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
                   </li>
-                  <li class="nav-item active">
-                    <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
-                  </li>
+                </ul>
+                <br><br>
+                <span class="navbar-text" style="color: lightgray;width:100%;text-align:center;border-top:1px solid white;padding-top:30px;font-family:'Secular One', sans-serif;">
+                  שלום <%= current_staff.name %> <br>
+                </span>
+                <ul class="sidebar-nav">
                   <li class="nav-item active">
                     <%= link_to "עריכת משתמש", edit_staff_registration_path, class: "nav-link" %>
                   </li>
-                  <span class="navbar-text" style="color: white;">
-                    שלום <%= current_staff.name %> <br>
-                  </span>
+                  <li class="nav-item active">
+                    <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
+                  </li>
+                </ul>
+
                   <% end %>
-          </ul>
       </div>

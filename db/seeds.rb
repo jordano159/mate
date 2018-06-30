@@ -32,7 +32,7 @@ end
 
 # Seeding Admin
 puts "Creating Admin..."
-Staff.create!(name: "שיר", email: "shir@gmail.com", password: "123123", password_confirmation: "123123", role: "admin", username: "Shir", staffable_type: "Axis", staffable_id: "#{Axis.first.id}") if Staff.find_by(username: "Shir").nil?
+Staff.create!(name: "גילעד", email: "gilad@gmail.com", password: "123123", password_confirmation: "123123", role: "admin", username: "Gilad", staffable_type: "Axis", staffable_id: "#{Axis.first.id}") if Staff.find_by(username: "Gilad").nil?
 
 
 puts "Created Succesfully"

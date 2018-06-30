@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% case current_staff.staffable_type %>
+<% when "Group" %>
+  <h1>חניכי קבוצת <%= current_staff.staffable.name %> </h1>
+<% when "Head" %>
+  <h1>חניכי ראש <%= current_staff.staffable.name %> </h1>
+<% when "Axis" %>
+  <h1>חניכי ציר <%= current_staff.staffable.name %> </h1>
+<% end %>
 
 <%= form_tag(kids_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
 <%= text_field_tag :search, params[:search], placeholder: "חיפוש...", class: "form-control mr-sm-2" %>
@@ -20,21 +27,15 @@
 <% if @kids.blank? %>
   <h4>אין חניכימות שתואמות את החיפוש <%= params[:search] %>.</h4>
 <% else %>
-<h1>חניכים</h1>
 
 
-<%
-counter = 0
-Kid.all.each do |kid|
-  counter += kid.current_status if kid.current_status
-end
- %>
- יש <%= counter %> חניכימות נוכחימות מתוך <%= Kid.all.count %>
+
+<% counter = how_many_attending(current_staff.staffable) %>
+ יש <%= counter %> חניכימות נוכחימות מתוך <%= current_staff.staffable.kids.count %>
 <%# counter = 0 %>
 <%# counter += kid.checks.last.attendances.where(kid_id: kid.id).first.status %>
 
 
-<%= paginate @kids %>
 
 <div class="table-responsive-lg">
   <table class = "table table-hover">
@@ -80,3 +81,5 @@ end
   </table>
 </div>
 <% end %>
+
+<%= paginate @kids %>
