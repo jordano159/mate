@@ -7,9 +7,17 @@ class KidsController < ApplicationController
   # GET /kids.json
   def index
     if params[:search]
-      @kids = current_staff.staffable.kids.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
+      if current_staff.admin?
+        @kids = Kid.all.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
+      else
+        @kids = current_staff.staffable.kids.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
+      end
     else
-      @kids = current_staff.staffable.kids.order(sort_column + " " + sort_direction).page(params[:page]).per(50)
+      if current_staff.admin?
+        @kids = Kid.all.order(sort_column + " " + sort_direction).page(params[:page]).per(50)
+      else
+        @kids = current_staff.staffable.kids.order(sort_column + " " + sort_direction).page(params[:page]).per(50)
+      end
     end
 
     respond_to do |format|

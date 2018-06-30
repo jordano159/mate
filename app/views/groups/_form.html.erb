@@ -30,7 +30,7 @@
     <%= form.input_field :head_id, collection: @heads, input_html: { class: 'select' } %>
   </div>
   <div class="field">
-    <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Kid.all, label_method: :name, value_method: :id %>
+    <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Kid.all, label_method: :full_name, value_method: :id %>
   </div>
   <!-- <select name="group[kid_ids][]" class="field select" multiple="multiple">
     <% Kid.all.each do |k| %>

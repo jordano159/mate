@@ -16,6 +16,10 @@ class Kid < ApplicationRecord
       end
     end
 
+    def full_name
+      name + " " + last_name
+    end
+
   def self.search(search_term)
     Kid.joins(:group).where(
       "kids.name LIKE ? OR kids.sex LIKE ? OR kids.last_name LIKE ? OR kids.phone LIKE ? OR

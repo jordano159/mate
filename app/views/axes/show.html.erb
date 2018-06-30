@@ -48,8 +48,8 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "יצירת רכז.ת ציר חדש.ה", new_axis_staff_path(@axis) if current_staff.admin? %>
+  <%= link_to "יצירת רכז.ת ציר חדש.ה", new_axis_staff_path(@axis), class: "btn btn-primary" if current_staff.admin? %>
 </p>
 
-<%= link_to 'עריכה', edit_axis_path(@axis) if current_staff.admin? %>
-<%= link_to 'חזרה לרשימה', axes_path %>
+<%= link_to 'עריכה', edit_axis_path(@axis), class: "btn btn-primary" if current_staff.admin? %>
+<%= link_to 'חזרה לרשימה', axes_path, class: "btn btn-primary" %>
