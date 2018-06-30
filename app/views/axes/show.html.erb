@@ -1,25 +1,26 @@
-<p id="notice"><%= notice %></p>
-
 <h2>ציר <%= @axis.name %></h2>
 
 <p>
   <strong>ראשים:</strong>
   <div class="table-responsive">
-  <table class = "table table-hover">
-    <thead class="thead-light">
-      <tr>
-        <th>שם</th>
-        <% if current_staff.admin? %>
-          <th>עריכה</th>
-          <th>מחיקה </th>
-        <% end %>
-      </tr>
-    </thead>
+    <table class = "table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>שם</th>
+          <th colspan="1"> נוכחות </th>
+          <% if current_staff.admin? %>
+            <th>עריכה</th>
+            <th>מחיקה </th>
+          <% end %>
+        </tr>
+      </thead>
 
     <tbody>
       <% @axis.heads.each do |head|%>
         <tr>
           <td><%= link_to head.name, head %></td>
+          <td><% counter = how_many_attending(head) %>
+           יש <%= counter %> חניכימות נוכחימות מתוך <%= head.kids.count %></td>
           <td><%= link_to 'עריכה', edit_head_path(head), class: "btn btn-warning" if current_staff.admin? %></td>
           <td><%= link_to 'מחיקה', head, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
         </tr>

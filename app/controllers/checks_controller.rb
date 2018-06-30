@@ -18,11 +18,10 @@ class ChecksController < ApplicationController
       elsif @level == 2
         @checks = []
         Check.all.each do |c|
-          if (c.kids.exists?) && (current_staff.staffable.groups.map(&:id).include? (c.my_group.id) && (!@checks.include? c)
+          if (c.kids.exists?) && (current_staff.staffable.groups.map(&:id).include? (c.my_group.id)) && (!@checks.include? c)
             @checks << c
           end
         end
-      end
       else
         @checks = Check.all.order("created_at DESC")
       end
