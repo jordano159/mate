@@ -1,0 +1,31 @@
+<div class="table-responsive-lg">
+  <table class = "table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>שם</th>
+        <th>שם משתמש</th>
+        <th>אדמין?</th>
+        <th>עריכה</th>
+        <th>מחיקה </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% Staff.all.order("staffable_type DESC").each do |staff| %>
+      <tr>
+        <td><%= link_to staff.name, staff_path(staff) %></td>
+        <td><%= staff.username %></td>
+        <td>
+          <% if staff.admin? %>
+          <span style="color:green;">כן</span>
+          <% else %>
+          לא
+          <% end %>
+        </td>
+        <td><%# link_to 'עריכה', edit_staff_path(staff), class: "btn btn-warning" %></td>
+        <td><%# link_to 'מחיקה', "#{staff.staffable_type.downcase}"_staff_path(staff), method: :delete, class: "btn btn-danger" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

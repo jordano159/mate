@@ -6,13 +6,11 @@ class StaffsController < ApplicationController
     @staffs = @staffable.staffs
   end
 
-  # def show
-  #   sign_in(Staff.find(params[:id]), scope: :staff)
-  # end
+  def show
+  end
 
   def new
     @staff = Staff.new
-    # sign_in(Staff.find(params[:id]), scope: :staff)
   end
 
   def edit

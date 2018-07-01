@@ -20,6 +20,10 @@ def home_page
   end
 end
 
+def admin_index
+  redirect_to '/' if !current_staff.admin?
+end
+
 def only_admin
   blocked = %w(kids groups heads axes)
   if staff_signed_in? && current_staff.admin? == false
