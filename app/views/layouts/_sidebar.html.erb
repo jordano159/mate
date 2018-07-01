@@ -7,6 +7,9 @@
               <ul class="sidebar-nav">
               <% if staff_signed_in? %>
               <li class="nav-item active">
+                <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item active">
                 <%= link_to "נוכחויות", checks_path, class: "nav-link" %>
               </li>
                 <% if current_staff.admin? %>
@@ -19,10 +22,10 @@
                 <li class="nav-item active">
                   <%= link_to "קבוצות", groups_path, class: "nav-link" %>
                 </li>
+                <li class="nav-item active">
+                  <%= link_to "כל המשתמשים", staffs_path, class: "nav-link" %>
+                </li>
                 <% end %>
-                  <li class="nav-item active">
-                    <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
-                  </li>
                 </ul>
                 <br><br>
                 <span class="navbar-text" style="color: lightgray;width:100%;text-align:center;border-top:1px solid white;padding-top:30px;font-family:'Secular One', sans-serif;">

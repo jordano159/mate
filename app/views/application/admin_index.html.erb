@@ -22,8 +22,8 @@
           לא
           <% end %>
         </td>
-        <td><%# link_to 'עריכה', edit_staff_path(staff), class: "btn btn-warning" %></td>
-        <td><%# link_to 'מחיקה', "#{staff.staffable_type.downcase}"_staff_path(staff), method: :delete, class: "btn btn-danger" %></td>
+        <td><%= link_to 'עריכה', eval("edit_#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})"), class: "btn btn-warning" %></td>
+        <td><%= link_to 'מחיקה', eval("#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})"), :data => {:confirm => "את\ה בטוח\ה?"}, method: :delete, class: "btn btn-danger" %></td>
       </tr>
       <% end %>
     </tbody>

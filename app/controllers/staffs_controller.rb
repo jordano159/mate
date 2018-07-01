@@ -14,6 +14,7 @@ class StaffsController < ApplicationController
   end
 
   def edit
+    redirect_to '/' if !current_staff.admin?
   end
 
   def create
