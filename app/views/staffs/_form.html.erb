@@ -1,11 +1,12 @@
 <%= simple_form_for([@staffable, @staff], html: { class: 'form-inline' }) do |form| %>
 
   <div class="field">
-    <%= form.input :name %>
-    <%= form.input :email, required: true, autofocus: true %>
-    <%= form.input :username, required: true %>
-    <%= form.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= form.input :password_confirmation, required: true %>
+    <%= form.input :name, label:"שם" %>
+    <%= form.input :email, required: true, autofocus: true, label: "מייל" %>
+    <%= form.input :username, required: true, label: "שם משתמש" %>
+    <%= form.input :role, collection: ["user", "admin"], label: "תפקיד" if current_staff.admin? %>
+    <%= form.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: "סיסמה" %>
+    <%= form.input :password_confirmation, required: true, label: "אימות סיסמה" %>
   </div>
   <div class="actions">
     <%= form.submit %>

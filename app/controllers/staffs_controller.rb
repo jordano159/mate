@@ -62,6 +62,6 @@ end
   end
 
   def staff_params
-    params.require(:staff).permit(:name, :staffable_id, :staffable_type, :email, :password, :username)
+    params.require(:staff).permit(:name, :staffable_id, :staffable_type, :email, :password, :username, :role)
   end
 end
