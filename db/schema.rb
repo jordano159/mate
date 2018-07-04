@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_24_172026) do
+ActiveRecord::Schema.define(version: 2018_07_04_163502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 2018_06_24_172026) do
     t.string "mom"
     t.string "mom_phone"
     t.string "size"
+    t.boolean "shabat"
+    t.boolean "parents"
   end
 
   create_table "staffs", force: :cascade do |t|

@@ -53,6 +53,12 @@
   <div class="field">
     <%= form.input :size %>
   </div>
+  <div class="field">
+    <%= form.input :shabat, as: :radio_buttons, label: "שומר.ת שבת?" %>
+  </div>
+  <div class="field">
+    <%= form.input :parents, as: :radio_buttons, label: "ההורים באים?" %>
+  </div>
   <div class="field select">
     <%= form.input :group_id, collection: @groups %>
   </div>

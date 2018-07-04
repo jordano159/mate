@@ -1,3 +1,8 @@
+<script type="text/javascript">
+  $('.check_q').change(function(){if($(this).attr("value")==0){$(this).closest(".check_div").find(".check_r").show()}else{$(this).closest(".check_div").find(".check_r").hide()}});
+  $('.check_r').change(function(){if($(this).attr("value")=="אחר" ){$(this).closest(".check_div").find(".check_o").show()}else{$(this).closest(".check_div").find(".check_o").hide()}});
+</script>
+
 <%= simple_form_for(@check) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -8,12 +13,15 @@
     <% causes = ["בבית מסיבות רפואיות ויחזור", "בבית מסיבות רפואיות ולא יחזור", "בבית מסיבות אישיות ויחזור", "בבית מסיבות אישיות ולא יחזור", "פינוי רפואי", "מרפאה", "אחר"] %>
     <br />
     <%= f.simple_fields_for :attendances do |ff| %>
+      <div class="check_div">
       <% kid = ff.object.kid %>
       <%= kid.name + " " + kid.last_name %>
       נוכח?
-      <%= ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last %>
-      <%= ff.input :cause, label: "סיבת היעדרות:", collection: causes %>
+      <%= ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last, class: "check_q" %>
+      <%= ff.input :cause, label: "סיבת היעדרות:", collection: causes, class: "check_r" %>
+      <%= ff.input :cause, label: "סיבת היעדרות:", class: "check_o" %>
       <br />
+    </div>
     <% end %>
       <%= f.submit 'עדכון פרטים', class: "form-actions", data: {confirm: "ראית את החניכים והחניכות בעיניים?"} %>
   </div>

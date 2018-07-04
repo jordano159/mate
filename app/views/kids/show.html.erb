@@ -15,6 +15,8 @@
     <li>שם אמא: </li>
     <li>טלפון אמא: </li>
     <li>גודל חולצה:</li>
+    <li>שמירת שבת:</li>
+    <li>הגעת הורים לטקס:</li>
     <li>קבוצה</li>
     <li>סטטוס עדכני</li>
     <li>סיבה</li>
@@ -34,6 +36,20 @@
     <li><%= @kid.mom %></li>
     <li><%= @kid.mom_phone %></li>
     <li><%= @kid.size %></li>
+    <li>
+      <% if @kid.shabat == true %>
+      כן
+      <% elsif @kid.shabat == false %>
+      לא
+      <% end %>
+    </li>
+    <li>
+      <% if @kid.parents == true %>
+      כן
+      <% elsif @kid.parents == false %>
+      לא
+      <% end %>
+    </li>
     <% if @kid.group %>
       <li><%= link_to @kid.group.name, @kid.group %></li>
     <% end %>
@@ -44,56 +60,6 @@
   </ul>
 
 </div>
-<!--
-<div class="table-responsive-lg">
-  <table class = "table">
-    <thead class="thead-light">
-      <tr>
-        <th>שם פרטי</th>
-        <th>שם משפחה</th>
-        <th>מין</th>
-        <th>טלפון</th>
-        <th>רגישות ובעיות רפואיות</th>
-        <th>תרופות</th>
-        <th>אוכל</th>
-        <th>מקום מגורים</th>
-        <th>קן מקור</th>
-        <th>שם אבא</th>
-        <th>טלפון אבא</th>
-        <th>שם אמא</th>
-        <th>טלפון אמא</th>
-        <th>גודל חולצה</th>
-
-      </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-          <td><%= @kid.name %></td>
-          <td><%= @kid.last_name %></td>
-          <td><%= @kid.sex %></td>
-          <td><%= @kid.phone %></td>
-          <td><%= @kid.medical %></td>
-          <td><%= @kid.meds %></td>
-          <td><%= @kid.food %></td>
-          <td><%= @kid.city %></td>
-          <td><%= @kid.ken %></td>
-          <td><%= @kid.dad %></td>
-          <td><%= @kid.dad_phone %></td>
-          <td><%= @kid.mom %></td>
-          <td><%= @kid.mom_phone %></td>
-          <td><%= @kid.size %></td>
-          <% if @kid.group %>
-            <td><%= link_to @kid.group.name, @kid.group %></td>
-          <% end %>
-          <% if @kid.checks.exists? && @kid.checks.last.attendances.exists? %>
-            <td><%= @kid.checks.last.attendances.where(kid_id: @kid.id).first.status %></td>
-            <td><%= @kid.checks.last.attendances.where(kid_id: @kid.id).first.cause %></td>
-          <% end %>
-        </tr>
-    </tbody>
-  </table>
-</div> -->
 <% if @kid.group_id != nil %>
   <p>
     <strong> מדריכות ומדריכים:</strong>
@@ -115,5 +81,5 @@
   </p>
 <% end %>
 
-<%= link_to 'עריכה', edit_kid_path(@kid) if current_staff.admin? %>
-<%= link_to 'חזרה לרשימה', kids_path %>
+<%= link_to 'עריכה', edit_kid_path(@kid), class: "btn btn-primary" if current_staff.admin? %>
+<%= link_to 'חזרה לרשימה', kids_path, class: "btn btn-primary" %>
