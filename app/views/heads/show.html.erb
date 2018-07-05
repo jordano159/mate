@@ -23,7 +23,7 @@
       <% @head.groups.each do |group|%>
         <tr>
           <td><%= link_to group.name, group %></td>
-          <td><% counter = how_many_attending(group) %>
+          <td><% counter = how_many_attending(group.kids) %>
            <%= counter %> מתוך <%= group.kids.count %></td>
           <td><%= link_to 'עריכה', edit_group_path(group), class: "btn btn-warning" if current_staff.admin? %></td>
           <td><%= link_to 'מחיקה', group, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>

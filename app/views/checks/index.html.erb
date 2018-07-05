@@ -16,6 +16,7 @@
         <th>שם</th>
         <th>תאריך</th>
         <th>קבוצה</th>
+        <th>מאושר?</th>
         <th>הצגה</th>
         <th>עריכה</th>
         <% if current_staff.admin? %>
@@ -32,6 +33,13 @@
         <% if check.kids.exists? %>
           <td><%= link_to check.my_group.name, group_path(check.my_group), class: "btn btn-primary" %> </td>
         <% end %>
+        <td>
+          <% if check.approved? %>
+            <span style="color:green;">מאושר</span>
+          <% else %>
+            <span style="color:red;">עוד לא מאושר</span>
+          <% end %>
+        </td>
         <td><%= link_to 'הצגה', check, class: "btn btn-primary" %></td>
         <td><%= link_to 'עריכה', edit_check_path(check), class: "btn btn-warning" %></td>
         <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin?  %></td>

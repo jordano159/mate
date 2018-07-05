@@ -27,8 +27,13 @@
 <% if @kids.blank? %>
   <h4>אין חניכימות שתואמות את החיפוש <%= params[:search] %>.</h4>
 <% else %>
-<% counter = how_many_attending(current_staff.staffable) %>
-<%= counter %> מתוך <%= current_staff.staffable.kids.count %> חניכים\ות נוכחים\ות
+  <% if current_staff.admin? %>
+    <% counter = how_many_attending(Kid.all) %>
+    <%= counter %> מתוך <%= Kid.all.count %> חניכים\ות נוכחים\ות
+  <% else %>
+    <% counter = how_many_attending(current_staff.staffable.kids) %>
+    <%= counter %> מתוך <%= current_staff.staffable.kids.count %> חניכים\ות נוכחים\ות
+  <% end %>
 
 <div class="table-responsive-lg">
   <table class = "table table-hover">

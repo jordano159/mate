@@ -1,5 +1,14 @@
 <%= link_to "יצירת אדמין חדש", new_axis_staff_path(Axis.first.id), class: "btn btn-primary" %>
 <br>
+<!-- <%= form_tag(staffs_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+<%= text_field_tag :search, params[:search], placeholder: "חיפוש...", class: "form-control mr-sm-2" %>
+<%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+<% end %>
+
+<% if @staffs.blank? %>
+  <h4>אין משתמשות שתואמות את החיפוש <%= params[:search] %>.</h4>
+<% else %> -->
+
 <div class="table-responsive-lg">
   <table class = "table table-hover">
     <thead class="thead-light">
@@ -31,3 +40,4 @@
     </tbody>
   </table>
 </div>
+<!-- <% end %> -->

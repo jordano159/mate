@@ -98,6 +98,6 @@ class ChecksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def check_params
-      params.require(:check).permit(:name, :group_id, attendances_attributes: [:status, :id, :cause], kid_ids: [])
+      params.require(:check).permit(:name, :group_id, :approved, attendances_attributes: [:status, :id, :cause], kid_ids: [])
     end
 end

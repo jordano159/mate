@@ -8,6 +8,13 @@
   <%= Group.find(@check.group_id).name %>
 </p>
 
+סטטוס:
+<% if @check.approved? %>
+  <span style="color:green;">מאושר</span>
+<% else %>
+  <span style="color:red;">עוד לא מאושר</span>
+<% end %>
+
 <p>
   <strong>חניכים:</strong>
   <div class="table-responsive-lg">
@@ -45,3 +52,17 @@
 </p>
 <%= link_to 'עריכה', edit_check_path(@check), class: "btn btn-primary" %>
 <%= link_to 'חזרה לרשימת הנוכחויות', checks_path, class: "btn btn-primary" %>
+
+<% if @level > 1 %>
+  <% if !@check.approved? %>
+    <%= form_for @check do |f| %>
+      <%= f.hidden_field :approved, value: true %>
+      <%= f.submit 'שינוי סטטוס - מאושר', class: 'btn btn-primary' %>
+    <% end %>
+    <% else %>
+    <%= form_for @check do |f| %>
+      <%= f.hidden_field :approved, value: false %>
+      <%= f.submit 'שינוי סטטוס - לא מאושר', class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+<% end %>

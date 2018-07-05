@@ -113,6 +113,6 @@ class KidsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def kid_params
       params.require(:kid).permit(:name, :group_id, :last_name, :sex, :phone, :medical,
-        :meds, :food, :city, :ken, :dad, :dad_phone, :mom, :mom_phone, :size, :shabat, :parents)
+        :meds, :food, :city, :ken, :dad, :dad_phone, :mom, :mom_phone, :size, :shabat, :parents, :swim)
     end
 end

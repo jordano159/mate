@@ -22,6 +22,11 @@ end
 
 def admin_index
   redirect_to '/' if !current_staff.admin?
+  if params[:search]
+    @staffs = Staff.search(params[:search]).order("created_at DESC")
+  else
+    @staffs = Staff.all.order("created_at DESC")
+  end
 end
 
 def only_admin

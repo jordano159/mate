@@ -1,8 +1,3 @@
-<script type="text/javascript">
-  $('.check_q').change(function(){if($(this).attr("value")==0){$(this).closest(".check_div").find(".check_r").show()}else{$(this).closest(".check_div").find(".check_r").hide()}});
-  $('.check_r').change(function(){if($(this).attr("value")=="אחר" ){$(this).closest(".check_div").find(".check_o").show()}else{$(this).closest(".check_div").find(".check_o").hide()}});
-</script>
-
 <%= simple_form_for(@check) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -17,12 +12,37 @@
       <% kid = ff.object.kid %>
       <%= kid.name + " " + kid.last_name %>
       נוכח?
-      <%= ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last, class: "check_q" %>
-      <%= ff.input :cause, label: "סיבת היעדרות:", collection: causes, class: "check_r" %>
-      <%= ff.input :cause, label: "סיבת היעדרות:", class: "check_o" %>
+      <%= ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last %>
+      <%= ff.input :cause, label: "סיבת היעדרות:", collection: causes, input_html: {style:"display:none;", class: 'check_r' }, label_html: {style:"display:none;", class: 'label_r' } %>
+      <%= ff.input :cause, label: "סיבת היעדרות:",                     input_html: {style:"display:none;", class: 'check_o' }, label_html: {style:"display:none;", class: 'label_o' } %>
       <br />
     </div>
     <% end %>
       <%= f.submit 'עדכון פרטים', class: "form-actions", data: {confirm: "ראית את החניכים והחניכות בעיניים?"} %>
   </div>
 <% end %>
+
+<script>
+$(document).ready(function(){
+$('input[type="radio"]').change(function(){
+console.log($(this).val())
+if($(this).val()==0){
+  $(this).closest("div.check_div").find(".check_r").show(400)
+  $(this).closest("div.check_div").find(".label_r").show(400)}
+else{
+  $(this).closest("div.check_div").find(".check_r").hide(400)
+  $(this).closest("div.check_div").find(".label_r").hide(400)}
+});
+
+$(".check_r").change(function(){
+$($(this).closest("div.check_div").find(".check_o")).val($(this).val());
+console.log($(this).val())
+if($(this).val()=="אחר"){
+  $(this).closest("div.check_div").find(".check_o").show(400)
+  $(this).closest("div.check_div").find(".label_o").show(400)}
+else{
+  $(this).closest("div.check_div").find(".check_o").hide(400)
+  $(this).closest("div.check_div").find(".label_o").hide(400)}
+});
+});
+</script>

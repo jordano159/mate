@@ -17,6 +17,7 @@
     <li>גודל חולצה:</li>
     <li>שמירת שבת:</li>
     <li>הגעת הורים לטקס:</li>
+    <li>יכולת שחייה:</li>
     <li>קבוצה</li>
     <li>סטטוס עדכני</li>
     <li>סיבה</li>
@@ -36,20 +37,9 @@
     <li><%= @kid.mom %></li>
     <li><%= @kid.mom_phone %></li>
     <li><%= @kid.size %></li>
-    <li>
-      <% if @kid.shabat == true %>
-      כן
-      <% elsif @kid.shabat == false %>
-      לא
-      <% end %>
-    </li>
-    <li>
-      <% if @kid.parents == true %>
-      כן
-      <% elsif @kid.parents == false %>
-      לא
-      <% end %>
-    </li>
+    <li><%= @kid.shabat %></li>
+    <li><%= @kid.parents %></li>
+    <li><%= @kid.swim %></li>
     <% if @kid.group %>
       <li><%= link_to @kid.group.name, @kid.group %></li>
     <% end %>
@@ -81,5 +71,6 @@
   </p>
 <% end %>
 
-<%= link_to 'עריכה', edit_kid_path(@kid), class: "btn btn-primary" if current_staff.admin? %>
+<%= link_to 'עריכה', edit_kid_path(@kid), class: "btn btn-warning" if current_staff.admin? %>
+<%= link_to 'מחיקה', @kid, method: :delete, class: "btn btn-danger" if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', kids_path, class: "btn btn-primary" %>

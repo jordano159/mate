@@ -18,4 +18,9 @@ class Staff < ApplicationRecord
   def will_save_change_to_email?
     false
   end
+
+  def self.search(search_term)
+    Staff.where(
+      "staffs.name LIKE ?", "%#{search_term}%" ).distinct
+  end
 end
