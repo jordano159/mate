@@ -12,6 +12,12 @@ class KidsController < ApplicationController
       else
         @kids = current_staff.staffable.kids.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
       end
+    elsif params[:filter_column]
+      if current_staff.admin?
+        @kids = Kid.all.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(50)
+      else
+        @kids = current_staff.staffable.kids.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(50)
+      end
     else
       if current_staff.admin?
         @kids = Kid.all.order(sort_column + " " + sort_direction).page(params[:page]).per(50)

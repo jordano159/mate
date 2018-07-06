@@ -32,6 +32,10 @@ class Kid < ApplicationRecord
       "%#{search_term}%", "%#{search_term}%", "%#{search_term}%").distinct
   end
 
+  def self.filter(filter_column, filter_condition)
+    Kid.where("kids.#{filter_column} LIKE ?", "%#{filter_condition}%").distinct
+  end
+
   def self.to_csv
     attributes = %w{name last_name sex phone medical
       meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim}
