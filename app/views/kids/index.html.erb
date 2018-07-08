@@ -12,14 +12,16 @@
 <%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
 <% end %>
 
-<% columns = %w[swim shabat parents] %>
-<% conditions = %w[כן לא] %>
-<%= form_tag(kids_path, :method => "get", id: "filter-form", class: "form-inline my-2 my-lg-0") do %>
-<%= text_field_tag :filter_column, params[:filter_column], placeholder: "סינון עמודה", class: "form-control mr-sm-2" %>
-<%# collection_select(:filter_column, params[:filter_column], columns, :id) %>
-<%# select_tag "column", options_from_collection_for_select(@people, "id", "name"), prompt: "Select something" %>
-<%= text_field_tag :filter_condition, params[:filter_condition], placeholder: "כן או לא?", class: "form-control mr-sm-2" %>
-<%= submit_tag "סינון", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+<% if current_staff.admin? %>
+  <% columns = %w[swim shabat parents] %>
+  <% conditions = %w[כן לא] %>
+  <%= form_tag(kids_path, :method => "get", id: "filter-form", class: "form-inline my-2 my-lg-0") do %>
+  <%= text_field_tag :filter_column, params[:filter_column], placeholder: "סינון עמודה", class: "form-control mr-sm-2" %>
+  <%# collection_select(:filter_column, params[:filter_column], columns, :id) %>
+  <%# select_tag "column", options_from_collection_for_select(@people, "id", "name"), prompt: "Select something" %>
+  <%= text_field_tag :filter_condition, params[:filter_condition], placeholder: "כן או לא?", class: "form-control mr-sm-2" %>
+  <%= submit_tag "סינון", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+  <% end %>
 <% end %>
 
 

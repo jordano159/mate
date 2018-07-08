@@ -51,13 +51,12 @@ class ChecksController < ApplicationController
   # POST /checks.json
   def create
     @check = Check.new(check_params)
-    @check.group_id = current_staff.staffable.id
     @kids = current_staff.staffable.kids
     @check.kids << @kids
 
     respond_to do |format|
       if @check.save
-        format.html { redirect_to @check, notice: 'Check was successfully created.' }
+        format.html { redirect_to edit_check_path(@check), notice: 'Check was successfully created.' }
         format.json { render :show, status: :created, location: @check }
       else
         format.html { render :new }
