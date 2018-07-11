@@ -18,6 +18,8 @@
     <li>שמירת שבת:</li>
     <li>הגעת הורים לטקס:</li>
     <li>יכולת שחייה:</li>
+    <li>כניסות ויציאות</li>
+    <li>הערות</li>
     <li>קבוצה</li>
     <li>סטטוס עדכני</li>
     <li>סיבה</li>
@@ -40,6 +42,8 @@
     <li><%= @kid.shabat %></li>
     <li><%= @kid.parents %></li>
     <li><%= @kid.swim %></li>
+    <li><%= @kid.exits %></li>
+    <li><%= @kid.comments %></li>
     <% if @kid.group %>
       <li><%= link_to @kid.group.name, @kid.group %></li>
     <% end %>

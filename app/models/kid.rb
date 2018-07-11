@@ -38,10 +38,11 @@ class Kid < ApplicationRecord
 
   def self.to_csv
     attributes = %w{name last_name sex phone medical
-      meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim}
+      meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim exits comments}
     heb_names = ["שם", "שם משפחה", "מין", "פלאפון", "רגישות ובעיות רפואיות", "תרופות",
       "אוכל", "מקום מגורים", "קן מקור", "שם אבא", "טלפון אבא", "שם אמא", "טלפון אמא",
-    "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת?", "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה"]
+    "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת?",
+     "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות"]
 
     CSV.generate(headers: true) do |csv|
       csv << heb_names
@@ -55,7 +56,7 @@ class Kid < ApplicationRecord
   def self.my_import(file)
     columns = ["שם", "שם משפחה", "מין", "פלאפון", "רגישות ובעיות רפואיות", "תרופות",
       "אוכל", "מקום מגורים", "קן מקור", "שם אבא", "טלפון אבא", "שם אמא", "טלפון אמא",
-    "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת?", "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה"]
+    "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת?", "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות"]
     kids = []
     CSV.foreach(file.path, headers: true) do |row|
       kids << Kid.new(name: row["שם"], last_name: row["שם משפחה"], sex: row["מין"],
@@ -63,7 +64,7 @@ class Kid < ApplicationRecord
         food: row["אוכל"], city: row["מקום מגורים"], ken: row["קן מקור"], dad: row["שם אבא"],
         dad_phone: row["טלפון אבא"], mom: row["שם אמא"], mom_phone: row["טלפון אמא"], size: row["מידת חולצה"],
         group_id: (row ["מספר קבוצה"].to_i + Group.first.id - 1), shabat: row["האם החניך/ה שומר/ת שבת?"],
-        parents: row["האם תגיעו לטקס הסיום וליום ההורים?"], swim: row["אישור שחייה"])
+        parents: row["האם תגיעו לטקס הסיום וליום ההורים?"], swim: row["אישור שחייה"], exits: row["כניסות ויציאות"], comments: row["הערות"])
     end
     Kid.import kids, recursive: true
   end

@@ -15,11 +15,7 @@ end
 puts "How Many Heads?"
 amount = STDIN.gets.chomp.to_i
 for i in 1..amount
-  if i < 4
-    Head.create!(name: "#{i}", axis_id: "#{Axis.find_by(name: "1").id}") if Head.find_by(name: "#{i}").nil?
-  elsif i >= 4
-    Head.create!(name: "#{i}", axis_id: "#{Axis.find_by(name: "2").id}") if Head.find_by(name: "#{i}").nil?
-  end
+  Head.create!(name: "#{i}", axis_id: "#{Axis.find_by(name: "#{(i / 6) + 1}").id}") if Head.find_by(name: "#{i}").nil?
   Staff.create!(name: "ראשראשית #{i}", email: "h#{i}@gmail.com", password: "123123", password_confirmation: "123123",
     role: "user", username: "ראש #{i}", staffable_type: "Head", staffable_id: Head.find_by(name: "#{i}").id) if Staff.find_by(username: "ראש #{i}").nil?
 end
@@ -28,14 +24,17 @@ end
 puts "How Many Groups?"
 amount = STDIN.gets.chomp.to_i
 for i in 1..amount
-  Group.create!(name: "#{i}", head_id: "#{Head.find_by(name: "#{i/5}").id}") if Group.find_by(name: "#{i}").nil?
-  Staff.create!(name: "מדריכת #{i}", email: "g#{i}@gmail.com", password: "123123", password_confirmation: "123123",
+  Group.create!(name: "#{i}", head_id: "#{Head.find_by(name: "#{(i / 6) + 1}").id}") if Group.find_by(name: "#{i}").nil?
+  Staff.create!(name: "מדריכת #{i}", email: "g#{i}@gmail.com", password: "321321", password_confirmation: "321321",
     role: "user", username: "קבוצה #{i}", staffable_type: "Group", staffable_id: Group.find_by(name: "#{i}").id) if Staff.find_by(username: "קבוצה #{i}").nil?
 end
 
+puts "Creating VIP..."
+Staff.create!(name: "גילעד", email: "gilad@gmail.com", password: "12341234", password_confirmation: "12341234", role: "vip", username: "Gilad", staffable_type: "Axis", staffable_id: "#{Axis.first.id}") if Staff.find_by(username: "Gilad").nil?
+
 # Seeding Admin
 puts "Creating Admin..."
-Staff.create!(name: "גילעד", email: "gilad@gmail.com", password: "123123", password_confirmation: "123123", role: "admin", username: "Gilad", staffable_type: "Axis", staffable_id: "#{Axis.first.id}") if Staff.find_by(username: "Gilad").nil?
+Staff.create!(name: "ירדן", email: "yarden11111@gmail.com", password: "12341234", password_confirmation: "12341234", role: "admin", username: "Jordan", staffable_type: "Axis", staffable_id: "#{Axis.first.id}") if Staff.find_by(username: "Jordan").nil?
 
 
 puts "Created Succesfully"

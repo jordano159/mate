@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
 def home_page
   if staff_signed_in?
-    if current_staff.admin?
+    if current_staff.admin? || current_staff.vip?
       redirect_to controller: "axes", action: "index"
     elsif @level == 1
       redirect_to kids_path
@@ -21,7 +21,7 @@ def home_page
 end
 
 def admin_index
-  redirect_to '/' if !current_staff.admin?
+  redirect_to '/' if !current_staff.admin? || !current_staff.vip?
   if params[:search]
     @staffs = Staff.search(params[:search]).order("created_at DESC")
   else
