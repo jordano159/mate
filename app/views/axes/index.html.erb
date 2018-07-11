@@ -2,23 +2,25 @@
 <br>
 <h1>צירים</h1>
 
-<div class="table-responsive-lg">
-  <br>
-<table class = "table table-hover">
-  <thead class="thead-light">
-    <tr>
-      <th>שם</th>
-      <% if current_staff.admin? %>
-        <th>עריכה</th>
-        <th>מחיקה </th>
-      <% end %>
-    </tr>
-  </thead>
+<div class="table-responsive">
+  <table class = "table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>שם</th>
+        <th colspan="1"> נוכחות </th>
+        <% if current_staff.admin? %>
+          <th>עריכה</th>
+          <th>מחיקה </th>
+        <% end %>
+      </tr>
+    </thead>
 
   <tbody>
     <% @axes.each do |axis| %>
       <tr>
         <td><%= link_to axis.name, axis %></td>
+        <td><% counter = how_many_attending(axis.kids) %>
+        <%= counter %> מתוך <%= axis.kids.count %></td>
         <td><%= link_to 'עריכה', edit_axis_path(axis), class: "btn btn-warning" if current_staff.admin? %></td>
         <td><%= link_to 'מחיקה', axis, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
       </tr>
