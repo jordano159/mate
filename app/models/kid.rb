@@ -5,7 +5,7 @@ class Kid < ApplicationRecord
     accepts_nested_attributes_for :attendances, :allow_destroy => true
 
     def current_status
-      if checks.exists? && checks.last.attendances.exists? && checks.last.approved?
+      if checks.exists? && checks.last.attendances.exists?
         checks.last.attendances.where(kid_id: id).last.status
       end
     end
@@ -47,7 +47,7 @@ class Kid < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << heb_names
 
-      all.each do |kid|
+      Kid.all.each do |kid|
         csv << attributes.map{ |attr| kid.send(attr) }
       end
     end
