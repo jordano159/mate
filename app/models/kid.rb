@@ -5,7 +5,7 @@ class Kid < ApplicationRecord
     accepts_nested_attributes_for :attendances, :allow_destroy => true
 
     def current_status
-      if checks.exists? && checks.last.attendances.exists?
+      if checks.exists? && checks.last.attendances.exists? && checks.last.approved?
         checks.last.attendances.where(kid_id: id).last.status
       end
     end
