@@ -28,7 +28,7 @@ class KidsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @kids.to_csv, filename: "חניכי המדצופי-#{Date.today}.csv" }
+      format.csv { send_data Kid.all.to_csv, filename: "חניכי המדצופי-#{Date.today}.csv" }
     end
   end
 

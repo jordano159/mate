@@ -47,7 +47,7 @@ class Kid < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << heb_names
 
-      Kid.all.each do |kid|
+      all.each do |kid|
         csv << attributes.map{ |attr| kid.send(attr) }
       end
     end
