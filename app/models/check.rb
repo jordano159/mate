@@ -3,6 +3,7 @@ class Check < ApplicationRecord
   has_many :kids, through: :attendances
   accepts_nested_attributes_for :attendances, :allow_destroy => true
   belongs_to :groups, optional: true
+  validates :name, presence: true
 
   enum status: [ :present, :not_present ]
 

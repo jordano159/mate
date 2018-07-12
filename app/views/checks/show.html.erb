@@ -15,6 +15,14 @@
   <span style="color:red;">עוד לא מאושר</span>
 <% end %>
 
+<div>
+  <% counter = 0 %>
+  <% @check.attendances.each do |kid| %>
+    <% counter += kid.status if kid.status %>
+  <% end %>
+  <%= counter %> מתוך <%= @check.kids.count %> נוכחים
+</div>
+
 <p>
   <strong>חניכים:</strong>
   <div class="table-responsive-lg">

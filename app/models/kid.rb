@@ -5,14 +5,22 @@ class Kid < ApplicationRecord
     accepts_nested_attributes_for :attendances, :allow_destroy => true
 
     def current_status
-      if checks.exists? && checks.last.attendances.exists?
-        checks.last.attendances.where(kid_id: id).last.status
+      if checks.exists?
+        if checks.last.approved? && checks.last.attendances.exists?
+          checks.last.attendances.where(kid_id: id).last.status
+        elsif checks.last(2).first && checks.last(2).first.attendances.exists?
+          checks.last(2).first.attendances.where(kid_id: id).last.status
+        end
       end
     end
 
     def current_cause
-      if checks.exists? && checks.last.attendances.exists?
-        checks.last.attendances.where(kid_id: id).last.cause
+      if checks.exists?
+        if checks.last.approved? && checks.last.attendances.exists?
+          checks.last.attendances.where(kid_id: id).last.cause
+        elsif checks.last(2).first && checks.last(2).first.attendances.exists?
+          checks.last(2).first.attendances.where(kid_id: id).last.cause
+        end
       end
     end
 

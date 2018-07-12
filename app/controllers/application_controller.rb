@@ -21,7 +21,7 @@ def home_page
 end
 
 def admin_index
-  redirect_to '/' if !current_staff.admin? || !current_staff.vip?
+  redirect_to '/' if !current_staff.admin?
   if params[:search]
     @staffs = Staff.search(params[:search]).order("created_at DESC")
   else
