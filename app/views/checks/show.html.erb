@@ -29,7 +29,9 @@
   <%= counter %> מתוך <%= @check.kids.count %> נוכחים
 </div>
 
-<button type="button" class="btn btn-success" id="show">הצגת הנוכחות הקודמת</button>
+<% if @level > 1 %>
+  <button type="button" class="btn btn-success" id="show"> הצגת הנוכחות הקודמת </button>
+<% end %>
 
 <p>
   <strong>חניכים:</strong>
