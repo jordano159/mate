@@ -51,7 +51,6 @@ class ChecksController < ApplicationController
   # POST /checks.json
   def create
     @check = Check.new(check_params)
-
     respond_to do |format|
       if @check.save
         @kids = current_staff.staffable.kids

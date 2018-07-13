@@ -29,7 +29,7 @@
     <% @checks.each do |check| %>
       <tr>
         <td><%= check.name %></td>
-        <td><%= check.created_at.strftime("%H:%M | %e.%m") %> </td>
+        <td><%= check.created_at.in_time_zone("Jerusalem").strftime("%H:%M | %e.%m") %> </td>
         <% if check.kids.exists? %>
           <td><%= link_to check.my_group.name, group_path(check.my_group), class: "btn btn-primary" %> </td>
         <% end %>
