@@ -1,11 +1,17 @@
 <p>
   <strong>שם:</strong>
   <%= @check.name %>
+  <%= @check.created_at.strftime("%e.%m") %>
 </p>
 
 <p>
   <strong>קבוצה:</strong>
   <%= Group.find(@check.group_id).name %>
+</p>
+
+<p>
+  <strong> נוצר בשעה: </strong>
+  <%= @check.created_at.strftime("%H:%M") %>
 </p>
 
 סטטוס:
@@ -40,7 +46,7 @@
     </thead>
 
     <tbody>
-      <% @check.kids.each do |kid|%>
+      <% @check.kids.order("name ASC").each do |kid|%>
         <tr>
           <td><%= link_to kid.name + " " + kid.last_name, kid, class: "btn btn-primary" %></td>
           <td>
