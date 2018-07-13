@@ -8,21 +8,21 @@ class KidsController < ApplicationController
   def index
     if params[:search]
       if current_staff.admin?
-        @kids = Kid.all.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
+        @kids = Kid.all.search(params[:search]).order("created_at DESC").page(params[:page]).per(25)
       else
-        @kids = current_staff.staffable.kids.search(params[:search]).order("created_at DESC").page(params[:page]).per(50)
+        @kids = current_staff.staffable.kids.search(params[:search]).order("created_at DESC").page(params[:page]).per(25)
       end
     elsif params[:filter_column]
       if current_staff.admin?
-        @kids = Kid.all.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(50)
+        @kids = Kid.all.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(25)
       else
-        @kids = current_staff.staffable.kids.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(50)
+        @kids = current_staff.staffable.kids.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(25)
       end
     else
       if current_staff.admin?
-        @kids = Kid.all.order(sort_column + " " + sort_direction).page(params[:page]).per(50)
+        @kids = Kid.all.order(sort_column + " " + sort_direction).page(params[:page]).per(25)
       else
-        @kids = current_staff.staffable.kids.order(sort_column + " " + sort_direction).page(params[:page]).per(50)
+        @kids = current_staff.staffable.kids.order(sort_column + " " + sort_direction).page(params[:page]).per(25)
       end
     end
 

@@ -11,9 +11,11 @@ class Check < ApplicationRecord
     Group.find(group_id) if group_id.present?
   end
 
-
   def self.search(search_term)
     Check.where(group_id: Group.where("groups.name LIKE ?", "%#{search_term}%").first.id).distinct
   end
 
+  def previous_check
+    Check.where("id < ? AND group_id = ?", id, group_id).last
+  end
 end
