@@ -29,7 +29,7 @@
   <%= counter %> מתוך <%= @check.kids.count %> נוכחים
 </div>
 
-<button type="button" class="delete btn btn-danger" id="hide">הצגת הנוכחות הקודמת</button>
+<button type="button" class="btn btn-success" id="show">הצגת הנוכחות הקודמת</button>
 
 <p>
   <strong>חניכים:</strong>
@@ -105,7 +105,7 @@
 <% end %>
 
 <script>
-  $( document ).on( "click", function( event ) {
+  $( "#show" ).on( "click", function( event ) {
   $( ".previous" ).show(100);
   });
 </script>
