@@ -26,6 +26,11 @@
                   <%= link_to "כל המשתמשים", staffs_path, class: "nav-link" %>
                 </li>
                 <% end %>
+                <% if @level > 1 %>
+                <li class="nav-item active">
+                  <%= link_to "יומן אירועים", events_path, class: "nav-link" %>
+                </li>
+                <% end %>
                 </ul>
                 <br><br>
                 <span class="navbar-text" style="color: lightgray;width:100%;text-align:center;border-top:1px solid white;padding-top:30px;font-family:'Secular One', sans-serif;">

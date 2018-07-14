@@ -1,0 +1,17 @@
+<p>
+  <strong>פירוט:</strong>
+  <%= @event.content %>
+</p>
+
+<p>
+  <strong>נוצר על ידי:</strong>
+  <%= @event.staff.name %>
+</p>
+
+<p>
+  <strong>שייך ל:</strong>
+  <%= @event.eventable.name %>
+</p>
+
+<%= link_to 'עריכה', edit_event_path(@event), class: "btn btn-primary" %>
+<%= link_to 'אחורה', events_path, class: "btn btn-primary" %>

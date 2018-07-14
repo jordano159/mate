@@ -1,0 +1,59 @@
+<h1>יומן אירועים</h1>
+
+<div class="table-responsive">
+  <table class = "table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>פירוט</th>
+        <th>נוצר על ידי</th>
+        <th>שייך ל</th>
+        <th>הצגה</th>
+        <% if current_staff.admin? %>
+          <th>עריכה</th>
+          <th>מחיקה </th>
+        <% end %>
+      </tr>
+    </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.content %></td>
+        <td><%= event.staff.name %></td>
+        <td><%= link_to event.eventable.name, event.eventable %></td>
+        <td><%= link_to 'הצגה', event, class: "btn btn-primary" %></td>
+        <td><%= link_to 'עריכה', edit_event_path(event), class: "btn btn-warning" %></td>
+        <td><%= link_to 'מחיקה', event, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<!-- <table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Staff</th>
+      <th>Eventable</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.content %></td>
+        <td><%= event.staff.name %></td>
+        <td><%= event.eventable.name %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> -->
+
+<br>
+
+<%= link_to 'אירוע חדש', new_event_path, class: "btn btn-primary" %>

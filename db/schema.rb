@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_11_051452) do
+ActiveRecord::Schema.define(version: 2018_07_14_080421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 2018_07_11_051452) do
     t.datetime "updated_at", null: false
     t.integer "group_id"
     t.boolean "approved"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.text "content"
+    t.bigint "staff_id"
+    t.string "eventable_type"
+    t.bigint "eventable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
+    t.index ["staff_id"], name: "index_events_on_staff_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -102,4 +113,5 @@ ActiveRecord::Schema.define(version: 2018_07_11_051452) do
     t.index ["username"], name: "index_staffs_on_username", unique: true
   end
 
+  add_foreign_key "events", "staffs"
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :checks
   devise_for :staffs
   root 'application#home_page'
