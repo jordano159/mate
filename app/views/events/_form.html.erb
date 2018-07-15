@@ -3,16 +3,19 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <%# types = %w(Group Head Axis) %>
-  <%# all_names = Group.pluck(:name) + Head.pluck(:name) + Axis.pluck(:name) %>
+  <%# all_names = Group.pluck(:name, :id) + Head.pluck(:name) + Axis.pluck(:name) %>
   <%# types = [["קבוצה","Group"]["ראש","Head"]["ציר", "Axis"]] %>
+  <% options = [['קבוצות:',Group.pluck(:name, :id)],['ראשים:',Head.pluck(:name, :id)],['צירים:',Axis.pluck(:name, :id)]] %>
   <div class="form-inputs">
     <%= f.input :content, label: "פירוט:" %>
-    <%# f.input :eventable_type, collection: types, label: "קבוצה/ראש/ציר" %>
-    <%# f.input :eventable_id, collection: all_names %>
-    <div class="field">
-      <%# f.label :eventable_id, "שם הקבוצה/ראש/ציר" %><br />
+    <%= f.input :eventable_type, as: :hidden %>
+    <%= f.input :eventable_id, as: :hidden %>
+    <!-- <div class="field"> -->
+      <%# f.label :eventable_id, "שם הקבוצה/ראש/ציר" %>
       <%# f.grouped_collection_select :eventable_id, types, :groups, :name, :id, :name, include_blank: true %>
-  </div>
+  <!-- </div> -->
+    <% grouped_options = [['Documents:',[["Create a new template-based document",1], ["Changing an existing document",2], ["New doc",3]]],['BOM:',[["Add New Part",4], ["Change existion part",5]]]] %>
+    <%= select_tag "outcome_based", content_tag(:option,'נא לבחור',:value=>"") + grouped_options_for_select(options), class:"form-control" %>
   </div>
 
   <div class="form-actions">
@@ -22,20 +25,17 @@
 
 
 <script>
-$(function() {
-  var names;
-  names = $('#event_eventable_id').html();
-  console.log(names);
-  return $('#event_type_id').change(function() {
-    var type, options;
-    type = $('#event__eventable_type :selected').text();
-    options = $(names).filter("optgroup[label=" + type + "]").html();
-    console.log(options);
-    if (options) {
-      return $('#event_eventable_id').html(options);
-    } else {
-      return $('#event_eventable_id').empty();
-    }
-  });
+$('#outcome_based').change(function(){
+  var c_type = $('#outcome_based :selected').parent('optgroup').attr("label");
+  $('#event_eventable_id').val($('#outcome_based :selected').val())
+  if (c_type == "קבוצות:"){
+    $('#event_eventable_type').val("Group")
+  }
+  if (c_type == "ראשים:"){
+    $('#event_eventable_type').val("Head")
+  }
+  if (c_type == "צירים:"){
+    $('#event_eventable_type').val("Axis")
+  }
 });
 </script>

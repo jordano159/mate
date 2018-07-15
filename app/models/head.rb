@@ -4,8 +4,5 @@ class Head < ApplicationRecord
   has_many :kids, through: :groups
   has_many :staffs, as: :staffable
   has_many :events, as: :eventable
-
-  # def kids
-  #   Kid.where(group_id: self.groups.map(&:id))
-  # end
+  # has_many :events, through: :groups, source: :events, source_type: 'Event'
 end
