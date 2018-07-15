@@ -2,16 +2,16 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <% types = %w(Group Head Axis) %>
-  <% all_names = Group.pluck(:name) + Head.pluck(:name) + Axis.pluck(:name) %>
+  <%# types = %w(Group Head Axis) %>
+  <%# all_names = Group.pluck(:name) + Head.pluck(:name) + Axis.pluck(:name) %>
   <%# types = [["קבוצה","Group"]["ראש","Head"]["ציר", "Axis"]] %>
   <div class="form-inputs">
     <%= f.input :content, label: "פירוט:" %>
-    <%= f.input :eventable_type, collection: types, label: "קבוצה/ראש/ציר" %>
-    <%= f.input :eventable_id, collection: all_names %>
+    <%# f.input :eventable_type, collection: types, label: "קבוצה/ראש/ציר" %>
+    <%# f.input :eventable_id, collection: all_names %>
     <div class="field">
-      <%= f.label :eventable_id, "שם הקבוצה/ראש/ציר" %><br />
-      <%= f.grouped_collection_select :eventable_id, types, :groups, :name, :id, :name, include_blank: true %>
+      <%# f.label :eventable_id, "שם הקבוצה/ראש/ציר" %><br />
+      <%# f.grouped_collection_select :eventable_id, types, :groups, :name, :id, :name, include_blank: true %>
   </div>
   </div>
 
