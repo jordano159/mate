@@ -10,7 +10,7 @@ sheet.add_row ["שם", "שם משפחה", "מין", "פלאפון", "רגישו�
       kid.mom_phone, kid.size, kid.group_id, kid.shabat, kid.parents, kid.swim, kid.exits, kid.comments]
     kid.attendances.each do |a|
       check = Check.find(a.check_id)
-      attributes << check.name + " " + check.created_at.strftime("%e.%m") " :" + a.status.to_s
+      attributes << check.name + " " + check.created_at.strftime("%e.%m") + " :" + a.status.to_s
     end
     sheet.add_row attributes
   end
