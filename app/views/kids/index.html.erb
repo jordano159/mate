@@ -138,7 +138,7 @@
       </tbody>
     </table>
     <%= link_to "יצירת מדריך.ה חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
-    <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1%>
+    <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if (@level == 1 || current_staff.vip?) %>
   </p>
 <% end %>
 
