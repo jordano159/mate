@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Kids") do |sheet|
+sheet.add_row ["שם פרטי", "שם משפחה", "נוכחות"]
+  Kid.all.each do |kid|
+    attributes = [kid.name, kid.last_name]
+    kid.attendances.each do |a|
+      attributes << Check.find(a.check_id).name + " :" + a.status.to_s
+    end
+    sheet.add_row attributes
+  end
+end

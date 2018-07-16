@@ -29,11 +29,7 @@ class KidsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data Kid.all.to_csv, filename: "חניכי המדצופי-#{Date.today}.csv" }
-      format.xls do
-              contents = StringIO.new
-              DataShift::ExcelExporter.new.export(contents, Kid.all)
-              send_data contents.string.force_encoding('binary'), type: 'application/xls'
-         end
+      format.xlsx
     end
   end
 

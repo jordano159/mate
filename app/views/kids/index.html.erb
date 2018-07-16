@@ -32,7 +32,7 @@
   <%= submit_tag "ייבוא מקובץ" %>
   <% end %>
 </div>
-<%= link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xls), class: "btn btn-primary" %>
+<%= link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary" %>
 <%= link_to  'ייצוא הטבלה לCSV', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
 
@@ -47,9 +47,9 @@
     <%= counter %> מתוך <%= current_staff.staffable.kids.count %> חניכים\ות נוכחים\ות
   <% end %>
 
-<div class="table-responsive-lg">
+<div class="table-responsive">
   <table class = "table table-hover">
-    <thead class="thead-light">
+    <thead class="thead-dark">
       <tr>
         <th>
           <%= sortable "name", "שם פרטי" %>
@@ -137,8 +137,8 @@
         <% end %>
       </tbody>
     </table>
-    <% end %>
     <%= link_to "יצירת מדריך.ה חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
+    <% end %>
     <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1 or current_staff.vip? %>
   </p>
 

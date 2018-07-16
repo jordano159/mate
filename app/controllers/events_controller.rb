@@ -11,11 +11,6 @@ class EventsController < ApplicationController
     # end
     respond_to do |format|
       format.html
-      format.xls do
-              contents = StringIO.new
-              DataShift::ExcelExporter.new.export(contents, Event.all)
-              send_data contents.string.force_encoding('binary'), type: 'application/xls'
-         end
     end
   end
 
