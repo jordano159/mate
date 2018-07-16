@@ -1,8 +1,13 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Kids") do |sheet|
-sheet.add_row ["שם פרטי", "שם משפחה", "נוכחות"]
+sheet.add_row ["שם", "שם משפחה", "מין", "פלאפון", "רגישות ובעיות רפואיות", "תרופות",
+  "אוכל", "מקום מגורים", "קן מקור", "שם אבא", "טלפון אבא", "שם אמא", "טלפון אמא",
+"מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת?",
+ "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות", "נוכחות"]
   Kid.all.each do |kid|
-    attributes = [kid.name, kid.last_name]
+    attributes = [kid.name, kid.last_name, kid.sex, kid.phone, kid.medical,
+      kid.meds, kid.food, kid.city, kid.ken, kid.dad, kid.dad_phone, kid.mom,
+      kid.mom_phone, kid.size, kid.group_id, kid.shabat, kid.parents, kid.swim, kid.exits, kid.comments]
     kid.attendances.each do |a|
       attributes << Check.find(a.check_id).name + " :" + a.status.to_s
     end
