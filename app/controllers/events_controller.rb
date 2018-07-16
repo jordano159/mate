@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     # if current_staff.user?
     #   @events = current_staff.staffable.events
     # else
-      @events = Event.all
+      @events = Event.all.order("created_at DESC")
     # end
   end
 
