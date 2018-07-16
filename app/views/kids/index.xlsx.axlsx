@@ -4,10 +4,10 @@ sheet.add_row ["שם", "שם משפחה", "מין", "פלאפון", "רגישו�
   "אוכל", "מקום מגורים", "קן מקור", "שם אבא", "טלפון אבא", "שם אמא", "טלפון אמא",
 "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת?",
  "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות", "נוכחות"]
-  Kid.all.each do |kid|
+  Kid.all.order("group_id ASC").each do |kid|
     attributes = [kid.name, kid.last_name, kid.sex, kid.phone, kid.medical,
       kid.meds, kid.food, kid.city, kid.ken, kid.dad, kid.dad_phone, kid.mom,
-      kid.mom_phone, kid.size, kid.group_id, kid.shabat, kid.parents, kid.swim, kid.exits, kid.comments]
+      kid.mom_phone, kid.size, Group.find(kid.group_id).name, kid.shabat, kid.parents, kid.swim, kid.exits, kid.comments]
     kid.attendances.each do |a|
       check = Check.find(a.check_id)
       attributes << check.name + " " + check.created_at.strftime("%e.%m") + " :" + a.status.to_s
