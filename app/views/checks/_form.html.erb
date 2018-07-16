@@ -5,7 +5,7 @@
   <div class="form-inputs">
     <% names = ["נוכחות בוקר", "נוכחות צהריים", "נוכחות ערב", "תרגיל"] %>
     <%= f.input :name, label: "שם הנוכחות", collection: names, input_html: {required: true} %>
-    <%= f.input :group_id, input_html: { value: current_staff.staffable.id }, as: :hidden if @level == 1 %>
+    <%= f.input :group_id, input_html: { value: current_staff.staffable.id }, as: :hidden if @level == 1 or (current_staff.vip? and current_staff.staffable_type == "Group") %>
     <% causes = ["בבית מסיבות רפואיות ויחזור", "בבית מסיבות רפואיות ולא יחזור", "בבית מסיבות אישיות ויחזור", "בבית מסיבות אישיות ולא יחזור", "פינוי רפואי", "מרפאה", "אחר"] %>
     <br />
     <%= f.simple_fields_for :attendances do |ff| %>
