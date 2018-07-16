@@ -32,7 +32,8 @@
   <%= submit_tag "ייבוא מקובץ" %>
   <% end %>
 </div>
-<%= link_to  'ייצוא הטבלה', kids_path(format: :csv), class: "btn btn-primary" %>
+<%= link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xls), class: "btn btn-primary" %>
+<%= link_to  'ייצוא הטבלה לCSV', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
 
 <% if @kids.blank? %>

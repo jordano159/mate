@@ -26,6 +26,15 @@ class ChecksController < ApplicationController
         @checks = Check.all.order("created_at DESC")
       end
     end
+
+    respond_to do |format|
+      format.html
+      format.xls do
+              contents = StringIO.new
+              DataShift::ExcelExporter.new.export(contents, Check.all)
+              send_data contents.string.force_encoding('binary'), type: 'application/xls'
+         end
+    end
   end
 
   # GET /checks/1

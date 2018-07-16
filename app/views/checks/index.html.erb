@@ -7,6 +7,8 @@
   <h4>אין נוכחויות שתואמות את החיפוש <%= params[:search] %>.</h4>
 <% else %>
 
+<%= link_to 'ייצוא הטבלה', checks_path(format: :xls), class: "btn btn-primary" if !current_staff.user? %>
+
 <h1>נוכחויות</h1>
 
 <div class="table-responsive-lg">

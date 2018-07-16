@@ -32,7 +32,11 @@ if($(this).val()==0){
   $(this).closest("div.check_div").find(".label_r").show(400)}
 else{
   $(this).closest("div.check_div").find(".check_r").hide(400)
-  $(this).closest("div.check_div").find(".label_r").hide(400)}
+  $(this).closest("div.check_div").find(".label_r").hide(400)
+  $(this).closest("div.check_div").find(".check_o").hide(400)
+  $(this).closest("div.check_div").find(".label_o").hide(400)
+  $($(this).closest("div.check_div").find(".check_o")).val("");
+  }
 });
 
 $(".check_r").change(function(){
