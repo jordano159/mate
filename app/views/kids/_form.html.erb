@@ -15,40 +15,43 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.input :name %>
+    <%= form.input :name, label: "שם" %>
   </div>
   <div class="field">
-    <%= form.input :last_name %>
+    <%= form.input :last_name, label: "שם משפחה" %>
   </div>
   <div class="field">
-    <%= form.input :sex %>
+    <%= form.input :sex, label: "מין" %>
   </div>
   <div class="field">
-    <%= form.input :phone %>
+    <%= form.input :phone, label: "פלאפון" %>
   </div>
   <div class="field">
-    <%= form.input :meds %>
+    <%= form.input :medical, label: "רגישות ובעיות רפואיות" %>
   </div>
   <div class="field">
-    <%= form.input :food %>
+    <%= form.input :meds, label: "תרופות" %>
   </div>
   <div class="field">
-    <%= form.input :city %>
+    <%= form.input :food, label: "אוכל" %>
   </div>
   <div class="field">
-    <%= form.input :ken %>
+    <%= form.input :city, label: "מקום מגורים" %>
   </div>
   <div class="field">
-    <%= form.input :dad %>
+    <%= form.input :ken, label: "קן מקור" %>
   </div>
   <div class="field">
-    <%= form.input :dad_phone %>
+    <%= form.input :dad, label: "שם אבא" %>
   </div>
   <div class="field">
-    <%= form.input :mom %>
+    <%= form.input :dad_phone, label: "טלפון אבא" %>
   </div>
   <div class="field">
-    <%= form.input :mom_phone %>
+    <%= form.input :mom, label: "שם אמא" %>
+  </div>
+  <div class="field">
+    <%= form.input :mom_phone, label: "טלפון אמא" %>
   </div>
   <div class="field">
     <%= form.input :size, label: "מידת חולצה" %>
