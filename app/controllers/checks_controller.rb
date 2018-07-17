@@ -22,7 +22,7 @@ class ChecksController < ApplicationController
           if (c.kids.exists?) && (current_staff.staffable.groups.map(&:id).include? (c.my_group.id)) && (!@checks.include? c)
             @checks << c
           end
-          @checks.page(params[:page]).per(25)
+          @checks
         end
       else
         @checks = Check.all.order("created_at DESC").page(params[:page]).per(25)

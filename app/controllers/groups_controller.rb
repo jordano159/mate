@@ -4,11 +4,11 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.all.order("id ASC")
     if params[:search]
-      @groups = Group.search(params[:search]).order("created_at DESC")
+      @groups = Group.search(params[:search]).order("id DESC")
     else
-      @groups = Group.all.order("created_at DESC")
+      @groups = Group.all.order("id DESC")
     end
   end
 
