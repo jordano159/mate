@@ -6,7 +6,7 @@ class ChecksController < ApplicationController
   # GET /checks.json
   def index
     if params[:search]
-      @checks = Check.search(params[:search]).order("created_at DESC")
+      @checks = Check.search(params[:search]).order("created_at DESC").page(params[:page]).per(25)
     else
       if @level == 1
         @checks = []
@@ -14,6 +14,7 @@ class ChecksController < ApplicationController
           if (c.kids.exists?) && (c.my_group.id == current_staff.staffable.id) && (!@checks.include? c)
             @checks << c
           end
+          @checks.page(params[:page]).per(25)
         end
       elsif @level == 2
         @checks = []
@@ -21,9 +22,10 @@ class ChecksController < ApplicationController
           if (c.kids.exists?) && (current_staff.staffable.groups.map(&:id).include? (c.my_group.id)) && (!@checks.include? c)
             @checks << c
           end
+          @checks.page(params[:page]).per(25)
         end
       else
-        @checks = Check.all.order("created_at DESC")
+        @checks = Check.all.order("created_at DESC").page(params[:page]).per(25)
       end
     end
 
