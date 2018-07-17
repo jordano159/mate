@@ -1,6 +1,6 @@
 <h1>יומן אירועים</h1>
 
-<%= link_to  'ייצוא הטבלה לאקסל', events_path(format: :xls), class: "btn btn-primary" if !current_staff.user? %>
+<%= link_to  'ייצוא הטבלה לאקסל', events_path(format: :xlsx), class: "btn btn-primary" if !current_staff.user? %>
 
 <div class="table-responsive">
   <table class = "table table-hover">

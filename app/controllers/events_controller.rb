@@ -11,6 +11,7 @@ class EventsController < ApplicationController
     # end
     respond_to do |format|
       format.html
+      format.xlsx
     end
   end
 

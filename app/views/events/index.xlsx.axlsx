@@ -1,0 +1,8 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Kids") do |sheet|
+sheet.add_row ["פירוט", "תאריך", "שייך ל", "נוצר על ידי"]
+  Event.all.order("created_at DESC").each do |event|
+    attributes = [event.content, event.created_at.in_time_zone("Jerusalem").strftime("%H:%M | %e.%m"), event.eventable.name, event.staff.name]
+    sheet.add_row attributes
+  end
+end
