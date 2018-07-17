@@ -6,7 +6,7 @@ class ChecksController < ApplicationController
   # GET /checks.json
   def index
     if params[:search]
-      @checks = Check.search(params[:search]).order("created_at DESC").page(params[:page]).per(25)
+      @checks = Check.search(params[:search]).order("created_at DESC")
     else
       if @level == 1
         @checks = []
@@ -25,7 +25,7 @@ class ChecksController < ApplicationController
           @checks
         end
       else
-        @checks = Check.all.order("created_at DESC").page(params[:page]).per(25)
+        @checks = Check.all.order("created_at DESC")
       end
     end
 
