@@ -14,7 +14,7 @@ class ChecksController < ApplicationController
           if (c.kids.exists?) && (c.my_group.id == current_staff.staffable.id) && (!@checks.include? c)
             @checks << c
           end
-          @checks.page(params[:page]).per(25)
+          @checks
         end
       elsif @level == 2
         @checks = []
