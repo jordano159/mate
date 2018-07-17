@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_14_080421) do
+ActiveRecord::Schema.define(version: 2018_07_17_063842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,17 @@ ActiveRecord::Schema.define(version: 2018_07_14_080421) do
     t.string "cause"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cause"], name: "index_attendances_on_cause"
+    t.index ["check_id"], name: "index_attendances_on_check_id"
+    t.index ["kid_id"], name: "index_attendances_on_kid_id"
+    t.index ["status"], name: "index_attendances_on_status"
   end
 
   create_table "axes", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_axes_on_name"
   end
 
   create_table "checks", force: :cascade do |t|
@@ -36,6 +41,9 @@ ActiveRecord::Schema.define(version: 2018_07_14_080421) do
     t.datetime "updated_at", null: false
     t.integer "group_id"
     t.boolean "approved"
+    t.index ["approved"], name: "index_checks_on_approved"
+    t.index ["group_id"], name: "index_checks_on_group_id"
+    t.index ["name"], name: "index_checks_on_name"
   end
 
   create_table "events", force: :cascade do |t|
@@ -45,6 +53,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_080421) do
     t.bigint "eventable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["content"], name: "index_events_on_content"
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
     t.index ["staff_id"], name: "index_events_on_staff_id"
   end
@@ -54,6 +63,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_080421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "head_id"
+    t.index ["name"], name: "index_groups_on_name"
   end
 
   create_table "heads", force: :cascade do |t|
@@ -61,6 +71,8 @@ ActiveRecord::Schema.define(version: 2018_07_14_080421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "axis_id"
+    t.index ["axis_id"], name: "index_heads_on_axis_id"
+    t.index ["name"], name: "index_heads_on_name"
   end
 
   create_table "kids", force: :cascade do |t|
@@ -86,6 +98,26 @@ ActiveRecord::Schema.define(version: 2018_07_14_080421) do
     t.string "swim"
     t.text "exits"
     t.text "comments"
+    t.index ["city"], name: "index_kids_on_city"
+    t.index ["comments"], name: "index_kids_on_comments"
+    t.index ["dad"], name: "index_kids_on_dad"
+    t.index ["dad_phone"], name: "index_kids_on_dad_phone"
+    t.index ["exits"], name: "index_kids_on_exits"
+    t.index ["food"], name: "index_kids_on_food"
+    t.index ["group_id"], name: "index_kids_on_group_id"
+    t.index ["ken"], name: "index_kids_on_ken"
+    t.index ["last_name"], name: "index_kids_on_last_name"
+    t.index ["medical"], name: "index_kids_on_medical"
+    t.index ["meds"], name: "index_kids_on_meds"
+    t.index ["mom"], name: "index_kids_on_mom"
+    t.index ["mom_phone"], name: "index_kids_on_mom_phone"
+    t.index ["name"], name: "index_kids_on_name"
+    t.index ["parents"], name: "index_kids_on_parents"
+    t.index ["phone"], name: "index_kids_on_phone"
+    t.index ["sex"], name: "index_kids_on_sex"
+    t.index ["shabat"], name: "index_kids_on_shabat"
+    t.index ["size"], name: "index_kids_on_size"
+    t.index ["swim"], name: "index_kids_on_swim"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -107,6 +139,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_080421) do
     t.string "username"
     t.integer "role"
     t.index ["email"], name: "index_staffs_on_email"
+    t.index ["name"], name: "index_staffs_on_name"
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
     t.index ["staffable_id", "staffable_type"], name: "index_staffs_on_staffable_id_and_staffable_type"
     t.index ["staffable_type", "staffable_id"], name: "index_staffs_on_staffable_type_and_staffable_id"

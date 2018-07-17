@@ -33,13 +33,6 @@ class KidsController < ApplicationController
     end
   end
 
-  def export_with_attendances
-    Kid.all.each do |kid|
-      export.join(kid.attendances)
-    end
-    export
-  end
-
   # GET /kids/1
   # GET /kids/1.json
   def show
