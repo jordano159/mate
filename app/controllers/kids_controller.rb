@@ -1,22 +1,21 @@
 class KidsController < ApplicationController
   before_action :set_kid, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_staff!
-  helper_method :sort_column, :sort_direction
 
   # GET /kids
   # GET /kids.json
   def index
     if params[:filter_column]
       if current_staff.admin?
-        @kids = Kid.all.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(25)
+        @kids = Kid.all.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC")
       else
-        @kids = current_staff.staffable.kids.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(25)
+        @kids = current_staff.staffable.kids.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC")
       end
     else
       if current_staff.admin?
-        @kids = Kid.all.order(sort_column + " " + sort_direction).page(params[:page]).per(25)
+        @kids = Kid.all
       else
-        @kids = current_staff.staffable.kids.order(sort_column + " " + sort_direction).page(params[:page]).per(25)
+        @kids = current_staff.staffable.kids
       end
     end
 

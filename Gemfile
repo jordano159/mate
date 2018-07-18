@@ -48,7 +48,6 @@ gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem 'jquery-datatables'
-gem 'kaminari'
 
 
 group :development, :test do
