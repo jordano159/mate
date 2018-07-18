@@ -92,18 +92,6 @@ class KidsController < ApplicationController
 
   private
 
-    def sortable_columns
-      ["name", "last_name", "ken"]
-    end
-
-    def sort_column
-      sortable_columns.include?(params[:sort]) ? params[:sort] : "name"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_kid
       @kid = Kid.find(params[:id])
