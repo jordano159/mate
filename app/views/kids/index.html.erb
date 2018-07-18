@@ -7,11 +7,6 @@
   <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי ציר <%= current_staff.staffable.name %> </h1>
 <% end %>
 
-<%= form_tag(kids_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
-<%= text_field_tag :search, params[:search], placeholder: "חיפוש...", class: "form-control mr-sm-2" %>
-<%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
-<% end %>
-
 <% if current_staff.admin? %>
   <% columns = %w[swim shabat parents] %>
   <% conditions = %w[כן לא] %>
@@ -36,9 +31,6 @@
 <%= link_to  'ייצוא הטבלה לCSV', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
 
-<% if @kids.blank? %>
-  <h4>אין חניכימות שתואמות את החיפוש <%= params[:search] %>.</h4>
-<% else %>
   <% if current_staff.admin? %>
     <% counter = how_many_attending(Kid.all) %>
     <%= counter %> מתוך <%= Kid.all.count %> חניכים\ות נוכחים\ות
@@ -48,43 +40,16 @@
   <% end %>
 
 <div class="table-responsive">
-  <table class = "table table-hover">
+  <table class = "table table-hover" id="dttb">
     <thead class="thead-dark">
       <tr>
-        <th>
-          <%= sortable "name", "שם פרטי" %>
-            <% if params[:sort] == "name" %>
-            <% if params[:direction] == "asc" %>
-              <i class="fa fa-chevron-up"></i>
-            <% else %>
-              <i class="fa fa-chevron-down"></i>
-            <% end %>
-          <% end %>
-        </th>
-        <th>
-          <%= sortable "last_name", "שם משפחה" %>
-          <% if params[:sort] == "last_name" %>
-            <% if params[:direction] == "asc" %>
-              <i class="fa fa-chevron-up"></i>
-            <% else %>
-              <i class="fa fa-chevron-down"></i>
-            <% end %>
-          <% end %>
-        </th>
+        <th>שם פרטי</th>
+        <th>שם משפחה</th>
         <th>טלפון</th>
         <th>רגישות ובעיות רפואיות</th>
         <th>תרופות</th>
         <th>אוכל</th>
-        <th>
-          <%= sortable "ken", "קן מקור" %>
-          <% if params[:sort] == "ken" %>
-            <% if params[:direction] == "asc" %>
-              <i class="fa fa-chevron-up"></i>
-            <% else %>
-              <i class="fa fa-chevron-down"></i>
-            <% end %>
-          <% end %>
-        </th>
+        <th>קן מקור</th>
         <% if @level > 1 %> <th>קבוצה</th> <% end %>
         <th>סטטוס עדכני</th>
         <th>סיבה</th>
@@ -101,23 +66,22 @@
         <td><%= kid.meds %></td>
         <td><%= kid.food %></td>
         <td><%= kid.ken %></td>
-        <%  if kid.group && @level > 1 %>
+        <%  if @level > 1 %>
+        <% kid.group ||= Group.new(name: "אין קבוצה") %>
           <td><%= link_to kid.group.name, kid.group %> </td>
         <% end %>
-        <% if kid.checks.exists? && kid.checks.last.attendances.exists? %>
           <td><%= if kid.current_status == 1
             "נוכח/ת"
           else
             "לא נוכח/ת"
           end %></td>
           <td><%= kid.current_cause %></td>
-        <% end %>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<% end %>
+
 
 <% if @level == 1 %>
   <p>
@@ -142,4 +106,9 @@
     <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1 or current_staff.vip? %>
   </p>
 
-<%= paginate @kids %>
+<%# paginate @kids %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#dttb").dataTable();
+  });
+</script>

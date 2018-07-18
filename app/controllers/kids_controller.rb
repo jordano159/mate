@@ -6,13 +6,7 @@ class KidsController < ApplicationController
   # GET /kids
   # GET /kids.json
   def index
-    if params[:search]
-      if current_staff.admin?
-        @kids = Kid.all.search(params[:search]).order("created_at DESC").page(params[:page]).per(25)
-      else
-        @kids = current_staff.staffable.kids.search(params[:search]).order("created_at DESC").page(params[:page]).per(25)
-      end
-    elsif params[:filter_column]
+    if params[:filter_column]
       if current_staff.admin?
         @kids = Kid.all.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC").page(params[:page]).per(25)
       else
