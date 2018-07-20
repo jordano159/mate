@@ -1,13 +1,4 @@
 <%= link_to "יצירת אדמין חדש", new_axis_staff_path(Axis.first.id), class: "btn btn-primary" %>
-<br>
-<!-- <%= form_tag(staffs_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
-<%= text_field_tag :search, params[:search], placeholder: "חיפוש...", class: "form-control mr-sm-2" %>
-<%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
-<% end %>
-
-<% if @staffs.blank? %>
-  <h4>אין משתמשות שתואמות את החיפוש <%= params[:search] %>.</h4>
-<% else %> -->
 
 <div class="table-responsive">
   <table class = "table table-hover">
@@ -33,11 +24,10 @@
           לא
           <% end %>
         </td>
-        <td><%# link_to 'עריכה', eval("edit_#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})"), class: "btn btn-warning" %></td>
-        <td><%# link_to 'מחיקה', eval("#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})"), :data => {:confirm => "את\ה בטוח\ה?"}, method: :delete, class: "btn btn-danger" %></td>
+        <td><%= link_to 'עריכה', eval("edit_#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})"), class: "btn btn-warning" %></td>
+        <td><%= link_to 'מחיקה', eval("#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})"), :data => {:confirm => "את\ה בטוח\ה?"}, method: :delete, class: "btn btn-danger" %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
-<!-- <% end %> -->
