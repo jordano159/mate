@@ -1,11 +1,4 @@
-<% case current_staff.staffable_type %>
-<% when "Group" %>
-  <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי קבוצת <%= current_staff.staffable.name %> </h1>
-<% when "Head" %>
-  <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי ראש <%= current_staff.staffable.name %> </h1>
-<% when "Axis" %>
-  <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי ציר <%= current_staff.staffable.name %> </h1>
-<% end %>
+<h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי <%= current_staff.staffable.name %> </h1>
 
 <% if current_staff.admin? %>
   <% columns = %w[swim shabat parents] %>
