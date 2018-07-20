@@ -35,7 +35,7 @@ class Kid < ApplicationRecord
   def self.to_csv
     attributes = %w{name last_name sex phone medical
       meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim exits comments}
-    heb_names = ["שם", "שם משפחה", "מין", "פלאפון", "רגישות ובעיות רפואיות", "תרופות",
+    heb_names = ["שם", "שם משפחה", "מגדר", "פלאפון", "רגישות ובעיות רפואיות", "תרופות",
       "אוכל", "מקום מגורים", "קן מקור", "שם אבא", "טלפון אבא", "שם אמא", "טלפון אמא",
     "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת?",
      "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות"]

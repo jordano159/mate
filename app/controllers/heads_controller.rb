@@ -71,6 +71,6 @@ class HeadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def head_params
-      params.require(:head).permit(:name, :axis_id)
+      params.require(:head).permit(:name, :axis_id, group_ids: [])
     end
 end
