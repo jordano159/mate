@@ -1,4 +1,13 @@
-<%= form_with(model: axis, local: true) do |form| %>
+<script>
+    $(document).ready(function() {
+       $(".select").select2({
+          language: "he",
+          theme: "bootstrap"
+      }); });
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+</script>
+
+<%= simple_form_for(@axis, html: { class: 'form-inline' }) do |form| %>
   <% if axis.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(axis.errors.count, "error") %> prohibited this axis from being saved:</h2>
@@ -12,10 +21,11 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.input :name %>
   </div>
-
+  <div class="field">
+    <%= form.input_field :head_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Head.all, label_method: :name, value_method: :id %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

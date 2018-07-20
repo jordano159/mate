@@ -69,7 +69,7 @@ class AxesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def axis_params
-      params.require(:axis).permit(:name)
+      params.require(:axis).permit(:name, head_ids: [])
     end
 
 end
