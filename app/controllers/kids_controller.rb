@@ -12,7 +12,7 @@ class KidsController < ApplicationController
         @kids = current_staff.staffable.kids.filter(params[:filter_column], params[:filter_condition]).order("created_at DESC")
       end
     else
-      if current_staff.admin?
+      if !current_staff.user?
         @kids = Kid.all
       else
         @kids = current_staff.staffable.kids

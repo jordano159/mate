@@ -24,7 +24,7 @@
 <%= link_to  'ייצוא הטבלה לCSV', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
 
-  <% if current_staff.admin? %>
+  <% if !current_staff.user? %>
     <% counter = how_many_attending(Kid.all) %>
     <%= counter %> מתוך <%= Kid.all.count %> חניכים\ות נוכחים\ות
   <% else %>
@@ -99,7 +99,6 @@
     <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1 or current_staff.vip? %>
   </p>
 
-<%# paginate @kids %>
 <script type="text/javascript">
   $(document).ready(function() {
     $("#dttb").dataTable();
