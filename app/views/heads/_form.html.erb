@@ -1,3 +1,12 @@
+<script>
+    $(document).ready(function() {
+       $(".select").select2({
+          language: "he",
+          theme: "bootstrap"
+      }); });
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+</script>
+
 <%= simple_form_for(@head, html: { class: 'form-inline' }) do |form| %>
   <% if head.errors.any? %>
     <div id="error_explanation">
@@ -19,6 +28,9 @@
   </div>
   <div class="field select">
     <%= form.input :axis_id, collection: @axes %>
+  </div>
+  <div class="field">
+    <%= form.input_field :group_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Group.all, label_method: :name, value_method: :id %>
   </div>
   <div class="actions">
     <%= form.submit %>
