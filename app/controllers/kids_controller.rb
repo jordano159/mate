@@ -7,16 +7,16 @@ class KidsController < ApplicationController
   def index
     if params[:filter_column]
       if current_staff.admin?
-        @kids = Kid.all.includes(:group, :checks).filter(params[:filter_column], params[:filter_condition]).order("created_at DESC")
+        @kids = Kid.all.includes(:group).filter(params[:filter_column], params[:filter_condition]).order("created_at DESC")
       else
-        @kids = current_staff.staffable.kids.includes(:group, :checks).filter(params[:filter_column],
+        @kids = current_staff.staffable.kids.includes(:group).filter(params[:filter_column],
           params[:filter_condition]).order("created_at DESC")
       end
     else
       if !current_staff.user?
-        @kids = Kid.all.includes(:group, :checks)
+        @kids = Kid.all.includes(:group)
       else
-        @kids = current_staff.staffable.kids.includes(:group, :checks)
+        @kids = current_staff.staffable.kids.includes(:group)
       end
     end
 
