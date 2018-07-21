@@ -49,7 +49,7 @@ gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails'
 gem 'jquery-datatables'
 gem 'kaminari'
-gem 'bullet', group: 'development'
+gem 'bullet'
 
 
 group :development, :test do
