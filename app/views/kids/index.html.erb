@@ -1,6 +1,6 @@
 <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי <%= current_staff.staffable.name %> </h1>
 
-<% if current_staff.admin? %>
+<% if !current_staff.user? %>
   <% columns = %w[swim shabat parents] %>
   <% conditions = %w[כן לא] %>
   <%= form_tag(kids_path, :method => "get", id: "filter-form", class: "form-inline my-2 my-lg-0") do %>
