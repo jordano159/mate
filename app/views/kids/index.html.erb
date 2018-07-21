@@ -24,13 +24,13 @@
 <%= link_to  'ייצוא הטבלה לCSV', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
 
-  <% if !current_staff.user? %>
-    <% counter = how_many_attending(Kid.all) %>
-    <%= counter %> מתוך <%= Kid.all.count %> חניכים\ות נוכחים\ות
-  <% else %>
-    <% counter = how_many_attending(current_staff.staffable.kids) %>
-    <%= counter %> מתוך <%= current_staff.staffable.kids.count %> חניכים\ות נוכחים\ות
-  <% end %>
+<% if !current_staff.user? %>
+  <% counter = how_many_attending(Kid.all) %>
+  <%= counter %> מתוך <%= Kid.all.count %> חניכים\ות נוכחים\ות
+<% else %>
+  <% counter = how_many_attending(current_staff.staffable.kids) %>
+  <%= counter %> מתוך <%= current_staff.staffable.kids.count %> חניכים\ות נוכחים\ות
+<% end %>
 
 <div class="table-responsive">
   <table class = "table table-hover" id="dttb">
@@ -44,8 +44,6 @@
         <th>אוכל</th>
         <th>קן מקור</th>
         <% if @level > 1 %> <th>קבוצה</th> <% end %>
-        <th>סטטוס עדכני</th>
-        <th>סיבה</th>
       </tr>
     </thead>
 
@@ -63,12 +61,6 @@
         <% kid.group ||= Group.new(name: "אין קבוצה") %>
           <td><%= link_to kid.group.name, kid.group %> </td>
         <% end %>
-          <td><%= if kid.current_status == 1
-            "נוכח/ת"
-          else
-            "לא נוכח/ת"
-          end %></td>
-          <td><%= kid.current_cause %></td>
       </tr>
       <% end %>
     </tbody>

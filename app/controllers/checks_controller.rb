@@ -46,11 +46,7 @@ class ChecksController < ApplicationController
 
   # GET /checks/1/edit
   def edit
-    if @level == 1 or (current_staff.vip? and current_staff.staffable_type == "Group")
-      @kids = current_staff.staffable.kids
-    else
       @kids = @check.my_group.kids
-    end
   end
 
   # POST /checks
