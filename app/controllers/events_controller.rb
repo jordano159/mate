@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     # if current_staff.user?
     #   @events = current_staff.staffable.events
     # else
-      @events = Event.all.order("created_at DESC")
+      @events = Event.all.order("created_at DESC").includes(:staff, :eventable)
     # end
     respond_to do |format|
       format.html

@@ -13,7 +13,7 @@
     </thead>
 
     <tbody>
-      <% Staff.all.order("staffable_type DESC").each do |staff| %>
+      <% @staffs.each do |staff| %>
       <tr>
         <td><%= link_to staff.name, staff_path(staff) %></td>
         <td><%= staff.username %></td>

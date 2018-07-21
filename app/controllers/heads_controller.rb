@@ -3,7 +3,7 @@ class HeadsController < ApplicationController
   # GET /heads
   # GET /heads.json
   def index
-    @heads = Head.all
+    @heads = Head.all.includes(:groups, :kids)
   end
 
   # GET /heads/1

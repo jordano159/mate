@@ -4,7 +4,7 @@ class AxesController < ApplicationController
   # GET /axes
   # GET /axes.json
   def index
-    @axes = Axis.all
+    @axes = Axis.all.includes(:heads, :kids)
   end
 
   # GET /axes/1

@@ -75,29 +75,8 @@
   </table>
 </div>
 
-
-<% if @level == 1 %>
-  <p>
-    <strong> מדריכות ומדריכים:</strong>
-    <table>
-      <thead>
-        <tr>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% current_staff.staffable.staffs.each do |s|%>
-          <tr>
-            <td class = "btn btn-primary"><%= s.name %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= link_to "יצירת מדריך.ה חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
-    <% end %>
-    <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1 or current_staff.vip? %>
-  </p>
+<%# link_to "יצירת מדריך.ה חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
+<%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1 or current_staff.vip? %>
 
 <script type="text/javascript">
   $(document).ready(function() {

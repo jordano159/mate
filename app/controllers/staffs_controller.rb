@@ -3,7 +3,7 @@ class StaffsController < ApplicationController
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   def index
-    @staffs = @staffable.staffs
+    @staffs = @staffable.staffs.includes(:staffable)
   end
 
   def show
