@@ -9,7 +9,7 @@
   </strong>
 </p>
 <%
-counter = how_many_attending(@group)
+counter = how_many_attending(@group.kids)
  %>
  יש <%= counter %> חניכימות נוכחימות מתוך <%= @group.kids.count %>
 <p>

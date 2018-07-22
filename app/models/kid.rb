@@ -45,11 +45,4 @@ class Kid < ApplicationRecord
     end
     Kid.import kids, recursive: true
   end
-
-  def set_default_status
-    Kid.all.each do |k|
-      k.status ||= 0
-      k.save
-    end
-  end
 end
