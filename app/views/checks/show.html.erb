@@ -56,14 +56,14 @@
     <tbody>
       <% @check.kids.order("name ASC").each do |kid|%>
         <tr>
-          <td><%= link_to kid.full_name, kid, class: "btn btn-primary" %></td>
+          <td><%= link_to kid.full_name, kid %></td>
           <td>
-            <%= if (@check.attendances & kid.attendances).first.status == 1
+            <%= if kid.status == 1
               string1 = "נוכח/ת"
             else
               string1 = "לא נוכח/ת"
             end %></td>
-          <td><%= (@check.attendances & kid.attendances).first.cause %></td>
+          <td><%= kid.cause %></td>
           <td class="previous" style="display:none;">
             <% if @check.previous_check %>
               <% if (@check.previous_check.attendances & kid.attendances).first.status == 1  %>

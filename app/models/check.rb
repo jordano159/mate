@@ -4,8 +4,7 @@ class Check < ApplicationRecord
   accepts_nested_attributes_for :attendances, :allow_destroy => true
   belongs_to :groups, optional: true
   validates :name, presence: true
-
-  enum status: [ :present, :not_present ]
+  after_update :update_attendance
 
   def my_group
     Group.find(group_id) if group_id.present?
@@ -17,5 +16,14 @@ class Check < ApplicationRecord
 
   def previous_check
     Check.where("id < ? AND group_id = ?", id, group_id).last
+  end
+end
+
+def update_attendance
+  if approved?
+    attendances.each do |a|
+      Kid.find(a.kid_id).update_columns(status: a.status)
+      Kid.find(a.kid_id).update_columns(cause: a.cause)
+    end
   end
 end

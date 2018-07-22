@@ -4,26 +4,6 @@ class Kid < ApplicationRecord
   has_many :checks, through: :attendances
     accepts_nested_attributes_for :attendances, :allow_destroy => true
 
-    def current_status
-      if checks.exists?
-        if checks.last.approved? && checks.last.attendances.exists?
-          checks.last.attendances.where(kid_id: id).last.status
-        elsif checks.last(2).first && checks.last(2).first.attendances.exists?
-          checks.last(2).first.attendances.where(kid_id: id).last.status
-        end
-      end
-    end
-
-    def current_cause
-      if checks.exists?
-        if checks.last.approved? && checks.last.attendances.exists?
-          checks.last.attendances.where(kid_id: id).last.cause
-        elsif checks.last(2).first && checks.last(2).first.attendances.exists?
-          checks.last(2).first.attendances.where(kid_id: id).last.cause
-        end
-      end
-    end
-
     def full_name
       name + " " + last_name
     end
@@ -66,4 +46,10 @@ class Kid < ApplicationRecord
     Kid.import kids, recursive: true
   end
 
+  def set_default_status
+    Kid.all.each do |k|
+      k.status ||= 0
+      k.save
+    end
+  end
 end

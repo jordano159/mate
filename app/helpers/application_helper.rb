@@ -2,7 +2,7 @@ module ApplicationHelper
   def how_many_attending(object)
     counter = 0
     object.each do |kid|
-      counter += kid.current_status if kid.current_status
+      counter += kid.status
     end
     counter
   end

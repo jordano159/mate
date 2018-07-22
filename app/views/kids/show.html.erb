@@ -47,10 +47,8 @@
     <% if @kid.group %>
       <li><%= link_to @kid.group.name, @kid.group %></li>
     <% end %>
-    <% if @kid.checks.exists? && @kid.checks.last.attendances.exists? %>
-      <li><%= @kid.checks.last.attendances.where(kid_id: @kid.id).first.status %></li>
-      <li><%= @kid.checks.last.attendances.where(kid_id: @kid.id).first.cause %></li>
-    <% end %>
+      <li><%= @kid.status %></li>
+      <li><%= @kid.cause %></li>
   </ul>
 
 </div>

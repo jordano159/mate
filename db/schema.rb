@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_17_063842) do
+ActiveRecord::Schema.define(version: 2018_07_22_184452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(version: 2018_07_17_063842) do
     t.string "swim"
     t.text "exits"
     t.text "comments"
+    t.integer "status", default: 0
+    t.text "cause"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
     t.index ["dad"], name: "index_kids_on_dad"
