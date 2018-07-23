@@ -35,6 +35,7 @@
         <th>תרופות</th>
         <th>אוכל</th>
         <th>קן מקור</th>
+        <th>הגעת הורים לטקס</th>
         <th>סטטוס</th>
         <th>סיבה</th>
         <% if @level > 1 %> <th>קבוצה</th> <% end %>
@@ -51,6 +52,7 @@
         <td><%= kid.meds %></td>
         <td><%= kid.food %></td>
         <td><%= kid.ken %></td>
+        <td><%= kid.parents %></td>
         <td>
           <%= if kid.status == 1
             string1 = "נוכח/ת"

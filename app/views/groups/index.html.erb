@@ -28,7 +28,7 @@
     <tr>
       <td><%= link_to group.name, group %></td>
       <td><% counter = how_many_attending(group.kids) %>
-       <%= counter %> מתוך <%= group.kids.count %></td>
+       <strong><%= counter %></strong> מתוך <strong><%= group.kids.count %></strong></td>
        <td>
          <% if group.checks.exists? %>
            <% if group.checks.last.approved? %>
