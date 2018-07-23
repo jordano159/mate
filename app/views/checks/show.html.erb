@@ -80,7 +80,7 @@
                 <span style="color:red;">לא נוכח/ת</span>
               <%# end %>
               <%# end %></td>
-              <td class="previous" style="display:none;"><%= @check.previous_check.attendances.find_by(kid_id: kid.id).cause %></td>
+              <td class="previous" style="display:none;"><%# @check.previous_check.attendances.find_by(kid_id: kid.id).cause %></td>
             <%# end %> -->
           <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" if current_staff.admin? %></td>
           <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin? %></td>
