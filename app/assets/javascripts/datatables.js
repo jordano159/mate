@@ -22,8 +22,8 @@
 // require datatables/extensions/AutoFill/autoFill.bootstrap4
 // require datatables/extensions/Buttons/buttons.bootstrap4
 // require datatables/extensions/Responsive/responsive.bootstrap4
-//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js
-//cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js
+// cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js
+// cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js
 
 //Global setting and initializer
 
