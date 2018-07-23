@@ -92,6 +92,7 @@
 </p>
 <%= link_to 'עריכה', edit_check_path(@check), class: "btn btn-primary" %>
 <%= link_to 'חזרה לרשימת הנוכחויות', checks_path, class: "btn btn-primary" %>
+<%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin?  %>
 
 <% if @level > 1 %>
   <% if !@check.approved? %>
