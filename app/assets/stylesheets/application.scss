@@ -128,13 +128,13 @@ body {
   background: none;
 }
 
-@media(max-width:768px) {
+@media(max-width:1025px) {
   #sidebar-wrapper{
     display: none;
   }
 }
 
-@media(min-width:768px) {
+@media(min-width:1024px) {
 
 #navbar {
   display: none;
