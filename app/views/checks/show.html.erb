@@ -24,7 +24,7 @@
 <div>
   <% counter = 0 %>
   <% @check.attendances.each do |kid| %>
-    <% counter += kid.status %>
+    <% counter += kid.status if !kid.status.nil? %>
   <% end %>
   <%= counter %> מתוך <%= @check.kids.count %> נוכחים
 </div>
@@ -58,12 +58,13 @@
         <tr>
           <td><%= link_to kid.full_name, kid %></td>
           <td>
-            <%= if kid.status == 1
+            <%= if @check.attendances.find_by(kid_id: kid.id).status == 1
               string1 = "נוכח/ת"
             else
               string1 = "לא נוכח/ת"
-            end %></td>
-          <td><%= kid.cause %></td>
+            end %>
+          </td>
+          <td><%= @check.attendances.find_by(kid_id: kid.id).cause %></td>
           <td class="previous" style="display:none;">
             <% if @check.previous_check %>
               <% if (@check.previous_check.attendances & kid.attendances).first.status == 1  %>

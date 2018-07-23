@@ -51,7 +51,13 @@
         <td><%= kid.meds %></td>
         <td><%= kid.food %></td>
         <td><%= kid.ken %></td>
-        <td><%= kid.status %></td>
+        <td>
+          <%= if kid.status == 1
+            string1 = "נוכח/ת"
+          else
+            string1 = "לא נוכח/ת"
+          end %>
+        </td>
         <td><%= kid.cause %></td>
         <%  if @level > 1 %>
           <td><%= link_to kid.group.name, kid.group %> </td>
