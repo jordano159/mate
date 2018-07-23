@@ -29,9 +29,9 @@
   <%= counter %> מתוך <%= @check.kids.count %> נוכחים
 </div>
 
-<% if @level > 1 %>
+<!-- <% if @level > 1 %>
   <button type="button" class="btn btn-success" id="show"> הצגת הנוכחות הקודמת </button>
-<% end %>
+<% end %> -->
 
 <p>
   <strong>חניכים:</strong>
@@ -42,10 +42,10 @@
         <th>שם</th>
         <th>סטטוס</th>
         <th>סיבה</th>
-        <% if @check.previous_check %>
-          <th class="previous" style="display:none;">סטטוס קודם</th>
-          <th class="previous" style="display:none;">סיבה קודמת</th>
-        <% end %>
+        <!-- <% if @check.previous_check %> -->
+          <!-- <th class="previous" style="display:none;">סטטוס קודם</th>
+          <th class="previous" style="display:none;">סיבה קודמת</th> -->
+        <!-- <% end %> -->
         <% if current_staff.admin? %>
           <th>עריכה</th>
           <th>מחיקה</th>
@@ -65,7 +65,7 @@
             end %>
           </td>
           <td><%= @check.attendances.find_by(kid_id: kid.id).cause %></td>
-          <td class="previous" style="display:none;">
+          <!-- <td class="previous" style="display:none;">
             <% if @check.previous_check %>
               <% if @check.previous_check.attendances.find_by(kid_id: kid.id).status == 1  %>
                 <% if string1 == "נוכח/ת" %>
@@ -81,7 +81,7 @@
               <% end %>
               <% end %></td>
               <td class="previous" style="display:none;"><%= @check.previous_check.attendances.find_by(kid_id: kid.id).cause %></td>
-            <% end %>
+            <% end %> -->
           <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" if current_staff.admin? %></td>
           <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin? %></td>
         </tr>
