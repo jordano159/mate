@@ -22,7 +22,7 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.content %></td>
-        <td><%= event.created_at.strftime("%H:%M | %e.%m") %> </td>
+        <td><%= event.created_at.in_time_zone("Jerusalem").strftime("%H:%M | %e.%m") %> </td>
         <td><%= event.staff.name %></td>
         <td><%= link_to event.eventable.name, event.eventable if event.eventable %></td>
         <td><%= link_to 'הצגה', event, class: "btn btn-primary" %></td>

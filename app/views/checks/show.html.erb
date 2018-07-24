@@ -11,7 +11,7 @@
 
 <p>
   <strong> נוצר בשעה: </strong>
-  <%= @check.created_at.strftime("%H:%M") %>
+  <%= @check.created_at.in_time_zone("Jerusalem").strftime("%H:%M") %>
 </p>
 
 סטטוס:
