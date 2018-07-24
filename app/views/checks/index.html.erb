@@ -31,7 +31,7 @@
     <% @checks.each do |check| %>
       <tr>
         <td><%= check.name %></td>
-        <td><%= check.created_at.in_time_zone("Jerusalem").strftime("%H:%M %e.%m") %> </td>
+        <td><%= check.created_at.in_time_zone("Jerusalem").strftime("%H:%M | %e.%m") %> </td>
         <% if check.kids.exists? %>
           <td><%= link_to check.my_group.name, group_path(check.my_group), class: "btn btn-primary" %> </td>
         <% end %>
@@ -44,10 +44,26 @@
         </td>
         <td><%= link_to 'הצגה', check, class: "btn btn-primary" %></td>
         <td><%= link_to 'עריכה', edit_check_path(check), class: "btn btn-warning" %></td>
-        <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin?  %></td>
+        <% if current_staff.admin? %>
+        <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"  %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
 <% end %>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+<script>
+$( document ).ready(function() {
+  $('#dttb').DataTable({
+    responsive: true,
+    language: {
+      url: "/he_he.lang"
+    }
+  });
+  $.fn.dataTable.moment( 'HH:mm | DD.MM' );
+});
+</script>
