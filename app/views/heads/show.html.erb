@@ -35,8 +35,10 @@
              <% end %>
            <% end %>
            </td>
-          <td><%= link_to 'עריכה', edit_group_path(group), class: "btn btn-warning" if current_staff.admin? %></td>
-          <td><%= link_to 'מחיקה', group, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
+           <% if current_staff.admin? %>
+             <td><%= link_to 'עריכה', edit_group_path(group), class: "btn btn-warning" %></td>
+             <td><%= link_to 'מחיקה', group, method: :delete, class: "btn btn-danger" %></td>
+           <% end %>
         </tr>
       <% end %>
     </tbody>

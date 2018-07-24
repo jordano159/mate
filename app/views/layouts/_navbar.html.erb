@@ -12,6 +12,11 @@
       <li class="nav-item active">
         <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
       </li>
+      <% if @level == 2 %>
+        <li class="nav-item active">
+          <%= link_to "הקבוצות שלי", root_path, class: "nav-link" %>
+        </li>
+      <% end %>
       <li class="nav-item active">
         <%= link_to "נוכחויות", checks_path, class: "nav-link" %>
       </li>

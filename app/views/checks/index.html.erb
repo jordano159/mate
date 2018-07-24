@@ -1,5 +1,5 @@
 <%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
-<%= text_field_tag :search, params[:search], placeholder: "חיפוש...", class: "form-control mr-sm-2" %>
+<%= text_field_tag :search, params[:search], placeholder: "סינון לפי שם קבוצה...", class: "form-control mr-sm-2" %>
 <%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
 <% end %>
 
