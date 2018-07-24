@@ -29,9 +29,9 @@
            <td>
              <% if group.checks.exists? %>
                <% if group.checks.last.approved? %>
-                <span style="color:green;"> <%= group.checks.last.name %> </span>
+                <span style="color:green;"> <%= group.checks.last.name %> </span><i class="fa fa-check-circle"></i>
               <% else %>
-                <span style="color:red;"> <%= group.checks.last.name %> </span>
+                <span style="color:red;"> <%= group.checks.last.name %> </span><i class="fa fa-check-circle"></i>
              <% end %>
            <% end %>
            </td>

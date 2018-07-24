@@ -21,7 +21,7 @@
         <th>מאושר?</th>
         <th>הצגה</th>
         <th>עריכה</th>
-        <% if current_staff.admin? %>
+        <% if @level > 1 %>
           <th>מחיקה</th>
         <% end %>
       </tr>
@@ -44,8 +44,8 @@
         </td>
         <td><%= link_to 'הצגה', check, class: "btn btn-primary" %></td>
         <td><%= link_to 'עריכה', edit_check_path(check), class: "btn btn-warning" %></td>
-        <% if current_staff.admin? %>
-        <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"  %></td>
+        <% if @level > 1 %>
+          <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'את/ה בטוח/ה שאת/ה רוצה למחוק את הנוכחות הזאת?' }, class: "btn btn-danger"  %></td>
         <% end %>
       </tr>
     <% end %>
