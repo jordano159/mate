@@ -3,8 +3,9 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <% names = ["נוכחות בוקר", "נוכחות צהריים", "נוכחות ערב", "תרגיל"] %>
-    <%= f.input :name, label: "שם הנוכחות", collection: names, input_html: {required: true} %>
+    <% names = [["בדיקה", "בדיקה &#128747;".html_safe],["נוכחות בוקר","נוכחות בוקר &#9925;".html_safe], ["נוכחות צהריים","נוכחות צהריים &#127774;".html_safe], ["נוכחות ערב", "נוכחות ערב &#127769;".html_safe]] %>
+
+    <%= f.input :name, label: "שם הנוכחות", collection: names, input_html: {required: true}, label_method: :second, value_method: :first %>
     <%= f.input :group_id, input_html: { value: current_staff.staffable.id }, as: :hidden if @level == 1 or (current_staff.vip? and current_staff.staffable_type == "Group") %>
     <% causes = ["בבית מסיבות רפואיות ויחזור", "בבית מסיבות רפואיות ולא יחזור", "בבית מסיבות אישיות ויחזור", "בבית מסיבות אישיות ולא יחזור", "פינוי רפואי", "מרפאה", "אחר"] %>
     <br />
