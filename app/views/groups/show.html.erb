@@ -8,15 +8,13 @@
   <%= link_to @group.head.name, @group.head, :style=>'color:#FFFFFF;' %>
   </strong>
 </p>
-<%
-counter = how_many_attending(@group.kids)
- %>
+<% counter = how_many_attending(@group.kids) %>
  יש <%= counter %> חניכימות נוכחימות מתוך <%= @group.kids.count %>
 <p>
   <strong>חניכים:</strong>
-  <div class="table-responsive-lg">
+  <div class="table-responsive">
   <table class = "table table-hover">
-    <thead class="thead-light">
+    <thead class="thead-dark">
       <tr>
         <th>שם</th>
         <th>קן</th>
@@ -40,8 +38,10 @@ counter = how_many_attending(@group.kids)
               "לא נוכח/ת"
             end %></td>
             <td><%= kid.cause %></td>
-          <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" if current_staff.admin? %></td>
-          <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" if current_staff.admin? %></td>
+            <% if current_staff.admin? %>
+              <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" %></td>
+              <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+            <% end %>
         </tr>
       <% end %>
     </tbody>
