@@ -1,25 +1,18 @@
 <%= simple_form_for([@eventable, @event], html: { class: 'form-inline' }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <%# types = %w(Group Head Axis) %>
-  <%# all_names = Group.pluck(:name, :id) + Head.pluck(:name) + Axis.pluck(:name) %>
-  <%# types = [["קבוצה","Group"]["ראש","Head"]["ציר", "Axis"]] %>
   <% options = [['קבוצות:',Group.pluck(:name, :id)],['ראשים:',Head.pluck(:name, :id)],['צירים:',Axis.pluck(:name, :id)]] %>
   <div class="form-inputs">
     <%= f.input :content, label: "פירוט:" %>
     <%= f.input :eventable_type, as: :hidden %>
     <%= f.input :eventable_id, as: :hidden %>
-    <!-- <div class="field"> -->
-      <%# f.label :eventable_id, "שם הקבוצה/ראש/ציר" %>
-      <%# f.grouped_collection_select :eventable_id, types, :groups, :name, :id, :name, include_blank: true %>
-  <!-- </div> -->
+
     <% grouped_options = [['Documents:',[["Create a new template-based document",1], ["Changing an existing document",2], ["New doc",3]]],['BOM:',[["Add New Part",4], ["Change existion part",5]]]] %>
     <%= select_tag "outcome_based", content_tag(:option,'נא לבחור',:value=>"") + grouped_options_for_select(options), class:"form-control" %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, "שליחה" %>
   </div>
 <% end %>
 

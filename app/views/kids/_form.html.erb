@@ -71,9 +71,12 @@
     <%= form.input :comments, label: "הערות" %>
   </div>
   <div class="field select">
-    <%= form.input :group_id, collection: @groups %>
+    <%= form.input :group_id, collection: @groups, label: "קבוצה" %>
   </div>
+  <div class="field">
+    <%= form.input :status, as: :radio_buttons, label: "סטטוס?", collection: [["לא נוכח/ת", "0"], ["נוכח/ת","1"]]  %>
+</div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "עדכון פרטים" %>
   </div>
 <% end %>
