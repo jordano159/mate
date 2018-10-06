@@ -4,7 +4,6 @@
 
   <div class="form-inputs">
     <% names = [["בדיקה", "בדיקה &#128747;".html_safe],["נוכחות בוקר","נוכחות בוקר &#9925;".html_safe], ["נוכחות צהריים","נוכחות צהריים &#127774;".html_safe], ["נוכחות ערב", "נוכחות ערב &#127769;".html_safe]] %>
-
     <%= f.input :name, label: "שם הנוכחות", collection: names, input_html: {required: true}, label_method: :second, value_method: :first %>
     <%= f.input :group_id, input_html: { value: current_staff.staffable.id }, as: :hidden if @level == 1 or (current_staff.vip? and current_staff.staffable_type == "Group") %>
     <% causes = ["בבית מסיבות רפואיות ויחזור", "בבית מסיבות רפואיות ולא יחזור", "בבית מסיבות אישיות ויחזור", "בבית מסיבות אישיות ולא יחזור", "פינוי רפואי", "מרפאה", "אחר"] %>
@@ -13,8 +12,20 @@
       <div class="check_div">
       <% kid = ff.object.kid %>
       <%= kid.name + " " + kid.last_name %>
-      נוכח?
-      <%= ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last, required: true %>
+      <div class="container">
+        <div class="button-wrap">
+          <%= ff.collection_radio_buttons :status, [["1", '<h1>נוכח/ת</h1>'.html_safe] ,["0", '<h1>לא נוכח/ת</h1>'.html_safe]],
+          :first, :last do |b|
+            b.label(class: "button-label") { b.radio_button }
+          end %>
+          <%# input_html: {id: "yes-button", class: "hidden radio-label"}, item_wrapper_class: "button-label"  %>
+          <!-- <input type="radio" name="status" id="yes-button<%= kid.id %>" class="hidden radio-label" value="1" >
+          <label for="yes-button<%= kid.id %>" class="button-label"> <h1>נוכח/ת</h1>  </label>
+          <input type="radio" name="status" id="no-button<%= kid.id %>" class="hidden radio-label" value="0">
+          <label for="no-button<%= kid.id %>" class="button-label"> <h1>לא נוכח/ת</h1> </label> -->
+        </div>
+      </div>
+      <%# ff.collection_radio_buttons :status, [["1", 'כן'] ,["0", 'לא']], :first, :last, required: true %>
       <%= ff.input :cause, label: "סיבת היעדרות:", collection: causes, input_html: {style:"display:none;", class: 'check_r' }, label_html: {style:"display:none;", class: 'label_r' } %>
       <%= ff.input :cause, label: "סיבת היעדרות:",                     input_html: {style:"display:none;", class: 'check_o' }, label_html: {style:"display:none;", class: 'label_o' } %>
       <br />
@@ -23,7 +34,7 @@
       <%= f.submit 'עדכון פרטים', class: "form-actions", data: {confirm: "ראית את החניכים והחניכות בעיניים?"} %>
   </div>
 <% end %>
-<br><br>
+
 
 
 <script>

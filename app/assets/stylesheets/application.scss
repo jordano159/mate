@@ -2,16 +2,20 @@
 *= require select2
 *= require select2-bootstrap
 */
-
+@import url('https://fonts.googleapis.com/css?family=Rubik');
 @import "bootstrap";
 @import "font-awesome";
-
+@import "checks";
 html {
   direction: rtl;
 }
 
 body {
   overflow-x: hidden;
+}
+
+* {
+  font-family: 'Rubik', sans-serif;
 }
 
 .kid-info{
