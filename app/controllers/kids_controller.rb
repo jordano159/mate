@@ -86,9 +86,16 @@ class KidsController < ApplicationController
   end
 
   def import
-    Kid.my_import(params[:file])
-    redirect_to kids_path, notice: "הייבוא עבר בהצלחה!"
+    file = params[:file]
+    file_type = file.present? ? file.path.split('.').last.to_s.downcase : ''
+      Kid.update_imported_kid(file) if file.present? and file_type == 'xlsx'
+    redirect_to kids_path
   end
+
+  # def import
+  #   Kid.my_import(params[:file])
+  #   redirect_to kids_path, notice: "הייבוא עבר בהצלחה!"
+  # end
 
   private
 

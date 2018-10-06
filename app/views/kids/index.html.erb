@@ -13,15 +13,12 @@
 
 <% if current_staff.admin? %>
 <%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
-<div>
-  <h4>ייבוא מידע!</h4>
-  <%= form_tag kids_import_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "ייבוא מקובץ" %>
-  <% end %>
-</div>
+<%= form_tag import_kids_path, multipart: true do %>
+  <%= file_field_tag :file, class: 'form-control' %><br>
+  <%= submit_tag 'ייבוא מקובץ xlsx', class: 'btn btn-primary'%>
+<% end %>
 <%= link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary" %>
-<%= link_to  'ייצוא הטבלה לCSV', kids_path(format: :csv), class: "btn btn-primary" %>
+<%# link_to  'ייצוא הטבלה לCSV', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
 
 <div class="table-responsive">

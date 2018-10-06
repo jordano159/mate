@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   resources :checks
   devise_for :staffs
   root 'application#home_page'
-  resources :kids
-  post 'kids/import' => 'kids#import'
+  resources :kids do
+    collection do
+      post :import
+    end
+  end
+  # post 'kids/import' => 'kids#import'
   resources :groups do
     resources :staffs
   end

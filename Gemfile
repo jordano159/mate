@@ -50,6 +50,7 @@ gem 'axlsx_rails'
 gem 'jquery-datatables'
 gem 'kaminari'
 gem 'bullet', group: 'development'
+gem 'roo'
 
 
 group :development, :test do
