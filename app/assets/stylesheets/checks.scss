@@ -36,7 +36,7 @@ html, body {
   @media (max-width: $small) {margin-top: -1.5em;}
 }
 //
-.button-label {
+.collection_radio_buttons {
   display: inline-block;
   padding: 1em 2em;
   margin: 0.5em;
@@ -65,7 +65,11 @@ html, body {
   }
 }
 
-input[id*="yes-button"]:checked + .button-label {
+input[type="radio"] {
+  display: none;
+}
+
+input[value="1"]:checked + .collection_radio_buttons {
   background: $green;
   color: $light;
   &:hover {
@@ -75,15 +79,11 @@ input[id*="yes-button"]:checked + .button-label {
 }
 
 
-input[id*="no-button"]:checked + .button-label {
+input[value="0"]:checked + .collection_radio_buttons {
   background: $red;
   color: $light;
   &:hover {
     background: darken($red, 5%);
     color: darken($light, 5%);
   }
-}
-
-.hidden {
-  display: none;
 }

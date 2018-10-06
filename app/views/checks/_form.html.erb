@@ -15,9 +15,10 @@
       <div class="container">
         <div class="button-wrap">
           <%= ff.collection_radio_buttons :status, [["1", '<h1>נוכח/ת</h1>'.html_safe] ,["0", '<h1>לא נוכח/ת</h1>'.html_safe]],
-          :first, :last do |b|
+          :first, :last  %>
+          <!-- do |b|
             b.label(class: "button-label") { b.radio_button }
-          end %>
+          end -->
           <%# input_html: {id: "yes-button", class: "hidden radio-label"}, item_wrapper_class: "button-label"  %>
           <!-- <input type="radio" name="status" id="yes-button<%= kid.id %>" class="hidden radio-label" value="1" >
           <label for="yes-button<%= kid.id %>" class="button-label"> <h1>נוכח/ת</h1>  </label>

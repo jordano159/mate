@@ -15,7 +15,7 @@
     <tbody>
       <% @staffs.each do |staff| %>
       <tr>
-        <td><%= link_to staff.name, staff_path(staff) %></td>
+        <td><%= staff.become %></td>
         <td><%= staff.username %></td>
         <td>
           <% if staff.admin? %>

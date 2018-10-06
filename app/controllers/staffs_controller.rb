@@ -50,7 +50,14 @@ def destroy
   end
 end
 
+def become
+  return unless current_staff.admin?
+  sign_in(:staff, Staff.find(params[:id]))
+  redirect_to root_url # or staff_root_url
+end
+
   private
+
 
   def set_staff
     @staff = Staff.find(params[:id])
