@@ -10,13 +10,25 @@ Rails.application.routes.draw do
   end
   # post 'kids/import' => 'kids#import'
   resources :groups do
-    resources :staffs
+    resources :staffs do
+      member do
+        get :become
+      end
+    end
   end
   resources :heads do
-    resources :staffs
+    resources :staffs do
+      member do
+        get :become
+      end
+    end
   end
   resources :axes do
-    resources :staffs
+    resources :staffs do
+      member do
+        get :become
+      end
+    end
   end
   get '/staffs/:id', to: 'staffs#show', as: 'staff'
   get 'staffs', to: 'application#admin_index'

@@ -15,7 +15,7 @@
     <tbody>
       <% @staffs.each do |staff| %>
       <tr>
-        <td><%= staff.become %></td>
+        <td><%= link_to staff.name, eval("become_#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})") %></td>
         <td><%= staff.username %></td>
         <td>
           <% if staff.admin? %>
