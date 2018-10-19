@@ -24,15 +24,14 @@ class ChecksController < ApplicationController
   # GET /checks/new
   def new
     @check = Check.new
-    @kids = @group.kids
+    @kids = @check.my_group.kids
     @check.kids << @kids
     @check.save(:validate => false)
   end
 
   # GET /checks/1/edit
   def edit
-    @group = @check.my_group
-    @kids = @group.kids
+    @kids = @check.my_group.kids
   end
 
   # POST /checks
