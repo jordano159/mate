@@ -24,11 +24,15 @@ class ChecksController < ApplicationController
   # GET /checks/new
   def new
     @check = Check.new
+    @kids = @group.kids
+    @check.kids << @kids
+    @check.save(:validate => false)
   end
 
   # GET /checks/1/edit
   def edit
-      @kids = @check.my_group.kids
+    @group = @check.my_group
+    @kids = @group.kids
   end
 
   # POST /checks
@@ -37,9 +41,7 @@ class ChecksController < ApplicationController
     @check = Check.new(check_params)
     respond_to do |format|
       if @check.save
-        @kids = current_staff.staffable.kids
-        @check.kids << @kids
-        format.html { redirect_to edit_check_path(@check), notice: 'Check was successfully created.' }
+        format.html { redirect_to check_path(@check), notice: 'Check was successfully created.' }
         format.json { render :show, status: :created, location: @check }
       else
         format.html { render :new }
