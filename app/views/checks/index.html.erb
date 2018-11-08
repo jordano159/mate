@@ -3,6 +3,8 @@
 <%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
 <% end %>
 
+<%= button_to "New", "#", html_options = {params[show_all]} %>
+
 <% if @checks.blank? %>
   <h4>אין נוכחויות שתואמות את החיפוש <%= params[:search] %>.</h4>
 <% else %>
