@@ -54,6 +54,7 @@ gem 'roo'
 gem 'overcommit'
 gem 'rubocop', require: false
 gem 'fasterer'
+gem 'reek'
 
 
 group :development, :test do
