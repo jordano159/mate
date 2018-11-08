@@ -1,0 +1,47 @@
+
+<p>
+  <strong>שם:</strong>
+  <%= @bus.name %>
+</p>
+
+<p>
+  <strong>חניכים:</strong>
+  <div class="table-responsive">
+  <table class = "table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>שם</th>
+        <th>קן</th>
+        <th>סטטוס עדכני</th>
+        <th>סיבה</th>
+        <% if current_staff.admin? %>
+          <th>עריכה</th>
+          <th>מחיקה </th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @bus.kids.each do |kid|%>
+        <tr>
+          <td><%= link_to kid.name + " " + kid.last_name, kid %></td>
+          <td><%= kid.ken %></td>
+            <td><%= if kid.status == 1
+              "נוכח/ת"
+            else
+              "לא נוכח/ת"
+            end %></td>
+            <td><%= kid.cause %></td>
+            <% if current_staff.admin? %>
+              <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" %></td>
+              <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+            <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</p>
+
+<%= link_to 'Edit', edit_bus_path(@bus) %> |
+<%= link_to 'Back', buses_path %>

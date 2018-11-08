@@ -9,7 +9,7 @@ class ChecksController < ApplicationController
     @checks = if params[:search]
                 Check.search(params[:search]).order('created_at DESC')
               elsif params[:show_all]
-                Check.all.order('created_at DESC')
+                current_staff.staffable.checks.order('created_at DESC')
               elsif current_staff.admin?
                 Check.all.order('created_at DESC')
               else
