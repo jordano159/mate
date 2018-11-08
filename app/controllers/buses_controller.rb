@@ -19,6 +19,10 @@ class BusesController < ApplicationController
 
   # GET /buses/1/edit
   def edit
+    if params[:city]
+      populate_bus(params[:city])
+      redirect_to @bus
+    end
   end
 
   # POST /buses
@@ -62,6 +66,14 @@ class BusesController < ApplicationController
   end
 
   private
+    def populate_bus(cities)
+      cities.each do |c|
+        Kid.where("city = ?", c).each do |k|
+          k.bus_id = @bus.id
+          k.save
+        end
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_bus
       @bus = Bus.find(params[:id])
@@ -69,6 +81,6 @@ class BusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bus_params
-      params.require(:bus).permit(:name)
+      params.require(:bus).permit(:name, kid_ids: [])
     end
 end

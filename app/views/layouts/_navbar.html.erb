@@ -20,6 +20,9 @@
       <li class="nav-item active">
         <%= link_to "נוכחויות", checks_path, class: "nav-link" %>
       </li>
+      <li class="nav-item active">
+        <%= link_to "אוטובוסים", buses_path, class: "nav-link" %>
+      </li>
         <% if current_staff.admin? || current_staff.vip? %>
         <li class="nav-item active">
           <%= link_to "צירים", axes_path, class: "nav-link" %>
