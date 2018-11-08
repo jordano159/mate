@@ -98,6 +98,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     devise (4.4.3)
@@ -110,6 +111,9 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.7.1)
     execjs (2.7.0)
+    fasterer (0.4.1)
+      colorize (~> 0.7)
+      ruby_parser (~> 3.11.0)
     ffi (1.9.23)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
@@ -241,6 +245,8 @@ GEM
       unicode-display_width (~> 1.4.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
+    ruby_parser (3.11.0)
+      sexp_processor (~> 4.9)
     rubyzip (1.2.1)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
@@ -258,6 +264,7 @@ GEM
     selenium-webdriver (3.11.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    sexp_processor (4.11.0)
     simple_form (4.0.0)
       actionpack (> 4)
       activemodel (> 4)
@@ -316,6 +323,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
+  fasterer
   font-awesome-rails
   hirb
   jbuilder (~> 2.5)
