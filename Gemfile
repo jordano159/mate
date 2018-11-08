@@ -51,6 +51,7 @@ gem 'jquery-datatables'
 gem 'kaminari'
 gem 'bullet', group: 'development'
 gem 'roo'
+gem 'overcommit'
 
 
 group :development, :test do
