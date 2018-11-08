@@ -51,10 +51,12 @@ gem 'jquery-datatables'
 gem 'kaminari'
 gem 'bullet', group: 'development'
 gem 'roo'
+# Efficiency tests
 gem 'overcommit'
 gem 'rubocop', require: false
 gem 'fasterer'
 gem 'reek'
+gem 'rails_best_practices'
 
 
 group :development, :test do

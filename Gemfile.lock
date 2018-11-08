@@ -95,6 +95,8 @@ GEM
     chromedriver-helper (1.2.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    code_analyzer (0.4.8)
+      sexp_processor
     codeclimate-engine-rb (0.4.1)
       virtus (~> 1.0)
     coercible (1.0.0)
@@ -121,6 +123,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     equalizer (0.0.11)
     erubi (1.7.1)
+    erubis (2.7.0)
     execjs (2.7.0)
     fasterer (0.4.1)
       colorize (~> 0.7)
@@ -222,6 +225,14 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails_best_practices (1.19.4)
+      activesupport
+      code_analyzer (>= 0.4.8)
+      erubis
+      i18n
+      json
+      require_all (~> 2.0)
+      ruby-progressbar
     rails_real_favicon (0.0.11)
       json (>= 1.7, < 3)
       rails (>= 3.1)
@@ -243,6 +254,7 @@ GEM
       kwalify (~> 0.7.0)
       parser (>= 2.5.0.0, < 2.6, != 2.5.1.1)
       rainbow (>= 2.0, < 4.0)
+    require_all (2.0.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -358,6 +370,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 5.2.0)
+  rails_best_practices
   rails_real_favicon
   reek
   roo

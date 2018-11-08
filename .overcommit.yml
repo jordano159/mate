@@ -5,3 +5,5 @@ PreCommit:
     enabled: true
   Reek:
     enabled: true
+  RailsBestPractices:
+    enabled: true
