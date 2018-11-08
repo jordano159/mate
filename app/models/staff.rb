@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class Staff < ApplicationRecord
-  enum role: [:user, :vip, :admin]
-  after_initialize :set_default_role, :if => :new_record?
+  enum role: %i[user vip admin]
+  after_initialize :set_default_role, if: :new_record?
   has_many :events
 
   def set_default_role
     self.role ||= :user
   end
-
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -22,6 +23,7 @@ class Staff < ApplicationRecord
 
   def self.search(search_term)
     Staff.where(
-      "staffs.name LIKE ?", "%#{search_term}%" ).distinct
+      'staffs.name LIKE ?', "%#{search_term}%"
+    ).distinct
   end
 end

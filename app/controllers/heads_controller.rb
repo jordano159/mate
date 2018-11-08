@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class HeadsController < ApplicationController
-  before_action :set_head, only: [:show, :edit, :update, :destroy]
+  before_action :set_head, only: %i[show edit update destroy]
   # GET /heads
   # GET /heads.json
   def index
@@ -8,8 +10,7 @@ class HeadsController < ApplicationController
 
   # GET /heads/1
   # GET /heads/1.json
-  def show
-  end
+  def show; end
 
   # GET /heads/new
   def new
@@ -64,13 +65,14 @@ class HeadsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_head
-      @head = Head.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def head_params
-      params.require(:head).permit(:name, :axis_id, group_ids: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_head
+    @head = Head.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def head_params
+    params.require(:head).permit(:name, :axis_id, group_ids: [])
+  end
 end

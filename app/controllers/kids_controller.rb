@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class KidsController < ApplicationController
-  before_action :set_kid, only: [:show, :edit, :update, :destroy]
+  before_action :set_kid, only: %i[show edit update destroy]
   before_action :authenticate_staff!
 
   # GET /kids
@@ -7,17 +9,17 @@ class KidsController < ApplicationController
   def index
     if params[:filter_column]
       if current_staff.admin?
-        @kids = Kid.all.includes(:group).filter(params[:filter_column], params[:filter_condition]).order("created_at DESC")
+        @kids = Kid.all.includes(:group).filter(params[:filter_column], params[:filter_condition]).order('created_at DESC')
       else
         @kids = current_staff.staffable.kids.includes(:group).filter(params[:filter_column],
-          params[:filter_condition]).order("created_at DESC")
+                                                                     params[:filter_condition]).order('created_at DESC')
       end
     else
-      if !current_staff.user?
-        @kids = Kid.all.includes(:group)
-      else
-        @kids = current_staff.staffable.kids.includes(:group)
-      end
+      @kids = if !current_staff.user?
+                Kid.all.includes(:group)
+              else
+                current_staff.staffable.kids.includes(:group)
+              end
     end
 
     respond_to do |format|
@@ -29,8 +31,7 @@ class KidsController < ApplicationController
 
   # GET /kids/1
   # GET /kids/1.json
-  def show
-  end
+  def show; end
 
   # GET /kids/new
   def new
@@ -88,7 +89,7 @@ class KidsController < ApplicationController
   def import
     file = params[:file]
     file_type = file.present? ? file.path.split('.').last.to_s.downcase : ''
-      Kid.update_imported_kid(file) if file.present? and file_type == 'xlsx'
+    Kid.update_imported_kid(file) if file.present? && (file_type == 'xlsx')
     redirect_to kids_path
   end
 
@@ -99,15 +100,15 @@ class KidsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_kid
-      @kid = Kid.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_kid
+    @kid = Kid.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def kid_params
-      params.require(:kid).permit(:name, :group_id, :last_name, :sex, :phone, :medical,
-        :meds, :food, :city, :ken, :dad, :dad_phone, :mom, :mom_phone, :size, :shabat,
-        :parents, :swim, :exits, :comments, :status, :cause)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def kid_params
+    params.require(:kid).permit(:name, :group_id, :last_name, :sex, :phone, :medical,
+                                :meds, :food, :city, :ken, :dad, :dad_phone, :mom, :mom_phone, :size, :shabat,
+                                :parents, :swim, :exits, :comments, :status, :cause)
+  end
 end

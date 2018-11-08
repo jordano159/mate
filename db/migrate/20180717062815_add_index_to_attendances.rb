@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddIndexToAttendances < ActiveRecord::Migration[5.2]
   def change
     add_index :attendances, :kid_id

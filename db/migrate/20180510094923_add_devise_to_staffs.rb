@@ -4,8 +4,8 @@ class AddDeviseToStaffs < ActiveRecord::Migration[5.2]
   def self.up
     change_table :staffs do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
+      t.string :email,              null: false, default: ''
+      t.string :encrypted_password, null: false, default: ''
 
       ## Recoverable
       t.string   :reset_password_token
@@ -32,12 +32,11 @@ class AddDeviseToStaffs < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-
       # Uncomment below if timestamps were not included in your original model.
       # t.timestamps null: false
     end
 
-    add_index :staffs, :email                
+    add_index :staffs, :email
     add_index :staffs, :reset_password_token, unique: true
     # add_index :staffs, :confirmation_token,   unique: true
     # add_index :staffs, :unlock_token,         unique: true

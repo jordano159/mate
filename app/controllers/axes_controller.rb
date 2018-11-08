@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AxesController < ApplicationController
-  before_action :set_axis, only: [:show, :edit, :update, :destroy]
+  before_action :set_axis, only: %i[show edit update destroy]
 
   # GET /axes
   # GET /axes.json
@@ -9,8 +11,7 @@ class AxesController < ApplicationController
 
   # GET /axes/1
   # GET /axes/1.json
-  def show
-  end
+  def show; end
 
   # GET /axes/new
   def new
@@ -18,8 +19,7 @@ class AxesController < ApplicationController
   end
 
   # GET /axes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /axes
   # POST /axes.json
@@ -62,14 +62,14 @@ class AxesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_axis
-      @axis = Axis.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def axis_params
-      params.require(:axis).permit(:name, head_ids: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_axis
+    @axis = Axis.find(params[:id])
+  end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def axis_params
+    params.require(:axis).permit(:name, head_ids: [])
+  end
 end

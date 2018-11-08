@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class KidsControllerTest < ActionDispatch::IntegrationTest
@@ -5,17 +7,17 @@ class KidsControllerTest < ActionDispatch::IntegrationTest
     @kid = kids(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get kids_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_kid_url
     assert_response :success
   end
 
-  test "should create kid" do
+  test 'should create kid' do
     assert_difference('Kid.count') do
       post kids_url, params: { kid: { name: @kid.name } }
     end
@@ -23,22 +25,22 @@ class KidsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to kid_url(Kid.last)
   end
 
-  test "should show kid" do
+  test 'should show kid' do
     get kid_url(@kid)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_kid_url(@kid)
     assert_response :success
   end
 
-  test "should update kid" do
+  test 'should update kid' do
     patch kid_url(@kid), params: { kid: { name: @kid.name } }
     assert_redirected_to kid_url(@kid)
   end
 
-  test "should destroy kid" do
+  test 'should destroy kid' do
     assert_difference('Kid.count', -1) do
       delete kid_url(@kid)
     end

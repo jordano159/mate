@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStaffs < ActiveRecord::Migration[5.2]
   def change
     create_table :staffs do |t|
@@ -6,6 +8,6 @@ class CreateStaffs < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :staffs, [:staffable_id, :staffable_type]
+    add_index :staffs, %i[staffable_id staffable_type]
   end
 end

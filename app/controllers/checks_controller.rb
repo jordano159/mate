@@ -1,15 +1,16 @@
-class ChecksController < ApplicationController
-  before_action :set_check, only: [:show, :edit, :update, :destroy]
+# frozen_string_literal: true
 
+class ChecksController < ApplicationController
+  before_action :set_check, only: %i[show edit update destroy]
 
   # GET /checks
   # GET /checks.json
   def index
-    if params[:search]
-      @checks = Check.search(params[:search]).order("created_at DESC")
-    else
-      @checks = Check.all
-    end
+    @checks = if params[:search]
+                Check.search(params[:search]).order('created_at DESC')
+              else
+                Check.all
+              end
 
     respond_to do |format|
       format.html
@@ -18,8 +19,7 @@ class ChecksController < ApplicationController
 
   # GET /checks/1
   # GET /checks/1.json
-  def show
-  end
+  def show; end
 
   # GET /checks/new
   def new
@@ -27,7 +27,7 @@ class ChecksController < ApplicationController
     @group = Group.find(current_staff.staffable_id)
     @kids = @group.kids
     @check.kids << @kids
-    @check.save(:validate => false)
+    @check.save(validate: false)
   end
 
   # GET /checks/1/edit
@@ -78,13 +78,14 @@ class ChecksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_check
-      @check = Check.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def check_params
-      params.require(:check).permit(:name, :group_id, :approved, attendances_attributes: [:status, :id, :cause], kid_ids: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_check
+    @check = Check.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def check_params
+    params.require(:check).permit(:name, :group_id, :approved, attendances_attributes: %i[status id cause], kid_ids: [])
+  end
 end

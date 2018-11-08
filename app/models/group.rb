@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Group < ApplicationRecord
   has_many :kids
   belongs_to :head
@@ -7,7 +9,7 @@ class Group < ApplicationRecord
 
   def self.search(search_term)
     Group.where(
-      "groups.name LIKE ?", "%#{search_term}%" ).distinct
+      'groups.name LIKE ?', "%#{search_term}%"
+    ).distinct
   end
-
 end
