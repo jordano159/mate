@@ -8,8 +8,10 @@ class ChecksController < ApplicationController
   def index
     @checks = if params[:search]
                 Check.search(params[:search]).order('created_at DESC')
+              elsif current_staff.admin?
+                Check.all.order('created_at DESC')
               else
-                Check.all
+                current_staff.staffable.checks.order('created_at DESC')
               end
 
     respond_to do |format|
@@ -42,8 +44,6 @@ class ChecksController < ApplicationController
     @check = Check.new(check_params)
     respond_to do |format|
       if @check.save
-        # @kids = current_staff.staffable.kids
-        # @check.kids << @kids
         format.html { redirect_to check_path(@check), notice: 'Check was successfully created.' }
         format.json { render :show, status: :created, location: @check }
       else

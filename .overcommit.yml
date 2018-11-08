@@ -4,6 +4,8 @@ PreCommit:
   Fasterer:
     enabled: true
   Reek:
-    enabled: true
+    enabled: false
   RailsBestPractices:
+    enabled: true
+  RailsSchemaUpToDate:
     enabled: true
