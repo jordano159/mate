@@ -35,6 +35,7 @@ class ChecksController < ApplicationController
       @kids = @bus.kids
       @check.bus_id = @bus.id
       @check.kids << @kids
+      @check.approved = true
       @check.save(validate: false)
     else
       @check = Check.new

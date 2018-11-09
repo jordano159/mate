@@ -43,5 +43,6 @@
   </div>
 </p>
 <%= link_to "יצירת נוכחות חדשה", new_check_path(:bus => @bus.id), class: "btn btn-primary"%>
+<%= link_to "עריכת נוכחות אחרונה", edit_check_path(@bus.checks.last), class: "btn btn-primary" unless @bus.checks.blank? %>
 <%= link_to 'עריכה', edit_bus_path(@bus) %> |
 <%= link_to 'אחורה', buses_path %>

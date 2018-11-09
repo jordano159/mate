@@ -1,7 +1,20 @@
 <h1>עריכה</h1>
 
-<%= render 'form', bus: @bus %>
-<%= render 'pop_form' %>
+<script>
+    $(document).ready(function() {
+       $(".select").select2({
+          language: "he",
+          theme: "bootstrap"
+      }); });
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+</script>
+
+
+<%= form_tag(edit_bus_path(@bus), :method => "get", id: "pop-form", class: "form-inline my-2 my-lg-0") do %>
+  <%= text_field(:bus, :name) %>
+  <%= select_tag "city", options_for_select(Kid.pluck(:city).uniq), multiple: true, class: "select" %>
+  <%= submit_tag "הוספה", class: "btn btn-outline-success my-2 my-sm-0" %>
+<% end %>
 
 <%= link_to 'הצגה', @bus %> |
 <%= link_to 'אחורה', buses_path %>

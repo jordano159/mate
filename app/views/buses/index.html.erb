@@ -34,7 +34,7 @@
          <% if !bus.kids.blank? %>
            <% last_kid = bus.kids.first %>
            <% bus.kids.each do |k| %>
-           <% if k.updated_at > last_kid.updated_at
+           <% if k.updated_at >= last_kid.updated_at && k.status == 1
              last_kid = k
            end %>
            <% end %>
