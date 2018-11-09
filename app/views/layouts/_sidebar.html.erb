@@ -1,11 +1,11 @@
-<div id="sidebar-wrapper">
+<% if staff_signed_in? %>
+            <div id="sidebar-wrapper">
               <div class="sidebar-brand">
                 <%= link_to root_path do %>
                   <h1>המטה</h1>
                   <% end %>
               </div>
               <ul class="sidebar-nav">
-              <% if staff_signed_in? %>
               <li class="nav-item active">
                 <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
               </li>
@@ -53,5 +53,5 @@
                   </li>
                 </ul>
 
-                  <% end %>
       </div>
+    <% end %>

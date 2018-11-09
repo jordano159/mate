@@ -1,3 +1,4 @@
+<% if staff_signed_in? %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
   <%= link_to "מטה", root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,7 +9,6 @@
       <li class="nav-item active">
         <%= link_to "בית", root_path, class: "nav-link" %>
       </li>
-      <% if staff_signed_in? %>
       <li class="nav-item active">
         <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
       </li>
@@ -52,6 +52,6 @@
         <span class="navbar-text">
           שלום <%= current_staff.name %>
         </span>
-<% end %>
   </div>
 </nav>
+<% end %>
