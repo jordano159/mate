@@ -27,17 +27,31 @@ class ChecksController < ApplicationController
 
   # GET /checks/new
   def new
-    @check = Check.new
-    @group = Group.find(current_staff.staffable_id)
-    @kids = @group.kids
-    @check.kids << @kids
-    @check.save(validate: false)
+    if params[:bus]
+      @check = Check.new
+      @bus = Bus.find(params[:bus])
+      @kids = @bus.kids
+      @check.bus_id = @bus.id
+      @check.kids << @kids
+      @check.save(validate: false)
+    else
+      @check = Check.new
+      @group = Group.find(current_staff.staffable_id)
+      @kids = @group.kids
+      @check.kids << @kids
+      @check.save(validate: false)
+    end
   end
 
   # GET /checks/1/edit
   def edit
-    @group = @check.my_group
-    @kids = @group.kids
+    if @check.bus_id.blank?
+      @group = @check.my_group if @group
+      @kids = @group.kids
+    elsif @check.group_id.blank?
+      @bus = Bus.find(@check.bus_id)
+      @kids = @bus.kids
+    end
   end
 
   # POST /checks

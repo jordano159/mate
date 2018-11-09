@@ -5,8 +5,13 @@
 </p>
 
 <p>
-  <strong>קבוצה:</strong>
-  <%= Group.find(@check.group_id).name %>
+  <% if @check.bus_id.blank? %>
+    <strong>קבוצה:</strong>
+    <%= Group.find(@check.group_id).name %>
+  <% elsif @check.group_id.blank? %>
+  <strong>אוטובוס:</strong>
+  <%= Bus.find(@check.bus_id).name %>
+  <% end %>
 </p>
 
 <p>

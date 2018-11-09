@@ -6,6 +6,6 @@ PreCommit:
   Reek:
     enabled: false
   RailsBestPractices:
-    enabled: true
+    enabled: false
   RailsSchemaUpToDate:
     enabled: true

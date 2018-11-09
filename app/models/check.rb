@@ -5,6 +5,7 @@ class Check < ApplicationRecord
   has_many :kids, through: :attendances
   accepts_nested_attributes_for :attendances, allow_destroy: true
   belongs_to :group, optional: true
+  belongs_to :bus, optional: true
   validates :name, presence: true
   after_update :update_attendance
 
