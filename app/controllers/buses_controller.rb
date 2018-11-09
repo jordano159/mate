@@ -32,6 +32,7 @@ class BusesController < ApplicationController
 
     respond_to do |format|
       if @bus.save
+        populate_bus(params[:city]) if params[:city]
         format.html { redirect_to @bus, notice: 'Bus was successfully created.' }
         format.json { render :show, status: :created, location: @bus }
       else
