@@ -3,15 +3,16 @@
   <strong>שם:</strong>
   <%= @bus.name %>
 </p>
-
-<% counter = how_many_attending(@bus.kids) %>
- יש <%= counter %> חניכימות נוכחימות מתוך <%= @bus.kids.count %>
- <% percent = (counter.to_f / @bus.kids.count.to_i * 100).to_i %>
- <% width = "width:#{percent}%" %>
- <div class="progress">
-  <div class="progress-bar" role="progressbar"  style=<%= width %>
-    aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= percent %>% נוכחות</div>
-</div>
+<% unless @bus.kids.blank? %>
+  <% counter = how_many_attending(@bus.kids) %>
+  יש <%= counter %> חניכימות נוכחימות מתוך <%= @bus.kids.count %>
+  <% percent = (counter.to_f / @bus.kids.count.to_i * 100).to_i %>
+  <% width = "width:#{percent}%" %>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar"  style=<%= width %>
+      aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= percent %>% נוכחות</div>
+    </div>
+<% end %>
 
 <p>
   <strong>חניכים:</strong>
