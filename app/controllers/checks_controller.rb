@@ -8,12 +8,14 @@ class ChecksController < ApplicationController
   def index
     @checks = if params[:search]
                 Check.search(params[:search]).order('created_at DESC')
-              elsif params[:show_all]
-                current_staff.staffable.checks.order('created_at DESC')
+              elsif params[:buses]
+                Check.where.not(bus_id: [nil, ""]).order('created_at DESC')
+              elsif params[:show_all] && !current_staff.admin?
+                current_staff.staffable.checks.where(bus_id: [nil, ""]).order('created_at DESC')
               elsif current_staff.admin?
-                Check.all.order('created_at DESC')
+                Check.all.where(bus_id: [nil, ""]).order('created_at DESC')
               else
-                current_staff.staffable.checks.order('created_at DESC').where("checks.updated_at >= ?", 1.day.ago)
+                current_staff.staffable.checks.where(bus_id: [nil, ""]).where("checks.updated_at >= ?", 1.day.ago).order('created_at DESC')
               end
 
     respond_to do |format|
@@ -46,7 +48,7 @@ class ChecksController < ApplicationController
   # GET /checks/1/edit
   def edit
     if @check.bus_id.blank?
-      @group = @check.my_group if @group
+      @group = @check.group if @group
       @kids = @group.kids
     elsif @check.group_id.blank?
       @bus = Bus.find(@check.bus_id)

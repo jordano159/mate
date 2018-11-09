@@ -6,6 +6,8 @@
 <%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
 <%= submit_tag "נוכחויות מכל הזמנים", :name => "show_all", class: "btn btn-outline-success my-2 my-sm-0" %>
 <%= submit_tag "נוכחויות רק מהיום האחרון", :name => "hide_all", class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= submit_tag "נוכחויות של קבוצות", :name => "groups", class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= submit_tag "נוכחויות של אוטובוסים", :name => "buses", class: "btn btn-outline-success my-2 my-sm-0" %>
 <% end %>
 
 
@@ -23,7 +25,11 @@
     <tr>
         <th>שם</th>
         <th>תאריך</th>
-        <th>קבוצה</th>
+        <% if params[:buses] %>
+          <th>אוטובוס</th>
+        <% else %>
+          <th>קבוצה</th>
+        <% end %>
         <th>מאושר?</th>
         <th>הצגה</th>
         <th>עריכה</th>
@@ -38,8 +44,14 @@
       <tr>
         <td><%= check.name %></td>
         <td><%= check.created_at.in_time_zone("Jerusalem").strftime("%H:%M | %e.%m") %> </td>
-        <% if check.kids.exists? %>
-          <td>שדג<%# link_to check.my_group.name, group_path(check.my_group), class: "btn btn-primary" %> </td>
+        <% if params[:buses] %>
+            <td><%= link_to check.bus.name, bus_path(check.bus), class: "btn btn-primary" %></td>
+        <% else %>
+          <td>
+          <% if check.group %>
+            <%= link_to check.group.name, group_path(check.group), class: "btn btn-primary" %>
+          <% end %>
+          </td>
         <% end %>
         <td>
           <% if check.approved? %>

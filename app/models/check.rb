@@ -9,10 +9,6 @@ class Check < ApplicationRecord
   validates :name, presence: true
   after_update :update_attendance
 
-  def my_group
-    Group.find(group_id) if group_id.present?
-  end
-
   def self.search(search_term)
     Check.where(group_id: Group.where('groups.name LIKE ?', "%#{search_term}%").first.id).distinct
   end
