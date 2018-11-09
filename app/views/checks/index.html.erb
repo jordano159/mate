@@ -29,8 +29,8 @@
           <th>אוטובוס</th>
         <% else %>
           <th>קבוצה</th>
+          <th>מאושר?</th>
         <% end %>
-        <th>מאושר?</th>
         <th>הצגה</th>
         <th>עריכה</th>
         <% if @level > 1 %>
@@ -44,7 +44,7 @@
       <tr>
         <td><%= check.name %></td>
         <td><%= check.created_at.in_time_zone("Jerusalem").strftime("%H:%M | %e.%m") %> </td>
-        <% if params[:buses] %>
+        <% if params[:buses] && check.bus%>
             <td><%= link_to check.bus.name, bus_path(check.bus), class: "btn btn-primary" %></td>
         <% else %>
           <td>
@@ -53,6 +53,7 @@
           <% end %>
           </td>
         <% end %>
+        <% unless params[:buses] %>
         <td>
           <% if check.approved? %>
             <span style="color:green;">מאושר</span> <i class="fa fa-check-circle"></i>
@@ -60,6 +61,7 @@
             <span style="color:red;">עוד לא מאושר</span>
           <% end %>
         </td>
+        <% end %>
         <td><%= link_to 'הצגה', check, class: "btn btn-primary" %></td>
         <td><%= link_to 'עריכה', edit_check_path(check), class: "btn btn-warning" %></td>
         <% if @level > 1 %>
