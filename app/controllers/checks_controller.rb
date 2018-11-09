@@ -10,7 +10,7 @@ class ChecksController < ApplicationController
                 Check.search(params[:search]).order('created_at DESC')
               elsif params[:buses]
                 Check.where.not(bus_id: [nil, ""]).order('created_at DESC')
-              elsif params[:show_all] && !current_staff.admin?
+              elsif params[:show_all] && !current_staff.admin? && !current_staff.vip?
                 current_staff.staffable.checks.where(bus_id: [nil, ""]).order('created_at DESC')
               elsif current_staff.admin?
                 Check.all.where(bus_id: [nil, ""]).order('created_at DESC')

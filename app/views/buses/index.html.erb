@@ -1,6 +1,6 @@
 <h1>אוטובוסים</h1>
 
-<table class="responsive nowrap table table-hover" id="dttb-buses" data-sort="true" data-source="<%= url_for(format: :json)%>">
+<!-- <table class="responsive nowrap table table-hover" id="dttb-buses" data-sort="true" data-source="<%= url_for(format: :json)%>">
   <thead>
     <tr>
       <th data-data="name">שם</th>
@@ -8,8 +8,45 @@
     </tr>
   </thead>
 
-</table>
+</table> -->
 
-<br>
+<div class="table-responsive">
+<table class = "table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>שם</th>
+      <th colspan="1"> נוכחות </th>
+      <th>תחנה אחרונה</th>
+      <% if current_staff.admin? %>
+        <th>עריכה</th>
+        <th>מחיקה </th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @buses.each do |bus| %>
+    <tr>
+      <td><%= link_to bus.name, bus %></td>
+      <td><% counter = how_many_attending(bus.kids) %>
+       <strong><%= counter %></strong> מתוך <strong><%= bus.kids.count %></strong></td>
+       <td>
+         <% if !bus.kids.blank? %>
+           <% last_kid = bus.kids.first %>
+           <% bus.kids.each do |k| %>
+           <% if k.updated_at > last_kid.updated_at
+             last_kid = k
+           end %>
+           <% end %>
+           <%= last_kid.city %>
+         <% end %>
+       </td>
+      <td><%= link_to 'עריכה', edit_bus_path(bus), class: "btn btn-warning" if current_staff.admin? %></td>
+      <td><%= link_to 'מחיקה', bus, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
 
 <%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
