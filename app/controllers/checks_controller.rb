@@ -13,7 +13,7 @@ class ChecksController < ApplicationController
               elsif current_staff.admin?
                 Check.all.order('created_at DESC')
               else
-                current_staff.staffable.checks.order('created_at DESC').where("updated_at >= ?", 1.day.ago)
+                current_staff.staffable.checks.order('created_at DESC').where("checks.updated_at >= ?", 1.day.ago)
               end
 
     respond_to do |format|
