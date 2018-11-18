@@ -38,7 +38,7 @@
              last_kid = k
            end %>
            <% end %>
-           <%= last_kid.city %>
+           <%= "#{last_kid.city} בשעה #{last_kid.updated_at.in_time_zone("Jerusalem").strftime('%H:%M')}" %>
          <% end %>
        </td>
        <% if current_staff.admin? %>
