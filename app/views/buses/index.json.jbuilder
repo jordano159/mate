@@ -6,5 +6,8 @@ json.set! :data do
               #{link_to 'Edit', edit_bus_path(bus)}
               #{link_to 'Destroy', bus, method: :delete, data: { confirm: 'Are you sure?' }}
               "
+    json.bus_counter "
+     <strong>#{how_many_attending(bus.kids)}</strong> מתוך <strong> #{bus.kids.count} </strong>
+    "
   end
 end

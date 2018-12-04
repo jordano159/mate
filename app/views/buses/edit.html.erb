@@ -9,7 +9,7 @@
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 </script>
 
-
+<%# @bus.new_record? ? method = "post" :  method = "get" %>
 <%= form_tag(edit_bus_path(@bus), :method => "get", id: "pop-form", class: "form-inline my-2 my-lg-0") do %>
 <div class="form-inline">
   <%= label_tag 'bus_name', "שם האוטובוס: " %>
