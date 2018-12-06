@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :mifals
   resources :buses
   resources :events
   resources :checks
@@ -28,6 +27,13 @@ Rails.application.routes.draw do
     end
   end
   resources :axes do
+    resources :staffs do
+      member do
+        get :become
+      end
+    end
+  end
+  resources :mifals do
     resources :staffs do
       member do
         get :become
