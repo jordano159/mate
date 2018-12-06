@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :mifals
   resources :buses
   resources :events
   resources :checks

@@ -4,6 +4,24 @@
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
 
+# Create Mifal
+puts "What's the name of your new and awesome factory?"
+name = STDIN.gets.chomp
+Mifal.create(name: name)
+
+puts 'Creating VIP...'
+if Staff.find_by(username: 'Gilad').nil?
+  Staff.create!(name: 'גילעד', email: 'gilad@gmail.com', password: '12341234', password_confirmation: '12341234',
+                role: 'vip', username: 'Gilad', staffable_type: 'Mifal', staffable_id: Mifal.find_by(name: name).id)
+end
+
+# Seeding Admin
+puts 'Creating Admin...'
+if Staff.find_by(username: 'Jordan').nil?
+  Staff.create!(name: 'ירדן', email: 'yarden11111@gmail.com', password: '12341234', password_confirmation: '12341234',
+                role: 'admin', username: 'Jordan', staffable_type: 'Mifal', staffable_id: Mifal.find_by(name: name).id)
+end
+
 # Seeding Axes
 puts 'How Many Axes?'
 amount = STDIN.gets.chomp.to_i
@@ -44,17 +62,6 @@ div = STDIN.gets.chomp.to_i
                 staffable_id: Group.find_by(name: "קבוצה #{i}").id)
 end
 
-puts 'Creating VIP...'
-if Staff.find_by(username: 'Gilad').nil?
-  Staff.create!(name: 'גילעד', email: 'gilad@gmail.com', password: '12341234', password_confirmation: '12341234',
-                role: 'vip', username: 'Gilad', staffable_type: 'Axis', staffable_id: Axis.first.id.to_s)
-end
 
-# Seeding Admin
-puts 'Creating Admin...'
-if Staff.find_by(username: 'Jordan').nil?
-  Staff.create!(name: 'ירדן', email: 'yarden11111@gmail.com', password: '12341234', password_confirmation: '12341234',
-                role: 'admin', username: 'Jordan', staffable_type: 'Axis', staffable_id: Axis.first.id.to_s)
-end
 
 puts 'Created Succesfully'
