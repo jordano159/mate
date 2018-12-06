@@ -39,6 +39,14 @@ class Kid < ApplicationRecord
     Kid.where("kids.#{filter_column} LIKE ?", "%#{filter_condition}%").distinct
   end
 
+  def heb_status
+    if status == 1
+      string1 = "נוכח/ת"
+    else
+      string1 = "לא נוכח/ת"
+    end
+  end
+
   # ייצוא וייבוא בCSV
   # def self.to_csv
   #   attributes = %w{name last_name sex phone medical
