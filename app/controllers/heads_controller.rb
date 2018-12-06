@@ -5,7 +5,7 @@ class HeadsController < ApplicationController
   # GET /heads
   # GET /heads.json
   def index
-    @heads = Head.all.includes(:groups, :kids)
+    @heads = Head.all.order('id ASC').includes(:groups, :kids)
   end
 
   # GET /heads/1

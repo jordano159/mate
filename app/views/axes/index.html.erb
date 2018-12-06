@@ -1,31 +1,16 @@
 <h1>צירים</h1>
 
 <div class="table-responsive">
-  <table class = "table table-hover">
+  <table class="nowrap table table-hover" id="dttb-axes" data-sort="false" data-source="<%= url_for(format: :json)%>">
     <thead class="thead-dark">
       <tr>
-        <th>שם</th>
-        <th colspan="1"> נוכחות </th>
-        <% if current_staff.admin? %>
-          <th>עריכה</th>
-          <th>מחיקה </th>
-        <% end %>
+        <th data-data="name">שם</th>
+        <th data-data="axis_counter" data-orderable="false" data-searchable="false">נוכחות</th>
+        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
       </tr>
     </thead>
 
-  <tbody>
-    <% @axes.each do |axis| %>
-      <tr>
-        <td><%= link_to axis.name, axis %></td>
-        <td><% counter = how_many_attending(axis.kids) %>
-        <%= counter %> מתוך <%= axis.kids.count %></td>
-        <td><%= link_to 'עריכה', edit_axis_path(axis), class: "btn btn-warning" if current_staff.admin? %></td>
-        <td><%= link_to 'מחיקה', axis, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  </table>
 </div>
-<br>
 
-<%= link_to 'ציר חדש', new_axis_path if current_staff.admin? %>
+<%= link_to 'ציר חדש', new_axis_path if @level > 3 %>

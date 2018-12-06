@@ -1,10 +1,9 @@
 json.set! :data do
   json.array! @mifals do |mifal|
-    json.partial! 'mifals/mifal', mifal: mifal
+    json.name "#{link_to mifal.name, mifal}"
     json.url  "
-              #{link_to 'Show', mifal }
-              #{link_to 'Edit', edit_mifal_path(mifal)}
-              #{link_to 'Destroy', mifal, method: :delete, data: { confirm: 'Are you sure?' }}
+              #{link_to 'עריכה', edit_mifal_path(mifal), class: 'btn btn-warning' if current_staff.admin? || current_staff.vip?}
+              #{link_to 'מחיקה', mifal, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
               "
   end
 end
