@@ -7,9 +7,4 @@ class Group < ApplicationRecord
   has_many :checks
   has_many :events, as: :eventable
 
-  def self.search(search_term)
-    Group.where(
-      'groups.name LIKE ?', "%#{search_term}%"
-    ).distinct
-  end
 end

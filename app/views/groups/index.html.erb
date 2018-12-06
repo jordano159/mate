@@ -1,50 +1,17 @@
-<%= form_tag(groups_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
-<%= text_field_tag :search, params[:search], placeholder: "חיפוש...", class: "form-control mr-sm-2" %>
-<%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
-<% end %>
-
-<% if @groups.blank? %>
-  <h4>אין קבוצות שתואמות את החיפוש <%= params[:search] %>.</h4>
-<% else %>
-
 <h1>קבוצות</h1>
 
 <div class="table-responsive">
-<table class = "table table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th>שם</th>
-      <th colspan="1"> נוכחות </th>
-      <th>נוכחות אחרונה</th>
-      <% if current_staff.admin? %>
-        <th>עריכה</th>
-        <th>מחיקה </th>
-      <% end %>
-    </tr>
-  </thead>
+  <table class="nowrap table table-hover" id="dttb-groups" data-sort="false" data-source="<%= url_for(format: :json)%>">
+    <thead class="thead-dark">
+      <tr>
+        <th data-data="name">שם</th>
+        <th data-data="group_counter" data-orderable="false" data-searchable="false">נוכחות</th>
+        <th data-data="last_attendence" data-orderable="false">נוכחות אחרונה</th>
+        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @groups.each do |group| %>
-    <tr>
-      <td><%= link_to group.name, group %></td>
-      <td><% counter = how_many_attending(group.kids) %>
-       <strong><%= counter %></strong> מתוך <strong><%= group.kids.count %></strong></td>
-       <td>
-         <% if group.checks.exists? %>
-           <% if group.checks.last.approved? %>
-            <span style="color:green;"> <%= group.checks.last.name %> </span> <i class="fa fa-check-circle"></i>
-          <% else %>
-            <span style="color:red;"> <%= group.checks.last.name %> </span>
-         <% end %>
-       <% end %>
-       </td>
-      <td><%= link_to 'עריכה', edit_group_path(group), class: "btn btn-warning" if current_staff.admin? %></td>
-      <td><%= link_to 'מחיקה', group, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  </table>
 </div>
-<% end %>
 
 <%= link_to 'קבוצה חדשה', new_group_path if current_staff.admin? %>
