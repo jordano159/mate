@@ -1,56 +1,16 @@
 <h1>אוטובוסים</h1>
-
-<table class="responsive nowrap table table-hover" id="dttb-buses" data-sort="true" data-source="<%= url_for(format: :json)%>">
-  <thead>
-    <tr>
-      <th data-data="name">שם</th>
-      <th data-data="bus_counter" data-searchable="false">נוכחות</th>
-      <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
-    </tr>
-  </thead>
-
-</table>
-<% if true %>
-  <div class="table-responsive">
-  <table class = "table table-hover">
+<div class="table-responsive">
+  <table class="nowrap table table-hover" id="dttb-buses" data-sort="true" data-source="<%= url_for(format: :json)%>">
     <thead class="thead-dark">
       <tr>
-        <th>שם</th>
-        <th colspan="1"> נוכחות </th>
-        <th>תחנה אחרונה</th>
-        <% if current_staff.admin? %>
-          <th>עריכה</th>
-          <th>מחיקה </th>
-        <% end %>
+        <th data-data="name">שם</th>
+        <th data-data="bus_counter" data-orderable="false" data-searchable="false">נוכחות</th>
+        <th data-data="last_stop" data-orderable="false">תחנה אחרונה</th>
+        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
       </tr>
     </thead>
 
-    <tbody>
-      <% @buses.each do |bus| %>
-      <tr>
-        <td><%= link_to bus.name, bus %></td>
-        <td><% counter = how_many_attending(bus.kids) %>
-         <strong><%= counter %></strong> מתוך <strong><%= bus.kids.count %></strong></td>
-         <td>
-           <% if !bus.kids.blank? %>
-             <% last_kid = bus.kids.first %>
-             <% bus.kids.each do |k| %>
-             <% if k.updated_at >= last_kid.updated_at && k.status == 1
-               last_kid = k
-             end %>
-             <% end %>
-             <%= "#{last_kid.city} בשעה #{last_kid.updated_at.in_time_zone("Jerusalem").strftime('%H:%M')}" %>
-           <% end %>
-         </td>
-         <% if current_staff.admin? %>
-          <td><%= link_to 'עריכה', edit_bus_path(bus), class: "btn btn-warning" %></td>
-          <td><%= link_to 'מחיקה', bus, method: :delete, class: "btn btn-danger" %></td>
-        <% end %>
-      </tr>
-      <% end %>
-    </tbody>
   </table>
-  </div>
+</div>
 
-  <%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
-<% end %>
+<%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
