@@ -5,7 +5,11 @@ class HeadsController < ApplicationController
   # GET /heads
   # GET /heads.json
   def index
-    @heads = Head.all.order('id ASC').includes(:groups, :kids)
+    if params[:axis_id].present?
+      @heads = Axis.find(params[:axis_id]).heads.order('id ASC')
+    else
+      @heads = Head.all.order('id ASC').includes(:groups, :kids)
+    end
   end
 
   # GET /heads/1

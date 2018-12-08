@@ -6,7 +6,11 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all.order('id ASC').includes(:kids)
+    if params[:head_id].present?
+      @groups = Head.find(params[:head_id]).groups.order('id ASC')
+    else
+      @groups = Group.all.order('id ASC').includes(:kids)
+    end
   end
 
   # GET /groups/1

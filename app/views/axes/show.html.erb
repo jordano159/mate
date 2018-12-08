@@ -1,35 +1,19 @@
 <h2><%= @axis.name %></h2>
 
-<p>
-  <strong>ראשים:</strong>
-  <div class="table-responsive">
-    <table class = "table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>שם</th>
-          <th colspan="1"> נוכחות </th>
-          <% if current_staff.admin? %>
-            <th>עריכה</th>
-            <th>מחיקה </th>
-          <% end %>
-        </tr>
-      </thead>
+<div class="table-responsive">
+  <table class="nowrap table table-hover" id="dttb-heads" data-sort="false"
+                            data-source="<%= url_for(controller: 'heads', format: :json, axis_id: @axis.id)%>">
+    <thead class="thead-dark">
+      <tr>
+        <th data-data="name">שם</th>
+        <th data-data="head_counter" data-orderable="false" data-searchable="false">נוכחות</th>
+        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+      </tr>
+    </thead>
 
-    <tbody>
-      <% @axis.heads.each do |head|%>
-        <tr>
-          <td><%= link_to head.name, head %></td>
-          <td><% counter = how_many_attending(head.kids) %>
-          <%= counter %> מתוך <%= head.kids.count %></td>
-          <td><%= link_to 'עריכה', edit_head_path(head), class: "btn btn-warning" if current_staff.admin? %></td>
-          <td><%= link_to 'מחיקה', head, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
-        </tr>
-      <% end %>
-    </tbody>
   </table>
-  </div>
-</p>
-<p>
+</div>
+
   <strong>רכז.ת הציר:</strong>
   <table>
     <thead>
@@ -49,7 +33,6 @@
     </tbody>
   </table>
   <%= link_to "יצירת רכז.ת ציר חדש.ה", new_axis_staff_path(@axis), class: "btn btn-primary" if current_staff.admin? %>
-</p>
 
 <%= link_to 'עריכה', edit_axis_path(@axis), class: "btn btn-primary" if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', axes_path, class: "btn btn-primary" %>

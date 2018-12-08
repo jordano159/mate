@@ -4,7 +4,7 @@ class MifalsController < ApplicationController
   # GET /mifals
   # GET /mifals.json
   def index
-    @mifals = Mifal.all
+    @mifals = Mifal.all.order('id ASC')
   end
 
   # GET /mifals/1

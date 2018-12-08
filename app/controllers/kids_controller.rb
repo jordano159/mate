@@ -7,19 +7,23 @@ class KidsController < ApplicationController
   # GET /kids
   # GET /kids.json
   def index
-    if params[:filter_column]
-      if current_staff.admin?
-        @kids = Kid.all.includes(:group).filter(params[:filter_column], params[:filter_condition]).order('created_at DESC')
-      else
-        @kids = current_staff.staffable.kids.includes(:group).filter(params[:filter_column],
-                                                                     params[:filter_condition]).order('created_at DESC')
-      end
+    if params[:group_id].present?
+      @kids = Group.find(params[:group_id]).kids
     else
-      @kids = if !current_staff.user?
-                Kid.all.includes(:group)
-              else
-                current_staff.staffable.kids.includes(:group)
-              end
+      if params[:filter_column]
+        if current_staff.admin? || current_staff.vip?
+          @kids = Kid.all.includes(:group).filter(params[:filter_column], params[:filter_condition]).order('created_at DESC')
+        else
+          @kids = current_staff.staffable.kids.includes(:group).filter(params[:filter_column],
+            params[:filter_condition]).order('created_at DESC')
+          end
+        else
+          @kids = unless current_staff.user?
+            Kid.all.includes(:group)
+          else
+            current_staff.staffable.kids.includes(:group)
+          end
+        end
     end
 
     respond_to do |format|

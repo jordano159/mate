@@ -1,36 +1,20 @@
 <h2><%= @mifal.name %></h2>
 
-<p>
-  <strong>ראשים:</strong>
-  <div class="table-responsive">
-    <table class = "table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>שם</th>
-          <th colspan="1"> נוכחות </th>
-          <% if current_staff.admin? %>
-            <th>עריכה</th>
-            <th>מחיקה </th>
-          <% end %>
-        </tr>
-      </thead>
+<div class="table-responsive">
+  <table class="nowrap table table-hover" id="dttb-axes"
+                data-sort="false" data-source="<%= url_for(controller: 'axes', format: :json, mifal_id: @mifal.id)%>">
+    <thead class="thead-dark">
+      <tr>
+        <th data-data="name">שם</th>
+        <th data-data="axis_counter" data-orderable="false" data-searchable="false">נוכחות</th>
+        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+      </tr>
+    </thead>
 
-    <tbody>
-      <% @mifal.axes.each do |axis|%>
-        <tr>
-          <td><%= link_to axis.name, axis %></td>
-          <td><% counter = how_many_attending(axis.kids) %>
-          <%= counter %> מתוך <%= axis.kids.count %></td>
-          <td><%= link_to 'עריכה', edit_axis_path(axis), class: "btn btn-warning" if current_staff.admin? %></td>
-          <td><%= link_to 'מחיקה', axis, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
-        </tr>
-      <% end %>
-    </tbody>
   </table>
-  </div>
-</p>
-<p>
-  <strong>רכז.ת המפעל:</strong>
+</div>
+
+<strong>רכז.ת המפעל:</strong>
   <table>
     <thead>
       <tr>
@@ -41,15 +25,12 @@
     <tbody>
       <% @mifal.staffs.each do |s|%>
         <tr>
-          <% if s.user? %>
-            <td class = "btn btn-primary"><%= s.name %></td>
-          <% end %>
+          <td><%= s.name if s.admin? || s.vip? %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <%= link_to "יצירת רכז.ת מפעל חדש.ה", new_mifal_staff_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
-</p>
 
 <%= link_to 'עריכה', edit_mifal_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary" %>

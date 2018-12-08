@@ -6,7 +6,11 @@ class AxesController < ApplicationController
   # GET /axes
   # GET /axes.json
   def index
-    @axes = Axis.all.includes(:heads, :kids)
+    if params[:mifal_id].present?
+      @axes = Mifal.find(params[:mifal_id]).axes.order('id ASC')
+    else
+      @axes = Axis.all.includes(:heads, :kids)
+    end
   end
 
   # GET /axes/1
