@@ -9,6 +9,8 @@ class KidsController < ApplicationController
   def index
     if params[:group_id].present?
       @kids = Group.find(params[:group_id]).kids
+    elsif params[:bus_id].present?
+      @kids = Bus.find(params[:bus_id]).kids
     else
       if params[:filter_column]
         if current_staff.admin? || current_staff.vip?

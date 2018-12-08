@@ -1,8 +1,5 @@
+<h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> <%= @bus.name %> </h1>
 
-<p>
-  <strong>שם:</strong>
-  <%= @bus.name %>
-</p>
 <% unless @bus.kids.blank? %>
   <% counter = how_many_attending(@bus.kids) %>
   יש <%= counter %> חניכימות נוכחימות מתוך <%= @bus.kids.count %>
@@ -15,43 +12,24 @@
 <% end %>
 
 <p>
-  <strong>חניכים:</strong>
-  <div class="table-responsive">
-  <table class = "table table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th>שם</th>
-        <th>קן</th>
-        <th>סטטוס עדכני</th>
-        <th>סיבה</th>
-        <% if current_staff.admin? %>
-          <th>עריכה</th>
-          <th>מחיקה </th>
-        <% end %>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @bus.kids.each do |kid|%>
+  <div class="table-responsive-lg">
+    <table class="table table-hover" id="dttb-kids" data-sort="true"
+                        data-source="<%= url_for(format: :json, controller: 'kids', bus_id: @bus.id)%>">
+      <thead class="thead-dark">
         <tr>
-          <td><%= link_to kid.name + " " + kid.last_name, kid %></td>
-          <td><%= kid.ken %></td>
-            <td><%= if kid.status == 1
-              "נוכח/ת"
-            else
-              "לא נוכח/ת"
-            end %></td>
-            <td><%= kid.cause %></td>
-            <% if current_staff.admin? %>
-              <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" %></td>
-              <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
-            <% end %>
+          <th data-data="full_name">שם</th>
+          <th data-data="ken">קן</th>
+          <th data-data="exits">כניסות ויציאות</th>
+          <th data-data="status">סטטוס</th>
+          <th data-data="cause">סיבה</th>
+          <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+    </table>
   </div>
 </p>
+
 <%= link_to "יצירת נוכחות חדשה", new_check_path(:bus => @bus.id), class: "btn btn-primary"%>
 <%= link_to "עריכת נוכחות אחרונה", edit_check_path(@bus.checks.last), class: "btn btn-primary" unless @bus.checks.blank? %>
 <%= link_to 'עריכה', edit_bus_path(@bus) %> |
