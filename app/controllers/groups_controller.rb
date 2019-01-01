@@ -8,8 +8,10 @@ class GroupsController < ApplicationController
   def index
     if params[:head_id].present?
       @groups = Head.find(params[:head_id]).groups.order('id ASC')
-    else
+    elsif current_staff.admin?
       @groups = Group.all.order('id ASC').includes(:kids)
+    else
+      @groups = current_staff.staffable.groups
     end
   end
 
