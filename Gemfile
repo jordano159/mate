@@ -51,6 +51,7 @@ gem 'jquery-datatables'
 gem 'kaminari'
 gem 'bullet', group: 'development'
 gem 'roo'
+gem 'wicked'
 # Efficiency tests
 gem 'overcommit'
 gem 'rubocop', require: false
