@@ -30,9 +30,11 @@ class ApplicationController < ActionController::Base
 
   def only_admin
     blocked = %w[kids groups heads axes]
-    if staff_signed_in? && current_staff.admin? == false
-      if blocked.include?(controller_name) && ((action_name == 'new') || (action_name == 'edit') || (action_name == 'destroy'))
-        redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: 'show', id: current_staff.staffable_id
+    if staff_signed_in?
+      unless current_staff.admin? || current_staff.vip?
+        if blocked.include?(controller_name) && ((action_name == 'new') || (action_name == 'edit') || (action_name == 'destroy'))
+          redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: 'show', id: current_staff.staffable_id
+        end
       end
     end
   end

@@ -1,7 +1,7 @@
 class MifalStepsController < ApplicationController
   include Wicked::Wizard
 
-  steps :axised, :headed, :grouped, :imported_kids, :associated_kids, :buses_created, :done
+  steps :axised, :headed, :grouped, :imported_kids, :buses_created, :done
 
   def show
     @mifal = current_staff.staffable
