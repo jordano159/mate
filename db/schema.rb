@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_153518) do
+ActiveRecord::Schema.define(version: 2019_01_14_203220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_153518) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "mifal_id"
+    t.index ["mifal_id"], name: "index_buses_on_mifal_id"
   end
 
   create_table "checks", force: :cascade do |t|
@@ -136,6 +138,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_153518) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "wizard"
+    t.integer "stage"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -165,5 +169,6 @@ ActiveRecord::Schema.define(version: 2018_12_04_153518) do
   end
 
   add_foreign_key "axes", "mifals"
+  add_foreign_key "buses", "mifals"
   add_foreign_key "events", "staffs"
 end

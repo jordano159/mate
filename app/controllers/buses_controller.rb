@@ -4,7 +4,11 @@ class BusesController < ApplicationController
   # GET /buses
   # GET /buses.json
   def index
-    @buses = Bus.all
+    if current_staff.admin?
+      @buses = Bus.all.order('id ASC')
+    else
+      @buses = current_staff.staffable.buses
+    end
   end
 
   # GET /buses/1

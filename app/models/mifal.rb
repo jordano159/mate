@@ -6,4 +6,5 @@ class Mifal < ApplicationRecord
   has_many :kids, through: :axes
   has_many :checks, through: :axes
   has_many :events, as: :eventable
+  has_many :buses
 end
