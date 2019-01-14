@@ -1,12 +1,11 @@
-<%= simple_form_for(@mifal, url: wizard_path, method: :put) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= form_with model: @mifal, url: wizard_path, local: true do |form| %>
 
-  <%= yield f %>
+
+  <%= yield form %>
 
   <div class="form-actions">
-    <%= f.button :submit, "Continue" %>
-    Or
-    <%= link_to "Next", next_wizard_path %>
+    <%= form.submit "המשך", class: "btn btn-primary" %>
+    או
+    <%= link_to "דילוג לשלב הבא", next_wizard_path, class: "btn btn-primary" %>
   </div>
 <% end %>
