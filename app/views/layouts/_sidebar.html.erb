@@ -19,6 +19,9 @@
               </li>
               <% if current_staff.admin? %>
                 <li class="nav-item active">
+                  <%= link_to "כל המשתמשים", staffs_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item active">
                   <%= link_to "מפעלים", mifals_path, class: "nav-link" %>
                 </li>
               <% end %>
@@ -31,9 +34,6 @@
                 </li>
                 <li class="nav-item active">
                   <%= link_to "קבוצות", groups_path, class: "nav-link" %>
-                </li>
-                <li class="nav-item active">
-                  <%= link_to "כל המשתמשים", staffs_path, class: "nav-link" %>
                 </li>
                 <li class="nav-item active">
                   <%= link_to "אוטובוסים", buses_path, class: "nav-link" %>
