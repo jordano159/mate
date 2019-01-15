@@ -19,6 +19,7 @@ class BusesController < ApplicationController
   # GET /buses/new
   def new
     @bus = Bus.new
+    @mifal = current_staff.staffable
   end
 
   # GET /buses/1/edit
@@ -86,6 +87,6 @@ class BusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bus_params
-      params.require(:bus).permit(:name, kid_ids: [])
+      params.require(:bus).permit(:name, :mifal_id, kid_ids: [])
     end
 end

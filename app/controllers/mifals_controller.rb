@@ -72,6 +72,6 @@ class MifalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mifal_params
-      params.require(:mifal).permit(:name, :mifal_id, axis_ids: [])
+      params.require(:mifal).permit(:name, axis_ids: [])
     end
 end

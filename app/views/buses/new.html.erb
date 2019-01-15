@@ -33,14 +33,14 @@
   <%= form.hidden_field :mifal_id, value: current_staff.staffable.id %>
   <div class="field">
     <%= form.label :city, "התחנות שהאוטובוס עוצר בהם: " %>
-    <%= form.select :city, options_for_select(Kid.pluck(:city).uniq), multiple: true, class: "select" %>
+    <%= form.select :city, options_for_select(@mifal.kids.pluck(:city).uniq), {}, {multiple: true, class: "select"} %>
   </div>
   <div class="form-actions">
     <%= form.submit "המשך", class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<% if false %>
+<!-- <% if false %>
   <%= form_tag(buses_path, :method => "post", id: "pop-form", class: "form-inline my-2 my-lg-0") do %>
   <% if @bus.errors.any? %>
     <div id="error_explanation">
@@ -60,7 +60,7 @@
     <div class="form-inline">
       <%= label_tag 'bus_name', "שם האוטובוס: " %>
       <%= text_field(:bus, :name) %>
-      <%= hidden_field_tag (:bus, :mifal_id), current_staff.staffable.id %>
+      <%# hidden_field_tag (:bus, :mifal_id), current_staff.staffable.id %>
     </div>
     <div class="form-inline">
       <%= label_tag 'city[]', "התחנות שהאוטובוס עוצר בהם: " %>
@@ -68,6 +68,6 @@
     </div>
     <%= submit_tag "הוספה", class: "btn btn-outline-success my-2 my-sm-0" %>
   <% end %>
-<% end %>
+<% end %> -->
 
 <%= link_to 'אחורה', buses_path %>

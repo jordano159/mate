@@ -1,11 +1,16 @@
 class MifalStepsController < ApplicationController
   include Wicked::Wizard
 
-  steps :axised, :headed, :grouped, :imported_kids, :buses_created, :done
+  steps :axised, :headed, :grouped, :imported_kids, :done
 
   def show
     @mifal = current_staff.staffable
-    render_wizard
+    case step
+    when :done
+      redirect_to buses_path
+    else
+      render_wizard
+    end
   end
 
   def update
