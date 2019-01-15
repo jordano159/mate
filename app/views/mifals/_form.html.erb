@@ -4,7 +4,11 @@
 
     <%= f.input :name %>
 
-    <%= f.input :stage, as: :hidden, input_html: {value: "named"} %>
+  <% if false %>
+    <div class="form-inputs">
+      <%= f.association :axes %>
+    </div>
+  <% end %>
 
   <div class="form-actions">
     <%= f.button :submit %>

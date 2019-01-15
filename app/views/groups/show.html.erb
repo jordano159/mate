@@ -7,7 +7,7 @@
 </p>
 <% counter = how_many_attending(@group.kids) %>
 יש <%= counter %> חניכימות נוכחימות מתוך <%= @group.kids.count %>
-<% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i %>
+<% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i if @group.kids.exists? %>
 <% width = "width:#{percent}%" %>
 <div class="progress">
   <div class="progress-bar" role="progressbar"  style=<%= width %>

@@ -8,8 +8,10 @@ class AxesController < ApplicationController
   def index
     if params[:mifal_id].present?
       @axes = Mifal.find(params[:mifal_id]).axes.order('id ASC')
-    else
+    elsif current_staff.admin?
       @axes = Axis.all.includes(:heads, :kids)
+    else
+      @axes = current_staff.staffable.axes
     end
   end
 

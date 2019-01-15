@@ -1,0 +1,7 @@
+<h1>יצירת הצירים</h1>
+<%= render layout: 'form' do |form| %>
+  <div class="field">
+    <%= form.label :axis_num, "כמה צירים יש במפעל?" %>
+    <%= form.text_field :axis_num, value: @mifal.axes.count %>
+  </div>
+<% end %>

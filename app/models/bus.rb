@@ -1,6 +1,7 @@
 class Bus < ApplicationRecord
   has_many :kids
   has_many :checks
+  belongs_to :mifal
 
   def last_updated_kid
      unless self.kids.blank?

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :buses
   resources :events
   resources :checks
+  resources :mifal_steps
   devise_for :staffs
   root 'application#home_page'
   resources :kids do

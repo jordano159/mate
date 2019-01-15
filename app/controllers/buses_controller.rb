@@ -4,7 +4,11 @@ class BusesController < ApplicationController
   # GET /buses
   # GET /buses.json
   def index
-    @buses = Bus.all
+    if current_staff.admin?
+      @buses = Bus.all.order('id ASC')
+    else
+      @buses = current_staff.staffable.buses
+    end
   end
 
   # GET /buses/1
@@ -15,14 +19,12 @@ class BusesController < ApplicationController
   # GET /buses/new
   def new
     @bus = Bus.new
+    @mifal = current_staff.staffable
   end
 
   # GET /buses/1/edit
   def edit
-    if params[:city]
-      populate_bus(params[:city])
-      redirect_to @bus
-    end
+    @mifal = current_staff.staffable
   end
 
   # POST /buses
@@ -32,7 +34,7 @@ class BusesController < ApplicationController
 
     respond_to do |format|
       if @bus.save
-        populate_bus(params[:city]) if params[:city]
+        populate_bus(params[:bus][:city]) if params[:bus][:city]
         format.html { redirect_to @bus, notice: 'Bus was successfully created.' }
         format.json { render :show, status: :created, location: @bus }
       else
@@ -47,6 +49,9 @@ class BusesController < ApplicationController
   def update
     respond_to do |format|
       if @bus.update(bus_params)
+        if params[:bus].present? && params[:bus][:city].present?
+          populate_bus(params[:bus][:city])
+        end
         format.html { redirect_to @bus, notice: 'Bus was successfully updated.' }
         format.json { render :show, status: :ok, location: @bus }
       else
@@ -82,6 +87,6 @@ class BusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bus_params
-      params.require(:bus).permit(:name, kid_ids: [])
+      params.require(:bus).permit(:name, :mifal_id, :city, kid_ids: [])
     end
 end

@@ -28,6 +28,9 @@ class MifalsController < ApplicationController
 
     respond_to do |format|
       if @mifal.save
+        Staff.create!(name: ('רכזת ה' + @mifal.name), email: (@mifal.name + '@gmail.com'), password: '12341234',
+          password_confirmation: '12341234', role: 'vip', username: @mifal.name, staffable_type: 'Mifal',
+          staffable_id: @mifal.id)
         format.html { redirect_to @mifal, notice: 'Mifal was successfully created.' }
         format.json { render :show, status: :created, location: @mifal }
       else

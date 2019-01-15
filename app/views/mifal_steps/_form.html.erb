@@ -1,0 +1,11 @@
+<%= form_with model: @mifal, url: wizard_path, local: true do |form| %>
+
+
+  <%= yield form %>
+
+  <div class="form-actions">
+    <%= form.submit "המשך", class: "btn btn-primary" %>
+    או
+    <%= link_to "דילוג לשלב הבא", next_wizard_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
