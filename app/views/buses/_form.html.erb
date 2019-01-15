@@ -7,9 +7,32 @@
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 </script>
 
-
-<%= form_tag(buses_path, :method => "post", id: "pop-form", class: "form-inline my-2 my-lg-0") do %>
-  <%= text_field(:bus, :name) %>
-  <%= select_tag "city", options_for_select(Kid.pluck(:city).uniq), multiple: true, class: "select" %>
-  <%= submit_tag "הוספה", class: "btn btn-outline-success my-2 my-sm-0" %>
+<%= form_with model: @bus, local: true, id: "pop-form", class: "form-inline my-2 my-lg-0" do |form| %>
+  <% if @bus.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@bus.errors.count, "error") %>
+        prohibited this bus from being saved:
+      </h2>
+      <ul>
+        <% @bus.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :name, "שם" %>
+    <%= form.text_field :name %>
+  </div>
+  <%= form.hidden_field :mifal_id, value: current_staff.staffable.id unless @bus.persisted? %>
+  <div class="field">
+    <%= form.label :city, "התחנות שהאוטובוס עוצר בהם: " %>
+    <%= form.select :city, options_for_select(@mifal.kids.pluck(:city).uniq), {}, {multiple: true, class: "select"} %>
+  </div>
+  <div class="form-actions">
+    <%= form.submit "המשך", class: "btn btn-primary" %>
+  </div>
 <% end %>
