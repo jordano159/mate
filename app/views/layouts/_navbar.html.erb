@@ -47,6 +47,11 @@
           <%= link_to "יומן אירועים", events_path, class: "nav-link" %>
         </li>
         <% end %>
+        <% if current_staff.vip? %>
+        <li class="nav-item active">
+          <%= link_to "אשף יצירת מפעל", mifal_steps_path, class: "nav-link" %>
+        </li>
+        <% end %>
           <li class="nav-item active">
             <%= link_to "עריכת משתמש", edit_staff_registration_path, class: "nav-link" %>
           </li>

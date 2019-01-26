@@ -1,4 +1,6 @@
 <h1>יצירת הראשים</h1>
+<% if false %>
+
 <%= render layout: 'form' do |form| %>
   <div class="field">
     <%= form.label :head_num, "כמה ראשים יש במפעל?" %>
@@ -8,4 +10,14 @@
     <%= form.label :head_in_axis_num, "כמה ראשים יש בכל ציר?" %>
     <%= form.text_field :head_in_axis_num %>
   </div>
+<% end %>
+<% end %>
+
+<%= render layout: 'form' do |form| %>
+  <% @mifal.axes.each_with_index do |a,i| %>
+    <div class="field">
+      <%= form.label "head_num_#{i}".to_sym, "כמה ראשים יש ב#{a.name}?" %>
+      <%= form.text_field "head_num_#{i}".to_sym %>
+    </div>
+  <% end %>
 <% end %>
