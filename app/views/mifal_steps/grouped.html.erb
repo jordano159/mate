@@ -1,11 +1,9 @@
 <h1>יצירת הקבוצות</h1>
 <%= render layout: 'form' do |form| %>
-  <div class="field">
-    <%= form.label :group_num, "כמה קבוצות יש במפעל?" %>
-    <%= form.text_field :group_num, value: @mifal.groups.count %>
-  </div>
-  <div class="field">
-    <%= form.label :group_in_head_num, "כמה קבוצות יש בכל ראש?" %>
-    <%= form.text_field :group_in_head_num %>
-  </div>
+  <% @mifal.heads.each_with_index do |h,i| %>
+    <div class="field">
+      <%= form.label "group_num_#{i}".to_sym, "כמה קבוצות יש ב#{h.name}?" %>
+      <%= form.text_field "group_num_#{i}".to_sym %>
+    </div>
+  <% end %>
 <% end %>
