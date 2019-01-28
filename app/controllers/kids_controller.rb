@@ -96,7 +96,7 @@ class KidsController < ApplicationController
   def import
     file = params[:file]
     file_type = file.present? ? file.path.split('.').last.to_s.downcase : ''
-    Kid.update_imported_kid(file) if file.present? && (file_type == 'xlsx')
+    Kid.update_imported_kid(file, current_staff.staffable_id) if file.present? && (file_type == 'xlsx')
     redirect_to kids_path
   end
 

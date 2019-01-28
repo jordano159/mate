@@ -8,7 +8,8 @@ class Kid < ApplicationRecord
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
   # ייבוא מאקסל
-  def self.update_imported_kid(file)
+  def self.update_imported_kid(file, mifal_id)
+    mifal = Mifal.find(mifal_id)
     header_names = %w[name last_name sex phone medical
                       meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim exits comments]
     spreadsheet = open_spreadsheet(file)
@@ -18,6 +19,7 @@ class Kid < ApplicationRecord
       row = Hash[[header, spreadsheet.row(i)].transpose]
       kid = find_by(phone: row['phone']) || new
       kid.attributes = row.to_hash
+      kid.group_id = Group.find_by(name: "קבוצה #{kid.group_id} #{mifal.name}").id
       kid.save!
     end
   end

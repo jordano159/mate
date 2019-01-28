@@ -3,7 +3,7 @@
   <% @mifal.heads.each_with_index do |h,i| %>
     <div class="field">
       <%= form.label "group_num_#{i}".to_sym, "כמה קבוצות יש ב#{h.name}?" %>
-      <%= form.text_field "group_num_#{i}".to_sym %>
+      <%= form.text_field "group_num_#{i}".to_sym, value: h.groups.count %>
     </div>
   <% end %>
 <% end %>
