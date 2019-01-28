@@ -39,7 +39,7 @@ html, body {
 .collection_radio_buttons {
   display: inline-block;
   padding: 1em 2em;
-  margin: 0.5em;
+  margin: 1em;
   cursor: pointer;
   color: $dark;
   border-radius: 0.25em;
@@ -78,6 +78,14 @@ input[value="1"]:checked + .collection_radio_buttons {
   }
 }
 
+input[value="כן"]:checked + .collection_radio_buttons {
+  background: $green;
+  color: $light;
+  &:hover {
+    background: darken($green, 5%);
+    color: darken($light, 5%);
+  }
+}
 
 input[value="0"]:checked + .collection_radio_buttons {
   background: $red;
@@ -86,4 +94,30 @@ input[value="0"]:checked + .collection_radio_buttons {
     background: darken($red, 5%);
     color: darken($light, 5%);
   }
+}
+
+input[value="לא"]:checked + .collection_radio_buttons {
+  background: $red;
+  color: $light;
+  &:hover {
+    background: darken($red, 5%);
+    color: darken($light, 5%);
+  }
+}
+
+input[type="submit"]{
+  border-radius: 0.25em;
+	background-color: $blue;
+	color: white;
+	height: 50px;
+	cursor: pointer;
+	margin-top: 30px;
+	font-size: 1.29em;
+	-webkit-transition: background-color 0.5s;
+	-moz-transition: background-color 0.5s;
+	-o-transition: background-color 0.5s;
+	transition: background-color 0.5s;
+}
+input[type="submit"]:hover{
+	background-color: $dark;
 }

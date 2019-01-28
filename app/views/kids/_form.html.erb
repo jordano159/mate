@@ -14,69 +14,82 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.input :name, label: "שם" %>
+  <div class="row">
+    <div class="column">
+      <%= form.input :name, label: "שם" %>
+    </div>
+    <div class="column">
+      <%= form.input :last_name, label: "שם משפחה" %>
+    </div>
+    <div class="column">
+      <%= form.input :sex, label: "מין" %>
+    </div>
   </div>
-  <div class="field">
-    <%= form.input :last_name, label: "שם משפחה" %>
+  <div class="row">
+    <div class="column">
+      <%= form.input :phone, label: "פלאפון" %>
+    </div>
+    <div class="column">
+      <%= form.input :medical, label: "רגישות ובעיות רפואיות" %>
+    </div>
+    <div class="column">
+      <%= form.input :meds, label: "תרופות" %>
+    </div>
   </div>
-  <div class="field">
-    <%= form.input :sex, label: "מין" %>
+  <div class="row">
+    <div class="column">
+      <%= form.input :food, label: "אוכל" %>
+    </div>
+    <div class="column">
+      <%= form.input :city, label: "מקום מגורים" %>
+    </div>
+    <div class="column">
+      <%= form.input :ken, label: "קן מקור" %>
+      </div>
   </div>
-  <div class="field">
-    <%= form.input :phone, label: "פלאפון" %>
+  <div class="row">
+    <div class="column">
+      <%= form.input :dad, label: "שם אבא" %>
+    </div>
+    <div class="column">
+      <%= form.input :dad_phone, label: "טלפון אבא" %>
+    </div>
+    <div class="column">
+      <%= form.input :mom, label: "שם אמא" %>
+    </div>
   </div>
-  <div class="field">
-    <%= form.input :medical, label: "רגישות ובעיות רפואיות" %>
+  <div class="row">
+    <div class="column">
+      <%= form.input :mom_phone, label: "טלפון אמא" %>
+    </div>
+    <div class="column">
+      <%= form.input :size, label: "מידת חולצה" %>
+    </div>
+    <div class="column">
+      <%= form.input :exits, label: "כניסות ויציאות" %>
+    </div>
   </div>
-  <div class="field">
-    <%= form.input :meds, label: "תרופות" %>
+  <div class="row">
+    <div class="column">
+      <%= form.input :comments, label: "הערות" %>
+    </div>
+    <div class="column">
+      <%= form.input :group_id, collection: @groups, label: "קבוצה" %>
+    </div>
   </div>
-  <div class="field">
-    <%= form.input :food, label: "אוכל" %>
+  <div class="row">
+    <div class="column">
+      <%= form.input :shabat, as: :radio_buttons, label: "שומר.ת שבת?", collection: ["כן", "לא"] %>
+    </div>
+    <div class="column">
+      <%= form.input :parents, as: :radio_buttons, label: "ההורים באים?", collection: ["כן", "לא"] %>
+    </div>
+    <div class="column">
+      <%= form.input :swim, as: :radio_buttons, label: "יודע.ת לשחות?", collection: ["כן", "לא"] %>
+    </div>
+    <div class="column">
+      <%= form.input :status, as: :radio_buttons, label: "סטטוס?", collection: [["לא נוכח/ת", "0"], ["נוכח/ת","1"]]  %>
+    </div>
   </div>
-  <div class="field">
-    <%= form.input :city, label: "מקום מגורים" %>
-  </div>
-  <div class="field">
-    <%= form.input :ken, label: "קן מקור" %>
-  </div>
-  <div class="field">
-    <%= form.input :dad, label: "שם אבא" %>
-  </div>
-  <div class="field">
-    <%= form.input :dad_phone, label: "טלפון אבא" %>
-  </div>
-  <div class="field">
-    <%= form.input :mom, label: "שם אמא" %>
-  </div>
-  <div class="field">
-    <%= form.input :mom_phone, label: "טלפון אמא" %>
-  </div>
-  <div class="field">
-    <%= form.input :size, label: "מידת חולצה" %>
-  </div>
-  <div class="field">
-    <%= form.input :shabat, as: :radio_buttons, label: "שומר.ת שבת?", collection: ["כן", "לא"] %>
-  </div>
-  <div class="field">
-    <%= form.input :parents, as: :radio_buttons, label: "ההורים באים?", collection: ["כן", "לא"] %>
-  <div class="field">
-    <%= form.input :swim, as: :radio_buttons, label: "יודע.ת לשחות?", collection: ["כן", "לא"] %>
-  </div>
-  <div class="field">
-    <%= form.input :exits, label: "כניסות ויציאות" %>
-  </div>
-  <div class="field">
-    <%= form.input :comments, label: "הערות" %>
-  </div>
-  <div class="field select">
-    <%= form.input :group_id, collection: @groups, label: "קבוצה" %>
-  </div>
-  <div class="field">
-    <%= form.input :status, as: :radio_buttons, label: "סטטוס?", collection: [["לא נוכח/ת", "0"], ["נוכח/ת","1"]]  %>
-</div>
-  <div class="actions">
     <%= form.submit "עדכון פרטים" %>
-  </div>
 <% end %>
