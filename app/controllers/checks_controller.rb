@@ -40,6 +40,7 @@ class ChecksController < ApplicationController
     else
       @check = Check.new
       @group = Group.find(current_staff.staffable_id)
+      @check.group_id = @group.id
       @kids = @group.kids
       @check.kids << @kids
       @check.save(validate: false)
