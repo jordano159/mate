@@ -50,7 +50,7 @@ class ChecksController < ApplicationController
   # GET /checks/1/edit
   def edit
     if @check.bus_id.blank?
-      @group = @check.group if @group
+      @group = @check.group
       @kids = @group.kids
     elsif @check.group_id.blank?
       @bus = Bus.find(@check.bus_id)
