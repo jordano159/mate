@@ -9,10 +9,12 @@ class ApplicationController < ActionController::Base
 
   def home_page
     if staff_signed_in?
-      if !current_staff.user? || (@level == 1)
+      if @level == 1
         redirect_to kids_path
-      else
+      elsif @level == 2 || @level == 3 || @level == 4
         redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: 'show', id: current_staff.staffable_id
+      elsif @level == 5
+        redirect_to mifals_path
       end
     else
       redirect_to controller: 'axes', action: 'index'
@@ -55,8 +57,10 @@ class ApplicationController < ActionController::Base
         when Head  then @level = 2
         when Axis  then @level = 3
         end
-      else
+      elsif current_staff.vip?
         @level = 4
+      elsif current_staff.admin?
+        @level = 5
       end
     else
       @level = 0

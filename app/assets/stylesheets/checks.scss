@@ -7,6 +7,7 @@ $light: #efefef;
 $red: #D91E18;
 $green: #2ECC71;
 $blue: #4183D7;
+$dark-blue: #00008B;
 $small: 40em;
 
 * {
@@ -119,5 +120,5 @@ input[type="submit"]{
 	transition: background-color 0.5s;
 }
 input[type="submit"]:hover{
-	background-color: $dark;
+	background-color: $dark-blue;
 }
