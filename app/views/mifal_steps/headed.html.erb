@@ -4,7 +4,7 @@
   <% @mifal.axes.each_with_index do |a,i| %>
     <div class="field">
       <%= form.label "head_num_#{i}".to_sym, "כמה ראשים יש ב#{a.name}?" %>
-      <%= form.text_field "head_num_#{i}".to_sym, value: a.heads.count %>
+      <%= form.number_field "head_num_#{i}".to_sym, value: a.heads.count %>
     </div>
   <% end %>
 <% end %>
