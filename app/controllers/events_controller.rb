@@ -11,13 +11,10 @@ class EventsController < ApplicationController
     else
       @events = current_staff.staffable.events
     end
-    # if current_staff.user?
-    #   @events = current_staff.staffable.events
-    # else
-    # end
     respond_to do |format|
       format.html
       format.xlsx
+      format.json
     end
   end
 
@@ -37,11 +34,6 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params.merge(staff_id: current_staff.id))
-    if current_staff.staffable_type == "mifal"
-      @event.mifal_id = current_staff.staffable_id
-    else
-      @event.mifal_id = current_staff.staffable.mifal.id
-    end
 
     respond_to do |format|
       if @event.save

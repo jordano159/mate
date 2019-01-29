@@ -4,37 +4,16 @@
 <%= link_to 'אירוע חדש', new_event_path, class: "btn btn-primary" %>
 
 <div class="table-responsive">
-  <table class = "table table-hover">
+  <table class="nowrap table table-hover" id="dttb-events" data-source="<%= url_for(format: :json)%>">
     <thead class="thead-dark">
       <tr>
-        <th>פירוט</th>
-        <th>תאריך</th>
-        <th>נוצר על ידי</th>
-        <th>שייך ל</th>
-        <th>הצגה</th>
-        <th>עריכה</th>
-        <% if current_staff.admin? %>
-          <th>מחיקה </th>
-        <% end %>
+        <th data-data="content">פירוט</th>
+        <th data-data="date">תאריך</th>
+        <th data-data="made">נוצר על ידי</th>
+        <th data-data="belongs">שייך ל</th>
+        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
       </tr>
     </thead>
 
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.content %></td>
-        <td><%= event.created_at.in_time_zone("Jerusalem").strftime("%H:%M | %e.%m") %> </td>
-        <td><%= event.staff.name %></td>
-        <td><%= link_to event.eventable.name, event.eventable if event.eventable %></td>
-        <td><%= link_to 'הצגה', event, class: "btn btn-primary" %></td>
-        <td><%= link_to 'עריכה', edit_event_path(event), class: "btn btn-warning" %></td>
-        <% if current_staff.admin? %>
-          <td><%= link_to 'מחיקה', event, method: :delete, class: "btn btn-danger"  %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  </table>
 </div>
-
-<br>
