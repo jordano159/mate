@@ -1,4 +1,8 @@
-<h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> חניכי <%= current_staff.staffable.name %> </h1>
+<% unless current_staff.admin? %>
+  <h1 style="font-weight:bold;">חניכי <%= current_staff.staffable.name %> </h1>
+<% else %>
+  <h1 style="font-weight:bold;">חניכים </h1>
+<% end %>
 
 <% if !current_staff.user? %>
   <% columns = %w[swim shabat parents] %>

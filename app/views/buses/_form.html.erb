@@ -27,7 +27,6 @@
     <%= form.label :name, "שם" %>
     <%= form.text_field :name %>
   </div>
-  <%= form.hidden_field :mifal_id, value: current_staff.staffable.id unless @bus.persisted? %>
   <div class="field">
     <%= form.label :city, "התחנות שהאוטובוס עוצר בהם: " %>
     <%= form.select :city, options_for_select(@mifal.kids.pluck(:city).uniq), {}, {multiple: true, class: "select"} %>

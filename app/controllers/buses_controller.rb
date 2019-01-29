@@ -31,6 +31,7 @@ class BusesController < ApplicationController
   # POST /buses.json
   def create
     @bus = Bus.new(bus_params)
+    @bus.mifal_id = current_staff.staffable.id
 
     respond_to do |format|
       if @bus.save

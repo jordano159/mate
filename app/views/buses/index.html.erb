@@ -13,4 +13,4 @@
   </table>
 </div>
 
-<%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
+<%= link_to 'יצירת אוטובוס חדש', new_bus_path unless current_staff.admin? %>
