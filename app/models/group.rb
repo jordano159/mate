@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Group < ApplicationRecord
-  has_many :kids
+  has_many :kids, dependent: :destroy
   belongs_to :head
-  has_many :staffs, as: :staffable
-  has_many :checks
-  has_many :events, as: :eventable
+  has_many :staffs, as: :staffable, dependent: :destroy
+  has_many :checks, dependent: :destroy
+  has_many :events, as: :eventable, dependent: :destroy
   delegate :mifal, to: :head
 end
