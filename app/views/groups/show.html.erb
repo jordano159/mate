@@ -1,10 +1,8 @@
-<h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> <%= @group.name %> </h1>
+<h1 style="font-weight:bold;"></i> <%= @group.name %> </h1>
 
-<p class="btn btn-primary">
-  <strong>ראש
-    <%= link_to @group.head.name, @group.head, :style=>'color:#FFFFFF;' %>
+  <strong>
+    <%= link_to @group.head.name, @group.head %>
   </strong>
-</p>
 <% counter = how_many_attending(@group.kids) %>
 יש <%= counter %> חניכימות נוכחימות מתוך <%= @group.kids.count %>
 <% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i if @group.kids.exists? %>

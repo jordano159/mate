@@ -6,10 +6,14 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    if current_staff.admin?
+      @events = Event.all.order('created_at DESC').includes(:staff, :eventable)
+    else
+      @events = current_staff.staffable.events
+    end
     # if current_staff.user?
     #   @events = current_staff.staffable.events
     # else
-    @events = Event.all.order('created_at DESC').includes(:staff, :eventable)
     # end
     respond_to do |format|
       format.html
@@ -33,6 +37,11 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params.merge(staff_id: current_staff.id))
+    if current_staff.staffable_type == "mifal"
+      @event.mifal_id = current_staff.staffable_id
+    else
+      @event.mifal_id = current_staff.staffable.mifal.id
+    end
 
     respond_to do |format|
       if @event.save

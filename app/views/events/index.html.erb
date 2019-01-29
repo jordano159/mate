@@ -28,7 +28,9 @@
         <td><%= link_to event.eventable.name, event.eventable if event.eventable %></td>
         <td><%= link_to 'הצגה', event, class: "btn btn-primary" %></td>
         <td><%= link_to 'עריכה', edit_event_path(event), class: "btn btn-warning" %></td>
-        <td><%= link_to 'מחיקה', event, method: :delete, class: "btn btn-danger" if current_staff.admin? %></td>
+        <% if current_staff.admin? %>
+          <td><%= link_to 'מחיקה', event, method: :delete, class: "btn btn-danger"  %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

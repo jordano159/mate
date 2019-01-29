@@ -7,5 +7,6 @@ class Axis < ApplicationRecord
   has_many :kids, through: :heads
   has_many :checks, through: :heads
   has_many :events, as: :eventable
+  has_many :events, through: :heads, source: :events
   belongs_to :mifal
 end

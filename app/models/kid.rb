@@ -5,6 +5,7 @@ class Kid < ApplicationRecord
   belongs_to :bus, optional: true
   has_many :attendances, dependent: :destroy
   has_many :checks, through: :attendances
+  delegate :mifal, to: :group
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
   # ייבוא מאקסל
