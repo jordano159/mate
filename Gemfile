@@ -52,6 +52,7 @@ gem 'kaminari'
 gem 'bullet', group: 'development'
 gem 'roo'
 gem 'wicked'
+gem 'geocoder'
 
 # Efficiency tests
 gem 'overcommit'

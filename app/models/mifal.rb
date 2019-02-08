@@ -9,4 +9,96 @@ class Mifal < ApplicationRecord
   has_many :staffs, as: :staffable, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
   has_many :events, through: :axes, source: :events
+
+  # מחזיר ערים עם קואורדינטות
+  def city_list
+    names = self.kids.pluck(:city).uniq.first(10)
+    cities = Hash.new
+    names.each do |name|
+      result = Geocoder.search("#{name}")
+      cities["#{name}"] = result.first.data["lat"], result.first.data["lon"]
+    end
+    cities
+  end
+
+  # מחזיר חניכים לפי ערים
+  def kid_list
+    names = self.kids.pluck(:city).uniq.first(10)
+    cities = Hash.new
+    names.each do |name|
+      result = self.kids.where(city: "#{name}")
+      cities["#{name}"] = result
+    end
+    cities
+  end
+
+  # סופר כמה חניכים יש מכל עיר
+  def kid_count
+    names = self.kids.pluck(:city).uniq.first(10)
+    cities = Hash.new
+    names.each do |name|
+      result = self.kids.where(city: "#{name}").count
+      cities["#{name}"] = result
+    end
+    cities
+  end
+
+  def how_many_kids(city)
+    self.kids.where(city: "#{city}").count
+  end
+
+  # מחזיר את שם העיר הכי רחוקה
+  def farthest(cities, my_location)
+    names = self.kids.pluck(:city).uniq.first(10)
+    max_dis = 0
+    max_name = ""
+    names.each do |name|
+      distance = Geocoder::Calculations.distance_between(cities[name], my_location)
+      if distance > max_dis
+        max_name = name
+        max_dis = distance
+      end
+    end
+    max_name
+  end
+
+  # סתם כדי לחסוך זמן, לא קריטי
+  def my_location
+    location = Geocoder.search("גבעת חביבה").first
+    location = location.data["lat"], location.data["lon"]
+  end
+
+  # מחזיר את שם העיר הקרובה ביותר
+  def nearest(cities, my_location)
+    names = self.kids.pluck(:city).uniq.first(10)
+    min_dis = 10000
+    min_name = ""
+    names.each do |name|
+      distance = Geocoder::Calculations.distance_between(cities[name], my_location)
+      if distance < min_dis
+        min_name = name
+        min_dis = distance
+      end
+    end
+    min_name
+  end
+
+  # בונה צירים של אוטובוסים
+  def make_a_bus(cities, my_location)
+    kids_in_bus = 0
+    bus_stops = []
+    loop do
+      far = farthest(cities, my_location)
+      puts "far: #{far}"
+      break if (kids_in_bus + how_many_kids(far)) > 50 || cities.empty?
+      kids_in_bus += how_many_kids(far)
+      puts "kids: #{kids_in_bus}"
+      sleep 1
+      bus_stops << far
+      cities.delete("#{far}")
+    end
+    puts "kids_in_bus: #{kids_in_bus}"
+    bus_stops
+  end
+
 end

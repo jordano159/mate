@@ -14,4 +14,5 @@ class Bus < ApplicationRecord
       last_kid
      end
   end
+
 end
