@@ -12,7 +12,7 @@ class Mifal < ApplicationRecord
 
   # מחזיר ערים עם קואורדינטות
   def city_list
-    names = self.kids.pluck(:city).uniq.first(10)
+    names = self.kids.pluck(:city).uniq
     cities = Hash.new
     names.each do |name|
       result = Geocoder.search("#{name}")
@@ -23,7 +23,7 @@ class Mifal < ApplicationRecord
 
   # מחזיר חניכים לפי ערים
   def kid_list
-    names = self.kids.pluck(:city).uniq.first(10)
+    names = self.kids.pluck(:city).uniq
     cities = Hash.new
     names.each do |name|
       result = self.kids.where(city: "#{name}")
@@ -34,7 +34,7 @@ class Mifal < ApplicationRecord
 
   # סופר כמה חניכים יש מכל עיר
   def kid_count
-    names = self.kids.pluck(:city).uniq.first(10)
+    names = self.kids.pluck(:city).uniq
     cities = Hash.new
     names.each do |name|
       result = self.kids.where(city: "#{name}").count
@@ -49,7 +49,7 @@ class Mifal < ApplicationRecord
 
   # מחזיר את שם העיר הכי רחוקה
   def farthest(cities, my_location)
-    names = self.kids.pluck(:city).uniq.first(10)
+    names = self.kids.pluck(:city).uniq
     max_dis = 0
     max_name = ""
     names.each do |name|
@@ -70,7 +70,7 @@ class Mifal < ApplicationRecord
 
   # מחזיר את שם העיר הקרובה ביותר
   def nearest(cities, my_location)
-    names = self.kids.pluck(:city).uniq.first(10)
+    names = self.kids.pluck(:city).uniq
     min_dis = 10000
     min_name = ""
     names.each do |name|
@@ -90,15 +90,31 @@ class Mifal < ApplicationRecord
     loop do
       far = farthest(cities, my_location)
       puts "far: #{far}"
-      break if (kids_in_bus + how_many_kids(far)) > 50 || cities.empty?
+      if (kids_in_bus + how_many_kids(far)) > 50 || cities.empty?
+        unless kids_in_bus == 0 && how_many_kids(far) > 50 # במקרה ויש קן עם יותר חניכים מאשר אוטובוס, תיצור לו פשוט אוטובוס משל עצמו
+          break
+        end
+      end
       kids_in_bus += how_many_kids(far)
       puts "kids: #{kids_in_bus}"
-      sleep 1
       bus_stops << far
       cities.delete("#{far}")
     end
     puts "kids_in_bus: #{kids_in_bus}"
     bus_stops
+  end
+
+  def make_some_noise
+    cities = self.city_list
+    location = Geocoder.search("גבעת חביבה").first
+    location = location.data["lat"], location.data["lon"]
+    buses = Hash.new
+    i = 0
+    while !cities.empty?
+      buses["bus#{i}"] = self.make_a_bus(cities, location)
+      i += 1
+    end
+    buses
   end
 
 end

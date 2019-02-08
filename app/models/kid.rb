@@ -11,8 +11,10 @@ class Kid < ApplicationRecord
   # ייבוא מאקסל
   def self.update_imported_kid(file, mifal_id)
     mifal = Mifal.find(mifal_id)
-    header_names = %w[name last_name sex phone medical
-                      meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim exits comments]
+    # header_names = %w[name last_name sex phone medical
+    #                   meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim exits comments]
+    header_names = %w[ken name last_name sex phone medical comments city dad dad_phone
+                      mom mom_phone group_id size shabat parents swim exits]
     spreadsheet = open_spreadsheet(file)
     header = header_names
     header = header.to_a
