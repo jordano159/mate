@@ -13,4 +13,13 @@
   </table>
 </div>
 
-<%= link_to 'יצירת אוטובוס חדש', new_bus_path unless current_staff.admin? %>
+<% if current_staff.vip? %>
+  <%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
+
+  <h2>הצעה לצירי אוטובוס</h2>
+  <ul>
+    <% Mifal.find(current_staff.staffable.id).make_bus_proposal.each do |key, value| %>
+    <li> <%= "#{key}: #{value.join(', ')}" %> </li>
+    <% end %>
+  </ul>
+<% end %>

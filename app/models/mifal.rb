@@ -87,31 +87,30 @@ class Mifal < ApplicationRecord
   def make_a_bus(cities, my_location)
     kids_in_bus = 0
     bus_stops = []
+    far = farthest(cities, my_location)
+    kids_in_bus += how_many_kids(far)
+    bus_stops << far
+    temp = cities["#{far}"]
+    cities.delete("#{far}")
     loop do
-      far = farthest(cities, my_location)
-      puts "far: #{far}"
-      if (kids_in_bus + how_many_kids(far)) > 50 || cities.empty?
-        unless kids_in_bus == 0 && how_many_kids(far) > 50 # במקרה ויש קן עם יותר חניכים מאשר אוטובוס, תיצור לו פשוט אוטובוס משל עצמו
-          break
-        end
-      end
-      kids_in_bus += how_many_kids(far)
-      puts "kids: #{kids_in_bus}"
-      bus_stops << far
-      cities.delete("#{far}")
+      near = nearest(cities, temp)
+      break if (kids_in_bus + how_many_kids(near)) > 50 || cities.empty?
+      kids_in_bus += how_many_kids(near)
+      bus_stops << near
+      temp = cities["#{near}"]
+      cities.delete("#{near}")
     end
-    puts "kids_in_bus: #{kids_in_bus}"
     bus_stops
   end
 
-  def make_some_noise
+  def make_bus_proposal
     cities = self.city_list
     location = Geocoder.search("גבעת חביבה").first
     location = location.data["lat"], location.data["lon"]
     buses = Hash.new
-    i = 0
+    i = 1
     while !cities.empty?
-      buses["bus#{i}"] = self.make_a_bus(cities, location)
+      buses["אוטובוס #{i}"] = self.make_a_bus(cities, location)
       i += 1
     end
     buses

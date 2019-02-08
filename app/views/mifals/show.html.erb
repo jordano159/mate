@@ -32,8 +32,5 @@
   </table>
   <%= link_to "יצירת רכז.ת מפעל חדש.ה", new_mifal_staff_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
 
-  <h2>הצעה לצירי אוטובוס</h2>
-  <%= @mifal.make_some_noise %>
-
 <%= link_to 'עריכה', edit_mifal_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary" %>
