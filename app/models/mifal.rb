@@ -16,6 +16,7 @@ class Mifal < ApplicationRecord
     cities = Hash.new
     names.each do |name|
       result = Geocoder.search("#{name}")
+      next unless result.present?
       cities["#{name}"] = result.first.data["lat"], result.first.data["lon"]
     end
     cities
@@ -62,12 +63,6 @@ class Mifal < ApplicationRecord
     max_name
   end
 
-  # סתם כדי לחסוך זמן, לא קריטי
-  def my_location
-    location = Geocoder.search("גבעת חביבה").first
-    location = location.data["lat"], location.data["lon"]
-  end
-
   # מחזיר את שם העיר הקרובה ביותר
   def nearest(cities, my_location)
     names = self.kids.pluck(:city).uniq
@@ -100,7 +95,7 @@ class Mifal < ApplicationRecord
       temp = cities["#{near}"]
       cities.delete("#{near}")
     end
-    bus_stops
+    return bus_stops, kids_in_bus
   end
 
   def make_bus_proposal
