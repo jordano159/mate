@@ -7,7 +7,10 @@ class BusesController < ApplicationController
     if current_staff.admin?
       @buses = Bus.all.order('id ASC')
     else
-      @buses = current_staff.staffable.buses
+      if current_staff.staffable_type == "Mifal"
+        @buses = current_staff.staffable.buses
+      else
+        @buses = current_staff.staffable.mifal.buses
     end
   end
 
