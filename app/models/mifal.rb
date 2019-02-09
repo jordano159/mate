@@ -22,27 +22,6 @@ class Mifal < ApplicationRecord
     cities
   end
 
-  # מחזיר חניכים לפי ערים
-  def kid_list
-    names = self.kids.pluck(:city).uniq
-    cities = Hash.new
-    names.each do |name|
-      result = self.kids.where(city: "#{name}")
-      cities["#{name}"] = result
-    end
-    cities
-  end
-
-  # סופר כמה חניכים יש מכל עיר
-  def kid_count
-    names = self.kids.pluck(:city).uniq
-    cities = Hash.new
-    names.each do |name|
-      result = self.kids.where(city: "#{name}").count
-      cities["#{name}"] = result
-    end
-    cities
-  end
 
   def how_many_kids(city)
     self.kids.where(city: "#{city}").count
@@ -111,4 +90,25 @@ class Mifal < ApplicationRecord
     buses
   end
 
+  # מחזיר חניכים לפי ערים, לא בשימוש כרגע
+  def kid_list
+    names = self.kids.pluck(:city).uniq
+    cities = Hash.new
+    names.each do |name|
+      result = self.kids.where(city: "#{name}")
+      cities["#{name}"] = result
+    end
+    cities
+  end
+
+  # סופר כמה חניכים יש מכל עיר, לא בשימוש כרגע
+  def kid_count
+    names = self.kids.pluck(:city).uniq
+    cities = Hash.new
+    names.each do |name|
+      result = self.kids.where(city: "#{name}").count
+      cities["#{name}"] = result
+    end
+    cities
+  end
 end
