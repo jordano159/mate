@@ -11,6 +11,7 @@ class BusesController < ApplicationController
         @buses = current_staff.staffable.buses
       else
         @buses = current_staff.staffable.mifal.buses
+      end
     end
   end
 
