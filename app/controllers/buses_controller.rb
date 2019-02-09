@@ -8,9 +8,9 @@ class BusesController < ApplicationController
       @buses = Bus.all.order('id ASC')
     else
       if current_staff.staffable_type == "Mifal"
-        @buses = current_staff.staffable.buses
+        @buses = current_staff.staffable.buses.order('id ASC')
       else
-        @buses = current_staff.staffable.mifal.buses
+        @buses = current_staff.staffable.mifal.buses.order('id ASC')
       end
     end
   end

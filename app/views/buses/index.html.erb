@@ -18,7 +18,11 @@
 
   <h2>הצעה לצירי אוטובוס</h2>
   <ul>
-    <% Mifal.find(current_staff.staffable.id).make_bus_proposal.each do |key, value| %>
+    <% if current_staff.staffable_type == "Mifal" %>
+      <% Mifal.find(current_staff.staffable.id).make_bus_proposal.each do |key, value| %>
+    <% else %>
+      <% Mifal.find(current_staff.staffable.mifal.id).make_bus_proposal.each do |key, value| %>
+    <% end %>
     <li> <%= "#{key}: #{value.join(', ')}" %> </li>
     <% end %>
   </ul>
