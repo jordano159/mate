@@ -60,17 +60,20 @@ class Mifal < ApplicationRecord
   # בונה צירים של אוטובוסים
   def make_a_bus(cities, my_location)
     kids_in_bus = 0
-    bus_stops = []
+    # bus_stops = []
+    bus_stops = Hash.new
     far = farthest(cities, my_location)
-    kids_in_bus += how_many_kids(far)
-    bus_stops << far
+    kids_in_stop = how_many_kids(far)
+    kids_in_bus += kids_in_stop
+    bus_stops["#{far}"] = kids_in_stop
     temp = cities["#{far}"]
     cities.delete("#{far}")
     loop do
       near = nearest(cities, temp)
       break if (kids_in_bus + how_many_kids(near)) > 50 || cities.empty?
-      kids_in_bus += how_many_kids(near)
-      bus_stops << near
+      kids_in_stop = how_many_kids(near)
+      kids_in_bus += kids_in_stop
+      bus_stops["#{near}"] = kids_in_stop
       temp = cities["#{near}"]
       cities.delete("#{near}")
     end

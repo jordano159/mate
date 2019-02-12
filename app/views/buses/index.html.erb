@@ -23,8 +23,11 @@
     <% else %>
       <% mifal = Mifal.find(current_staff.staffable.mifal.id) %>
     <% end %>
-    <% mifal.make_bus_proposal.each do |key, value| %>
-    <li> <%= "#{key}: #{value.join(', ')}" %> </li>
+    <% mifal.make_bus_proposal.each do |a| %>
+      <% bus = "" %>
+      <% a[1][0].each { |x| bus += "#{x[0]}(#{x[1]}), "} %>
+      <% bus += "#{a[1][1]} סה''כ" %>
+      <li> <%= bus %> </li>
     <% end %>
   </ul>
 <% end %>
