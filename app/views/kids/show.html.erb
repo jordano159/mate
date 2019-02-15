@@ -3,6 +3,8 @@
 
 <div class="kid-info">
   <ul style="float:right;">
+    <li>תעודת זהות</li>
+    <li>שכבה</li>
     <li>מין: </li>
     <li>טלפון: </li>
     <li>רגישות ובעיות רפואיות:</li>
@@ -27,6 +29,8 @@
   </ul>
 
   <ul style="float:right;font-weight:bold;">
+    <li><%= @kid.taz %></li>
+    <li><%= @kid.grade %></li>
     <li><%= @kid.sex %></li>
     <li><%= @kid.phone %></li>
     <li><%= @kid.medical %></li>
@@ -73,6 +77,6 @@
   </p>
 <% end %>
 
-<%= link_to 'עריכה', edit_kid_path(@kid), class: "btn btn-warning" if current_staff.admin? %>
-<%= link_to 'מחיקה', @kid, method: :delete, class: "btn btn-danger" if current_staff.admin? %>
+<%= link_to 'עריכה', edit_kid_path(@kid), class: "btn btn-warning" if current_staff.admin? || current_staff.vip? %>
+<%= link_to 'מחיקה', @kid, method: :delete, class: "btn btn-danger" if current_staff.admin? || current_staff.vip? %>
 <%= link_to 'חזרה לרשימה', kids_path, class: "btn btn-primary" %>

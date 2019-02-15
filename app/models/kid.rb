@@ -18,9 +18,10 @@ class Kid < ApplicationRecord
     header = header.to_a
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      kid = find_by(phone: row['phone']) || new
+      kid = find_by(taz: row['taz']) || new
       kid.attributes = row.to_hash
       kid.group_id = Group.find_by(name: "קבוצה #{kid.group_id} #{mifal.name}").id
+      kid.city = kid.city.strip if kid.city.present?
       kid.save!
     end
   end
