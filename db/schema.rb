@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_120735) do
+ActiveRecord::Schema.define(version: 2019_02_15_164611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,10 +99,10 @@ ActiveRecord::Schema.define(version: 2019_02_15_120735) do
     t.string "food"
     t.string "city"
     t.string "ken"
-    t.string "dad"
-    t.string "dad_phone"
-    t.string "mom"
-    t.string "mom_phone"
+    t.string "parent_1"
+    t.string "parent_1_phone"
+    t.string "parent_2"
+    t.string "parent_2_phone"
     t.string "size"
     t.string "shabat"
     t.string "parents"
@@ -112,26 +112,30 @@ ActiveRecord::Schema.define(version: 2019_02_15_120735) do
     t.integer "status", default: 0
     t.text "cause"
     t.integer "bus_id"
+    t.string "grade"
+    t.integer "taz"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
-    t.index ["dad"], name: "index_kids_on_dad"
-    t.index ["dad_phone"], name: "index_kids_on_dad_phone"
     t.index ["exits"], name: "index_kids_on_exits"
     t.index ["food"], name: "index_kids_on_food"
+    t.index ["grade"], name: "index_kids_on_grade"
     t.index ["group_id"], name: "index_kids_on_group_id"
     t.index ["ken"], name: "index_kids_on_ken"
     t.index ["last_name"], name: "index_kids_on_last_name"
     t.index ["medical"], name: "index_kids_on_medical"
     t.index ["meds"], name: "index_kids_on_meds"
-    t.index ["mom"], name: "index_kids_on_mom"
-    t.index ["mom_phone"], name: "index_kids_on_mom_phone"
     t.index ["name"], name: "index_kids_on_name"
+    t.index ["parent_1"], name: "index_kids_on_parent_1"
+    t.index ["parent_1_phone"], name: "index_kids_on_parent_1_phone"
+    t.index ["parent_2"], name: "index_kids_on_parent_2"
+    t.index ["parent_2_phone"], name: "index_kids_on_parent_2_phone"
     t.index ["parents"], name: "index_kids_on_parents"
     t.index ["phone"], name: "index_kids_on_phone"
     t.index ["sex"], name: "index_kids_on_sex"
     t.index ["shabat"], name: "index_kids_on_shabat"
     t.index ["size"], name: "index_kids_on_size"
     t.index ["swim"], name: "index_kids_on_swim"
+    t.index ["taz"], name: "index_kids_on_taz"
   end
 
   create_table "mifals", force: :cascade do |t|

@@ -11,10 +11,8 @@ class Kid < ApplicationRecord
   # ייבוא מאקסל
   def self.update_imported_kid(file, mifal_id)
     mifal = Mifal.find(mifal_id)
-    # header_names = %w[name last_name sex phone medical
-    #                   meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim exits comments]
-    header_names = %w[ken name last_name sex phone medical comments city dad dad_phone
-                      mom mom_phone group_id size shabat parents swim exits]
+    header_names = %w[ken grade name last_name sex taz phone medical comments city parent_1 parent_1_phone
+                      parent_2 parent_2_phone group_id size shabat parents swim exits]
     spreadsheet = open_spreadsheet(file)
     header = header_names
     header = header.to_a
@@ -55,9 +53,9 @@ class Kid < ApplicationRecord
   # ייצוא וייבוא בCSV
   # def self.to_csv
   #   attributes = %w{name last_name sex phone medical
-  #     meds food city ken dad dad_phone mom mom_phone size group_id shabat parents swim exits comments}
+  #     meds food city ken parent_1 parent_1_phone parent_2 parent_2_phone size group_id shabat parents swim exits comments}
   #   heb_names = ["שם פרטי חניך", "שם משפחה חניך", "מגדר", "נייד", "רגישות ובעיות רפואיות", "תרופות",
-  #     "אוכל", "יישוב", "קן", "שם פרטי אב", "נייד של אבא", "שם פרטי אם", "נייד של אמא",
+  #     "אוכל", "יישוב", "קן", "שם פרטי הורה 1", "נייד של הורה 1", "שם פרטי הורה 2", "נייד של הורה 2",
   #   "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת",
   #    "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות"]
   #
@@ -72,15 +70,15 @@ class Kid < ApplicationRecord
   #
   # def self.my_import(file)
   #   columns = ["שם פרטי חניך", "שם משפחה חניך", "מגדר", "נייד", "רגישות ובעיות רפואיות", "תרופות",
-  #     "אוכל", "יישוב", "קן", "שם פרטי אב", "נייד של אבא", "שם פרטי אם", "נייד של אמא",
+  #     "אוכל", "יישוב", "קן", "שם פרטי הורה 1", "נייד של הורה 1", "שם פרטי הורה 2", "נייד של הורה 2",
   #   "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת",
   #    "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות"]
   #   kids = []
   #   CSV.foreach(file.path, headers: true) do |row|
   #     kids << Kid.new(name: row["שם פרטי חניך"], last_name: row["שם משפחה חניך"], sex: row["מגדר"],
   #       phone: row["נייד"], medical: row["רגישות ובעיות רפואיות"], meds: row["תרופות"],
-  #       food: row["אוכל"], city: row["יישוב"], ken: row["קן"], dad: row["שם פרטי אב"],
-  #       dad_phone: row["נייד של אבא"], mom: row["שם פרטי אם"], mom_phone: row["נייד של אמא"], size: row["מידת חולצה"],
+  #       food: row["אוכל"], city: row["יישוב"], ken: row["קן"], parent_1: row["שם פרטי הורה 1"],
+  #       parent_1_phone: row["נייד של הורה 1"], parent_2: row["שם פרטי הורה 2"], parent_2_phone: row["נייד של הורה 2"], size: row["מידת חולצה"],
   #       group_id: (row ["מספר קבוצה"].to_i + Group.first.id - 1), shabat: row["האם החניך/ה שומר/ת שבת?"],
   #       parents: row["האם תגיעו לטקס הסיום וליום ההורים?"], swim: row["אישור שחייה"], exits: row["כניסות ויציאות"], comments: row["הערות"])
   #   end

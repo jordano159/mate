@@ -49,18 +49,18 @@
   </div>
   <div class="row">
     <div class="column">
-      <%= form.input :dad, label: "שם אבא" %>
+      <%= form.input :parent_1, label: "שם הורה 1" %>
     </div>
     <div class="column">
-      <%= form.input :dad_phone, label: "טלפון אבא" %>
+      <%= form.input :parent_1_phone, label: "טלפון הורה 1" %>
     </div>
     <div class="column">
-      <%= form.input :mom, label: "שם אמא" %>
+      <%= form.input :parent_2, label: "שם הורה 2" %>
     </div>
   </div>
   <div class="row">
     <div class="column">
-      <%= form.input :mom_phone, label: "טלפון אמא" %>
+      <%= form.input :parent_2_phone, label: "טלפון הורה 2" %>
     </div>
     <div class="column">
       <%= form.input :size, label: "מידת חולצה" %>
@@ -75,6 +75,12 @@
     </div>
     <div class="column">
       <%= form.input :group_id, collection: @groups, label: "קבוצה" %>
+    </div>
+    <div class="column">
+      <%= form.input :grade, label: "שכבה" %>
+    </div>
+    <div class="column">
+      <%= form.input :taz, label: "תעודת זהות" %>
     </div>
   </div>
   <div class="row">
