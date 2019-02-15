@@ -53,6 +53,8 @@ gem 'bullet', group: 'development'
 gem 'roo'
 gem 'wicked'
 gem 'geocoder'
+gem 'sidekiq'
+
 
 # Efficiency tests
 gem 'overcommit'

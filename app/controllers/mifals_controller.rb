@@ -10,6 +10,8 @@ class MifalsController < ApplicationController
   # GET /mifals/1
   # GET /mifals/1.json
   def show
+    @mifal = Mifal.find(params[:id])
+    BusWorker.perform_async(@mifal.id)
   end
 
   # GET /mifals/new
