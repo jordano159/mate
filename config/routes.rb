@@ -43,4 +43,5 @@ Rails.application.routes.draw do
   end
   get '/staffs/:id', to: 'staffs#show', as: 'staff'
   get 'staffs', to: 'application#admin_index'
+  get '/prop', to: 'mifals#prop', as: 'prop'
 end

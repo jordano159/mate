@@ -30,7 +30,6 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "יצירת רכז.ת מפעל חדש.ה", new_mifal_staff_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
-
+<%= link_to "יצירת רכז.ת מפעל חדש.ה", new_mifal_staff_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
 <%= link_to 'עריכה', edit_mifal_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary" %>

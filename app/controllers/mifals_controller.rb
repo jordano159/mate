@@ -10,8 +10,6 @@ class MifalsController < ApplicationController
   # GET /mifals/1
   # GET /mifals/1.json
   def show
-    @mifal = Mifal.find(params[:id])
-    BusWorker.perform_async(@mifal.id)
   end
 
   # GET /mifals/new
@@ -64,6 +62,12 @@ class MifalsController < ApplicationController
       format.html { redirect_to mifals_url, notice: 'Mifal was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def prop
+    @mifal = Mifal.find(params[:id])
+    BusWorker.perform_async(@mifal.id)
+    redirect_to mifals_url
   end
 
   private

@@ -14,15 +14,15 @@
 </div>
 
 <% if current_staff.vip? %>
+  <% if current_staff.staffable_type == "Mifal" %>
+  <% mifal = Mifal.find(current_staff.staffable.id) %>
+  <% else %>
+  <% mifal = Mifal.find(current_staff.staffable.mifal.id) %>
+  <% end %>
   <%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
 
   <h2>הצעה לצירי אוטובוס</h2>
   <ul>
-    <% if current_staff.staffable_type == "Mifal" %>
-      <% mifal = Mifal.find(current_staff.staffable.id) %>
-    <% else %>
-      <% mifal = Mifal.find(current_staff.staffable.mifal.id) %>
-    <% end %>
     <% mifal.bus_proposal.each do |a| %>
       <% bus = "" %>
       <% a[1][0].each { |x| bus += "#{x[0]}(#{x[1]}), "} %>
@@ -31,3 +31,4 @@
     <% end %>
   </ul>
 <% end %>
+<%= button_to 'הצעה חדשה לאוטובוסים', prop_path, method: :get, params: { id: mifal.id} %>
