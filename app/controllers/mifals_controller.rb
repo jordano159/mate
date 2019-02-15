@@ -67,7 +67,7 @@ class MifalsController < ApplicationController
   def prop
     @mifal = Mifal.find(params[:id])
     BusWorker.perform_async(@mifal.id)
-    redirect_to mifals_url
+    redirect_to buses_url
   end
 
   private
