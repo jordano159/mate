@@ -29,6 +29,7 @@ class GroupsController < ApplicationController
   def edit
     @group = Group.find(params[:id])
     @heads = Head.all
+    @mifal = @group.mifal
   end
 
   # POST /groups

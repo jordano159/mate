@@ -25,11 +25,13 @@
   <% end %>
   <div class="field">
     <%= form.label :name, "שם" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, required: :true %>
   </div>
   <div class="field">
     <%= form.label :city, "התחנות שהאוטובוס עוצר בהם: " %>
-    <%= form.select :city, options_for_select(@mifal.kids.pluck(:city).uniq), {}, {multiple: true, class: "select"} %>
+    <% places = @mifal.kids.pluck(:city).uniq %>
+    <% @mifal.kids.pluck(:ken).uniq.each { |p| places << p } %>
+    <%= form.select :city, options_for_select(places), {}, {multiple: true, class: "select"} %>
   </div>
   <div class="form-actions">
     <%= form.submit "המשך", class: "btn btn-primary" %>

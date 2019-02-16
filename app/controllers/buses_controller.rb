@@ -85,6 +85,15 @@ class BusesController < ApplicationController
         end
       end
     end
+
+    def populate_bus(places)
+      places.each do |p|
+        Kid.where("city = ? OR ken = ?", p, p).each do |k|
+          k.bus_id = @bus.id
+          k.save
+        end
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_bus
       @bus = Bus.find(params[:id])
