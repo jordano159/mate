@@ -19,17 +19,27 @@
     <% mifal = Mifal.find(current_staff.staffable.mifal.id) %>
   <% end %>
   <%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
-
-  <h2>הצעה לצירי אוטובוס</h2>
-  <ul>
-    <% if mifal.bus_proposal.present? %>
-      <% mifal.bus_proposal.each do |a| %>
-        <% bus = "" %>
-        <% a[1][0].each { |x| bus += "#{x[0]}(#{x[1]}), "} %>
-        <% bus += "#{a[1][1]} סה''כ" %>
-        <li> <%= bus %> </li>
+  <button class="btn">הצגה והסתרה של הצעת צירי הנסיעה</button>
+  <div class="prop" style="display: none;">
+    <h2>הצעה לצירי אוטובוס</h2>
+    <ul>
+      <% if mifal.bus_proposal.present? %>
+        <% mifal.bus_proposal.each do |a| %>
+          <% bus = "" %>
+          <% a[1][0].each { |x| bus += "#{x[0]}(#{x[1]}), "} %>
+          <% bus += "#{a[1][1]} סה''כ" %>
+          <li> <%= bus %> </li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
-  <%= button_to 'הצעה חדשה לאוטובוסים', prop_path, method: :get, params: { id: mifal.id} %>
+    </ul>
+    <%= button_to 'הצעה חדשה לאוטובוסים', prop_path, method: :get, params: { id: mifal.id} %>
+</div>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("button").click(function(){
+      $(".prop").toggle();
+    });
+  });
+</script>
