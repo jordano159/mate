@@ -8,6 +8,10 @@ class Kid < ApplicationRecord
   delegate :mifal, to: :group
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
+  def to_s
+    self.full_name
+  end
+
   # ייבוא מאקסל
   def self.update_imported_kid(file, mifal_id)
     mifal = Mifal.find(mifal_id)

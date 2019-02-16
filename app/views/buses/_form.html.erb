@@ -7,6 +7,12 @@
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 </script>
 
+<style media="screen">
+  .field{
+    padding-left: 15px;
+  }
+</style>
+
 <%= form_with model: @bus, local: true, id: "pop-form", class: "form-inline my-2 my-lg-0" do |form| %>
   <% if @bus.errors.any? %>
     <div id="error_explanation">
@@ -28,10 +34,16 @@
     <%= form.text_field :name, required: :true %>
   </div>
   <div class="field">
-    <%= form.label :city, "התחנות שהאוטובוס עוצר בהם: " %>
+    <%= form.label :city, "קנים או ערים שהאוטובוס עוצר בהם: " %>
     <% places = @mifal.kids.pluck(:city).uniq %>
     <% @mifal.kids.pluck(:ken).uniq.each { |p| places << p } %>
-    <%= form.select :city, options_for_select(places), {}, {multiple: true, class: "select"} %>
+    <%= form.select :city, options_for_select(places), {}, {multiple: true, class: "select", style: "width: 100%"} %>
+  </div>
+  <div class="field">
+    <%= form.label :kid_ids, "החניכים: (מתעדכן לאחר שמירה)" %>
+    <% kids = @mifal.kids %>
+    <%# form.select :kid_ids, options_for_select(kids), {}, {multiple: true, class: "select"} %>
+    <%= form.collection_select(:kid_ids, @mifal.kids, :id, :full_name, {}, {multiple: true, class: "select", style: "width: 100%"}) %>
   </div>
   <div class="form-actions">
     <%= form.submit "המשך", class: "btn btn-primary" %>
