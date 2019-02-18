@@ -19,7 +19,7 @@
     <% mifal = Mifal.find(current_staff.staffable.mifal.id) %>
   <% end %>
   <%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
-  <button class="btn">הצגה והסתרה של הצעת צירי הנסיעה</button>
+  <button class="btn" id="prop" >הצגה והסתרה של הצעת צירי הנסיעה</button>
   <div class="prop" style="display: none;">
     <h2>הצעה לצירי אוטובוס</h2>
     <ul>
@@ -38,8 +38,8 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $("button").click(function(){
-      $(".prop").toggle();
+    $("#prop").click(function(){
+      $(".prop").toggle(400);
     });
   });
 </script>
