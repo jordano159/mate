@@ -32,7 +32,7 @@ class ChecksController < ApplicationController
     if params[:bus]
       @check = Check.new
       @bus = Bus.find(params[:bus])
-      @kids = @bus.kids
+      @kids = @bus.kids.order(:ken)
       @check.bus_id = @bus.id
       @check.kids << @kids
       @check.approved = true
@@ -41,7 +41,7 @@ class ChecksController < ApplicationController
       @check = Check.new
       @group = Group.find(current_staff.staffable_id)
       @check.group_id = @group.id
-      @kids = @group.kids
+      @kids = @group.kids.order(:ken)
       @check.kids << @kids
       @check.save(validate: false)
     end
@@ -51,10 +51,10 @@ class ChecksController < ApplicationController
   def edit
     if @check.bus_id.blank?
       @group = @check.group
-      @kids = @group.kids
+      @kids = @group.kids.order(:ken)
     elsif @check.group_id.blank?
       @bus = Bus.find(@check.bus_id)
-      @kids = @bus.kids
+      @kids = @bus.kids.order(:ken)
     end
   end
 
