@@ -87,8 +87,9 @@ class BusesController < ApplicationController
     end
 
     def populate_bus(places)
+      mifal = Mifal.find(current_staff.staffable.id)
       places.each do |p|
-        Kid.where("city = ? OR ken = ?", p, p).each do |k|
+        mifal.kids.where("city = ? OR ken = ?", p, p).each do |k|
           k.bus_id = @bus.id
           k.save
         end
