@@ -6,8 +6,10 @@
 <%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
 <%= submit_tag "נוכחויות מכל הזמנים", :name => "show_all", class: "btn btn-outline-success my-2 my-sm-0" %>
 <%= submit_tag "נוכחויות רק מהיום האחרון", :name => "hide_all", class: "btn btn-outline-success my-2 my-sm-0" %>
-<%= submit_tag "נוכחויות של קבוצות", :name => "groups", class: "btn btn-outline-success my-2 my-sm-0" %>
-<%= submit_tag "נוכחויות של אוטובוסים", :name => "buses", class: "btn btn-outline-success my-2 my-sm-0" %>
+<% if current_staff.vip? || current_staff.admin? %>
+  <%= submit_tag "נוכחויות של קבוצות", :name => "groups", class: "btn btn-outline-success my-2 my-sm-0" %>
+  <%= submit_tag "נוכחויות של אוטובוסים", :name => "buses", class: "btn btn-outline-success my-2 my-sm-0" %>
+<% end %>
 <% end %>
 
 
