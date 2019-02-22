@@ -11,6 +11,12 @@
       <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id)],
                     ['ראשים:',current_staff.staffable.heads.pluck(:name, :id)],
                     ['צירים:',[[current_staff.staffable.name, current_staff.staffable.id]]]] %>
+    <% when 4 %>
+      <% if current_staff.vip? %>
+        <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id)],
+                      ['ראשים:',current_staff.staffable.heads.pluck(:name, :id)],
+                      ['צירים:',[[current_staff.staffable.axes.pluck(:name, :id)]]]] %>
+      <% end %>
   <% end %>
   <div class="form-inputs">
     <%= f.input :content, label: "פירוט:" %>
