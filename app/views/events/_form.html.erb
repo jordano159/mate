@@ -5,17 +5,17 @@
     <% when 1 %>
       <% options = [['קבוצות:',[[current_staff.staffable.name, current_staff.staffable.id]]]] %>
     <% when 2 %>
-      <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id).order('id ASC')],
+      <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id).sort],
                     ['ראשים:',[[current_staff.staffable.name, current_staff.staffable.id]]]] %>
     <% when 3 %>
-      <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id).order('id ASC')],
-                    ['ראשים:',current_staff.staffable.heads.pluck(:name, :id).order('id ASC')],
+      <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id).sort],
+                    ['ראשים:',current_staff.staffable.heads.pluck(:name, :id).sort],
                     ['צירים:',[[current_staff.staffable.name, current_staff.staffable.id]]]] %>
     <% when 4 %>
       <% if current_staff.vip? %>
-        <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id).order('id ASC')],
-                      ['ראשים:',current_staff.staffable.heads.pluck(:name, :id).order('id ASC')],
-                      ['צירים:',current_staff.staffable.axes.pluck(:name, :id).order('id ASC')]] %>
+        <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id).sort],
+                      ['ראשים:',current_staff.staffable.heads.pluck(:name, :id).sort],
+                      ['צירים:',current_staff.staffable.axes.pluck(:name, :id).sort]] %>
       <% end %>
   <% end %>
   <div class="form-inputs">
