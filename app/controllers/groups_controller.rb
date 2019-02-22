@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
     elsif current_staff.admin?
       @groups = Group.all.order('id ASC').includes(:kids)
     else
-      @groups = current_staff.staffable.groups
+      @groups = current_staff.staffable.groups.order('id ASC')
     end
   end
 
