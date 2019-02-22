@@ -8,6 +8,7 @@ json.set! :data do
     json.meds "#{kid.meds}"
     json.food "#{kid.food}"
     json.ken "#{kid.ken}"
+    json.city "#{kid.city}"
     json.exits "#{kid.exits}"
     json.status "#{kid.heb_status}"
     json.cause "#{kid.cause}"
