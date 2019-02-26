@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_164611) do
+ActiveRecord::Schema.define(version: 2019_02_26_132449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_164611) do
     t.integer "bus_id"
     t.string "grade"
     t.integer "taz"
+    t.bigint "mifal_id"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
     t.index ["exits"], name: "index_kids_on_exits"
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(version: 2019_02_15_164611) do
     t.index ["last_name"], name: "index_kids_on_last_name"
     t.index ["medical"], name: "index_kids_on_medical"
     t.index ["meds"], name: "index_kids_on_meds"
+    t.index ["mifal_id"], name: "index_kids_on_mifal_id"
     t.index ["name"], name: "index_kids_on_name"
     t.index ["parent_1"], name: "index_kids_on_parent_1"
     t.index ["parent_1_phone"], name: "index_kids_on_parent_1_phone"
@@ -175,4 +177,5 @@ ActiveRecord::Schema.define(version: 2019_02_15_164611) do
   add_foreign_key "axes", "mifals"
   add_foreign_key "buses", "mifals"
   add_foreign_key "events", "staffs"
+  add_foreign_key "kids", "mifals"
 end

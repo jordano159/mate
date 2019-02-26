@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Kid < ApplicationRecord
+  belongs_to :mifal
   belongs_to :group, optional: true
   belongs_to :bus, optional: true
   has_many :attendances, dependent: :destroy
   has_many :checks, through: :attendances
-  delegate :mifal, to: :group
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
   def to_s

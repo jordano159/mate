@@ -4,7 +4,7 @@ class Mifal < ApplicationRecord
   has_many :axes, dependent: :destroy
   has_many :heads, through: :axes
   has_many :groups, through: :heads
-  has_many :kids, through: :axes
+  has_many :kids
   has_many :checks, through: :axes
   has_many :buses, dependent: :destroy
   has_many :staffs, as: :staffable, dependent: :destroy
