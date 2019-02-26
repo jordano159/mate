@@ -5,12 +5,15 @@ wb.add_worksheet(name: 'Kids') do |sheet|
                  'מידת חולצה', 'מספר קבוצה', 'האם החניך/ה שומר/ת שבת?',
                  'האם תגיעו לטקס הסיום וליום ההורים?', 'אישור שחייה', 'כניסות ויציאות', 'הערות', 'נוכחות']
   Kid.all.order('group_id ASC').each do |kid|
-    attributes = [kid.name, kid.last_name, kid.sex, kid.phone, kid.medical, kid.meds, kid.grade, kid.taz
+    attributes = [kid.name, kid.last_name, kid.sex, kid.phone, kid.medical, kid.meds, kid.grade, kid.taz,
                   kid.food, kid.city, kid.ken, kid.parent_1, kid.parent_1_phone, kid.parent_2,
-                  kid.parent_2_phone, kid.size, Group.find(kid.group_id).name, kid.shabat, kid.parents, kid.swim, kid.exits, kid.comments]
+                  kid.parent_2_phone, kid.size, Group.find(kid.group_id).name, kid.shabat, kid.parents,
+                  kid.swim, kid.exits, kid.comments]
     kid.attendances.each do |a|
       check = Check.find(a.check_id)
-      attributes << check.name + ' ' + check.created_at.strftime('%e.%m') + ' :' + a.status.to_s
+      if check.present? && a.present?
+        attributes << "#{check.name} #{check.created_at.strftime('%e.%m')} :#{a.status.to_s}"
+      end
     end
     sheet.add_row attributes
   end
