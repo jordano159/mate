@@ -16,6 +16,7 @@ json.set! :data do
       json.group "#{link_to kid.group.name, kid.group}"
     else
       json.group "אין קבוצה משוייכת"
+    end
     json.url  "
               #{link_to 'עריכה', edit_kid_path(kid), class: 'btn btn-warning' if current_staff.admin? || current_staff.vip?}
               #{link_to 'מחיקה', kid, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
