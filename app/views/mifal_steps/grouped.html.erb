@@ -1,5 +1,8 @@
 <h1>יצירת הקבוצות</h1>
 <%= render layout: 'form' do |form| %>
+<% if @mifal.heads.count == 0 %>
+  <h3>אי אפשר ליצור קבוצות לפני שיש ראשים. בבקשה ליצור ראשים ולנסות שוב</h3>
+<% end %>
   <% @mifal.heads.each_with_index do |h,i| %>
     <div class="field">
       <%= form.label "group_num_#{i}".to_sym, "כמה קבוצות יש ב#{h.name}?" %>

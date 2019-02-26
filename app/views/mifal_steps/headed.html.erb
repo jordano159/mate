@@ -1,6 +1,9 @@
 <h1>יצירת הראשים</h1>
 
 <%= render layout: 'form' do |form| %>
+  <% if @mifal.axes.count == 0 %>
+    <h3>אי אפשר ליצור ראשים לפני שיש צירים. בבקשה ליצור צירים ולנסות שוב</h3>
+  <% end %>
   <% @mifal.axes.each_with_index do |a,i| %>
     <div class="field">
       <%= form.label "head_num_#{i}".to_sym, "כמה ראשים יש ב#{a.name}?" %>
