@@ -4,7 +4,7 @@ wb.add_worksheet(name: 'Kids') do |sheet|
                 'אוכל', 'מקום מגורים', 'קן מקור', 'שם הורה 1', 'טלפון הורה 1', 'שם הורה 2', 'טלפון הורה 2',
                 'מידת חולצה', 'האם החניך/ה שומר/ת שבת?',
                  'האם תגיעו לטקס הסיום וליום ההורים?', 'אישור שחייה', 'כניסות ויציאות', 'הערות', 'נוכחות', 'קבוצה']
-  Kid.all.order('group_id ASC').each do |kid|
+  @kids.order('group_id ASC').each do |kid|
     attributes = [kid.name, kid.last_name, kid.sex, kid.phone, kid.medical, kid.meds, kid.grade, kid.taz,
                   kid.food, kid.city, kid.ken, kid.parent_1, kid.parent_1_phone, kid.parent_2,
                   kid.parent_2_phone, kid.size, kid.shabat, kid.parents,
