@@ -23,7 +23,7 @@ class KidsController < ApplicationController
           if current_staff.admin?
             @kids = Kid.all.includes(:group)
           else
-            current_staff.staffable.kids.includes(:group)
+            @kids = current_staff.staffable.kids.includes(:group)
           end
         end
     end
