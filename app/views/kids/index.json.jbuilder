@@ -12,7 +12,10 @@ json.set! :data do
     json.exits "#{kid.exits}"
     json.status "#{kid.heb_status}"
     json.cause "#{kid.cause}"
-    json.group "#{link_to kid.group.name, kid.group}"
+    if kid.group.present?
+      json.group "#{link_to kid.group.name, kid.group}"
+    else
+      json.group "אין קבוצה משוייכת"
     json.url  "
               #{link_to 'עריכה', edit_kid_path(kid), class: 'btn btn-warning' if current_staff.admin? || current_staff.vip?}
               #{link_to 'מחיקה', kid, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}

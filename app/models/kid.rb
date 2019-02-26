@@ -25,6 +25,7 @@ class Kid < ApplicationRecord
       kid = find_by(taz: row['taz']) || new
       kid.attributes = row.to_hash
       kid.group_id = 153
+      kid.mifal_id = mifal.id
       kid.city = kid.city.strip if kid.city.present?
       kid.save!
     end
