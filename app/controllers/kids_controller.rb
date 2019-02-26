@@ -18,10 +18,10 @@ class KidsController < ApplicationController
         else
           @kids = current_staff.staffable.kids.includes(:group).filter(params[:filter_column],
             params[:filter_condition]).order('created_at DESC')
-          end
+        end
         else
-          @kids = if current_staff.admin?
-            Kid.all.includes(:group)
+          if current_staff.admin?
+            @kids = Kid.all.includes(:group)
           else
             current_staff.staffable.kids.includes(:group)
           end
