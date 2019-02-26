@@ -24,7 +24,7 @@ class Kid < ApplicationRecord
       row = Hash[[header, spreadsheet.row(i)].transpose]
       kid = find_by(taz: row['taz']) || new
       kid.attributes = row.to_hash
-      kid.group_id = 153
+      kid.group_id = Staff.find_by(username: "קבוצה #{kid.group_id} #{mifal.name}").staffable.id
       kid.mifal_id = mifal.id
       kid.city = kid.city.strip if kid.city.present?
       kid.save!

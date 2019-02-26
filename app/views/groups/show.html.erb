@@ -50,5 +50,5 @@
   <%= link_to "יצירת מדריך.ה חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
   <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1%>
 
-<%= link_to 'עריכה', edit_group_path(@group), class: "btn btn-primary" if current_staff.admin? %>
+<%= link_to 'עריכה', edit_group_path(@group), class: "btn btn-warning" if current_staff.admin? || current_staff.vip? %>
 <%= link_to 'חזרה לרשימה', groups_path, class: "btn btn-primary" %>
