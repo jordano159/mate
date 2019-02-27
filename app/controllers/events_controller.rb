@@ -6,12 +6,12 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    # if current_staff.admin?
-    #   @events = Event.all.order('created_at DESC').includes(:staff, :eventable)
-    # else
-    #   @events = current_staff.staffable.events
-    # end
-    @events = Event.where("created_at > ?", 2.days.ago)
+    if current_staff.admin?
+      @events = Event.all.order('created_at DESC').includes(:staff, :eventable)
+    else
+      @events = current_staff.staffable.events
+    end
+    # @events = Event.where("created_at > ?", 2.days.ago)
     respond_to do |format|
       format.html
       format.xlsx

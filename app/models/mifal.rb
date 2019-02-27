@@ -60,25 +60,41 @@ class Mifal < ApplicationRecord
 
   # בונה צירים של אוטובוסים
   def make_a_bus(cities, my_location)
+    # הצהרות על דברים
+    mifal_location = Geocoder.search("גבעת חביבה").first
+    mifal_location = mifal_location.data["lat"], mifal_location.data["lon"]
+    distance = 0
     kids_in_bus = 0
-    # bus_stops = []
     bus_stops = Hash.new
+
+    # מציאת היישוב הרחוק ביותר ועיבוד הנתונים שלו
     far = farthest(cities, my_location)
     kids_in_stop = how_many_kids(far)
     kids_in_bus += kids_in_stop
     bus_stops["#{far}"] = kids_in_stop
-    temp = cities["#{far}"]
+    last_loc = cities["#{far}"]
     cities.delete("#{far}")
+
+    # לולאה שתרוץ כל פעם על היישוב הקרוב ביותר ותעבד את הנתונים שלו
     loop do
-      near = nearest(cities, temp)
-      break if (kids_in_bus + how_many_kids(near)) > 50 || cities.empty?
+      # הכנת נתונים לעיבוד
+      near = nearest(cities, last_loc)
+      near_location = Geocoder.search(near).first
+      near_location = near_location.data["lat"], near_location.data["lon"] if near_location.present?
+      # תתחיל אוטובוס חדש  אם יהיו יותר מדי באוטובוס, אם נגמרו היישובים, או אם המרחק יהיה גדול מדי
+      break if (kids_in_bus + how_many_kids(near)) > 49 || cities.empty?
+      break if (distance + Geocoder::Calculations.distance_between(last_loc, mifal_location)) > 150 || (distance + Geocoder::Calculations.distance_between(last_loc, near_location)) > 200
+      # תוסיף למרחק את המרחק בין התחנה הקודמת לתחנה הנוכחית
+      distance += Geocoder::Calculations.distance_between(last_loc, near_location)
       kids_in_stop = how_many_kids(near)
       kids_in_bus += kids_in_stop
       bus_stops["#{near}"] = kids_in_stop
-      temp = cities["#{near}"]
+      last_loc = cities["#{near}"]
       cities.delete("#{near}")
     end
-    return bus_stops, kids_in_bus
+    # תוסיף את המרחק הנותר עד להגעה למפעל
+    distance += Geocoder::Calculations.distance_between(last_loc, mifal_location)
+    return bus_stops, kids_in_bus, distance
   end
 
   def make_bus_proposal
