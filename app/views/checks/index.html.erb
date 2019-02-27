@@ -47,7 +47,7 @@
         <td><%= check.name %></td>
         <td><%= check.created_at.in_time_zone("Jerusalem").strftime("%H:%M | %e.%m") %> </td>
         <% if params[:buses] && check.bus%>
-            <td><%= link_to check.bus.name, bus_path(check.bus), class: "btn btn-primary" %></td>
+            <td><%= link_to check.bus.name, bus_path(check.bus) %></td>
         <% else %>
           <td>
           <% if check.group %>
