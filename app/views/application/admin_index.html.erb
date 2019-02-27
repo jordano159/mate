@@ -1,37 +1,16 @@
-<%= link_to "יצירת אדמין חדש", new_axis_staff_path(Axis.first.id), class: "btn btn-primary" %>
+<h1>כל המשתמשים</h1>
 
-<div class="table-responsive">
-  <table class = "table table-hover">
-    <thead class="thead-dark">
+<%# link_to "יצירת אדמין חדש", new_axis_staff_path(Axis.first.id), class: "btn btn-primary" %>
+
+<div class="table-responsive-lg">
+  <table class="table table-hover" id="dttb-kids" data-sort="true" data-source="<%= url_for(format: :json)%>">
+    <thead class="thead-dark nowrap">
       <tr>
-        <th>שם</th>
-        <th>שם משתמש</th>
-        <th>אדמין?</th>
-        <th>עריכה</th>
-        <th>מחיקה </th>
+        <th data-data="name">שם</th>
+        <th data-data="username">שם משתמש</th>
+        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
       </tr>
     </thead>
 
-    <tbody>
-      <% @staffs.each do |staff| %>
-      <tr>
-        <% if staff.staffable %>
-          <td><%= link_to staff.name, eval("become_#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})") %></td>
-        <% end %>
-        <td><%= staff.username %></td>
-        <td>
-          <% if staff.admin? %>
-          <span style="color:green;">כן</span>
-          <% else %>
-          לא
-          <% end %>
-        </td>
-        <% if staff.staffable %>
-          <td><%= link_to 'עריכה', eval("edit_#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})"), class: "btn btn-warning" %></td>
-          <td><%= link_to 'מחיקה', eval("#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})"), :data => {:confirm => "את\ה בטוח\ה?"}, method: :delete, class: "btn btn-danger" %></td>
-        <% end %>
-      </tr>
-      <% end %>
-    </tbody>
   </table>
 </div>
