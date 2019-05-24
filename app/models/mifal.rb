@@ -131,4 +131,5 @@ class Mifal < ApplicationRecord
     end
     cities
   end
+  
 end
