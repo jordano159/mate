@@ -100,6 +100,13 @@ class KidsController < ApplicationController
     redirect_to kids_path
   end
 
+  def toggle
+    @kid = Kid.find(params[:id])
+    @kid.status = params[:value]
+    @kid.save
+    redirect_to kids_url
+  end
+
   # def import
   #   Kid.my_import(params[:file])
   #   redirect_to kids_path, notice: "הייבוא עבר בהצלחה!"

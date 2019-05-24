@@ -30,26 +30,24 @@ body {
     }
   }
 }
-
-#wrapper {
-  text-align: right;
-  // padding-right: 250px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+@media(min-width:1026px) {
+  #wrapper {
+    text-align: right;
+    // padding-right: 250px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    display: grid;
+    grid-template-columns: 16% 84%;
+  }
 }
-
 
 
 #sidebar-wrapper {
   background: #0984e3;
   z-index: 1000;
-  position: fixed;
-  right: 250px;
-  width: 285px;
   height: 100%;
-  margin-right: -250px;
   overflow-y: auto;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -59,8 +57,12 @@ body {
 
 
 #page-content-wrapper {
-  width: 100%;
   padding: 15px;
+}
+@media(min-width:1025px) {
+  #page-content-wrapper {
+    width: 1800px;
+  }
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -132,16 +134,10 @@ body {
   background: none;
 }
 
-@media(max-width:1025px) {
-  #sidebar-wrapper{
+@media(min-width:1026px) {
+  #navbar {
     display: none;
   }
-}
-
-@media(min-width:1024px) {
-
-#navbar {
-  display: none;
 }
 
 .kid-info {
@@ -175,6 +171,7 @@ body {
   //   position: relative;
   //   margin-right: 0;
   // }
-}
+
 
 @import "datatables";
+@import "mobile";

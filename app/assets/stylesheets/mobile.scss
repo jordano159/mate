@@ -1,0 +1,14 @@
+@media(max-width:1025px) {
+  #sidebar-wrapper{
+    display: none;
+  }
+  #wrapper{
+    display: block;
+  }
+}
+
+@media(max-width:1025px) {
+  #navbar {
+    display: block;
+  }
+}

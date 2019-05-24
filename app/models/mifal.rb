@@ -8,7 +8,7 @@ class Mifal < ApplicationRecord
   has_many :checks, through: :axes
   has_many :buses, dependent: :destroy
   has_many :staffs, as: :staffable, dependent: :destroy
-  has_many :events, as: :eventable, dependent: :destroy
+  has_many :events, as: :eventable
   has_many :events, through: :axes, source: :events
 
   # מחזיר ערים עם קואורדינטות
@@ -131,5 +131,5 @@ class Mifal < ApplicationRecord
     end
     cities
   end
-  
+
 end
