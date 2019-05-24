@@ -10,10 +10,9 @@ json.set! :data do
     json.ken "#{kid.ken}"
     json.city "#{kid.city}"
     json.exits "#{kid.exits}"
-    json.status "
-                #{if @kid.status}
-                  #{button_to kid.heb_status, toggle_path, method: :get, params: { value: 1 - kid.status, id: kid.id}}
-                #{end}"
+    json.status "#{if kid.status.present?
+                  button_to kid.heb_status, toggle_path, method: :get, params: { value: 1 - kid.status, id: kid.id}
+                end}"
     json.cause "#{kid.cause}"
     if kid.group.present?
       json.group "#{link_to kid.group.name, kid.group}"
