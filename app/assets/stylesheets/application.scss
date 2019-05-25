@@ -6,12 +6,20 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "checks";
+
+
+
 html {
   direction: rtl;
 }
 
 body {
-  overflow-x: hidden;
+  // overflow-x: hidden;
+  height: 100%;
+  width:100%;
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
 }
 
 * {
@@ -30,7 +38,8 @@ body {
     }
   }
 }
-@media(min-width:1026px) {
+
+
   #wrapper {
     text-align: right;
     // padding-right: 250px;
@@ -39,9 +48,10 @@ body {
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     display: grid;
-    grid-template-columns: 16% 84%;
+    grid-template-columns: 16% auto;
+    grid-column-gap: 2em;
   }
-}
+
 
 
 #sidebar-wrapper {
@@ -55,27 +65,27 @@ body {
   transition: all 0.5s ease;
 }
 
-
-#page-content-wrapper {
-  padding: 15px;
-}
-@media(min-width:1025px) {
-  #page-content-wrapper {
-    width: 1800px;
-  }
-}
-
-#wrapper.toggled #page-content-wrapper {
-  position: absolute;
-  margin-right: -250px;
-}
+//
+// #page-content-wrapper {
+//   padding: 15px;
+// }
+// @media(min-width:1025px) {
+//   #page-content-wrapper {
+//     width: 1800px;
+//   }
+// }
+//
+// #wrapper.toggled #page-content-wrapper {
+//   position: absolute;
+//   margin-right: -250px;
+// }
 
 
 /* Sidebar Styles */
 
 .sidebar-nav {
 
-  top: 0;
+  // top: 0;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -134,11 +144,11 @@ body {
   background: none;
 }
 
-@media(min-width:1026px) {
+
   #navbar {
     display: none;
   }
-}
+
 
 .kid-info {
   width: auto;
@@ -172,6 +182,5 @@ body {
   //   margin-right: 0;
   // }
 
-
-@import "datatables";
-@import "mobile";
+  @import "datatables";
+  @import "mobile";

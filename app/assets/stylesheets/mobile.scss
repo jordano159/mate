@@ -1,13 +1,10 @@
-@media(max-width:1025px) {
+@media screen and (max-width: 992px) {
   #sidebar-wrapper{
     display: none;
   }
   #wrapper{
     display: block;
   }
-}
-
-@media(max-width:1025px) {
   #navbar {
     display: block;
   }
