@@ -33,7 +33,7 @@
         <% end %>
       <% end %>
     </ul>
-    <%= button_to 'הצעה חדשה לאוטובוסים', prop_path, method: :get, params: { id: mifal.id} %>
+    <%= button_to 'הצעה חדשה לאוטובוסים', prop_path, method: :get, params: { id: mifal.id}, data: { confirm: 'אנחנו עובדים על זה ברקע. אפשר לסגור את החלון ולחזור עוד כמה דקות' } %>
 </div>
 <% end %>
 
