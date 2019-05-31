@@ -55,39 +55,4 @@ class Kid < ApplicationRecord
       string1 = "לא נוכח/ת"
     end
   end
-
-  # ייצוא וייבוא בCSV
-  # def self.to_csv
-  #   attributes = %w{name last_name sex phone medical
-  #     meds food city ken parent_1 parent_1_phone parent_2 parent_2_phone size group_id shabat parents swim exits comments}
-  #   heb_names = ["שם פרטי חניך", "שם משפחה חניך", "מגדר", "נייד", "רגישות ובעיות רפואיות", "תרופות",
-  #     "אוכל", "יישוב", "קן", "שם פרטי הורה 1", "נייד של הורה 1", "שם פרטי הורה 2", "נייד של הורה 2",
-  #   "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת",
-  #    "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות"]
-  #
-  #   CSV.generate(headers: true) do |csv|
-  #     csv << heb_names
-  #
-  #     all.each do |kid|
-  #       csv << attributes.map{ |attr| kid.send(attr) }
-  #     end
-  #   end
-  # end
-  #
-  # def self.my_import(file)
-  #   columns = ["שם פרטי חניך", "שם משפחה חניך", "מגדר", "נייד", "רגישות ובעיות רפואיות", "תרופות",
-  #     "אוכל", "יישוב", "קן", "שם פרטי הורה 1", "נייד של הורה 1", "שם פרטי הורה 2", "נייד של הורה 2",
-  #   "מידת חולצה", "מספר קבוצה", "האם החניך/ה שומר/ת שבת",
-  #    "האם תגיעו לטקס הסיום וליום ההורים?", "אישור שחייה", "כניסות ויציאות", "הערות"]
-  #   kids = []
-  #   CSV.foreach(file.path, headers: true) do |row|
-  #     kids << Kid.new(name: row["שם פרטי חניך"], last_name: row["שם משפחה חניך"], sex: row["מגדר"],
-  #       phone: row["נייד"], medical: row["רגישות ובעיות רפואיות"], meds: row["תרופות"],
-  #       food: row["אוכל"], city: row["יישוב"], ken: row["קן"], parent_1: row["שם פרטי הורה 1"],
-  #       parent_1_phone: row["נייד של הורה 1"], parent_2: row["שם פרטי הורה 2"], parent_2_phone: row["נייד של הורה 2"], size: row["מידת חולצה"],
-  #       group_id: (row ["מספר קבוצה"].to_i + Group.first.id - 1), shabat: row["האם החניך/ה שומר/ת שבת?"],
-  #       parents: row["האם תגיעו לטקס הסיום וליום ההורים?"], swim: row["אישור שחייה"], exits: row["כניסות ויציאות"], comments: row["הערות"])
-  #   end
-  #   Kid.import kids, recursive: true
-  # end
 end

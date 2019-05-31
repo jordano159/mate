@@ -21,10 +21,17 @@
     <div id="wrapper">
       <%= render 'layouts/sidebar' %>
         <div id="page-content-wrapper">
-            <div style="width:100%;">
+            <div>
               <%= yield %>
             </div>
         </div>
     </div>
   </body>
 </html>
+
+<script type="text/javascript">
+$(".nav-item").click(function(){
+  $(".nav-item").removeClass("active");
+  $(this).addClass("active");
+});
+</script>

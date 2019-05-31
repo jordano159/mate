@@ -18,9 +18,9 @@
 <% if current_staff.admin? || current_staff.vip? %>
 <%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
 <%= link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary" %>
-<%# link_to  'ייצוא הטבלה לCSV', kids_path(format: :csv), class: "btn btn-primary" %>
 <% end %>
 
+<div class="table-container">
 <div class="table-responsive-xs">
   <table class="table table-hover" id="dttb-kids" data-sort="true" data-source="<%= url_for(format: :json)%>">
     <thead class="thead-dark nowrap">
@@ -28,12 +28,12 @@
         <th data-data="first_name">שם פרטי</th>
         <th data-data="last_name">שם משפחה</th>
         <th data-data="phone">טלפון</th>
-        <th data-data="medical">רגישות ובעיות רפואיות</th>
+        <!-- <th data-data="medical">רגישות ובעיות רפואיות</th>
         <th data-data="meds">תרופות</th>
-        <th data-data="food">אוכל</th>
+        <th data-data="food">אוכל</th> -->
         <th data-data="ken">קן</th>
         <th data-data="city">יישוב</th>
-        <th data-data="exits">כניסות ויציאות</th>
+        <!-- <th data-data="exits">כניסות ויציאות</th> -->
         <th data-data="status">סטטוס</th>
         <th data-data="cause">סיבה</th>
         <% if @level > 1 %> <th data-data="group">קבוצה</th> <% end %>
@@ -42,5 +42,5 @@
 
   </table>
 </div>
-
+</div>
 <%= link_to "יצירת נוכחות חדשה", new_check_path, class: "btn btn-primary" if @level == 1 or current_staff.vip? %>

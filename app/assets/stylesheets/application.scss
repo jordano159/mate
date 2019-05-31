@@ -82,7 +82,9 @@ body {
 
 
 /* Sidebar Styles */
-
+.active {
+  background: rgba(255, 255, 255, 0.2);
+}
 .sidebar-nav {
 
   // top: 0;
@@ -90,13 +92,13 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-
 }
 
+
 .sidebar-nav li {
-  text-align: center;
-  line-height: 60px;
-  font-size: 1.3em;
+  text-align: right;
+  line-height: 45px;
+  font-size: 1.2em;
 }
 
 .sidebar-nav li a {
@@ -104,6 +106,7 @@ body {
   text-decoration: none;
   color: white;
   transition: all 0.3s ease;
+
 }
 
 .sidebar-nav li a:hover {
@@ -165,6 +168,10 @@ body {
     }
 }
 
+
+.table-container {
+  width:90%;
+}
   // #wrapper {
   //   padding-left: 250px;
   // }

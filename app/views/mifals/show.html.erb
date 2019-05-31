@@ -32,4 +32,5 @@
   </table>
 <%= link_to "יצירת רכז.ת מפעל חדש.ה", new_mifal_staff_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
 <%= link_to 'עריכה', edit_mifal_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
+<%= link_to 'גיבוי', mifal_path(format: :xlsx), class: 'btn btn-primary' if current_staff.admin? || current_staff.vip? %>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary" %>

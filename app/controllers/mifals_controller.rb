@@ -5,11 +5,21 @@ class MifalsController < ApplicationController
   # GET /mifals.json
   def index
     @mifals = Mifal.all.order('id ASC')
+
+    # upload to drive
   end
 
   # GET /mifals/1
   # GET /mifals/1.json
   def show
+    @mifal = Mifal.find(params[:id])
+    @kids = @mifal.kids
+    @events = @mifal.events
+    respond_to do |format|
+      format.html
+      format.json
+      format.xlsx
+    end
   end
 
   # GET /mifals/new

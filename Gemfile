@@ -54,6 +54,8 @@ gem 'roo'
 gem 'wicked'
 gem 'geocoder'
 gem 'sidekiq'
+gem 'google_drive'
+
 
 
 # Efficiency tests
