@@ -28,84 +28,84 @@ html, body {
 //   min-height: 100%;
 //   margin: 0 auto;
 // }
+
+.button-wrap {
+  position: relative;
+  text-align: center;
+  top: 50%;
+  margin-top: -2.5em;
+  @media (max-width: $small) {margin-top: -1.5em;}
+}
 //
-// .button-wrap {
-//   position: relative;
-//   text-align: center;
-//   top: 50%;
-//   margin-top: -2.5em;
-//   @media (max-width: $small) {margin-top: -1.5em;}
-// }
-// //
-// .collection_radio_buttons {
-//   display: inline-block;
-//   padding: 1em 2em;
-//   margin: 1em;
-//   cursor: pointer;
-//   color: $dark;
-//   border-radius: 0.25em;
-//   background: $light;
-//   box-shadow: 0 3px 10px rgba(0,0,0,0.2), inset 0 -3px 0 rgba(0,0,0,0.22);
-//   transition: 0.3s;
-//   user-select: none;
-//   h1 {
-//     font-size: 1em;
-//   }
-//   &:hover {
-//     background: darken($light, 10%);
-//     color: darken($dark, 10%);
-//     box-shadow: 0 3px 10px rgba(0,0,0,0.2), inset 0 -3px 0 rgba(0,0,0,0.32);
-//   }
-//   &:active {
-//     transform: translateY(2px);
-//     box-shadow: 0 3px 10px rgba(0,0,0,0.2), inset 0px -1px 0 rgba(0,0,0,0.22);
-//   }
-//   @media (max-width: $small) {
-//     padding: 0em 1em 3px;
-//     margin: 0.25em;
-//   }
-// }
-//
-// input[type="radio"] {
-//   display: none;
-// }
-//
-// input[value="1"]:checked + .collection_radio_buttons {
-//   background: $green;
-//   color: $light;
-//   &:hover {
-//     background: darken($green, 5%);
-//     color: darken($light, 5%);
-//   }
-// }
-//
-// input[value="כן"]:checked + .collection_radio_buttons {
-//   background: $green;
-//   color: $light;
-//   &:hover {
-//     background: darken($green, 5%);
-//     color: darken($light, 5%);
-//   }
-// }
-//
-// input[value="0"]:checked + .collection_radio_buttons {
-//   background: $red;
-//   color: $light;
-//   &:hover {
-//     background: darken($red, 5%);
-//     color: darken($light, 5%);
-//   }
-// }
-//
-// input[value="לא"]:checked + .collection_radio_buttons {
-//   background: $red;
-//   color: $light;
-//   &:hover {
-//     background: darken($red, 5%);
-//     color: darken($light, 5%);
-//   }
-// }
-//
+.collection_radio_buttons {
+  display: inline-block;
+  padding: 1em 2em;
+  margin: 1em;
+  cursor: pointer;
+  color: $dark;
+  border-radius: 0.25em;
+  background: $light;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2), inset 0 -3px 0 rgba(0,0,0,0.22);
+  transition: 0.3s;
+  user-select: none;
+  h1 {
+    font-size: 1em;
+  }
+  &:hover {
+    background: darken($light, 10%);
+    color: darken($dark, 10%);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2), inset 0 -3px 0 rgba(0,0,0,0.32);
+  }
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2), inset 0px -1px 0 rgba(0,0,0,0.22);
+  }
+  @media (max-width: $small) {
+    padding: 0em 1em 3px;
+    margin: 0.25em;
+  }
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[value="1"]:checked + .collection_radio_buttons {
+  background: $green;
+  color: $light;
+  &:hover {
+    background: darken($green, 5%);
+    color: darken($light, 5%);
+  }
+}
+
+input[value="כן"]:checked + .collection_radio_buttons {
+  background: $green;
+  color: $light;
+  &:hover {
+    background: darken($green, 5%);
+    color: darken($light, 5%);
+  }
+}
+
+input[value="0"]:checked + .collection_radio_buttons {
+  background: $red;
+  color: $light;
+  &:hover {
+    background: darken($red, 5%);
+    color: darken($light, 5%);
+  }
+}
+
+input[value="לא"]:checked + .collection_radio_buttons {
+  background: $red;
+  color: $light;
+  &:hover {
+    background: darken($red, 5%);
+    color: darken($light, 5%);
+  }
+}
+
 .button_to input[type="submit"]{
 
 	// height: 50px;

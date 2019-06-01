@@ -5,13 +5,7 @@
 <% end %>
 
 <% if !current_staff.user? %>
-  <% columns = %w[swim shabat parents] %>
-  <% conditions = %w[כן לא] %>
-  <%= form_tag(kids_path, :method => "get", id: "filter-form", class: "form-inline my-2 my-lg-0") do %>
-  <%= text_field_tag :filter_column, params[:filter_column], placeholder: "סינון - swim shabat parents", class: "form-control mr-sm-2" %>
-  <%= text_field_tag :filter_condition, params[:filter_condition], placeholder: "כן או לא?", class: "form-control mr-sm-2" %>
-  <%= submit_tag "סינון", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
-  <% end %>
+  <%= render 'filter' %>
 <% end %>
 
 
