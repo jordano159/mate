@@ -15,7 +15,7 @@ class Staff < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   validates :email,    uniqueness: true
   validates :username, uniqueness: true
-  belongs_to :staffable, polymorphic: true
+  belongs_to :staffable, polymorphic: true, optional: true
 
   def will_save_change_to_email?
     false
