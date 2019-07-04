@@ -8,8 +8,34 @@ class Kid < ApplicationRecord
   has_many :checks, through: :attendances
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
+  # Callbacks
+  around_save :create_kid_moved_event
+  before_destroy :create_kid_left_event
+
   def to_s
     self.full_name
+  end
+
+  def create_kid_moved_event
+    if group_id_changed?
+      event = Event.new
+      event.content = "#{full_name} עבר.ה מ#{Group.find(group_id_was).name} אל #{Group.find(group_id).name}"
+      event.staff_id = mifal.staffs.first.id
+      event.eventable_type = "Group"
+      event.eventable_id = group_id
+      event.save
+    end
+    yield #kid.save
+    puts "Success"
+  end
+
+  def create_kid_left_event
+    event = Event.new
+    event.content = "#{full_name} עזב.ה את המפעל"
+    event.staff_id = mifal.staffs.first.id
+    event.eventable_type = "Group"
+    event.eventable_id = group_id
+    event.save
   end
 
   # ייבוא מאקסל

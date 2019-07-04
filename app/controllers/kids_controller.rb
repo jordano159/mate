@@ -43,19 +43,22 @@ class KidsController < ApplicationController
   # GET /kids/new
   def new
     @kid = Kid.new
-    @groups = Group.all
+    @mifal = current_staff.staffable
+    @groups = @mifal.groups
   end
 
   # GET /kids/1/edit
   def edit
-    @groups = Group.all
+    @mifal = current_staff.staffable
+    @groups = @mifal.groups
   end
 
   # POST /kids
   # POST /kids.json
   def create
     @kid = Kid.new(kid_params)
-    @groups = Group.all
+    @mifal = current_staff.staffable
+    @groups = @mifal.groups
 
     respond_to do |format|
       if @kid.save
