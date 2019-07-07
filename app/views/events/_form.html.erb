@@ -20,13 +20,22 @@
                       ['מפעל:',[[current_staff.staffable.name, current_staff.staffable.id]]]
                       ] %>
       <% end %>
+      <% when 5 %>
+        <% if current_staff.admin? %>
+          <% options = [
+                        ['קבוצות:',Group.all.pluck(:name, :id)],
+                        ['ראשים:',Head.all.pluck(:name, :id)],
+                        ['צירים:',Axis.all.pluck(:name, :id)],
+                        ['מפעלים:',Mifal.all.pluck(:name, :id)]
+                        ] %>
+        <% end %>
   <% end %>
   <div class="form-inputs">
     <%= f.input :content, label: "פירוט:" %>
     <%= f.input :eventable_type, as: :hidden %>
     <%= f.input :eventable_id, as: :hidden %>
-
-    <%= select_tag "outcome_based", content_tag(:option,'נא לבחור',:value=>"") + grouped_options_for_select(options), class:"form-control" %>
+    <%= select_tag "outcome_based", content_tag(:option,'נא לבחור',:value=>"") +
+        grouped_options_for_select(options), class:"form-control" %>
   </div>
 
   <div class="form-actions">
