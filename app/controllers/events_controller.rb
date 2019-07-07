@@ -9,8 +9,8 @@ class EventsController < ApplicationController
     if current_staff.admin?
       @events = Event.all.order('created_at DESC').includes(:staff, :eventable)
     else
-      # @events = current_staff.staffable.events
-      @events = Event.where("created_at > ?", 10.days.ago)
+      @events = current_staff.staffable.all_events
+      # @events = Event.where("created_at > ?", 10.days.ago)
     end
     respond_to do |format|
       format.html

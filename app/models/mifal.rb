@@ -8,8 +8,21 @@ class Mifal < ApplicationRecord
   has_many :checks, through: :axes
   has_many :buses, dependent: :destroy
   has_many :staffs, as: :staffable, dependent: :destroy
+  # has_many :events, through: :axes, source: :events
   has_many :events, as: :eventable
-  has_many :events, through: :axes, source: :events
+
+  def all_events
+    my_events = Array.new
+    self.events.each do |e|
+      my_events << e
+    end
+    self.axes.each do |a|
+      a.all_events.each do |e|
+        my_events << e
+      end
+    end
+    return my_events
+  end
 
   # מחזיר ערים עם קואורדינטות
   def city_list

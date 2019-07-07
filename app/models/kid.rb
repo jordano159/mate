@@ -21,8 +21,8 @@ class Kid < ApplicationRecord
       event = Event.new
       event.content = "#{full_name} עבר.ה מ#{Group.find(group_id_was).name} אל #{Group.find(group_id).name}"
       event.staff_id = mifal.staffs.first.id
-      event.eventable_type = "Group"
-      event.eventable_id = group_id
+      event.eventable_type = "Mifal"
+      event.eventable_id = mifal.id
       event.save
     end
     yield #kid.save
@@ -33,8 +33,8 @@ class Kid < ApplicationRecord
     event = Event.new
     event.content = "#{full_name} עזב.ה את המפעל"
     event.staff_id = mifal.staffs.first.id
-    event.eventable_type = "Group"
-    event.eventable_id = group_id
+    event.eventable_type = "Mifal"
+    event.eventable_id = mifal.id
     event.save
   end
 
