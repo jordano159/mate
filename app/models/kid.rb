@@ -17,7 +17,7 @@ class Kid < ApplicationRecord
   end
 
   def create_kid_moved_event
-    if group_id_changed?
+    if group_id_changed? && group_id_was.present?
       event = Event.new
       event.content = "#{full_name} עבר.ה מ#{Group.find(group_id_was).name} אל #{Group.find(group_id).name}"
       event.staff_id = mifal.staffs.first.id
