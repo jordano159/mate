@@ -32,16 +32,20 @@
     <li><%= @kid.taz %></li>
     <li><%= @kid.grade %></li>
     <li><%= @kid.sex %></li>
-    <li><%= @kid.phone %></li>
+    <li><%= link_to @kid.phone, "tel:#{@kid.phone}" %></li>
+    <%# if mobile_device? %>
+    <a href="whatsapp://send?text=<%= " " %>&phone=972<%= @kid.phone %>" data-action="share/whatsapp/share"><%# image_tag "whatsapp", width: "32px" %></a>
+    <!-- <a href="tel://0<%= @kid.phone %>" ><i class="fa fa-phone fa-lg fa-2x"></i></a> -->
+    <%# end %>
     <li><%= @kid.medical %></li>
     <li><%= @kid.meds %></li>
     <li><%= @kid.food %></li>
     <li><%= @kid.city %></li>
     <li><%= @kid.ken %></li>
     <li><%= @kid.parent_1 %></li>
-    <li><%= @kid.parent_1_phone %></li>
+    <li><%= link_to @kid.parent_1_phone, "tel:#{@kid.parent_1_phone}" if @kid.parent_1_phone.present? %></li>
     <li><%= @kid.parent_2 %></li>
-    <li><%= @kid.parent_2_phone %></li>
+    <li><%= link_to @kid.parent_2_phone, "tel:#{@kid.parent_2_phone}" if @kid.parent_2_phone.present? %></li>
     <li><%= @kid.size %></li>
     <li><%= @kid.shabat %></li>
     <li><%= @kid.parents %></li>
