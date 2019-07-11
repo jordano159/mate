@@ -24,7 +24,9 @@
             <div>
               <%= yield %>
             </div>
-            <%= error_btn %>
+            <% if mobile_device? %>
+              <%= error_btn %>
+            <% end %>
         </div>
     </div>
   </body>
