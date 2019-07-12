@@ -49,7 +49,7 @@ class KidsController < ApplicationController
 
   # GET /kids/1/edit
   def edit
-    @mifal = current_staff.staffable
+    @mifal = @kid.mifal
     @groups = @mifal.groups
   end
 
