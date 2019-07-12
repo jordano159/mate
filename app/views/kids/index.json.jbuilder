@@ -3,7 +3,7 @@ json.set! :data do
     json.first_name "#{link_to kid.name, kid}"
     json.last_name "#{kid.last_name}"
     json.full_name "#{link_to kid.full_name, kid}"
-    json.phone "#{kid.phone}"
+    json.phone "#{link_to kid.phone, 'tel:#{kid.phone}' if kid.phone.present?}"
     json.medical "#{kid.medical}"
     json.meds "#{kid.meds}"
     json.food "#{kid.food}"
