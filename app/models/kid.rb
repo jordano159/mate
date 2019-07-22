@@ -31,7 +31,7 @@ class Kid < ApplicationRecord
 
   def create_kid_left_event
     event = Event.new
-    event.content = "#{full_name} עזב.ה את המפעל"
+    event.content = "#{full_name} מ#{Group.find(group_id).name} עזב.ה את המפעל"
     event.staff_id = mifal.staffs.first.id
     event.eventable_type = "Mifal"
     event.eventable_id = mifal.id
@@ -53,6 +53,7 @@ class Kid < ApplicationRecord
       kid.group_id = Staff.find_by(username: "קבוצה #{kid.group_id} #{mifal.name}").staffable.id if kid.group_id.present?
       kid.mifal_id = mifal.id
       kid.city = kid.city.strip if kid.city.present?
+      kid.ken = "קן #{kid.ken}"
       kid.save!
     end
   end

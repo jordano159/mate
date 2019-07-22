@@ -65,7 +65,7 @@
         <% end %>
         <td><%= link_to 'עריכה', edit_check_path(check), class: "btn btn-warning" %></td>
         <% if @level > 1 %>
-          <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'את/ה בטוח/ה שאת/ה רוצה למחוק את הנוכחות הזאת?' }, class: "btn btn-danger"  %></td>
+          <td><%= link_to 'מחיקה', check, method: :delete, class: "btn btn-danger"  %></td>
         <% end %>
       </tr>
     <% end %>

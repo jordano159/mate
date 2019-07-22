@@ -33,6 +33,7 @@ class ChecksController < ApplicationController
       @check = Check.new
       @bus = Bus.find(params[:bus])
       @kids = @bus.kids.order(:ken)
+      @check.name = "נוכחות בתהליך יצירה"
       @check.bus_id = @bus.id
       @check.kids << @kids
       @check.approved = true
@@ -40,6 +41,7 @@ class ChecksController < ApplicationController
     else
       @check = Check.new
       @group = Group.find(current_staff.staffable_id)
+      @check.name = "נוכחות בתהליך יצירה"
       @check.group_id = @group.id
       @kids = @group.kids.order(:ken)
       @check.kids << @kids
