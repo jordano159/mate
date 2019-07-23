@@ -107,7 +107,7 @@ class KidsController < ApplicationController
     @kid = Kid.find(params[:id])
     @kid.status = params[:value]
     @kid.save
-    redirect_to kids_url
+    redirect_to @kid
   end
 
   # def import
