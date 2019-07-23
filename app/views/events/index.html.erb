@@ -1,14 +1,13 @@
 <h1>יומן אירועים</h1>
 
-<%= link_to  'ייצוא הטבלה לאקסל', events_path(format: :xlsx), class: "btn btn-primary" if !current_staff.user? %>
-<%= link_to 'אירוע חדש', new_event_path, class: "btn btn-primary" %>
+<%# link_to  'ייצוא הטבלה לאקסל', events_path(format: :xlsx), class: "btn btn-primary" if !current_staff.user? %>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-events" data-source="<%= url_for(format: :json)%>">
     <thead class="thead-dark">
       <tr>
         <th data-data="content">פירוט</th>
-        <th data-data="date">תאריך</th>
+        <th data-data="date" data-orderable="false">תאריך</th>
         <th data-data="made">נוצר על ידי</th>
         <th data-data="belongs">שייך ל</th>
         <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
@@ -17,3 +16,5 @@
 
   </table>
 </div>
+
+<%= link_to 'אירוע חדש', new_event_path, class: "btn btn-primary" %>

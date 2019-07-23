@@ -40,9 +40,9 @@ class ChecksController < ApplicationController
       @check.save(validate: false)
     else
       @check = Check.new
-      @group = Group.find(current_staff.staffable_id)
-      @check.name = "נוכחות בתהליך יצירה"
+      @group = Group.find(params[:g_id])
       @check.group_id = @group.id
+      @check.name = "נוכחות בתהליך יצירה"
       @kids = @group.kids.order(:ken)
       @check.kids << @kids
       @check.save(validate: false)

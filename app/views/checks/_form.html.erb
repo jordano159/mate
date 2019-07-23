@@ -7,10 +7,9 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs">
-    <% names = [["בדיקה", "בדיקה &#128747;".html_safe],["נוכחות בוקר","נוכחות בוקר &#9925;".html_safe], ["נוכחות צהריים","נוכחות צהריים &#127774;".html_safe],
-    ["נוכחות ערב", "נוכחות ערב &#127769;".html_safe], ["אירוע חירום","אירוע חירום &#9937;".html_safe], ["נוכחות אוטובוס","נוכחות אוטובוס &#9981;".html_safe]] %>
+    <% names = check_names %>
     <%= f.input :name, label: "שם הנוכחות", collection: names, input_html: {required: true}, label_method: :second, value_method: :first %>
-    <% causes = ["בבית מסיבות רפואיות ויחזור", "בבית מסיבות רפואיות ולא יחזור", "בבית מסיבות אישיות ויחזור", "בבית מסיבות אישיות ולא יחזור", "פינוי רפואי", "מרפאה", "אחר"] %>
+    <% causes = check_causes %>
     <br />
     <%= f.simple_fields_for :attendances do |ff| %>
       <div class="check_div">

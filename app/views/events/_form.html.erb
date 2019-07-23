@@ -1,35 +1,7 @@
 <%= simple_form_for([@eventable, @event], html: { class: 'form-inline' }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-  <% case @level  %>
-    <% when 1 %>
-      <% options = [['קבוצות:',[[current_staff.staffable.name, current_staff.staffable.id]]]] %>
-    <% when 2 %>
-      <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id)],
-                    ['ראשים:',[[current_staff.staffable.name, current_staff.staffable.id]]]] %>
-    <% when 3 %>
-      <% options = [['קבוצות:',current_staff.staffable.groups.pluck(:name, :id)],
-                    ['ראשים:',current_staff.staffable.heads.pluck(:name, :id)],
-                    ['צירים:',[[current_staff.staffable.name, current_staff.staffable.id]]]] %>
-    <% when 4 %>
-      <% if current_staff.vip? %>
-        <% options = [
-                      ['קבוצות:',current_staff.staffable.groups.pluck(:name, :id)],
-                      ['ראשים:',current_staff.staffable.heads.pluck(:name, :id)],
-                      ['צירים:',current_staff.staffable.axes.pluck(:name, :id)],
-                      ['מפעל:',[[current_staff.staffable.name, current_staff.staffable.id]]]
-                      ] %>
-      <% end %>
-      <% when 5 %>
-        <% if current_staff.admin? %>
-          <% options = [
-                        ['קבוצות:',Group.all.pluck(:name, :id)],
-                        ['ראשים:',Head.all.pluck(:name, :id)],
-                        ['צירים:',Axis.all.pluck(:name, :id)],
-                        ['מפעלים:',Mifal.all.pluck(:name, :id)]
-                        ] %>
-        <% end %>
-  <% end %>
+  <% options = event_options %>
   <div class="form-inputs">
     <%= f.input :content, label: "פירוט:" %>
     <%= f.input :eventable_type, as: :hidden %>
