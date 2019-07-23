@@ -37,5 +37,7 @@
   </table>
 </div>
 </div>
-<% g_id = Group.find(current_staff.staffable.id) %>
-<%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => g_id), class: "btn btn-primary" if @level == 1 %>
+<% if @level == 1 %>
+  <% g_id = Group.find(current_staff.staffable.id) %>
+  <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => g_id), class: "btn btn-primary" %>
+<% end %>
