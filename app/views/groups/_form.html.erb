@@ -26,12 +26,14 @@
   <div class="field">
     <%= form.input :name, label: " שם הקבוצה: " %>
   </div>
-  <div class="field">
-    <%= form.input_field :head_id, collection: @heads, input_html: { class: 'select' } %>
-  </div>
-  <div class="field">
-    <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: @mifal.kids, label_method: :full_name, value_method: :id %>
-  </div>
+  <% if @level > 3 %>
+    <div class="field">
+      <%= form.input_field :head_id, collection: @heads, input_html: { class: 'select' } %>
+    </div>
+    <div class="field">
+      <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: @mifal.kids, label_method: :full_name, value_method: :id %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= form.submit "שליחה" %>
   </div>

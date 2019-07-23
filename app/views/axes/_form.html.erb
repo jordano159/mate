@@ -21,12 +21,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.input :name %>
+    <%= form.input :name, label: "שם הציר" %>
   </div>
   <div class="field">
-    <%= form.input_field :head_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Head.all, label_method: :name, value_method: :id %>
+    <%= form.input_field :head_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Head.all, label_method: :name, value_method: :id if @level > 3 %>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "שליחה" %>
   </div>
 <% end %>

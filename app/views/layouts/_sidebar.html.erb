@@ -58,6 +58,24 @@
                   <li class="nav-item ">
                     <%= link_to "עריכת משתמש", edit_staff_registration_path, class: "nav-link" %>
                   </li>
+                  <% case @level
+                    when 1 %>
+                      <li class="nav-item ">
+                        <%= link_to "עריכת שם הקבוצה", edit_group_path(current_staff.staffable.id), class: "nav-link" %>
+                      </li>
+                    <% when 2 %>
+                      <li class="nav-item ">
+                        <%= link_to "עריכת שם הראש", edit_head_path(current_staff.staffable.id), class: "nav-link" %>
+                      </li>
+                    <% when 3 %>
+                      <li class="nav-item ">
+                        <%= link_to "עריכת שם הציר", edit_axis_path(current_staff.staffable.id), class: "nav-link" %>
+                      </li>
+                    <% when 4 %>
+                      <li class="nav-item ">
+                        <%= link_to "עריכת שם המפעל", edit_mifal_path(current_staff.staffable.id), class: "nav-link" %>
+                      </li>
+                  <% end %>
                   <li class="nav-item ">
                     <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
                   </li>

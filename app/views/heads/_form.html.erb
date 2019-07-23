@@ -23,15 +23,18 @@
       </ul>
     </div>
   <% end %>
+
   <div class="field">
     <%= form.input :name, label: "שם" %>
   </div>
-  <div class="field select">
-    <%= form.input :axis_id, collection: @axes, label: "שייך לציר" %>
-  </div>
-  <div class="field">
-    <%= form.input_field :group_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Group.all, label_method: :name, value_method: :id, label: "קבוצות ששיכות לראש" %>
-  </div>
+  <% if @level > 3 %>
+    <div class="field select">
+      <%= form.input :axis_id, collection: @axes, label: "שייך לציר" %>
+    </div>
+    <div class="field">
+      <%= form.input_field :group_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Group.all, label_method: :name, value_method: :id, label: "קבוצות ששיכות לראש" %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= form.submit "שליחה" %>
   </div>

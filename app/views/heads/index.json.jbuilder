@@ -2,7 +2,7 @@ json.set! :data do
   json.array! @heads do |head|
     json.name "#{link_to head.name, head}"
     json.url  "
-              #{link_to 'עריכה', edit_head_path(head), class: 'btn btn-warning' if current_staff.admin? || current_staff.vip?}
+              #{link_to 'עריכה', edit_head_path(head), class: 'btn btn-warning'}
               #{link_to 'מחיקה', head, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
               "
     json.head_counter "
