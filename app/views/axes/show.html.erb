@@ -14,6 +14,26 @@
   </table>
 </div>
 
+<% if @level == 3 %>
+<p>
+  סה"כ:
+  <strong class="total"></strong> מתוך <strong><%= @axis.mifal.kids.count %></strong>
+</p>
+<% end %>
+
+
+<script>
+  $(document).ready(function(){
+  var x = 0;
+  setTimeout(function(){
+    $(".for_sum").each(function(){
+    x += Number($(this).text());
+    })
+    $(".total").html(x);
+   }, 1000);
+  });
+</script>
+
   <strong>רכז.ת הציר:</strong>
   <table>
     <thead>

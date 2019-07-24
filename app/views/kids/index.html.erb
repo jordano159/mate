@@ -8,6 +8,20 @@
   <%= render 'filter' %>
 <% end %>
 
+<% if @level == 1 %>
+<strong>
+  <%= @kids.first.group.head.name %>
+</strong>
+<% counter = how_many_attending(@kids) %>
+יש <%= counter %> חניכימות נוכחימות מתוך <%= @kids.count %>
+<% percent = (counter.to_f / @kids.count.to_i * 100).to_i if @kids.exists? %>
+<% width = "width:#{percent}%" %>
+<div class="progress">
+  <div class="progress-bar" role="progressbar"  style=<%= width %>
+    aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= percent %>% נוכחות</div>
+  </div>
+<% end %>
+
 
 <% if current_staff.admin? || current_staff.vip? %>
 <%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>

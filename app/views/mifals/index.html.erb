@@ -13,4 +13,20 @@
   </table>
 </div>
 
+<p>
+  סה"כ:
+  <strong class="total"></strong> מתוך <strong><%= mifals_total %></strong>
+</p>
 <%= link_to 'מפעל חדש', new_mifal_path %>
+
+<script>
+  $(document).ready(function(){
+  var x = 0;
+  setTimeout(function(){
+    $(".for_sum").each(function(){
+    x += Number($(this).text());
+    })
+    $(".total").html(x);
+   }, 1000);
+  });
+</script>

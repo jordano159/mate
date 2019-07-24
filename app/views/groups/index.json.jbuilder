@@ -6,7 +6,7 @@ json.set! :data do
               #{link_to 'מחיקה', group, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
               "
     json.group_counter "
-     <strong>#{how_many_attending(group.kids)}</strong> מתוך <strong> #{group.kids.count} </strong>
+     <strong class='for_sum'>#{how_many_attending(group.kids)}</strong> מתוך <strong> #{group.kids.count} </strong>
     "
     if group.checks.exists?
       if group.checks.last.approved?

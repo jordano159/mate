@@ -7,8 +7,7 @@ json.set! :data do
               #{link_to 'מחיקה', mifal, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
               "
     json.mifal_counter "
-     <strong>#{how_many_attending(mifal.kids)}</strong> מתוך <strong> #{mifal.kids.count} </strong>
+     <strong class='for_sum'>#{how_many_attending(mifal.kids)}</strong> מתוך <strong> #{mifal.kids.count} </strong>
     "
   end
 end
-#{link_to  'מחיקה', mifal(format: :xlsx), method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
