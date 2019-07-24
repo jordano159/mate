@@ -55,6 +55,7 @@ gem 'wicked'
 gem 'geocoder'
 gem 'sidekiq'
 gem 'google_drive'
+gem 'ahoy_matey'
 
 
 
