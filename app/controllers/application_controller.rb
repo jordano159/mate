@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :clearence
   before_action :only_admin
   before_action :configure_permitted_parameters, if: :devise_controller?
+  after_action :track_action
 
   def home_page
     if staff_signed_in?
@@ -39,6 +40,10 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+  end
+
+  def track_action
+    ahoy.track "Processed #{controller_name}##{action_name}", request.filtered_parameters
   end
 
   private
