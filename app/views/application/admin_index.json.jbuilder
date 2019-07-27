@@ -7,7 +7,7 @@ json.set! :data do
       json.name "#{link_to staff.name, become}"
       json.url  "
                 #{link_to 'עריכה', edit, class: 'btn btn-warning'}
-                #{link_to 'מחיקה', delete, method: :delete, class: 'btn btn-danger'}
+                #{link_to 'מחיקה', delete, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: 'btn btn-danger'}
                 "
     else
       json.name "#{staff.name}"

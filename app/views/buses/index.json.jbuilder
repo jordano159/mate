@@ -3,7 +3,7 @@ json.set! :data do
     json.name "#{link_to bus.name, bus}"
     json.url  "
               #{link_to 'עריכה', edit_bus_path(bus), class: 'btn btn-warning' if current_staff.admin? || current_staff.vip?}
-              #{link_to 'מחיקה', bus, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
+              #{link_to 'מחיקה', bus, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
               "
     if bus.kids.exists?
       json.bus_counter "

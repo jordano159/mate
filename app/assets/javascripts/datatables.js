@@ -31,6 +31,7 @@ $.extend( $.fn.dataTable.defaults, {
   language: {
     url: "/he_he.lang"
   },
+  "order": [],
   "pageLength": 25,
   columnDefs: [
        { type: 'natural', targets: 0 }

@@ -19,7 +19,7 @@ json.set! :data do
     end
     json.url  "
               #{link_to 'עריכה', edit_kid_path(kid), class: 'btn btn-warning' if current_staff.admin? || current_staff.vip?}
-              #{link_to 'מחיקה', kid, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
+              #{link_to 'מחיקה', kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
               "
   end
 end

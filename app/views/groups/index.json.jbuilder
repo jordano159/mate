@@ -3,7 +3,7 @@ json.set! :data do
     json.name "#{link_to group.name, group}"
     json.url  "
               #{link_to 'עריכה', edit_group_path(group), class: 'btn btn-warning'}
-              #{link_to 'מחיקה', group, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
+              #{link_to 'מחיקה', group, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
               "
     json.group_counter "
      <strong class='for_sum'>#{how_many_attending(group.kids)}</strong> מתוך <strong> #{group.kids.count} </strong>

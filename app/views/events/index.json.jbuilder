@@ -9,7 +9,7 @@ json.set! :data do
     json.belongs "#{link_to event.eventable.name, event.eventable if event.eventable}"
     json.url  "
               #{link_to 'עריכה', edit_event_path(event), class: 'btn btn-warning'}
-              #{link_to 'מחיקה', event, method: :delete, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
+              #{link_to 'מחיקה', event, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
               "
   end
 end
