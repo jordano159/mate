@@ -6,6 +6,9 @@ class ChecksController < ApplicationController
   # GET /checks
   # GET /checks.json
   def index
+    if params[:delete_in_progress]
+      current_staff.staffable.delete_in_progress
+    end
     @checks = if params[:search]
                 Check.search(params[:search]).order('created_at DESC')
               elsif params[:buses]

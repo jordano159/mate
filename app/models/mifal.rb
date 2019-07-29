@@ -25,7 +25,7 @@ class Mifal < ApplicationRecord
   end
 
   def delete_in_progress
-    self.checks.where(name: "נוכחות בתהליך יצירה").where("checks.created_at >= ?", 1.day.ago).delete_all
+    self.checks.where(name: "נוכחות בתהליך יצירה").where("checks.created_at <= ?", 20.minutes.ago).delete_all
   end
 
   # מחזיר ערים עם קואורדינטות
