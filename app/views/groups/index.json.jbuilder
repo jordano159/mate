@@ -12,7 +12,7 @@ json.set! :data do
       if group.checks.last.approved?
         json.last_attendence "<span style='color:green;'>  #{group.checks.last.name} </span> <i class='fa fa-check-circle'></i>"
       else
-       json.last_attendence "<span style='color:red;'>  #{group.checks.last.name} </span>"
+       json.last_attendence "<span style='color:red;'>  #{link_to group.checks.last.name, check_path(Check.find(group.checks.last.id)), class: "check-link"} </span>"
       end
     else
       json.last_attendence "לא נעשתה עדיין נוכחות..."

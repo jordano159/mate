@@ -24,6 +24,10 @@ class Mifal < ApplicationRecord
     return my_events
   end
 
+  def delete_in_progress
+    self.checks.where(name: "נוכחות בתהליך יצירה").where("checks.created_at >= ?", 1.day.ago).delete_all
+  end
+
   # מחזיר ערים עם קואורדינטות
   def city_list
     names = self.kids.pluck(:city).uniq
