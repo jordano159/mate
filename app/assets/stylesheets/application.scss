@@ -7,7 +7,15 @@
 @import "font-awesome";
 @import "checks";
 
+.check-link {
+  text-decoration: none;
+  color: red;
+}
 
+.check-link:hover {
+  text-decoration: none;
+  color: red;
+}
 
 html {
   direction: rtl;
