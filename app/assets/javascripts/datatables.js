@@ -33,9 +33,13 @@ $.extend( $.fn.dataTable.defaults, {
   },
   "order": [],
   "pageLength": 25,
-  // columnDefs: [
-  //      { type: 'natural', targets: 0 }
-  //    ],
+  columnDefs: [{
+     "targets": "_all",
+  "createdCell": function (td, cellData, rowData, row, col) {
+        $(td).attr('class', col);},
+
+       // { type: 'natural', targets: 0 }
+     }],
   //dom:
   //  "<'row'<'col-sm-4 text-left'f><'right-action col-sm-8 text-right'<'buttons'B> <'select-info'> >>" +
   //  "<'row'<'dttb col-12 px-0'tr>>" +

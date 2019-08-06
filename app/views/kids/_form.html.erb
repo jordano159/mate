@@ -24,6 +24,9 @@
     <div class="column">
       <%= form.input :sex, label: "מין" %>
     </div>
+    <div class="column">
+      <%= form.input :mifal_id, collection: Mifal.all, label: "מפעל" %>
+    </div>
   </div>
   <div class="row">
     <div class="column">

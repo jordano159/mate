@@ -126,6 +126,6 @@ class KidsController < ApplicationController
   def kid_params
     params.require(:kid).permit(:name, :group_id, :last_name, :sex, :phone, :medical,
                                 :meds, :food, :city, :ken, :parent_1, :parent_1_phone, :parent_2, :parent_2_phone, :size, :shabat,
-                                :parents, :swim, :exits, :comments, :status, :cause, :taz, :grade)
+                                :parents, :swim, :exits, :comments, :status, :cause, :taz, :grade, :mifal_id)
   end
 end
