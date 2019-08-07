@@ -4,7 +4,10 @@ module ApplicationHelper
   def how_many_attending(object)
     counter = 0
     object.each do |kid|
-      counter += kid.status unless kid.status.nil?
+      counter += kid.status unless kid.status.nil? || kid.status == 2
+      if kid.status == 2
+        counter += 1
+      end
     end
     counter
   end

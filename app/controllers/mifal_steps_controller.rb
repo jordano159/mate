@@ -29,6 +29,12 @@ class MifalStepsController < ApplicationController
       axis_name_single = params[:mifal][:axis_name_single]
       axis_name_plural = params[:mifal][:axis_name_plural]
       @mifal.axis_name = {single: axis_name_single, plural: axis_name_plural}
+      guide_name_single = params[:mifal][:guide_name_single]
+      guide_name_plural = params[:mifal][:guide_name_plural]
+      @mifal.guide_name = {single: guide_name_single, plural: guide_name_plural}
+      head_head_name_single = params[:mifal][:head_head_name_single]
+      head_head_name_plural = params[:mifal][:head_head_name_plural]
+      @mifal.head_head_name = {single: head_head_name_single, plural: head_head_name_plural}
       @mifal.save
     when :axised
       @mifal.axised! # Set stage
@@ -90,6 +96,6 @@ class MifalStepsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def mifal_params
-      params.require(:mifal).permit(:name, :has_buses, :has_events, :has_approve, :has_axes, :has_late, axis_ids: [])
+      params.require(:mifal).permit(:name, :has_buses, :has_events, :has_approve, :has_axes, :has_late, :checks_num, axis_ids: [])
     end
 end

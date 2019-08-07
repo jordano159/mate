@@ -47,6 +47,17 @@
   </div>
 
   <div class="field">
+    <%= form.label :checks_num, "מה תדירות הנוכחות?" %>
+    <div class="container">
+      <div class="button-wrap">
+        <%= form.collection_radio_buttons :checks_num, [[true, '<h1>פעם ביום</h1>'.html_safe] ,[false, '<h1>כמה פעמים ביום</h1>'.html_safe]],
+        :first, :last  %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="field">
     <%= form.label :group_name_single, "שם הרמה הראשונה ביחיד (למשל קבוצה):" %>
     <%= form.text_field :group_name_single, value: @mifal.group_name[:single] %>
   </div>
@@ -55,12 +66,28 @@
     <%= form.text_field :group_name_plural, value: @mifal.group_name[:plural] %>
   </div>
   <div class="field">
+    <%= form.label :guide_name_single, "שם האחראי על הרמה הראשונה ביחיד (למשל מדריך):" %>
+    <%= form.text_field :guide_name_single, value: @mifal.guide_name[:single] %>
+  </div>
+  <div class="field">
+    <%= form.label :guide_name_plural, "שם האחראי על הרמה הראשונה ברבים:" %>
+    <%= form.text_field :guide_name_plural, value: @mifal.guide_name[:plural] %>
+  </div>
+  <div class="field">
     <%= form.label :head_name_single, "שם הרמה השנייה ביחיד (למשל ראש):" %>
     <%= form.text_field :head_name_single, value: @mifal.head_name[:single] %>
   </div>
   <div class="field">
     <%= form.label :head_name_plural, "שם הרמה השנייה ברבים:" %>
     <%= form.text_field :head_name_plural, value: @mifal.head_name[:plural] %>
+  </div>
+  <div class="field">
+    <%= form.label :head_head_name_single, "שם האחראי על הרמה השנייה ביחיד (למשל ראשראש):" %>
+    <%= form.text_field :head_head_name_single, value: @mifal.head_head_name[:single] %>
+  </div>
+  <div class="field">
+    <%= form.label :head_head_name_plural, "שם האחראי על הרמה השנייה ברבים:" %>
+    <%= form.text_field :head_head_name_plural, value: @mifal.head_head_name[:plural] %>
   </div>
   <div class="field axes">
     <%= form.label :axis_name_single, "שם הרמה השלישית ביחיד (למשל ציר):" %>

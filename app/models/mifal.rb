@@ -5,6 +5,8 @@ class Mifal < ApplicationRecord
   serialize :head_name, Hash
   serialize :axis_name, Hash
   serialize :columns, Hash
+  serialize :guide_name, Hash
+  serialize :head_head_name, Hash
   has_many :axes, dependent: :destroy
   has_many :heads, through: :axes
   has_many :groups, through: :heads
