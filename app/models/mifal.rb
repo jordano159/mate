@@ -1,5 +1,5 @@
 class Mifal < ApplicationRecord
-  enum stage: [ :axised, :headed, :grouped, :imported_kids ]
+  enum stage: [ :settings, :axised, :headed, :grouped, :imported_kids ]
   serialize :bus_proposal, Hash
   serialize :group_name, Hash
   serialize :head_name, Hash

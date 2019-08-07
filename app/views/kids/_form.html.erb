@@ -77,7 +77,7 @@
       <%= form.input :comments, label: "הערות" %>
     </div>
     <div class="column">
-      <%= form.input :group_id, collection: @groups, label: "קבוצה" %>
+      <%= form.input :group_id, collection: @groups, label: "#{@level_names[0]}" %>
     </div>
     <div class="column">
       <%= form.input :grade, label: "שכבה" %>

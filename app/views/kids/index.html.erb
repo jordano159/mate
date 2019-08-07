@@ -113,7 +113,7 @@ $('#10').click(function() {
         <th data-data="exits" class="7">כניסות ויציאות</th>
         <th data-data="status" class="8" data-search="לא נוכח">סטטוס</th>
         <th data-data="cause" class="9">סיבה</th>
-        <% if @level > 1 %> <th data-data="group" class="10">קבוצה</th> <% end %>
+        <% if @level > 1 %> <th data-data="group" class="10"><%= @level_names[0] %></th> <% end %>
       </tr>
     </thead>
 

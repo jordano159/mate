@@ -2,13 +2,13 @@ class MifalStepsController < ApplicationController
   include Wicked::Wizard
   before_action :check_permission
 
-  steps :axised, :headed, :grouped, :imported_kids, :done
+  steps :settings, :axised, :headed, :grouped, :imported_kids, :done
 
   def show
     @mifal = current_staff.staffable
     case step
     when :done
-      redirect_to buses_path
+      redirect_to root_path
     else
       render_wizard
     end
@@ -17,6 +17,19 @@ class MifalStepsController < ApplicationController
   def update
     @mifal = current_staff.staffable
     case step
+    when :settings
+      @mifal.settings! # Set stage
+      @mifal.update(mifal_params)
+      group_name_single = params[:mifal][:group_name_single]
+      group_name_plural = params[:mifal][:group_name_plural]
+      @mifal.group_name = {single: group_name_single, plural: group_name_plural}
+      head_name_single = params[:mifal][:head_name_single]
+      head_name_plural = params[:mifal][:head_name_plural]
+      @mifal.head_name = {single: head_name_single, plural: head_name_plural}
+      axis_name_single = params[:mifal][:axis_name_single]
+      axis_name_plural = params[:mifal][:axis_name_plural]
+      @mifal.axis_name = {single: axis_name_single, plural: axis_name_plural}
+      @mifal.save
     when :axised
       @mifal.axised! # Set stage
       axis_num = params[:mifal][:axis_num].to_i
@@ -38,12 +51,12 @@ class MifalStepsController < ApplicationController
       @mifal.axes.each_with_index do |axis,i|
         head_nums[i].times do
           counter += 1
-          Head.create(name: "ראש #{counter} #{@mifal.name}", axis_id: axis.id) if Head.find_by(name: "ראש #{counter} #{@mifal.name}").nil?
-          next unless Staff.find_by(username: "ראש #{counter} #{@mifal.name}").nil?
+          Head.create(name: "#{@level_names[3]} #{counter} #{@mifal.name}", axis_id: axis.id) if Head.find_by(name: "#{@level_names[3]} #{counter} #{@mifal.name}").nil?
+          next unless Staff.find_by(username: "#{@level_names[3]} #{counter} #{@mifal.name}").nil?
 
           Staff.create(name: "ראשראשית #{counter} #{@mifal.name}", email: "h#{@mifal.name}#{counter}@gmail.com", password: '123123',
-            password_confirmation: '123123', role: 'user', username: "ראש #{counter} #{@mifal.name}", staffable_type: 'Head',
-            staffable_id: Head.find_by(name: "ראש #{counter} #{@mifal.name}").id)
+            password_confirmation: '123123', role: 'user', username: "#{@level_names[3]} #{counter} #{@mifal.name}", staffable_type: 'Head',
+            staffable_id: Head.find_by(name: "#{@level_names[3]} #{counter} #{@mifal.name}").id)
         end
       end
     when :grouped
@@ -56,12 +69,12 @@ class MifalStepsController < ApplicationController
       @mifal.heads.each_with_index do |head,i|
         group_nums[i].times do
           counter += 1
-          Group.create(name: "קבוצה #{counter} #{@mifal.name}", head_id: head.id) if Group.find_by(name: "קבוצה #{counter} #{@mifal.name}").nil?
-          next unless Staff.find_by(username: "קבוצה #{counter} #{@mifal.name}").nil?
+          Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", head_id: head.id) if Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+          next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
 
           Staff.create(name: "מדריכת #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
-                        role: 'user', username: "קבוצה #{counter} #{@mifal.name}", staffable_type: 'Group',
-                        staffable_id: Group.find_by(name: "קבוצה #{counter} #{@mifal.name}").id)
+                        role: 'user', username: "#{ @level_names[0] } #{counter} #{@mifal.name}", staffable_type: 'Group',
+                        staffable_id: Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").id)
         end
       end
     end
@@ -71,12 +84,12 @@ class MifalStepsController < ApplicationController
 
   private
     def check_permission
-      unless current_staff.admin? || current_staff.vip?
+      unless current_staff.vip?
         redirect_to root_path
       end
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def mifal_params
-      params.require(:mifal).permit(:name, axis_ids: [])
+      params.require(:mifal).permit(:name, :has_buses, :has_events, :has_approve, :has_axes, :has_late, axis_ids: [])
     end
 end

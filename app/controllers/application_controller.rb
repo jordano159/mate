@@ -3,10 +3,28 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_staff!
   before_action :level
+  before_action :level_names
   before_action :clearence
   before_action :only_admin
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :track_action
+
+  def level_names
+    if staff_signed_in?
+      if current_staff.vip?
+        mifal = current_staff.staffable
+      elsif @level < 4
+        mifal = current_staff.staffable.mifal
+      end
+      unless current_staff.admin?
+        @level_names = [mifal.group_name[:single], mifal.group_name[:plural],
+                        mifal.head_name[:single], mifal.head_name[:plural],
+                        mifal.axis_name[:single], mifal.axis_name[:plural]]
+      else
+        @level_names = %w(קבוצה קבוצות ראש ראשים ציר צירים)
+      end
+    end
+  end
 
   def home_page
     if staff_signed_in?

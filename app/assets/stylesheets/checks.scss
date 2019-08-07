@@ -9,6 +9,7 @@ $green: #2ECC71;
 $blue: #4183D7;
 $dark-blue: #00008B;
 $small: 40em;
+$gold: #FFD700;
 
 * {
   box-sizing: border-box;
@@ -102,6 +103,15 @@ input[value="לא"]:checked + .collection_radio_buttons {
   color: $light;
   &:hover {
     background: darken($red, 5%);
+    color: darken($light, 5%);
+  }
+}
+
+input[value="2"]:checked + .collection_radio_buttons {
+  background: $gold;
+  color: $light;
+  &:hover {
+    background: darken($gold, 5%);
     color: darken($light, 5%);
   }
 }

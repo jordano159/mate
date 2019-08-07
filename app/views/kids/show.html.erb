@@ -103,7 +103,7 @@
         <td><%= @kid.comments %></td>
       </tr>
       <tr>
-        <td>קבוצה</td>
+        <td><%= @level_names[0] %></td>
         <% if @kid.group %>
         <td><%= link_to @kid.group.name, @kid.group %></td>
         <% end %>

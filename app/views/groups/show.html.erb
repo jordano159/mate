@@ -54,5 +54,5 @@
 <%= link_to 'חזרה לרשימה', groups_path, class: "btn btn-primary" %>
 <% next_id = @group.id + 1 %>
 <% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>
-  <%= link_to 'הקבוצה הבאה', group_path(next_id), class: "btn btn-primary" %>
+  <%= link_to "ה#{@level_names[0]} הבאה", group_path(next_id), class: "btn btn-primary" %>
 <% end %>

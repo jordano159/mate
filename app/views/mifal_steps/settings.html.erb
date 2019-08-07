@@ -1,0 +1,92 @@
+<h1>הגדרות מפעל</h1>
+<%= render layout: 'form' do |form| %>
+  <div class="field">
+    <%= form.label :has_buses, "צריך ניהול אוטובוסים?" %>
+    <div class="container">
+      <div class="button-wrap">
+        <%= form.collection_radio_buttons :has_buses, [[true, '<h1>כן</h1>'.html_safe] ,[false, '<h1>לא</h1>'.html_safe]],
+        :first, :last, { checked: @mifal.has_buses }  %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :has_events, "צריך יומן אירועים?" %>
+    <div class="container">
+      <div class="button-wrap">
+        <%= form.collection_radio_buttons :has_events, [[true, '<h1>כן</h1>'.html_safe] ,[false, '<h1>לא</h1>'.html_safe]],
+        :first, :last  %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :has_approve, "צריך שהרמה השנייה תאשר נוכחות?" %>
+    <div class="container">
+      <div class="button-wrap">
+        <%= form.collection_radio_buttons :has_approve, [[true, '<h1>כן</h1>'.html_safe] ,[false, '<h1>לא</h1>'.html_safe]],
+        :first, :last  %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :has_axes, "צריך רמה שלישית?" %>
+    <div class="container">
+      <div class="button-wrap">
+        <%= form.collection_radio_buttons :has_axes, [[true, '<h1>כן</h1>'.html_safe] ,[false, '<h1>לא</h1>'.html_safe]],
+        :first, :last  %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :has_late, "צריך אפשרות לסמן איחורים?" %>
+    <div class="container">
+      <div class="button-wrap">
+        <%= form.collection_radio_buttons :has_late, [[true, '<h1>כן</h1>'.html_safe] ,[false, '<h1>לא</h1>'.html_safe]],
+        :first, :last  %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :group_name_single, "שם הרמה הראשונה ביחיד (למשל קבוצה):" %>
+    <%= form.text_field :group_name_single, value: @mifal.group_name[:single] %>
+  </div>
+  <div class="field">
+    <%= form.label :group_name_plural, "שם הרמה הראשונה ברבים:" %>
+    <%= form.text_field :group_name_plural, value: @mifal.group_name[:plural] %>
+  </div>
+  <div class="field">
+    <%= form.label :head_name_single, "שם הרמה השנייה ביחיד (למשל ראש):" %>
+    <%= form.text_field :head_name_single, value: @mifal.head_name[:single] %>
+  </div>
+  <div class="field">
+    <%= form.label :head_name_plural, "שם הרמה השנייה ברבים:" %>
+    <%= form.text_field :head_name_plural, value: @mifal.head_name[:plural] %>
+  </div>
+  <div class="field axes">
+    <%= form.label :axis_name_single, "שם הרמה השלישית ביחיד (למשל ציר):" %>
+    <%= form.text_field :axis_name_single, value: @mifal.axis_name[:single] %>
+  </div>
+  <div class="field axes">
+    <%= form.label :axis_name_plural, "שם הרמה השלישית ברבים:" %>
+    <%= form.text_field :axis_name_plural, value: @mifal.axis_name[:plural] %>
+  </div>
+<% end %>
+<span style="display: none;" id="axes">
+  <%= @mifal.has_axes %>
+</span>
+<style>
+  input[type="radio"]{
+    display: block !important;
+  }
+</style>
+
+<script>
+$(document).ready(function(){
+console.log($("#axes").text());
+  if ($("#axes").text() == 'false'){
+    $('.axes').hide(100);
+  }else{
+    $('.axes').show(100);
+  };
+});
+</script>

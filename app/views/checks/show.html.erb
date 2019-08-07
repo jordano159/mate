@@ -5,7 +5,7 @@
 </p>
 
   <% if @check.bus_id.blank? %>
-    <p><strong>קבוצה:</strong>
+    <p><strong><%= @level_names[0] %>:</strong>
     <%= Group.find(@check.group_id).name %></p>
     <p><strong>סטטוס:</strong>
     <% if @check.approved? %>
@@ -61,11 +61,19 @@
         <tr>
           <td><%= link_to kid.full_name, kid %></td>
           <td>
-            <% if @check.attendances.find_by(kid_id: kid.id).status == 1 %>
+            <%= case @check.attendances.find_by(kid_id: kid.id).status
+            when 0
+              heb_status = "לא נוכח/ת"
+            when 1
+              heb_status = "נוכח/ת"
+            when 2
+              heb_status = "איחר/ה"
+            end %>
+            <!-- <% if @check.attendances.find_by(kid_id: kid.id).status == 1 %>
               <%= string1 = "נוכח/ת" %>
             <% else %>
               <%= string1 = "לא נוכח/ת" %>
-            <% end %>
+            <% end %> -->
           </td>
           <td><%= @check.attendances.find_by(kid_id: kid.id).cause %></td>
           <!-- <td class="previous" style="display:none;">

@@ -22,8 +22,10 @@
       <% end %>
       <div class="container">
         <div class="button-wrap">
-          <%= ff.collection_radio_buttons :status, [["1", '<h1>נוכח/ת</h1>'.html_safe] ,["0", '<h1>לא נוכח/ת</h1>'.html_safe]],
-          :first, :last  %>
+          <%= ff.collection_radio_buttons :status, [["0", '<h1>לא נוכח/ת</h1>'.html_safe],
+                                                    ["1", '<h1>נוכח/ת</h1>'.html_safe],
+                                                    ["2", '<h1>איחר/ה</h1>'.html_safe]],
+                                          :first, :last  %>
         </div>
       </div>
       <%= ff.input :cause, label: "סיבת היעדרות:", collection: causes, input_html: {style:"display:none;", class: 'check_r' }, label_html: {style:"display:none;", class: 'label_r' } %>

@@ -14,7 +14,7 @@
       </li>
       <% if @level == 2 %>
         <li class="nav-item ">
-          <%= link_to "הקבוצות שלי", root_path, class: "nav-link" %>
+          <%= link_to "ה#{ @level_names[1] } שלי", root_path, class: "nav-link" %>
         </li>
       <% end %>
       <li class="nav-item ">
@@ -28,37 +28,41 @@
           <%= link_to "מפעלים", mifals_path, class: "nav-link" %>
         </li>
       <% end %>
-        <% if current_staff.admin? || current_staff.vip? %>
-        <li class="nav-item ">
-          <%= link_to "צירים", axes_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item ">
-          <%= link_to "ראשים", heads_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item ">
-          <%= link_to "קבוצות", groups_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item ">
-          <%= link_to "אוטובוסים", buses_path, class: "nav-link" %>
-        </li>
-        <% end %>
-        <% if @level > 1 %>
-        <li class="nav-item ">
-          <%= link_to "יומן אירועים", events_path, class: "nav-link" %>
-        </li>
-        <% end %>
-        <% if current_staff.vip? %>
-        <li class="nav-item ">
-          <%= link_to "אשף יצירת מפעל", mifal_steps_path, class: "nav-link" %>
-        </li>
-        <% end %>
+      <% if current_staff.admin? || current_staff.vip? %>
+      <% if current_staff.admin? || current_staff.staffable.has_axes %>
+      <li class="nav-item ">
+        <%= link_to "צירים", axes_path, class: "nav-link" %>
+      </li>
+      <% end %>
+      <li class="nav-item ">
+        <%= link_to "#{@level_names[4]}", heads_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item ">
+        <%= link_to "#{ @level_names[1] }", groups_path, class: "nav-link" %>
+      </li>
+      <% if current_staff.admin? || current_staff.staffable.has_buses %>
+          <li class="nav-item ">
+            <%= link_to "אוטובוסים", buses_path, class: "nav-link" %>
+          </li>
+      <% end %>
+      <% end %>
+      <% if current_staff.admin? || current_staff.staffable.has_events %>
+      <li class="nav-item ">
+        <%= link_to "יומן אירועים", events_path, class: "nav-link" %>
+      </li>
+      <% end %>
+      <% if current_staff.vip? %>
+      <li class="nav-item ">
+        <%= link_to "אשף יצירת מפעל", mifal_steps_path, class: "nav-link" %>
+      </li>
+      <% end %>
           <li class="nav-item ">
             <%= link_to "עריכת משתמש", edit_staff_registration_path, class: "nav-link" %>
           </li>
           <% case @level
             when 1 %>
               <li class="nav-item ">
-                <%= link_to "עריכת שם הקבוצה", edit_group_path(current_staff.staffable.id), class: "nav-link" %>
+                <%= link_to "עריכת שם ה#{@level_names[0]}", edit_group_path(current_staff.staffable.id), class: "nav-link" %>
               </li>
             <% when 2 %>
               <li class="nav-item ">
