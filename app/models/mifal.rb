@@ -1,6 +1,10 @@
 class Mifal < ApplicationRecord
   enum stage: [ :axised, :headed, :grouped, :imported_kids ]
   serialize :bus_proposal, Hash
+  serialize :group_name, Hash
+  serialize :head_name, Hash
+  serialize :axis_name, Hash
+  serialize :columns, Hash
   has_many :axes, dependent: :destroy
   has_many :heads, through: :axes
   has_many :groups, through: :heads
