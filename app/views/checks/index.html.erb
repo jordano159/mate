@@ -31,7 +31,9 @@
           <th>אוטובוס</th>
         <% else %>
           <th><%= @level_names[0] %></th>
-          <th>מאושר?</th>
+          <% if current_staff.admin? || current_staff.vip? && current_staff.staffable.mifal.has_approve %>
+            <th>מאושר?</th>
+          <% end %>
         <% end %>
         <th>עריכה</th>
         <% if @level > 1 %>
@@ -54,7 +56,7 @@
           <% end %>
           </td>
         <% end %>
-        <% unless params[:buses] %>
+        <% if params[:buses].blank? && (current_staff.staffable.mifal.has_approve || current_staff.admin?) %>
         <td>
           <% if check.approved? %>
             <span style="color:green;">מאושר</span> <i class="fa fa-check-circle"></i>

@@ -96,8 +96,10 @@
     <div class="column">
       <%= form.input :swim, as: :radio_buttons, label: "יודע.ת לשחות?", collection: ["כן", "לא"] %>
     </div>
+    <% status_options = [["לא נוכח/ת", "0"], ["נוכח/ת","1"]] %>
+    <% status_options << ["איחר/ה", "2"] if kid.mifal.has_late %>
     <div class="column">
-      <%= form.input :status, as: :radio_buttons, label: "סטטוס?", collection: [["לא נוכח/ת", "0"], ["נוכח/ת","1"]]  %>
+      <%= form.input :status, as: :radio_buttons, label: "סטטוס?", collection: status_options %>
     </div>
   </div>
     <%= form.submit "עדכון פרטים" %>

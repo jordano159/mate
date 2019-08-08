@@ -45,6 +45,9 @@ class ChecksController < ApplicationController
       @check.name = "נוכחות בתהליך יצירה"
       @kids = @group.kids.order(:ken)
       @check.kids << @kids
+      unless @group.mifal.has_approve
+        @check.approved = true
+      end
       @check.save(validate: false)
     end
   end

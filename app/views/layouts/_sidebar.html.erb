@@ -43,7 +43,7 @@
                     </li>
                 <% end %>
                 <% end %>
-                <% if current_staff.admin? || current_staff.staffable.has_events %>
+                <% if current_staff.admin? || (current_staff.vip? && current_staff.staffable.has_events) %>
                 <li class="nav-item ">
                   <%= link_to "יומן אירועים", events_path, class: "nav-link" %>
                 </li>
