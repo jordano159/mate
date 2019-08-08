@@ -12,17 +12,46 @@
     aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= percent %>% נוכחות</div>
   </div>
 
+  <% @heb_columns.each_with_index do |c,i| %>
+    <% if @group.mifal.columns.include?(c.first.to_s) %>
+      <% unless ["group","full_name","status","cause"].include?(c.first.to_s) %>
+      <button id="<%= i %>" class="btn"><%= c.last %></button>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+
+  <script>
+
+  var arr = <%= (4..@heb_columns.length).to_a %>;
+  $.each( arr, function( index, value ){
+    $("#" + value).click(function() {
+      $('.' + value).toggle();
+    })
+  });
+
+  </script>
 <p>
   <div class="table-responsive-lg">
     <table class="table table-hover" id="dttb-kids" data-sort="true"
                         data-source="<%= url_for(format: :json, controller: 'kids', group_id: @group.id)%>">
       <thead class="thead-dark">
         <tr>
-          <th data-data="full_name">שם</th>
-          <th data-data="ken">קן</th>
-          <th data-data="exits">כניסות ויציאות</th>
-          <th data-data="status">סטטוס</th>
-          <th data-data="cause">סיבה</th>
+          <% @heb_columns.each_with_index do |c,i| %>
+            <% if @group.mifal.columns.include?(c.first.to_s) %>
+              <% unless c.first == "group" %>
+              <% if @default_columns.include?(c.first.to_s)  %>
+                <th data-data="<%= c.first %>" class="<%= i %>"><%= c.last %></th>
+              <% else %>
+                <th data-data="<%= c.first %>" class="<%= i %>" style="display: none;"><%= c.last %></th>
+              <% end %>
+
+              <% else %>
+                <% if @level > 1 %> <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th> <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
           <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
         </tr>
       </thead>

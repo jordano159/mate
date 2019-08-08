@@ -1,6 +1,6 @@
 json.set! :data do
   json.array! @kids do |kid|
-    json.first_name "#{link_to kid.name, kid}"
+    json.name "#{link_to kid.name, kid}"
     json.last_name "#{kid.last_name}"
     json.full_name "#{link_to kid.full_name, kid}"
     json.phone "#{link_to kid.phone, 'tel:#{kid.phone}' if kid.phone.present?}"
@@ -12,6 +12,18 @@ json.set! :data do
     json.exits "#{kid.exits}"
     json.status "#{kid.heb_status}"
     json.cause "#{kid.cause}"
+    json.parent_1 "#{kid.parent_1}"
+    json.parent_1_phone "#{kid.parent_1_phone}"
+    json.parent_2 "#{kid.parent_2}"
+    json.parent_2_phone "#{kid.parent_2_phone}"
+    json.grade "#{kid.grade}"
+    json.sex "#{kid.sex}"
+    json.taz "#{kid.taz}"
+    json.comments "#{kid.comments}"
+    json.size "#{kid.size}"
+    json.shabat "#{kid.shabat}"
+    json.parents "#{kid.parents}"
+    json.swim "#{kid.swim}"
     if kid.group.present?
       json.group "#{link_to kid.group.name, kid.group}"
     else

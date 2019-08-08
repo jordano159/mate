@@ -97,7 +97,20 @@
     <%= form.label :axis_name_plural, "שם הרמה השלישית ברבים:" %>
     <%= form.text_field :axis_name_plural, value: @mifal.axis_name[:plural] %>
   </div>
-<% end %>
+
+  <div class="field">
+    <%= form.label :columns, "איזה מידע צריך להיות על חניכים:" %>
+    פרטי משפחה ותז קיימים אוטומטית
+    <%= form.collection_check_boxes :columns,
+     [["ken", "קן"], ["grade", "שכבה"], ["sex", "מין"],
+      ["phone", "טלפון"], ["medical", "רגישויות ובעיות רפואיות"], ["meds", "תרופות"],
+      ["food", "אוכל"], ["comments", "הערות"], ["city", "יישוב"],
+      ["parent_1", "שם הורה 1"], ["parent_1_phone", "טלפון הורה 1"],["parent_2", "שם הורה 2"],
+      ["parent_2_phone", "טלפון הורה 2"], ["size", "מידת חולצה"], ["shabat", "שומר/ת שבת"],
+      ["parents", "הגעת הורים לטקס"], ["swim", "יכולת שחייה"], ["exits", "כניסות ויציאות"]],
+      :first, :last %>
+  </div>
+  <% end %>
 <span style="display: none;" id="axes">
   <%= @mifal.has_axes %>
 </span>

@@ -7,6 +7,7 @@ class KidsController < ApplicationController
   # GET /kids
   # GET /kids.json
   def index
+    @mifal = current_staff.staffable.mifal unless current_staff.admin?
     if params[:group_id].present?
       @kids = Group.find(params[:group_id]).kids
     elsif params[:bus_id].present?

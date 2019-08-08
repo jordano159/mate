@@ -20,6 +20,8 @@ class MifalStepsController < ApplicationController
     when :settings
       @mifal.settings! # Set stage
       @mifal.update(mifal_params)
+      @mifal.columns.delete("")
+      @mifal.columns.unshift("name", "last_name", "full_name", "taz", "group", "status", "cause")
       group_name_single = params[:mifal][:group_name_single]
       group_name_plural = params[:mifal][:group_name_plural]
       @mifal.group_name = {single: group_name_single, plural: group_name_plural}
@@ -84,7 +86,12 @@ class MifalStepsController < ApplicationController
         end
       end
     end
-    @mifal.update(mifal_params)
+    # @mifal.update(mifal_params)
+    # if step == :settings
+    #   @mifal.columns.delete("")
+    #   @mifal.columns.unshift("name", "last_name", "taz", "group_id")
+    #   @mifal.save
+    # end
     render_wizard @mifal
   end
 
@@ -96,6 +103,6 @@ class MifalStepsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def mifal_params
-      params.require(:mifal).permit(:name, :has_buses, :has_events, :has_approve, :has_axes, :has_late, :checks_num, axis_ids: [])
+      params.require(:mifal).permit(:name, :has_buses, :has_events, :has_approve, :has_axes, :has_late, :checks_num, columns: [], axis_ids: [])
     end
 end

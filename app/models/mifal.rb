@@ -4,7 +4,7 @@ class Mifal < ApplicationRecord
   serialize :group_name, Hash
   serialize :head_name, Hash
   serialize :axis_name, Hash
-  serialize :columns, Hash
+  serialize :columns, Array
   serialize :guide_name, Hash
   serialize :head_head_name, Hash
   has_many :axes, dependent: :destroy

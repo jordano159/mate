@@ -27,96 +27,45 @@
 <%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
 <%# link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary" %>
 <% end %>
-<button id="0" class="btn">
-  פרטי
-</button>
-<button id="1" class="btn">
-  משפחה
-</button>
-<button id="2" class="btn">
-  phone
-</button>
-<button id="3" class="btn">
-  רפואי
-</button>
-<button id="4" class="btn">
-  תרופות
-</button>
-<button id="5" class="btn">
-  ken
-</button>
-<button id="6" class="btn">
-  city
-</button>
-<button id="7" class="btn">
-  exits
-</button>
-<button id="8" class="btn">
-  status
-</button>
-<button id="9" class="btn">
-  cause
-</button>
-<% if @level > 1 %>
- <button id="10" class="btn">
-   group
- </button>
+<% @heb_columns.each_with_index do |c,i| %>
+  <% if @mifal.columns.include?(c.first.to_s) %>
+    <% unless ["group","full_name","status","cause"].include?(c.first.to_s) %>
+    <button id="<%= i %>" class="btn"><%= c.last %></button>
+    <% end %>
   <% end %>
+<% end %>
+
 <script>
-$('#0').click(function() {
-  $('.0').toggle();
+
+var arr = <%= (4..@heb_columns.length).to_a %>;
+$.each( arr, function( index, value ){
+  $("#" + value).click(function() {
+    $('.' + value).toggle();
+  })
 });
-$('#1').click(function() {
-  $('.1').toggle();
-});
-$('#2').click(function() {
-  $('.2').toggle();
-});
-$('#3').click(function() {
-  $('.3').toggle();
-});
-$('#4').click(function() {
-  $('.4').toggle();
-});
-$('#5').click(function() {
-  $('.5').toggle();
-});
-$('#6').click(function() {
-  $('.6').toggle();
-});
-$('#7').click(function() {
-  $('.7').toggle();
-});
-$('#8').click(function() {
-  $('.8').toggle();
-});
-$('#9').click(function() {
-  $('.9').toggle();
-});
-$('#10').click(function() {
-  $('.10').toggle();
-});
+
 </script>
 <div class="table-container">
 <div class="table-responsive-xs">
   <table class="table table-hover" id="dttb-kids" data-sort="true" data-source="<%= url_for(format: :json)%>">
     <thead class="thead-dark nowrap">
       <tr>
-        <th data-data="first_name" class="0">שם פרטי</th>
-        <th data-data="last_name" class="1">שם משפחה</th>
-        <th data-data="phone" class="2">טלפון</th>
-        <th data-data="medical" class="3">רגישות ובעיות רפואיות</th>
-        <th data-data="meds" class="4">תרופות</th>
-        <!-- <th data-data="food">אוכל</th> -->
-        <th data-data="ken" class="5">קן</th>
-        <th data-data="city" class="6">יישוב</th>
-        <th data-data="exits" class="7">כניסות ויציאות</th>
-        <th data-data="status" class="8" data-search="לא נוכח">סטטוס</th>
-        <th data-data="cause" class="9">סיבה</th>
-        <% if @level > 1 %> <th data-data="group" class="10"><%= @level_names[0] %></th> <% end %>
+        <% @heb_columns.each_with_index do |c,i| %>
+          <% if @mifal.columns.include?(c.first.to_s) %>
+            <% unless c.first == "group" %>
+            <% if @default_columns.include?(c.first.to_s)  %>
+              <th data-data="<%= c.first %>" class="<%= i %>"><%= c.last %></th>
+            <% else %>
+              <th data-data="<%= c.first %>" class="<%= i %>" style="display: none;"><%= c.last %></th>
+            <% end %>
+
+            <% else %>
+              <% if @level > 1 %> <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th> <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
       </tr>
     </thead>
-
   </table>
 </div>
 </div>

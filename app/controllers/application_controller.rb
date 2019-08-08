@@ -4,10 +4,49 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_staff!
   before_action :level
   before_action :level_names
+  before_action :columns_settings
   before_action :clearence
   before_action :only_admin
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :track_action
+
+
+def columns_settings
+  @heb_columns = {
+    full_name: "שם מלא",
+    status: "סטטוס",
+    cause: "סיבה",
+    group: "#{@level_names[0]}",
+    sex: "מין",
+    taz: "תעודת זהות",
+    ken: "קן",
+    grade: "שכבה",
+    phone: "טלפון",
+    medical: "רגישות ובעיות רפואיות",
+    meds: "תרופות",
+    food: "אוכל",
+    comments: "הערות",
+    city: "יישוב",
+    parent_1: "שם הורה 1",
+    parent_1_phone: "טלפון הורה 1",
+    parent_2: "שם הורה 2",
+    parent_2_phone: "טלפון הורה 2",
+    size: "גודל חולצה",
+    shabat: "שמירת שבת",
+    parents: "ההורים באים לביקור?",
+    swim: "אישור שחייה",
+    exits: "כניסות ויציאות"
+  }
+
+  @default_columns = [
+    "full_name",
+    "status",
+    "cause",
+    "group",
+    "sex"
+  ]
+
+end
 
   def level_names
     if staff_signed_in?
