@@ -40,14 +40,27 @@ class MifalStepsController < ApplicationController
       @mifal.save
     when :axised
       @mifal.axised! # Set stage
-      axis_num = params[:mifal][:axis_num].to_i
-      (1..axis_num).each do |i|
-        Axis.create(name: "ציר #{i} #{@mifal.name}", mifal_id: @mifal.id) if Axis.find_by(name: "ציר #{i} #{@mifal.name}").nil?
-        next unless Staff.find_by(username: "ציר #{i} #{@mifal.name}").nil?
+      if @mifal.has_axes
+        axis_num = params[:mifal][:axis_num].to_i
+        (1..axis_num).each do |i|
+          Axis.create(name: "#{@level_names[4]} #{i} #{@mifal.name}", mifal_id: @mifal.id) if Axis.find_by(name: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
+          next unless Staff.find_by(username: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
 
-        Staff.create(name: "רכזת ציר #{i} #{@mifal.name}", email: "a#{@mifal.name}#{i}@gmail.com", password: '123123',
-          password_confirmation: '123123', role: 'user', username: "ציר #{i} #{@mifal.name}", staffable_type: 'Axis',
-          staffable_id: Axis.find_by(name: "ציר #{i} #{@mifal.name}").id)
+          Staff.create(name: "רכזת #{@level_names[4]} #{i} #{@mifal.name}", email: "a#{@mifal.name}#{i}@gmail.com", password: '123123',
+            password_confirmation: '123123', role: 'user', username: "#{@level_names[4]} #{i} #{@mifal.name}", staffable_type: 'Axis',
+            staffable_id: Axis.find_by(name: "#{@level_names[4]} #{i} #{@mifal.name}").id)
+          end
+      else
+        axis_num = 1
+
+        (1..axis_num).each do |i|
+          Axis.create(name: "#{@level_names[4]} #{i} #{@mifal.name}", mifal_id: @mifal.id) if Axis.find_by(name: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
+          next unless Staff.find_by(username: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
+
+          Staff.create(name: "רכזת #{@level_names[4]} #{i} #{@mifal.name}", email: "a#{@mifal.name}#{i}@gmail.com", password: '123123',
+            password_confirmation: '123123', role: 'user', username: "#{@level_names[4]} #{i} #{@mifal.name}", staffable_type: 'Axis',
+            staffable_id: Axis.find_by(name: "#{@level_names[4]} #{i} #{@mifal.name}").id)
+          end
       end
     when :headed
       @mifal.headed! # Set stage

@@ -20,13 +20,22 @@
 <%= link_to 'מפעל חדש', new_mifal_path %>
 
 <script>
-  $(document).ready(function(){
-  var x = 0;
-  setTimeout(function(){
-    $(".for_sum").each(function(){
-    x += Number($(this).text());
-    })
-    $(".total").html(x);
-   }, 1000);
-  });
+  // $(document).ready(function(){
+  // var x = 0;
+  // setTimeout(function(){
+  //   $(".for_sum").each(function(){
+  //   x += Number($(this).text());
+  //   })
+  //   $(".total").html(x);
+  //  }, 1000);
+  // });
+  $('#dttb-mifals').dataTable( {
+    "initComplete": function(settings, json) {
+      var x = 0;
+      $(".for_sum").each(function(){
+        x += Number($(this).text());
+      });
+        $(".total").html(x);
+    }});
+  // } );
 </script>

@@ -12,40 +12,41 @@ class ApplicationController < ActionController::Base
 
 
 def columns_settings
-  @heb_columns = {
-    full_name: "שם מלא",
-    status: "סטטוס",
-    cause: "סיבה",
-    group: "#{@level_names[0]}",
-    sex: "מין",
-    taz: "תעודת זהות",
-    ken: "קן",
-    grade: "שכבה",
-    phone: "טלפון",
-    medical: "רגישות ובעיות רפואיות",
-    meds: "תרופות",
-    food: "אוכל",
-    comments: "הערות",
-    city: "יישוב",
-    parent_1: "שם הורה 1",
-    parent_1_phone: "טלפון הורה 1",
-    parent_2: "שם הורה 2",
-    parent_2_phone: "טלפון הורה 2",
-    size: "גודל חולצה",
-    shabat: "שמירת שבת",
-    parents: "ההורים באים לביקור?",
-    swim: "אישור שחייה",
-    exits: "כניסות ויציאות"
-  }
+  if staff_signed_in?
+    @column_names = {
+      full_name: "שם מלא",
+      status: "סטטוס",
+      cause: "סיבה",
+      group: "#{@level_names[0]}",
+      sex: "מין",
+      taz: "תעודת זהות",
+      ken: "קן",
+      grade: "שכבה",
+      phone: "טלפון",
+      medical: "רגישות ובעיות רפואיות",
+      meds: "תרופות",
+      food: "אוכל",
+      comments: "הערות",
+      city: "יישוב",
+      parent_1: "שם הורה 1",
+      parent_1_phone: "טלפון הורה 1",
+      parent_2: "שם הורה 2",
+      parent_2_phone: "טלפון הורה 2",
+      size: "גודל חולצה",
+      shabat: "שמירת שבת",
+      parents: "ההורים באים לביקור?",
+      swim: "אישור שחייה",
+      exits: "כניסות ויציאות"
+    }
 
-  @default_columns = [
-    "full_name",
-    "status",
-    "cause",
-    "group",
-    "sex"
-  ]
-
+    @default_columns = [
+      "full_name",
+      "status",
+      "cause",
+      "group",
+      "sex"
+    ]
+end
 end
 
   def level_names

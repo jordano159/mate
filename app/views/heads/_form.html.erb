@@ -32,7 +32,7 @@
       <%= form.input :axis_id, collection: @axes, label: "שייך לציר" %>
     </div>
     <div class="field">
-      <%= form.input_field :group_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: Group.all, label_method: :name, value_method: :id, label: "#{ @level_names[1] } ששיכות ל#{@level_names[3]}" %>
+      <%= form.input_field :group_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: @groups, label_method: :name, value_method: :id, label: "#{ @level_names[1] } ששיכות ל#{@level_names[3]}" %>
     </div>
   <% end %>
   <div class="actions">

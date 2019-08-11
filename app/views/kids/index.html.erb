@@ -27,43 +27,32 @@
 <%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
 <%# link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary" %>
 <% end %>
-<% @heb_columns.each_with_index do |c,i| %>
-  <% if @mifal.columns.include?(c.first.to_s) %>
-    <% unless ["group","full_name","status","cause"].include?(c.first.to_s) %>
-    <button id="<%= i %>" class="btn"><%= c.last %></button>
-    <% end %>
-  <% end %>
-<% end %>
 
-<script>
-
-var arr = <%= (4..@heb_columns.length).to_a %>;
-$.each( arr, function( index, value ){
-  $("#" + value).click(function() {
-    $('.' + value).toggle();
-  })
-});
-
-</script>
 <div class="table-container">
-<div class="table-responsive-xs">
+<div class="table-responsive">
   <table class="table table-hover" id="dttb-kids" data-sort="true" data-source="<%= url_for(format: :json)%>">
-    <thead class="thead-dark nowrap">
+    <thead class="thead-dark nowrap ">
       <tr>
-        <% @heb_columns.each_with_index do |c,i| %>
-          <% if @mifal.columns.include?(c.first.to_s) %>
-            <% unless c.first == "group" %>
-            <% if @default_columns.include?(c.first.to_s)  %>
-              <th data-data="<%= c.first %>" class="<%= i %>"><%= c.last %></th>
+        <% if current_staff.admin? %>
+          <% @column_names.each_with_index do |col,i| %>
+            <% unless col.first == "group" %>
+                <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
             <% else %>
-              <th data-data="<%= c.first %>" class="<%= i %>" style="display: none;"><%= c.last %></th>
+                <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th>
             <% end %>
-
-            <% else %>
-              <% if @level > 1 %> <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th> <% end %>
+          <% end %>
+        <% else %>
+          <% @column_names.each_with_index do |col,i| %>
+            <% if @mifal.columns.include?(col.first.to_s) %>
+              <% unless col.first == "group" %>
+                  <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
+              <% else %>
+                <% if @level > 1 %> <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th> <% end %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
+
       </tr>
     </thead>
   </table>
@@ -73,3 +62,32 @@ $.each( arr, function( index, value ){
   <% g_id = Group.find(current_staff.staffable.id) %>
   <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => g_id), class: "btn btn-primary" %>
 <% end %>
+
+<script>
+$('#dttb-kids').dataTable( {
+        dom: 'Bfrtip',
+        stateSave: true,
+        columnDefs: [
+           {
+               targets: [0,1,2,3],
+               className: 'noVis'
+           },
+            {   targets: [0,1,2,3], visible: true },
+            {   targets: "_all", visible: false }
+       ],
+       buttons: [
+           {
+               extend: 'colvis',
+               columns: ':not(.noVis)',
+               collectionLayout: 'fixed two-column'
+           }
+       ],
+       language: {
+            buttons: {
+                colvis: 'עמודות להצגה'
+            }
+        },
+
+});
+
+</script>

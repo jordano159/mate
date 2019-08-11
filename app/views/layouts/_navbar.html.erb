@@ -31,11 +31,11 @@
       <% if current_staff.admin? || current_staff.vip? %>
       <% if current_staff.admin? || current_staff.staffable.has_axes %>
       <li class="nav-item ">
-        <%= link_to "צירים", axes_path, class: "nav-link" %>
+        <%= link_to "#{@level_names[5]}", axes_path, class: "nav-link" %>
       </li>
       <% end %>
       <li class="nav-item ">
-        <%= link_to "#{@level_names[4]}", heads_path, class: "nav-link" %>
+        <%= link_to "#{@level_names[3]}", heads_path, class: "nav-link" %>
       </li>
       <li class="nav-item ">
         <%= link_to "#{ @level_names[1] }", groups_path, class: "nav-link" %>
@@ -66,7 +66,7 @@
               </li>
             <% when 2 %>
               <li class="nav-item ">
-                <%= link_to "עריכת שם הראש", edit_head_path(current_staff.staffable.id), class: "nav-link" %>
+                <%= link_to "עריכת שם ה#{@level_names[2]}", edit_head_path(current_staff.staffable.id), class: "nav-link" %>
               </li>
             <% when 3 %>
               <li class="nav-item ">
