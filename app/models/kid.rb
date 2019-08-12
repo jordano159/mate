@@ -49,6 +49,7 @@ class Kid < ApplicationRecord
     header = header.to_a
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
+      row['taz'] = Kid.generate_taz unless row['taz'].present?
       kid = find_by(taz: row['taz']) || new
       kid.attributes = row.to_hash #סכנת הזרקת SQL
       kid.group_id = Staff.find_by(username: "כיתה #{kid.group_id} #{mifal.name}").staffable.id if kid.group_id.present?
@@ -74,6 +75,15 @@ class Kid < ApplicationRecord
 
   def self.filter(filter_column, filter_condition)
     Kid.where("kids.#{filter_column} LIKE ?", "%#{filter_condition}%").distinct
+  end
+
+  def self.generate_taz
+    random_taz = rand(100000000000..100000000000000)
+    if Kid.all.pluck(:taz).include?(random_taz)
+      self.generate_taz
+    else
+      return random_taz
+    end
   end
 
   def heb_status
