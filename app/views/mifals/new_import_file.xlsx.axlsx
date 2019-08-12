@@ -6,6 +6,5 @@ wb.add_worksheet(name: 'חניכי וחניכות המפעל') do |sheet|
       import_columns << @column_names[col.to_sym]
     end
   end
-  import_columns.delete("")
   sheet.add_row import_columns
 end
