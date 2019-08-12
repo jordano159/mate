@@ -29,7 +29,7 @@
   </div>
   <% if @level > 3 %>
     <div class="field select">
-      <%= form.input :axis_id, collection: @axes, label: "שייך לציר" %>
+      <%= form.input :axis_id, collection: @axes, label: "שייך ל#{@level_names[4]}" %>
     </div>
     <div class="field">
       <%= form.input_field :group_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: @groups, label_method: :name, value_method: :id, label: "#{ @level_names[1] } ששיכות ל#{@level_names[3]}" %>

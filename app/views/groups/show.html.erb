@@ -12,7 +12,7 @@
     aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= percent %>% נוכחות</div>
   </div>
 
-  
+
 
 <p>
   <div class="table-responsive">
@@ -37,7 +37,7 @@
   </div>
 </p>
 
-  <strong> מדריכות ומדריכים:</strong>
+  <strong> <%= @staff_names[1] %>:</strong>
   <table>
     <thead>
       <tr>
@@ -53,7 +53,7 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "יצירת מדריך.ה חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
+  <%= link_to "יצירת #{@staff_names[0]} חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
   <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => @group.id), class: "btn btn-primary" %>
 
 <%= link_to 'עריכה', edit_group_path(@group), class: "btn btn-warning" if current_staff.admin? || current_staff.vip? %>

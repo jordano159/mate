@@ -72,12 +72,12 @@ class MifalStepsController < ApplicationController
       @mifal.axes.each_with_index do |axis,i|
         head_nums[i].times do
           counter += 1
-          Head.create(name: "#{@level_names[3]} #{counter} #{@mifal.name}", axis_id: axis.id) if Head.find_by(name: "#{@level_names[3]} #{counter} #{@mifal.name}").nil?
-          next unless Staff.find_by(username: "#{@level_names[3]} #{counter} #{@mifal.name}").nil?
+          Head.create(name: "#{@level_names[2]} #{counter} #{@mifal.name}", axis_id: axis.id) if Head.find_by(name: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
+          next unless Staff.find_by(username: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
 
-          Staff.create(name: "ראשראשית #{counter} #{@mifal.name}", email: "h#{@mifal.name}#{counter}@gmail.com", password: '123123',
-            password_confirmation: '123123', role: 'user', username: "#{@level_names[3]} #{counter} #{@mifal.name}", staffable_type: 'Head',
-            staffable_id: Head.find_by(name: "#{@level_names[3]} #{counter} #{@mifal.name}").id)
+          Staff.create(name: "#{@staff_names[2]} #{counter} #{@mifal.name}", email: "h#{@mifal.name}#{counter}@gmail.com", password: '123123',
+            password_confirmation: '123123', role: 'user', username: "#{@level_names[2]} #{counter} #{@mifal.name}", staffable_type: 'Head',
+            staffable_id: Head.find_by(name: "#{@level_names[2]} #{counter} #{@mifal.name}").id)
         end
       end
     when :grouped
@@ -93,7 +93,7 @@ class MifalStepsController < ApplicationController
           Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", head_id: head.id) if Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
           next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
 
-          Staff.create(name: "מדריכת #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
+          Staff.create(name: "#{@staff_names[0]} #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
                         role: 'user', username: "#{ @level_names[0] } #{counter} #{@mifal.name}", staffable_type: 'Group',
                         staffable_id: Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").id)
         end

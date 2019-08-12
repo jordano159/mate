@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_staff!
   before_action :level
   before_action :level_names
+  before_action :staff_names
   before_action :columns_settings
   before_action :clearence
   before_action :only_admin
@@ -51,17 +52,26 @@ end
 
   def level_names
     if staff_signed_in?
-      if current_staff.vip?
-        mifal = current_staff.staffable
-      elsif @level < 4
-        mifal = current_staff.staffable.mifal
-      end
       unless current_staff.admin?
+        mifal = current_staff.staffable.mifal
         @level_names = [mifal.group_name[:single], mifal.group_name[:plural],
                         mifal.head_name[:single], mifal.head_name[:plural],
                         mifal.axis_name[:single], mifal.axis_name[:plural]]
       else
         @level_names = %w(קבוצה קבוצות ראש ראשים ציר צירים)
+      end
+    end
+  end
+
+
+  def staff_names
+    if staff_signed_in?
+      unless current_staff.admin?
+        mifal = current_staff.staffable.mifal
+        @staff_names = [mifal.guide_name[:single], mifal.guide_name[:plural],
+                        mifal.head_head_name[:single], mifal.head_head_name[:plural]]
+      else
+        @staff_names = %w(מדריך מדריכות ראשראשית ראשראשים)
       end
     end
   end

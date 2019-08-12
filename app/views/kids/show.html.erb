@@ -124,7 +124,7 @@
       </tr>
       <% if @kid.group_id != nil %>
         <tr>
-          <td>מדריכים ומדריכות</td>
+          <td><%= @staff_names[1] %></td>
             <% @kid.group.staffs.each do |s|%>
               <td><%= s.name %></td>
             <% end %>
