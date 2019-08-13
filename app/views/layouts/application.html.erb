@@ -6,7 +6,8 @@
     <meta property="og:description" content="אפליקציית מטה למפעלי התנועה, נבנה על ידי מעגל הקוד השומרי" />
     <meta property="og:type" content="website" />
     <%= csrf_meta_tags %>
-    <script src="https://use.fontawesome.com/7a4797d373.js"></script>
+    <!-- <script src="https://use.fontawesome.com/7a4797d373.js"></script> -->
+    <script src="https://kit.fontawesome.com/61c1a40a3c.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
@@ -21,9 +22,9 @@
     <div id="wrapper">
       <%= render 'layouts/sidebar' %>
         <div id="page-content-wrapper">
-            <div>
+
               <%= yield %>
-            </div>
+
             <% if mobile_device? %>
               <%= error_btn %>
             <% end %>

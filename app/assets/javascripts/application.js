@@ -22,7 +22,12 @@
 //= require select2_locale_he
 
 
-
+$(function () {
+  $('[data-toggle="popover"]').popover()
+});
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+});
 // מלא שיט
 /*!
  Buttons for DataTables 1.5.6

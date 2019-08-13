@@ -59,15 +59,15 @@
         <% if params[:buses].blank? && (current_staff.admin? || current_staff.staffable.mifal.has_approve) %>
         <td>
           <% if check.approved? %>
-            <span style="color:green;">מאושר</span> <i class="fa fa-check-circle"></i>
+            <span style="color:green;">מאושר</span> <i class="fas fa-check-circle"></i>
           <% else %>
             <span style="color:red;">עוד לא מאושר</span>
           <% end %>
         </td>
         <% end %>
-        <td><%= link_to 'עריכה', edit_check_path(check), class: "btn btn-warning" %></td>
+        <td><%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_check_path(check),  style: "color: grey" %></td>
         <% if @level > 1 %>
-          <td><%= link_to 'מחיקה', check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: "btn btn-danger"  %></td>
+          <td><%= link_to "<i class='far fa-trash-alt'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, style: "color: red"  %></td>
         <% end %>
       </tr>
     <% end %>

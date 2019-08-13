@@ -22,6 +22,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -40,7 +41,7 @@ gem 'simple_form'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'devise'
-gem "font-awesome-rails"
+# gem "font-awesome-rails"
 gem 'rails_real_favicon'
 gem "select2-rails"
 gem "activerecord-import"
@@ -56,6 +57,7 @@ gem 'geocoder'
 gem 'sidekiq'
 gem 'google_drive'
 gem 'ahoy_matey'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 
 
