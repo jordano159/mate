@@ -23,4 +23,17 @@ class Axis < ApplicationRecord
     return my_events
   end
 
+
+  def all_staffs
+    my_staffs = Array.new
+    self.staffs.each do |s|
+      my_staffs << s
+    end
+    self.heads.each do |h|
+      h.all_staffs.each do |s|
+        my_staffs << s
+      end
+    end
+    return my_staffs
+  end
 end

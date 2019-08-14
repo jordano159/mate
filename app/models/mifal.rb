@@ -33,6 +33,18 @@ end
     return my_events
   end
 
+  def all_staffs
+    my_staffs = Array.new
+    self.staffs.each do |s|
+      my_staffs << s
+    end
+    self.axes.each do |a|
+      a.all_staffs.each do |s|
+        my_staffs << s
+      end
+    end
+    return my_staffs
+  end
   # מחזיר ערים עם קואורדינטות
   def city_list
     names = self.kids.pluck(:city).uniq

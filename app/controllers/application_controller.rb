@@ -91,11 +91,12 @@ end
   end
 
   def admin_index
-    redirect_to '/' unless current_staff.admin?
-    if params[:search]
-      @staffs = Staff.search(params[:search]).order('created_at DESC').includes(:staffable)
+    if current_staff.admin?
+      @staffs = Staff.all
+    elsif current_staff.vip?
+      @staffs = current_staff.staffable.all_staffs
     else
-      @staffs = Staff.all.order('created_at DESC').includes(:staffable)
+      redirect_to root_path
     end
   end
 
