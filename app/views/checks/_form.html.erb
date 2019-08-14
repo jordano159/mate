@@ -2,15 +2,47 @@
   div{
     padding: 10px;
   }
+  abbr{
+    display: none;
+  }
 </style>
+
 <%= simple_form_for(@check) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs">
-    <% names = check_names %>
-    <%= f.input :name, label: "שם הנוכחות", collection: names, input_html: {required: true}, label_method: :second, value_method: :first %>
+    <% if @group %>
+      <% if @group.mifal.checks_num %>
+      <%= f.input :name, as: :hidden %>
+      <h3>תאריך הנוכחות</h3>
+      <% check_dates = @group.checks.pluck(:date).map{|date| date.to_date} %>
+      <% check_dates.select!{|date| date > 1.month.ago}%>
+      <% check_dates.map!{|date| date.day} %>
+      <% check_dates %>
+      <% month_date = (1..31).to_a %>
+      <% red_dates =  month_date - check_dates %>
+      <% red_dates.delete(Time.now.day) %>
+      <input type="text" id="datepicker" class="form-control" style="background-color: #fff;" required readonly>
+      <script>
+      $("#datepicker").click(function(){
+        $( "a.ui-state-default" ).each(function() {
+          var red_dates = <%= red_dates %>;
+          if (red_dates.includes(parseInt($(this).html()))) {
+            $(this).css("background", "#FF7F7F");
+          };
+        });
+      });
+      </script>
+      <%= f.input :date, as: :hidden, id: "check_date" %>
+      <% else %>
+        <% names = check_names %>
+        <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names, label_method: :second, value_method: :first %>
+      <% end %>
+    <% end %>
     <% causes = check_causes %>
     <br />
+    <%=  f.input :group_id, as: :hidden, input_html: {value: params[:g_id]} %>
+    <div class="" id="hide">
     <%= f.simple_fields_for :attendances do |ff| %>
       <div class="check_div">
       <% kid = ff.object.kid %>
@@ -34,12 +66,14 @@
     <% end %>
       <%= f.submit 'עדכון פרטים', class: "form-actions", data: {confirm: "ראית את החניכים והחניכות בעיניים?"} %>
   </div>
+  </div>
 <% end %>
 
 
 
 <script>
 $(document).ready(function(){
+  $("#hide").hide(1);
 $('input[type="radio"]').change(function(){
 console.log($(this).val())
 if($(this).val()==0){
@@ -63,6 +97,18 @@ if($(this).val()=="אחר"){
 else{
   $(this).closest("div.check_div").find(".check_o").hide(400)
   $(this).closest("div.check_div").find(".label_o").hide(400)}
+});
+$( function() {
+  $( "#datepicker" ).datepicker( $.datepicker.regional[ "he" ] );
+} );
+$( "#datepicker" ).on('change', function(){
+  $("#check_date").val($( "#datepicker" ).val());
+  var check_name = "נוכחות " + $( "#datepicker" ).val().slice(0, -5);
+  $("#check_name").val(check_name);
+  $("#hide").show(100);
+});
+$( "#check_name" ).on('change', function(){
+  $("#hide").show(100);
 });
 });
 </script>

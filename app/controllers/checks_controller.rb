@@ -33,7 +33,7 @@ class ChecksController < ApplicationController
       @check = Check.new
       @bus = Bus.find(params[:bus])
       @kids = @bus.kids.order(:ken)
-      @check.name = "נוכחות בתהליך יצירה"
+      @check.name = "נוכחות אוטובוס #{@bus.name}"
       @check.bus_id = @bus.id
       @check.kids << @kids
       @check.approved = true
@@ -41,8 +41,8 @@ class ChecksController < ApplicationController
     else
       @check = Check.new
       @group = Group.find(params[:g_id])
-      @check.group_id = @group.id
-      @check.name = "נוכחות בתהליך יצירה"
+      # @check.group_id = @group.id
+      # @check.name = "נוכחות בתהליך יצירה"
       @kids = @group.kids.order(:ken)
       @check.kids << @kids
       unless @group.mifal.has_approve
@@ -67,6 +67,9 @@ class ChecksController < ApplicationController
   # POST /checks.json
   def create
     @check = Check.new(check_params)
+    # @group = Group.find(@check.group_id)
+    # @kids = @group.kids
+    # @check.kids << @kids
     respond_to do |format|
       if @check.save
         format.html { redirect_to check_path(@check), notice: 'Check was successfully created.' }
@@ -111,6 +114,6 @@ class ChecksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def check_params
-    params.require(:check).permit(:name, :group_id, :approved, attendances_attributes: %i[status id cause], kid_ids: [])
+    params.require(:check).permit(:name, :group_id, :approved, :date, attendances_attributes: %i[status id cause], kid_ids: [])
   end
 end
