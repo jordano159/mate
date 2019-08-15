@@ -46,7 +46,7 @@
     <%= f.simple_fields_for :attendances do |ff| %>
       <div class="check_div">
       <% kid = ff.object.kid %>
-      <%= "#{kid.name} #{kid.last_name} " %>
+      <%= "#{kid.name} #{kid.last_name}" %>
       <% if kid.ken.present? %>
         <%= + "מקן #{kid.ken}"  %>
       <% elsif kid.city.present? %>
