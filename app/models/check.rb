@@ -16,6 +16,10 @@ class Check < ApplicationRecord
   def previous_check
     Check.where('id < ? AND group_id = ?', id, group_id).last
   end
+
+  def delete_blank_checks
+    Check.where("name = ? and group_id = ?", "Blank", self.group_id).delete_all
+  end
 end
 
 def update_attendance
@@ -28,9 +32,5 @@ def update_attendance
         kid.touch
       end
     end
-  end
-
-  def delete_check
-    check = Check.where("name =  0")
   end
 end

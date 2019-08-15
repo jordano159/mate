@@ -15,7 +15,7 @@
       <% if @group.mifal.checks_num %>
       <%= f.input :name, as: :hidden %>
       <h3>תאריך הנוכחות</h3>
-      <% check_dates = @group.checks.pluck(:date).map{|date| date.to_date} %>
+      <% check_dates = @group.checks.where.not(date: nil).pluck(:date).map{|date| date.to_date} %>
       <% check_dates.select!{|date| date > 1.month.ago}%>
       <% check_dates.map!{|date| date.day} %>
       <% check_dates %>
@@ -41,7 +41,7 @@
     <% end %>
     <% causes = check_causes %>
     <br />
-    <%=  f.input :group_id, as: :hidden, input_html: {value: params[:g_id]} %>
+    <%#  f.input :group_id, as: :hidden, input_html: {value: params[:g_id]} %>
     <div class="" id="hide">
     <%= f.simple_fields_for :attendances do |ff| %>
       <div class="check_div">
