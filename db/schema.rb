@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_063440) do
+ActiveRecord::Schema.define(version: 2019_08_14_132528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_063440) do
     t.integer "group_id"
     t.boolean "approved", default: false, null: false
     t.integer "bus_id"
+    t.string "date"
     t.index ["approved"], name: "index_checks_on_approved"
     t.index ["group_id"], name: "index_checks_on_group_id"
     t.index ["name"], name: "index_checks_on_name"
@@ -155,7 +156,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_063440) do
     t.text "cause"
     t.integer "bus_id"
     t.string "grade"
-    t.integer "taz"
+    t.bigint "taz"
     t.bigint "mifal_id"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
@@ -188,6 +189,18 @@ ActiveRecord::Schema.define(version: 2019_07_24_063440) do
     t.datetime "updated_at", null: false
     t.text "bus_proposal"
     t.integer "stage"
+    t.boolean "has_buses", default: false, null: false
+    t.boolean "has_events", default: false, null: false
+    t.boolean "has_axes", default: false, null: false
+    t.boolean "has_approve", default: false, null: false
+    t.boolean "has_late", default: false, null: false
+    t.text "group_name"
+    t.text "head_name"
+    t.text "axis_name"
+    t.text "columns"
+    t.boolean "checks_num", default: false, null: false
+    t.text "guide_name"
+    t.text "head_head_name"
   end
 
   create_table "staffs", force: :cascade do |t|

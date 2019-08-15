@@ -103,7 +103,7 @@
         <td><%= @kid.comments %></td>
       </tr>
       <tr>
-        <td>קבוצה</td>
+        <td><%= @level_names[0] %></td>
         <% if @kid.group %>
         <td><%= link_to @kid.group.name, @kid.group %></td>
         <% end %>
@@ -111,11 +111,11 @@
       <tr>
         <td>סטטוס עדכני</td>
         <td><%= if @kid.status.present?
-                  if @level > 1
-                    button_to @kid.heb_status, toggle_path, method: :get, params: { value: 1 - @kid.status, id: @kid.id}
-                  else
+                  # if @level > 1
+                  #   button_to @kid.heb_status, toggle_path, method: :get, params: { value: 1 - @kid.status, id: @kid.id}
+                  # else
                     @kid.heb_status
-                  end
+                  # end
                 end %></td>
       </tr>
       <tr>
@@ -124,7 +124,7 @@
       </tr>
       <% if @kid.group_id != nil %>
         <tr>
-          <td>מדריכים ומדריכות</td>
+          <td><%= @staff_names[1] %></td>
             <% @kid.group.staffs.each do |s|%>
               <td><%= s.name %></td>
             <% end %>

@@ -20,13 +20,13 @@
 $('#outcome_based').change(function(){
   var c_type = $('#outcome_based :selected').parent('optgroup').attr("label");
   $('#event_eventable_id').val($('#outcome_based :selected').val())
-  if (c_type == "קבוצות:"){
+  if (c_type == "<%= @level_names[1] %>:"){
     $('#event_eventable_type').val("Group")
   }
-  if (c_type == "ראשים:"){
+  if (c_type == "<%= @level_names[3] %>:"){
     $('#event_eventable_type').val("Head")
   }
-  if (c_type == "צירים:"){
+  if (c_type == "<%= @level_names[5] %>:"){
     $('#event_eventable_type').val("Axis")
   }
   if (c_type == "מפעל:"){

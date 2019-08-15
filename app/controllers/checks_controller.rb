@@ -3,8 +3,6 @@
 class ChecksController < ApplicationController
   before_action :set_check, only: %i[show edit update destroy]
 
-  # GET /checks
-  # GET /checks.json
   def index
     if params[:delete_in_progress]
       current_staff.staffable.delete_in_progress
@@ -26,33 +24,32 @@ class ChecksController < ApplicationController
     end
   end
 
-  # GET /checks/1
-  # GET /checks/1.json
   def show; end
 
-  # GET /checks/new
   def new
     if params[:bus]
       @check = Check.new
       @bus = Bus.find(params[:bus])
       @kids = @bus.kids.order(:ken)
-      @check.name = "נוכחות בתהליך יצירה"
+      @check.name = "נוכחות אוטובוס #{@bus.name}"
       @check.bus_id = @bus.id
       @check.kids << @kids
       @check.approved = true
       @check.save(validate: false)
     else
-      @check = Check.new
-      @group = Group.find(params[:g_id])
-      @check.group_id = @group.id
-      @check.name = "נוכחות בתהליך יצירה"
-      @kids = @group.kids.order(:ken)
-      @check.kids << @kids
+      @check = Check.new # יוצר נוכחות חדשה וריקה
+      @group = Group.find(params[:g_id]) # מצהיר על הקבוצה של הנוכחות
+      # @check.group_id = @group.id
+      @check.name = "Blank"
+      @kids = @group.kids.order(:ken) # set kids
+      @check.kids << @kids # assoicate kids to check
+      unless @group.mifal.has_approve
+        @check.approved = true
+      end
       @check.save(validate: false)
     end
   end
 
-  # GET /checks/1/edit
   def edit
     if @check.bus_id.blank?
       @group = @check.group
@@ -63,10 +60,11 @@ class ChecksController < ApplicationController
     end
   end
 
-  # POST /checks
-  # POST /checks.json
   def create
     @check = Check.new(check_params)
+    # @group = Group.find(@check.group_id)
+    # @kids = @group.kids
+    # @check.kids << @kids
     respond_to do |format|
       if @check.save
         format.html { redirect_to check_path(@check), notice: 'Check was successfully created.' }
@@ -78,8 +76,6 @@ class ChecksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /checks/1
-  # PATCH/PUT /checks/1.json
   def update
     respond_to do |format|
       if @check.update(check_params)
@@ -92,8 +88,6 @@ class ChecksController < ApplicationController
     end
   end
 
-  # DELETE /checks/1
-  # DELETE /checks/1.json
   def destroy
     @check.destroy
     respond_to do |format|
@@ -104,13 +98,13 @@ class ChecksController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_check
     @check = Check.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+
   def check_params
-    params.require(:check).permit(:name, :group_id, :approved, attendances_attributes: %i[status id cause], kid_ids: [])
+    params.require(:check).permit(:name, :group_id, :approved, :date, attendances_attributes: %i[status id cause], kid_ids: [])
   end
 end

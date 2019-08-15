@@ -6,10 +6,13 @@ class Attendance < ApplicationRecord
   validates :cause, exclusion: { in: %w[אחר],
                                  message: 'חובה לפרט סיבת היעדרות' }
    def heb_status
-     if status == 1
-       string1 = "נוכח/ת"
-     else
-       string1 = "לא נוכח/ת"
+     case status
+     when 0
+       heb_status = "לא נוכח/ת"
+     when 1
+       heb_status = "נוכח/ת"
+     when 2
+       heb_status = "איחר/ה"       
      end
    end
 end

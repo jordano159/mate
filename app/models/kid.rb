@@ -41,19 +41,21 @@ class Kid < ApplicationRecord
   # ייבוא מאקסל
   def self.update_imported_kid(file, mifal_id)
     mifal = Mifal.find(mifal_id)
-    header_names = %w[ken grade name last_name sex taz phone medical meds food comments city parent_1 parent_1_phone
-                      parent_2 parent_2_phone group_id size shabat parents swim exits]
+    mifal.columns.map! { |x| x == "group" ? 'group_id' : x }
+    mifal.columns.reject! {|item| item =~ /full_name|status|cause/i }
+    header_names = mifal.columns
     spreadsheet = open_spreadsheet(file)
     header = header_names
     header = header.to_a
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
+      row['taz'] = Kid.generate_taz unless row['taz'].present?
       kid = find_by(taz: row['taz']) || new
-      kid.attributes = row.to_hash
-      kid.group_id = Staff.find_by(username: "קבוצה #{kid.group_id} #{mifal.name}").staffable.id if kid.group_id.present?
+      kid.attributes = row.to_hash #סכנת הזרקת SQL
+      kid.group_id = Staff.find_by(username: "כיתה #{kid.group_id} #{mifal.name}").staffable.id if kid.group_id.present?
       kid.mifal_id = mifal.id
       kid.city = kid.city.strip if kid.city.present?
-      kid.ken = "קן #{kid.ken}"
+      kid.ken = "קן #{kid.ken}" if kid.ken.present?
       kid.save!
     end
   end
@@ -75,11 +77,23 @@ class Kid < ApplicationRecord
     Kid.where("kids.#{filter_column} LIKE ?", "%#{filter_condition}%").distinct
   end
 
-  def heb_status
-    if status == 1
-      string1 = "נוכח/ת"
+  def self.generate_taz
+    random_taz = rand(100000000000..100000000000000)
+    if Kid.all.pluck(:taz).include?(random_taz)
+      self.generate_taz
     else
-      string1 = "לא נוכח/ת"
+      return random_taz
+    end
+  end
+
+  def heb_status
+    case status
+    when 0
+      heb_status = "לא נוכח/ת"
+    when 1
+      heb_status = "נוכח/ת"
+    when 2
+      heb_status = "איחר/ה"
     end
   end
 end

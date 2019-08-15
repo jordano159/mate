@@ -3,10 +3,78 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_staff!
   before_action :level
+  before_action :level_names
+  before_action :staff_names
+  before_action :columns_settings
   before_action :clearence
   before_action :only_admin
   before_action :configure_permitted_parameters, if: :devise_controller?
-  after_action :track_action
+  # after_action :track_action
+
+
+def columns_settings
+  if staff_signed_in?
+    @column_names = {
+      full_name: "שם מלא",
+      status: "סטטוס",
+      cause: "סיבה",
+      group: "#{@level_names[0]}",
+      sex: "מין",
+      taz: "תעודת זהות",
+      ken: "קן",
+      grade: "שכבה",
+      phone: "טלפון",
+      medical: "רגישות ובעיות רפואיות",
+      meds: "תרופות",
+      food: "אוכל",
+      comments: "הערות",
+      city: "יישוב",
+      parent_1: "שם הורה 1",
+      parent_1_phone: "טלפון הורה 1",
+      parent_2: "שם הורה 2",
+      parent_2_phone: "טלפון הורה 2",
+      size: "גודל חולצה",
+      shabat: "שמירת שבת",
+      parents: "ההורים באים לביקור?",
+      swim: "אישור שחייה",
+      exits: "כניסות ויציאות"
+    }
+
+    @default_columns = [
+      "full_name",
+      "status",
+      "cause",
+      "group",
+      "sex"
+    ]
+end
+end
+
+  def level_names
+    if staff_signed_in?
+      unless current_staff.admin?
+        mifal = current_staff.staffable.mifal
+        @level_names = [mifal.group_name[:single], mifal.group_name[:plural],
+                        mifal.head_name[:single], mifal.head_name[:plural],
+                        mifal.axis_name[:single], mifal.axis_name[:plural]]
+      else
+        @level_names = %w(קבוצה קבוצות ראש ראשים ציר צירים)
+      end
+    end
+  end
+
+
+  def staff_names
+    if staff_signed_in?
+      unless current_staff.admin?
+        mifal = current_staff.staffable.mifal
+        @staff_names = [mifal.guide_name[:single], mifal.guide_name[:plural],
+                        mifal.head_head_name[:single], mifal.head_head_name[:plural]]
+      else
+        @staff_names = %w(מדריך מדריכות ראשראשית ראשראשים)
+      end
+    end
+  end
 
   def home_page
     if staff_signed_in?
@@ -23,11 +91,12 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_index
-    redirect_to '/' unless current_staff.admin?
-    if params[:search]
-      @staffs = Staff.search(params[:search]).order('created_at DESC').includes(:staffable)
+    if current_staff.admin?
+      @staffs = Staff.all
+    elsif current_staff.vip?
+      @staffs = current_staff.staffable.all_staffs
     else
-      @staffs = Staff.all.order('created_at DESC').includes(:staffable)
+      redirect_to root_path
     end
   end
 

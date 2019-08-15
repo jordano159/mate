@@ -1,7 +1,18 @@
-<h1>יצירת הצירים</h1>
+<h1>יצירת <%= @level_names[5] %></h1>
 <%= render layout: 'form' do |form| %>
   <div class="field">
-    <%= form.label :axis_num, "כמה צירים יש במפעל?" %>
+    <%= form.label :axis_num, "כמה #{@level_names[5]} יש במפעל?" %>
     <%= form.number_field :axis_num, value: @mifal.axes.count %>
   </div>
+<% end %>
+
+<% unless @mifal.has_axes %>
+<style>
+  body{
+    display: none;
+  }
+</style>
+<script>
+$("#submit").trigger('click');
+</script>
 <% end %>

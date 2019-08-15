@@ -1,4 +1,4 @@
-<h1>קבוצות</h1>
+<h1><%= @level_names[1] %></h1>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-groups" data-sort="true" data-source="<%= url_for(format: :json)%>">
@@ -14,4 +14,4 @@
   </table>
 </div>
 
-<%= link_to 'קבוצה חדשה', new_group_path if current_staff.admin? %>
+<%= link_to "#{ @level_names[0] } חדשה", new_group_path if current_staff.admin? %>

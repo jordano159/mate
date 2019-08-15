@@ -7,6 +7,7 @@ class KidsController < ApplicationController
   # GET /kids
   # GET /kids.json
   def index
+    @mifal = current_staff.staffable.mifal unless current_staff.admin?
     if params[:group_id].present?
       @kids = Group.find(params[:group_id]).kids
     elsif params[:bus_id].present?
@@ -126,6 +127,6 @@ class KidsController < ApplicationController
   def kid_params
     params.require(:kid).permit(:name, :group_id, :last_name, :sex, :phone, :medical,
                                 :meds, :food, :city, :ken, :parent_1, :parent_1_phone, :parent_2, :parent_2_phone, :size, :shabat,
-                                :parents, :swim, :exits, :comments, :status, :cause, :taz, :grade)
+                                :parents, :swim, :exits, :comments, :status, :cause, :taz, :grade, :mifal_id)
   end
 end

@@ -1,18 +1,27 @@
 <p>
   <strong>שם:</strong>
   <%= @check.name %>
-  <%= @check.created_at.strftime("%e.%m") %>
+  <% if @check.group.mifal.checks_num %>
+  <% else %>
+    <%= @check.created_at.strftime("%e.%m") %>
+  <% end %>
 </p>
 
+<% if @check.bus_id.blank? %>
+  <% group = Group.find(@check.group_id) %>
+<% end %>
+
   <% if @check.bus_id.blank? %>
-    <p><strong>קבוצה:</strong>
-    <%= Group.find(@check.group_id).name %></p>
-    <p><strong>סטטוס:</strong>
-    <% if @check.approved? %>
-    <span style="color:green;">מאושר</span> <i class="fa fa-check-circle"></i>
-    <% else %>
-    <span style="color:red;">עוד לא מאושר</span>
-    <% end %></p>
+    <p><strong><%= @level_names[0] %>:</strong>
+    <%= group.name %></p>
+    <% if group.mifal.has_approve %>
+      <p><strong>סטטוס:</strong>
+      <% if @check.approved? %>
+      <span style="color:green;">מאושר</span> <i class="fa fa-check-circle"></i>
+      <% else %>
+      <span style="color:red;">עוד לא מאושר</span>
+      <% end %></p>
+    <% end %>
   <% elsif @check.group_id.blank? %>
   <strong>אוטובוס:</strong>
   <%= Bus.find(@check.bus_id).name %>
@@ -61,11 +70,19 @@
         <tr>
           <td><%= link_to kid.full_name, kid %></td>
           <td>
-            <% if @check.attendances.find_by(kid_id: kid.id).status == 1 %>
+            <%= case @check.attendances.find_by(kid_id: kid.id).status
+            when 0
+              heb_status = "לא נוכח/ת"
+            when 1
+              heb_status = "נוכח/ת"
+            when 2
+              heb_status = "איחר/ה"
+            end %>
+            <!-- <% if @check.attendances.find_by(kid_id: kid.id).status == 1 %>
               <%= string1 = "נוכח/ת" %>
             <% else %>
               <%= string1 = "לא נוכח/ת" %>
-            <% end %>
+            <% end %> -->
           </td>
           <td><%= @check.attendances.find_by(kid_id: kid.id).cause %></td>
           <!-- <td class="previous" style="display:none;">
@@ -99,8 +116,8 @@
 <%= link_to 'חזרה לרשימת הנוכחויות', checks_path, class: "btn btn-primary" %>
 <%= link_to 'מחיקה', @check, method: :delete, data: { confirm: 'את/ה בטוח/ה שאת/ה רוצה למחוק את הנוכחות הזאת?' }, class: "btn btn-danger" %>
 
-<% if @level > 1 %>
-  <% if !@check.approved? %>
+<% if @level > 1 && group && group.mifal.has_approve %>
+  <% unless @check.approved? %>
     <%= form_for @check do |f| %>
       <%= f.hidden_field :approved, value: true %>
       <%= f.submit 'שינוי סטטוס - מאושר', class: 'btn btn-primary' %>

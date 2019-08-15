@@ -1,4 +1,22 @@
-<h1 style="font-weight:bold;"></i> <%= @group.name %> </h1>
+
+<div class="d-flex flex-row justify-content-between">
+  <div class="p-2">
+    <h1 style="font-weight:bold;"></i> <%= @group.name %> </h1>
+  </div>
+  <div class="p-2 mt-2">
+    <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => @group.id), class: "btn btn-primary" %>
+    <%= link_to 'עריכה', edit_group_path(@group), class: "btn btn-warning" if current_staff.admin? || current_staff.vip? %>
+    <%# link_to 'חזרה לרשימה', groups_path, class: "btn btn-primary" %>
+    <% next_id = @group.id + 1 %>
+    <% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>
+      <%= link_to "ה#{@level_names[0]} הבאה", group_path(next_id), class: "btn btn-primary" %>
+    <% end %>
+</div>
+
+</div>
+
+
+
 
   <strong>
     <%= link_to @group.head.name, @group.head %>
@@ -12,17 +30,23 @@
     aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= percent %>% נוכחות</div>
   </div>
 
+
+
 <p>
-  <div class="table-responsive-lg">
+  <div class="table-responsive">
     <table class="table table-hover" id="dttb-kids" data-sort="true"
                         data-source="<%= url_for(format: :json, controller: 'kids', group_id: @group.id)%>">
       <thead class="thead-dark">
         <tr>
-          <th data-data="full_name">שם</th>
-          <th data-data="ken">קן</th>
-          <th data-data="exits">כניסות ויציאות</th>
-          <th data-data="status">סטטוס</th>
-          <th data-data="cause">סיבה</th>
+          <% @column_names.each_with_index do |col,i| %>
+            <% if @group.mifal.columns.include?(col.first.to_s) %>
+              <% unless col.first == "group" %>
+                <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
+              <% else %>
+                <% if @level > 1 %> <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th> <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
           <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
         </tr>
       </thead>
@@ -31,28 +55,36 @@
   </div>
 </p>
 
-  <strong> מדריכות ומדריכים:</strong>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <%# link_to "יצירת #{@staff_names[0]} חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
 
-    <tbody>
-      <% @group.staffs.each do |s|%>
-        <tr>
-          <td><%= s.name %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= link_to "יצירת מדריך.ה חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
-  <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => @group.id), class: "btn btn-primary" %>
 
-<%= link_to 'עריכה', edit_group_path(@group), class: "btn btn-warning" if current_staff.admin? || current_staff.vip? %>
-<%= link_to 'חזרה לרשימה', groups_path, class: "btn btn-primary" %>
-<% next_id = @group.id + 1 %>
-<% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>
-  <%= link_to 'הקבוצה הבאה', group_path(next_id), class: "btn btn-primary" %>
-<% end %>
+
+
+<script>
+
+$('#dttb-kids').dataTable( {
+        dom: 'Bfrtip',
+        stateSave: true,
+        columnDefs: [
+           {
+               targets: [0,1,2,3,-1],
+               className: 'noVis'
+           },
+            {   targets: [0,1,2,3,-1], visible: true },
+            {   targets: "_all", visible: false }
+       ],
+       buttons: [
+           {
+               extend: 'colvis',
+               columns: ':not(.noVis)',
+               collectionLayout: 'fixed two-column'
+           }
+       ],
+       language: {
+            buttons: {
+                colvis: 'עמודות להצגה'
+            }
+        },
+
+});
+  </script>

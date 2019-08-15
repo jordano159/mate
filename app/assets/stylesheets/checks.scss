@@ -9,6 +9,7 @@ $green: #2ECC71;
 $blue: #4183D7;
 $dark-blue: #00008B;
 $small: 40em;
+$gold: #FFD700;
 
 * {
   box-sizing: border-box;
@@ -106,6 +107,15 @@ input[value="לא"]:checked + .collection_radio_buttons {
   }
 }
 
+input[value="2"]:checked + .collection_radio_buttons {
+  background: $gold;
+  color: $light;
+  &:hover {
+    background: darken($gold, 5%);
+    color: darken($light, 5%);
+  }
+}
+
 .button_to input[type="submit"]{
 
 	// height: 50px;
@@ -120,6 +130,6 @@ input[value="לא"]:checked + .collection_radio_buttons {
 	-o-transition: background-color 0.3s;
 	transition: background-color 0.3s;
 }
-input[type="submit"]:hover{
-	background-color: $green;
-}
+// input[type="submit"]:hover{
+// 	background-color: $green;
+// }

@@ -1,4 +1,4 @@
-<h1>ראשים</h1>
+<h1><%= @level_names[3] %></h1>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-heads" data-sort="true" data-source="<%= url_for(format: :json)%>">
@@ -13,4 +13,4 @@
   </table>
 </div>
 
-<%= link_to 'ראש חדש', new_head_path if @level > 2 %>
+<%= link_to "#{@level_names[2]} חדש", new_head_path if @level > 2 %>

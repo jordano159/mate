@@ -21,7 +21,14 @@ class HeadsController < ApplicationController
   # GET /heads/new
   def new
     @head = Head.new
-    @axes = Axis.all
+    if current_staff.admin?
+      @axes = Axis.all
+      @groups = Group.all
+    else
+      @axes = current_staff.staffable.axes
+      @groups = current_staff.staffable.groups
+    end
+
   end
 
   # GET /heads/1/edit
@@ -33,7 +40,6 @@ class HeadsController < ApplicationController
   # POST /heads.json
   def create
     @head = Head.new(head_params)
-    @axes = Axis.all
 
     respond_to do |format|
       if @head.save

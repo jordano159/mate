@@ -1,13 +1,23 @@
-<% unless current_staff.admin? %>
-  <h1 style="font-weight:bold;">חניכי <%= current_staff.staffable.name %> </h1>
-<% else %>
-  <h1 style="font-weight:bold;">חניכים </h1>
-<% end %>
 
-<% if !current_staff.user? %>
-  <%= render 'filter' %>
-<% end %>
-
+<%# if !current_staff.user? %>
+  <%# render 'filter' %>
+<%# end %>
+<div id="head">
+<div class="d-flex flex-row justify-content-between">
+  <div class="p-2">
+    <% unless current_staff.admin? %>
+      <h1 style="font-weight:bold;">חניכי <%= current_staff.staffable.name %> </h1>
+    <% else %>
+      <h1 style="font-weight:bold;">חניכים </h1>
+    <% end %>
+  </div>
+  <div class="p-2">
+    <% if @level == 1 %>
+      <% g_id = Group.find(current_staff.staffable.id) %>
+      <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => g_id), class: "btn btn-primary mt-2" %>
+    <% end %>
+  </div>
+</div>
 <% if @level == 1 %>
 <strong>
   <%= @kids.first.group.head.name %>
@@ -21,37 +31,82 @@
     aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= percent %>% נוכחות</div>
   </div>
 <% end %>
+</div>
 
-
-<% if current_staff.admin? || current_staff.vip? %>
-<%= link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary" %>
-<%= link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary" %>
-<% end %>
+<%# if current_staff.admin? || current_staff.vip? %>
+<%# link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary mb-3" %>
+<%# link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary" %>
+<%# end %>
 
 <div class="table-container">
-<div class="table-responsive-xs">
+<div class="table-responsive">
   <table class="table table-hover" id="dttb-kids" data-sort="true" data-source="<%= url_for(format: :json)%>">
-    <thead class="thead-dark nowrap">
+    <thead class="thead-dark nowrap ">
       <tr>
-        <th data-data="first_name">שם פרטי</th>
-        <th data-data="last_name">שם משפחה</th>
-        <th data-data="phone">טלפון</th>
-        <th data-data="medical">רגישות ובעיות רפואיות</th>
-        <th data-data="meds">תרופות</th>
-        <!-- <th data-data="food">אוכל</th> -->
-        <th data-data="ken">קן</th>
-        <th data-data="city">יישוב</th>
-        <th data-data="exits">כניסות ויציאות</th>
-        <th data-data="status" data-search="לא נוכח">סטטוס</th>
-        <th data-data="cause">סיבה</th>
-        <% if @level > 1 %> <th data-data="group">קבוצה</th> <% end %>
+        <% if current_staff.admin? %>
+          <% @column_names.each_with_index do |col,i| %>
+            <% unless col.first == "group" %>
+                <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
+            <% else %>
+                <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% @column_names.each_with_index do |col,i| %>
+            <% if @mifal.columns.include?(col.first.to_s) %>
+              <% unless col.first == "group" %>
+                  <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
+              <% else %>
+                <% if @level > 1 %> <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th> <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
       </tr>
     </thead>
-
   </table>
 </div>
 </div>
-<% if @level == 1 %>
-  <% g_id = Group.find(current_staff.staffable.id) %>
-  <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => g_id), class: "btn btn-primary" %>
-<% end %>
+
+<script>
+if(<%= @level == 1 %>){
+  var targets = [0,1,2];
+} else{
+  var targets = [0,1,2,3];
+}
+$('#dttb-kids').dataTable( {
+        dom: 'Bfrtip',
+        stateSave: true,
+        columnDefs: [
+           {
+               targets: targets,
+               className: 'noVis'
+           },
+            {   targets: targets, visible: true },
+            {   targets: "_all", visible: false }
+       ],
+       buttons: [
+           {
+               extend: 'colvis',
+               columns: ':not(.noVis)',
+               collectionLayout: 'fixed two-column',
+           }
+       ],
+       language: {
+            buttons: {
+                colvis: 'עמודות להצגה'
+            }
+        },
+
+});
+
+var padding =  parseInt($("#page-content-wrapper").css('padding-left')) + parseInt($("#page-content-wrapper").css('padding-right'));
+if ($("#navbar").css("display") == "none"){
+  var table_width =   $("#page-content-wrapper").width() - padding;
+}else {
+  var table_width = $( document ).width() - padding;
+}
+$(".table-container").width(table_width);
+$(".progress").width(table_width);
+</script>

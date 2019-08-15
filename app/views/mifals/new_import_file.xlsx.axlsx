@@ -1,0 +1,10 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'חניכי וחניכות המפעל') do |sheet|
+  import_columns = ["שם פרטי", "שם משפחה"]
+  @mifal.columns.each do |col|
+    unless ["full_name", "status", "cause", "name", "last_name"].include?(col)
+      import_columns << @column_names[col.to_sym]
+    end
+  end
+  sheet.add_row import_columns
+end

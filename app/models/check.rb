@@ -29,4 +29,8 @@ def update_attendance
       end
     end
   end
+
+  def delete_check
+    check = Check.where("name =  0")
+  end
 end

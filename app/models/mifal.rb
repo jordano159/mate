@@ -1,6 +1,12 @@
 class Mifal < ApplicationRecord
-  enum stage: [ :axised, :headed, :grouped, :imported_kids ]
+  enum stage: [ :settings, :axised, :headed, :grouped, :imported_kids ]
   serialize :bus_proposal, Hash
+  serialize :group_name, Hash
+  serialize :head_name, Hash
+  serialize :axis_name, Hash
+  serialize :columns, Array
+  serialize :guide_name, Hash
+  serialize :head_head_name, Hash
   has_many :axes, dependent: :destroy
   has_many :heads, through: :axes
   has_many :groups, through: :heads
@@ -11,6 +17,9 @@ class Mifal < ApplicationRecord
   # has_many :events, through: :axes, source: :events
   has_many :events, as: :eventable
 
+def mifal
+  self
+end
   def all_events
     my_events = Array.new
     self.events.each do |e|
@@ -24,10 +33,18 @@ class Mifal < ApplicationRecord
     return my_events
   end
 
-  def delete_in_progress
-    self.checks.where(name: "נוכחות בתהליך יצירה").where("checks.created_at <= ?", 20.minutes.ago).delete_all
+  def all_staffs
+    my_staffs = Array.new
+    self.staffs.each do |s|
+      my_staffs << s
+    end
+    self.axes.each do |a|
+      a.all_staffs.each do |s|
+        my_staffs << s
+      end
+    end
+    return my_staffs
   end
-
   # מחזיר ערים עם קואורדינטות
   def city_list
     names = self.kids.pluck(:city).uniq
