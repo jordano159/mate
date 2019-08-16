@@ -7,10 +7,9 @@
   <% @mifal.axes.each_with_index do |a,i| %>
     <div class="field">
       <% if @mifal.has_axes %>
-      <%= form.label "head_num_#{i}".to_sym, "כמה #{@level_names[3]} יש ב#{a.name}?" %>
-        <% else %>
+        <%= form.label "head_num_#{i}".to_sym, "כמה #{@level_names[3]} יש ב#{a.name}?" %>
+      <% else %>
         <%= form.label "head_num_#{i}".to_sym, "כמה #{@level_names[3]} יש במפעל?" %>
-
       <% end %>
       <%= form.number_field "head_num_#{i}".to_sym, value: a.heads.count %>
     </div>
