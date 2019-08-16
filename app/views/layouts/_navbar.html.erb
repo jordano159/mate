@@ -55,6 +55,9 @@
       <% end %>
       <% if current_staff.vip? %>
       <li class="nav-item ">
+        <%= link_to "סל מחזור", group_path(Group.find_by(name: "סל מחזור #{current_staff.staffable.name}")), class: "nav-link" if Group.find_by(name: "סל מחזור #{current_staff.staffable.name}").present? %>
+      </li>
+      <li class="nav-item ">
         <%= link_to "אשף יצירת מפעל", mifal_steps_path, class: "nav-link" %>
       </li>
       <% end %>

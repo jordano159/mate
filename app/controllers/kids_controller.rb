@@ -13,20 +13,11 @@ class KidsController < ApplicationController
     elsif params[:bus_id].present?
       @kids = Bus.find(params[:bus_id]).kids
     else
-      if params[:filter_column]
-        if current_staff.admin? || current_staff.vip?
-          @kids = Kid.all.includes(:group).filter(params[:filter_column], params[:filter_condition]).order('created_at DESC')
-        else
-          @kids = current_staff.staffable.kids.includes(:group).filter(params[:filter_column],
-            params[:filter_condition]).order('created_at DESC')
-        end
-        else
-          if current_staff.admin?
-            @kids = Kid.all.includes(:group)
-          else
-            @kids = current_staff.staffable.kids.includes(:group)
-          end
-        end
+      if current_staff.admin?
+        @kids = Kid.all.includes(:group)
+      else
+        @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(name: "סל מחזור #{@mifal.name}").id).includes(:group)
+      end
     end
 
     respond_to do |format|
