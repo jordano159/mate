@@ -90,7 +90,7 @@ class MifalStepsController < ApplicationController
       @mifal.heads.each_with_index do |head,i|
         group_nums[i].times do
           counter += 1
-          Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", head_id: head.id) if Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+          Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", head_id: head.id, mifal_id: @mifal.id) if Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
           next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
 
           Staff.create(name: "#{@staff_names[0]} #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
@@ -98,6 +98,7 @@ class MifalStepsController < ApplicationController
                         staffable_id: Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").id)
         end
       end
+      Group.create(name: "סל מחזור #{@mifal.name}", mifal_id: @mifal.id) if Group.find_by(name: "סל מחזור #{@mifal.name}").nil?
     end
     # @mifal.update(mifal_params)
     # if step == :settings

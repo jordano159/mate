@@ -9,7 +9,8 @@ class Mifal < ApplicationRecord
   serialize :head_head_name, Hash
   has_many :axes, dependent: :destroy
   has_many :heads, through: :axes
-  has_many :groups, through: :heads
+  # has_many :groups, through: :heads
+  has_many :groups
   has_many :kids
   has_many :checks, through: :axes
   has_many :buses, dependent: :destroy

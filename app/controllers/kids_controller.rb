@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class KidsController < ApplicationController
-  before_action :set_kid, only: %i[show edit update destroy]
+  before_action :set_kid, only: %i[show edit update destroy recover]
   before_action :authenticate_staff!
 
   # GET /kids
@@ -90,7 +90,20 @@ class KidsController < ApplicationController
   # DELETE /kids/1
   # DELETE /kids/1.json
   def destroy
-    @kid.destroy
+    @mifal = @kid.mifal
+    if current_staff.admin? || @kid.group.name == "סל מחזור #{@mifal.name}"
+      @kid.destroy
+    else
+      @kid.create_kid_left_event
+    end
+    respond_to do |format|
+      format.html { redirect_to kids_url, notice: 'Kid was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def recover
+    @kid.undelete
     respond_to do |format|
       format.html { redirect_to kids_url, notice: 'Kid was successfully destroyed.' }
       format.json { head :no_content }
