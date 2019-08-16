@@ -16,7 +16,7 @@ class KidsController < ApplicationController
       if current_staff.admin?
         @kids = Kid.all.includes(:group)
       else
-        @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(name: "סל מחזור #{@mifal.name}").id).includes(:group)
+        @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).includes(:group)
       end
     end
 
@@ -82,7 +82,7 @@ class KidsController < ApplicationController
   # DELETE /kids/1.json
   def destroy
     @mifal = @kid.mifal
-    if current_staff.admin? || @kid.group.name == "סל מחזור #{@mifal.name}"
+    if current_staff.admin? || @kid.group.hard_name == "סל מחזור #{@mifal.name}"
       @kid.destroy
     else
       @kid.create_kid_left_event

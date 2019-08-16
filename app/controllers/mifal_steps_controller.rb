@@ -46,9 +46,6 @@ class MifalStepsController < ApplicationController
       else
         axis_num = 1
       end
-
-      diff = axis_num - @mifal.axes.count
-
         (1..axis_num).each do |i|
           Axis.create(name: "#{@level_names[4]} #{i} #{@mifal.name}", hard_name: "#{@level_names[4]} #{i} #{@mifal.name}",
                       mifal_id: @mifal.id) if Axis.find_by(hard_name: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
@@ -65,8 +62,8 @@ class MifalStepsController < ApplicationController
       @mifal.axes.count.times do |i|
         head_nums << params[:mifal]["head_num_#{i}"].to_i
       end
-      counter = 1
-      @mifal.axes.each_with_index do |axis,i|
+      counter = 0
+      @mifal.axes.order(:hard_name.to_s.gsub(/\D/, '')).each_with_index do |axis,i|
         head_nums[i].times do
           counter += 1
           Head.create(name: "#{@level_names[2]} #{counter} #{@mifal.name}", hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}",
@@ -85,17 +82,27 @@ class MifalStepsController < ApplicationController
       @mifal.heads.count.times do |i|
         group_nums << params[:mifal]["group_num_#{i}"].to_i
       end
-      counter = 1
-      @mifal.heads.each_with_index do |head,i|
-        group_nums[i].times do
-          counter += 1
-          Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}",
-                       head_id: head.id, mifal_id: @mifal.id) if Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
-          next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+      counter = 0
+      @mifal.heads.order(:hard_name.to_s.gsub(/\D/, '')).each_with_index do |head,i|
+        diff = group_nums[i] - head.groups.count
+        puts "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~"
+        puts "~~~~~~~~~~~ Counter: #{counter} ~~~~~~~~~~~~~"
+        puts "~~~~~~~~~~~ Diff: #{diff} ~~~~~~~~~~~~~"
+        if diff > 0
+          group_nums[i].times do
+          # diff.times do
+            counter += 1
+            g = Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}",
+                         head_id: head.id, mifal_id: @mifal.id) if Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+            next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+            puts  "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~ #{g.name}"
 
-          Staff.create(name: "#{@staff_names[0]} #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
-                       role: 'user', username: "#{ @level_names[0] } #{counter} #{@mifal.name}", staffable_type: 'Group',
-                       staffable_id: Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").id)
+            Staff.create(name: "#{@staff_names[0]} #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
+                         role: 'user', username: "#{ @level_names[0] } #{counter} #{@mifal.name}", staffable_type: 'Group',
+                         staffable_id: Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").id)
+          end
+        else
+          counter += head.groups.count
         end
       end
       Group.create(name: "סל מחזור #{@mifal.name}", hard_name: "סל מחזור #{@mifal.name}",

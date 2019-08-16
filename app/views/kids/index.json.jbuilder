@@ -30,11 +30,11 @@ json.set! :data do
       json.group "אין #{@level_names[0]} משוייכת"
     end
 
-    group_name = "סל מחזור #{kid.mifal.name}"
+    group_hard_name = "סל מחזור #{kid.mifal.name}"
     json.url  "
               #{link_to 'עריכה', edit_kid_path(kid), class: 'btn btn-warning' if current_staff.admin? || current_staff.vip?}
               #{link_to 'מחיקה', kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
-              #{link_to 'שחזור', recover_path(kid), class: 'btn btn-primary' if kid.group.name == group_name}
+              #{link_to 'שחזור', recover_path(kid), class: 'btn btn-primary' if kid.group.hard_name == group_hard_name}
               "
   end
 end

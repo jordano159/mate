@@ -7,5 +7,6 @@ class Group < ApplicationRecord
   has_many :staffs, as: :staffable, dependent: :destroy
   has_many :checks, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
+  validates :hard_name, uniqueness: true
   # delegate :mifal, to: :head
 end

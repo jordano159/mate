@@ -38,7 +38,7 @@ class Kid < ApplicationRecord
     # event.save
     self.last_group = group.id
     puts last_group
-    self.group_id = Group.find_by(name: "סל מחזור #{mifal.name}").id
+    self.group_id = Group.find_by(hard_name: "סל מחזור #{mifal.name}").id
     puts group_id
     self.save
   end
