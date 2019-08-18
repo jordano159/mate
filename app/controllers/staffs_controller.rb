@@ -52,7 +52,7 @@ end
   end
 
   def become
-    return unless current_staff.admin?
+    return unless current_staff.admin? || current_staff.vip?
 
     sign_in(:staff, Staff.find(params[:id]))
     redirect_to root_url # or staff_root_url
