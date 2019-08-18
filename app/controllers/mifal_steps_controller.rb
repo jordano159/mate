@@ -64,15 +64,20 @@ class MifalStepsController < ApplicationController
       end
       counter = 0
       @mifal.axes.order(:hard_name).each_with_index do |axis,i|
-        head_nums[i].times do
-          counter += 1
-          Head.create(name: "#{@level_names[2]} #{counter} #{@mifal.name}", hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}",
-                      axis_id: axis.id) if Head.find_by(hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
-          next unless Staff.find_by(username: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
+        diff = head_nums[i] - axis.heads.count
+        if diff > 0
+          head_nums[i].times do
+            counter += 1
+            Head.create(name: "#{@level_names[2]} #{counter} #{@mifal.name}", hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}",
+                        axis_id: axis.id) if Head.find_by(hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
+            next unless Staff.find_by(username: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
 
-          Staff.create(name: "#{@staff_names[2]} #{counter} #{@mifal.name}", email: "h#{@mifal.name}#{counter}@gmail.com", password: '123123',
-            password_confirmation: '123123', role: 'user', username: "#{@level_names[2]} #{counter} #{@mifal.name}", staffable_type: 'Head',
-            staffable_id: Head.find_by(hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}").id)
+            Staff.create(name: "#{@staff_names[2]} #{counter} #{@mifal.name}", email: "h#{@mifal.name}#{counter}@gmail.com", password: '123123',
+              password_confirmation: '123123', role: 'user', username: "#{@level_names[2]} #{counter} #{@mifal.name}", staffable_type: 'Head',
+              staffable_id: Head.find_by(hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}").id)
+          end
+        else
+          counter += axis.heads.count
         end
       end
 
@@ -85,17 +90,17 @@ class MifalStepsController < ApplicationController
       counter = 0
       @mifal.heads.order(:hard_name).each_with_index do |head,i|
         diff = group_nums[i] - head.groups.count
-        puts "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~"
-        puts "~~~~~~~~~~~ Counter: #{counter} ~~~~~~~~~~~~~"
-        puts "~~~~~~~~~~~ Diff: #{diff} ~~~~~~~~~~~~~"
+        # puts "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~"
+        # puts "~~~~~~~~~~~ Counter: #{counter} ~~~~~~~~~~~~~"
+        # puts "~~~~~~~~~~~ Diff: #{diff} ~~~~~~~~~~~~~"
         if diff > 0
           group_nums[i].times do
           # diff.times do
             counter += 1
-            g = Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}",
+            Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}",
                          head_id: head.id, mifal_id: @mifal.id) if Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
             next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
-            puts  "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~ #{g.name}"
+            # puts  "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~ #{g.name}"
 
             Staff.create(name: "#{@staff_names[0]} #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
                          role: 'user', username: "#{ @level_names[0] } #{counter} #{@mifal.name}", staffable_type: 'Group',
