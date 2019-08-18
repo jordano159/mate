@@ -33,7 +33,13 @@ class HeadsController < ApplicationController
 
   # GET /heads/1/edit
   def edit
-    @axes = Axis.all
+    if current_staff.admin?
+      @axes = Axis.all
+      @groups = Group.all
+    else
+      @axes = current_staff.staffable.axes
+      @groups = current_staff.staffable.groups
+    end
   end
 
   # POST /heads
