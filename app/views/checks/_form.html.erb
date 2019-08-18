@@ -38,6 +38,12 @@
         <% names = check_names %>
         <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names, label_method: :second, value_method: :first %>
       <% end %>
+    <% else %>
+      <script>
+      $(document).ready(function(){
+        $("#hide").attr("id","")
+      });
+      </script>
     <% end %>
     <% causes = check_causes %>
     <br />
