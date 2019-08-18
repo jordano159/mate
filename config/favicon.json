@@ -1,5 +1,5 @@
 {
-    "master_picture": "app/assets/images/logoOnlyColor_(512X512).png",
+    "master_picture": "app/assets/images/wand.png",
     "favicon_design": {
         "ios": {
             "picture_aspect": "background_and_margin",
@@ -10,7 +10,8 @@
                 "ios7_and_later_icons": false,
                 "precomposed_icons": false,
                 "declare_only_default_icon": true
-            }
+            },
+            "app_name": "\u05d4\u05de\u05d8\u05d4"
         },
         "desktop_browser": [
 
@@ -27,12 +28,14 @@
                     "big": false,
                     "rectangle": false
                 }
-            }
+            },
+            "app_name": "\u05d4\u05de\u05d8\u05d4"
         },
         "android_chrome": {
             "picture_aspect": "no_change",
             "theme_color": "#ffffff",
             "manifest": {
+                "name": "\u05d4\u05de\u05d8\u05d4",
                 "display": "standalone",
                 "orientation": "not_set",
                 "on_conflict": "override",
@@ -49,7 +52,7 @@
         }
     },
     "settings": {
-        "scaling_algorithm": "Mitchell",
+        "scaling_algorithm": "on",
         "error_on_image_too_small": false,
         "readme_file": false,
         "html_code_file": false,

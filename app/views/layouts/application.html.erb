@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>מטה</title>
+    <title>המטה</title>
+    <%= render 'application/favicon' %>
     <meta property="og:title" content="מטה מפעל של השומר הצעיר" />
     <meta property="og:description" content="אפליקציית מטה למפעלי התנועה, נבנה על ידי מעגל הקוד השומרי" />
     <meta property="og:type" content="website" />
@@ -26,7 +27,9 @@
               <%= yield %>
 
             <% if mobile_device? %>
-              <%= error_btn %>
+              <div id="error_btn">
+                <%= error_btn %>
+              </div>
             <% end %>
         </div>
     </div>
