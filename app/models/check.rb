@@ -16,17 +16,21 @@ class Check < ApplicationRecord
   def previous_check
     Check.where('id < ? AND group_id = ?', id, group_id).last
   end
+
+  def delete_blank_checks
+    Check.where("name = ? and group_id = ?", "Blank", self.group_id).delete_all
+  end
 end
 
-  def update_attendance
-    if approved?
-      attendances.each do |a|
-        kid = Kid.find(a.kid_id)
-        if kid.status != a.status || kid.cause != a.cause
-          kid.update_columns(status: a.status, cause: a.cause)
-          # kid.update_columns(cause: a.cause)
-          kid.touch
-        end
+def update_attendance
+  if approved?
+    attendances.each do |a|
+      kid = Kid.find(a.kid_id)
+      if kid.status != a.status || kid.cause != a.cause
+        kid.update_columns(status: a.status, cause: a.cause)
+        # kid.update_columns(cause: a.cause)
+        kid.touch
       end
     end
   end
+end

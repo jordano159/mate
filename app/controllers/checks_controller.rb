@@ -39,7 +39,7 @@ class ChecksController < ApplicationController
     else
       @check = Check.new # יוצר נוכחות חדשה וריקה
       @group = Group.find(params[:g_id]) # מצהיר על הקבוצה של הנוכחות
-      # @check.group_id = @group.id
+      @check.group_id = @group.id
       @check.name = "Blank"
       @kids = @group.kids.order(:ken) # set kids
       @check.kids << @kids # assoicate kids to check
@@ -62,9 +62,6 @@ class ChecksController < ApplicationController
 
   def create
     @check = Check.new(check_params)
-    # @group = Group.find(@check.group_id)
-    # @kids = @group.kids
-    # @check.kids << @kids
     respond_to do |format|
       if @check.save
         format.html { redirect_to check_path(@check), notice: 'Check was successfully created.' }
@@ -79,6 +76,7 @@ class ChecksController < ApplicationController
   def update
     respond_to do |format|
       if @check.update(check_params)
+        @check.delete_blank_checks
         format.html { redirect_to @check, notice: 'Check was successfully updated.' }
         format.json { render :show, status: :ok, location: @check }
       else
