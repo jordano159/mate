@@ -51,7 +51,7 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "יצירת #{@staff_names[3]} חדש.ה", new_head_staff_path(@head) if current_staff.admin? %>
+  <%# link_to "יצירת #{@staff_names[3]} חדש.ה", new_head_staff_path(@head) if current_staff.admin? %>
 
 <%= link_to 'עריכה', edit_head_path(@head) if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', heads_path %>
