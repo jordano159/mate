@@ -1,5 +1,7 @@
 <h1>יומן אירועים</h1>
 
+<%= link_to 'אירוע חדש', new_event_path, class: "btn btn-primary" %>
+<%= link_to "איפוס", reset_events_path, class: "btn btn-danger", data: { confirm: 'את/ה בטוח/ה?' } %>
 <%# link_to  'ייצוא הטבלה לאקסל', events_path(format: :xlsx), class: "btn btn-primary" if !current_staff.user? %>
 
 <div class="table-responsive">
@@ -16,5 +18,3 @@
 
   </table>
 </div>
-
-<%= link_to 'אירוע חדש', new_event_path, class: "btn btn-primary" %>

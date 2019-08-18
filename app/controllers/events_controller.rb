@@ -71,6 +71,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def reset
+    current_staff.staffable.mifal.reset_events
+    redirect_to events_path
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

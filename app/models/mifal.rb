@@ -18,9 +18,14 @@ class Mifal < ApplicationRecord
   # has_many :events, through: :axes, source: :events
   has_many :events, as: :eventable
 
-def mifal
-  self
-end
+  def mifal
+    self
+  end
+
+  def reset_events
+    self.events.destroy_all
+  end
+
   def all_events
     my_events = Array.new
     self.events.each do |e|
