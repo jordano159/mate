@@ -1,7 +1,9 @@
 <p>
   <strong>שם:</strong>
   <%= @check.name %>
-  <%= @check.created_at.strftime("%e.%m") %>
+  <% unless (@check.group && @check.group.mifal.checks_num) || @check.bus %>
+    <%= @check.created_at.strftime("%e.%m") %>
+  <% end %>
 </p>
 
 <% if @check.bus_id.blank? %>
