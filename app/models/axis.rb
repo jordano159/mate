@@ -9,6 +9,7 @@ class Axis < ApplicationRecord
   # has_many :events, through: :heads, source: :events
   has_many :events, as: :eventable
   belongs_to :mifal
+  validates :hard_name, uniqueness: true
 
   def all_events
     my_events = Array.new

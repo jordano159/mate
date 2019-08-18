@@ -9,6 +9,7 @@ class Head < ApplicationRecord
   has_many :events, as: :eventable
   belongs_to :axis
   delegate :mifal, to: :axis
+  validates :hard_name, uniqueness: true
 
   def all_events
     my_events = Array.new

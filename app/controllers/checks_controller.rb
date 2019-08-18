@@ -4,6 +4,9 @@ class ChecksController < ApplicationController
   before_action :set_check, only: %i[show edit update destroy]
 
   def index
+    if params[:delete_in_progress]
+      current_staff.staffable.delete_in_progress
+    end
     @checks = if params[:search]
                 Check.search(params[:search]).order('created_at DESC')
               elsif params[:buses]

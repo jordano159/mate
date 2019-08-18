@@ -9,6 +9,10 @@
 // @import "font-awesome";
 @import "checks";
 
+.check-link {
+  text-decoration: none;
+  color: red;
+}
 
 table.dataTable {
     width: 100% !important;

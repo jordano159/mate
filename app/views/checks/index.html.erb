@@ -3,6 +3,12 @@
 <%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
 <% end %>
 
+<% if current_staff.vip? %>
+  <%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+  <%= submit_tag "מחיקת נוכחויות בתהליך יצירה ישנות", :name => "delete_in_progress", class: "btn btn-outline-success my-2 my-sm-0" %>
+  <% end %>
+<% end %>
+
 <%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
 <%= submit_tag "נוכחויות מכל הזמנים", :name => "show_all", class: "btn btn-outline-success my-2 my-sm-0" %>
 <%= submit_tag "נוכחויות רק מהיום האחרון", :name => "hide_all", class: "btn btn-outline-success my-2 my-sm-0" %>

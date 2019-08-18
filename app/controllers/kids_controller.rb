@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class KidsController < ApplicationController
-  before_action :set_kid, only: %i[show edit update destroy]
+  before_action :set_kid, only: %i[show edit update destroy recover]
   before_action :authenticate_staff!
 
   # GET /kids
@@ -13,20 +13,11 @@ class KidsController < ApplicationController
     elsif params[:bus_id].present?
       @kids = Bus.find(params[:bus_id]).kids
     else
-      if params[:filter_column]
-        if current_staff.admin? || current_staff.vip?
-          @kids = Kid.all.includes(:group).filter(params[:filter_column], params[:filter_condition]).order('created_at DESC')
-        else
-          @kids = current_staff.staffable.kids.includes(:group).filter(params[:filter_column],
-            params[:filter_condition]).order('created_at DESC')
-        end
-        else
-          if current_staff.admin?
-            @kids = Kid.all.includes(:group)
-          else
-            @kids = current_staff.staffable.kids.includes(:group)
-          end
-        end
+      if current_staff.admin?
+        @kids = Kid.all.includes(:group)
+      else
+        @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).includes(:group)
+      end
     end
 
     respond_to do |format|
@@ -90,7 +81,20 @@ class KidsController < ApplicationController
   # DELETE /kids/1
   # DELETE /kids/1.json
   def destroy
-    @kid.destroy
+    @mifal = @kid.mifal
+    if current_staff.admin? || @kid.group.hard_name == "סל מחזור #{@mifal.name}"
+      @kid.destroy
+    else
+      @kid.create_kid_left_event
+    end
+    respond_to do |format|
+      format.html { redirect_to kids_url, notice: 'Kid was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def recover
+    @kid.undelete
     respond_to do |format|
       format.html { redirect_to kids_url, notice: 'Kid was successfully destroyed.' }
       format.json { head :no_content }

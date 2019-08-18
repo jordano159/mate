@@ -1,14 +1,14 @@
 # # frozen_string_literal: true
- # יצירת אדמין
-# Staff.create!(name: 'ירדן', email: 'yarden11111@gmail.com', password: '12341234', password_confirmation: '12341234',
-#   role: 'admin', username: 'Jordan')
 # # This file should contain all the record creation needed to seed the database with its default values.
 # # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 # #
 #
 
+# יצירת אדמין
+# Staff.create!(name: 'ירדן', email: 'yarden11111@gmail.com', password: '12341234', password_confirmation: '12341234',
+#   role: 'admin', username: 'Jordan')
 
-1000.times do
+60.times do
   mifal_id = Mifal.all.ids.sample
   Kid.create(
       name:   Faker::Name.first_name     ,
@@ -33,9 +33,10 @@
       grade:   Faker::Lorem.word  ,
       taz:     Faker::Number.unique.number(digits: 10),
       mifal_id:    mifal_id ,
-      group_id: rand(Mifal.find(mifal_id).groups.first.id..Mifal.find(mifal_id).groups.last.id)
+      group_id: rand(Mifal.find(mifal_id).groups.first.id..Mifal.find(mifal_id).groups.last(2).first.id)
   )
 end
+
 # # Create Mifal
 # puts "What's the name of your new and awesome factory?"
 # name = STDIN.gets.chomp

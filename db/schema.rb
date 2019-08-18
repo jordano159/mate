@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_132528) do
+ActiveRecord::Schema.define(version: 2019_08_16_063623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_132528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "mifal_id"
+    t.string "hard_name"
     t.index ["mifal_id"], name: "index_axes_on_mifal_id"
     t.index ["name"], name: "index_axes_on_name"
   end
@@ -117,6 +118,9 @@ ActiveRecord::Schema.define(version: 2019_08_14_132528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "head_id"
+    t.bigint "mifal_id"
+    t.string "hard_name"
+    t.index ["mifal_id"], name: "index_groups_on_mifal_id"
     t.index ["name"], name: "index_groups_on_name"
   end
 
@@ -125,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_132528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "axis_id"
+    t.string "hard_name"
     t.index ["axis_id"], name: "index_heads_on_axis_id"
     t.index ["name"], name: "index_heads_on_name"
   end
@@ -158,6 +163,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_132528) do
     t.string "grade"
     t.bigint "taz"
     t.bigint "mifal_id"
+    t.integer "last_group"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
     t.index ["exits"], name: "index_kids_on_exits"
@@ -232,5 +238,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_132528) do
   add_foreign_key "axes", "mifals"
   add_foreign_key "buses", "mifals"
   add_foreign_key "events", "staffs"
+  add_foreign_key "groups", "mifals"
   add_foreign_key "kids", "mifals"
 end

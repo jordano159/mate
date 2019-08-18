@@ -10,7 +10,7 @@ class Kid < ApplicationRecord
 
   # Callbacks
   around_save :create_kid_moved_event
-  before_destroy :create_kid_left_event
+  # before_destroy :create_kid_left_event
 
   def to_s
     self.full_name
@@ -35,7 +35,17 @@ class Kid < ApplicationRecord
     event.staff_id = mifal.staffs.first.id
     event.eventable_type = "Mifal"
     event.eventable_id = mifal.id
-    event.save
+    # event.save
+    self.last_group = group.id
+    puts last_group
+    self.group_id = Group.find_by(hard_name: "סל מחזור #{mifal.name}").id
+    puts group_id
+    self.save
+  end
+
+  def undelete
+    self.group_id = self.last_group
+    self.save
   end
 
   # ייבוא מאקסל

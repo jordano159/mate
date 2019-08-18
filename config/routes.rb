@@ -45,5 +45,6 @@ Rails.application.routes.draw do
   get 'staffs', to: 'application#admin_index'
   get '/prop', to: 'mifals#prop', as: 'prop'
   get '/toggle', to: 'kids#toggle', as: 'toggle'
+  get '/recover/:id', to: 'kids#recover', as: 'recover'
   get '/new_import_file', to: 'mifals#new_import_file', as: 'new_import_file'
 end

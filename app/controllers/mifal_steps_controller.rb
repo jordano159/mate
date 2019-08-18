@@ -38,73 +38,81 @@ class MifalStepsController < ApplicationController
       head_head_name_plural = params[:mifal][:head_head_name_plural]
       @mifal.head_head_name = {single: head_head_name_single, plural: head_head_name_plural}
       @mifal.save
+
     when :axised
       @mifal.axised! # Set stage
       if @mifal.has_axes
         axis_num = params[:mifal][:axis_num].to_i
-        (1..axis_num).each do |i|
-          Axis.create(name: "#{@level_names[4]} #{i} #{@mifal.name}", mifal_id: @mifal.id) if Axis.find_by(name: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
-          next unless Staff.find_by(username: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
-
-          Staff.create(name: "רכזת #{@level_names[4]} #{i} #{@mifal.name}", email: "a#{@mifal.name}#{i}@gmail.com", password: '123123',
-            password_confirmation: '123123', role: 'user', username: "#{@level_names[4]} #{i} #{@mifal.name}", staffable_type: 'Axis',
-            staffable_id: Axis.find_by(name: "#{@level_names[4]} #{i} #{@mifal.name}").id)
-          end
       else
         axis_num = 1
-
+      end
         (1..axis_num).each do |i|
-          Axis.create(name: "#{@level_names[4]} #{i} #{@mifal.name}", mifal_id: @mifal.id) if Axis.find_by(name: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
+          Axis.create(name: "#{@level_names[4]} #{i} #{@mifal.name}", hard_name: "#{@level_names[4]} #{i} #{@mifal.name}",
+                      mifal_id: @mifal.id) if Axis.find_by(hard_name: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
           next unless Staff.find_by(username: "#{@level_names[4]} #{i} #{@mifal.name}").nil?
 
           Staff.create(name: "רכזת #{@level_names[4]} #{i} #{@mifal.name}", email: "a#{@mifal.name}#{i}@gmail.com", password: '123123',
             password_confirmation: '123123', role: 'user', username: "#{@level_names[4]} #{i} #{@mifal.name}", staffable_type: 'Axis',
-            staffable_id: Axis.find_by(name: "#{@level_names[4]} #{i} #{@mifal.name}").id)
+            staffable_id: Axis.find_by(hard_name: "#{@level_names[4]} #{i} #{@mifal.name}").id)
           end
-      end
+
     when :headed
       @mifal.headed! # Set stage
       head_nums = []
       @mifal.axes.count.times do |i|
         head_nums << params[:mifal]["head_num_#{i}"].to_i
       end
-      counter = 1
-      @mifal.axes.each_with_index do |axis,i|
-        head_nums[i].times do
-          counter += 1
-          Head.create(name: "#{@level_names[2]} #{counter} #{@mifal.name}", axis_id: axis.id) if Head.find_by(name: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
-          next unless Staff.find_by(username: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
+      counter = 0
+      @mifal.axes.order(:hard_name).each_with_index do |axis,i|
+        diff = head_nums[i] - axis.heads.count
+        if diff > 0
+          head_nums[i].times do
+            counter += 1
+            Head.create(name: "#{@level_names[2]} #{counter} #{@mifal.name}", hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}",
+                        axis_id: axis.id) if Head.find_by(hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
+            next unless Staff.find_by(username: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
 
-          Staff.create(name: "#{@staff_names[2]} #{counter} #{@mifal.name}", email: "h#{@mifal.name}#{counter}@gmail.com", password: '123123',
-            password_confirmation: '123123', role: 'user', username: "#{@level_names[2]} #{counter} #{@mifal.name}", staffable_type: 'Head',
-            staffable_id: Head.find_by(name: "#{@level_names[2]} #{counter} #{@mifal.name}").id)
+            Staff.create(name: "#{@staff_names[2]} #{counter} #{@mifal.name}", email: "h#{@mifal.name}#{counter}@gmail.com", password: '123123',
+              password_confirmation: '123123', role: 'user', username: "#{@level_names[2]} #{counter} #{@mifal.name}", staffable_type: 'Head',
+              staffable_id: Head.find_by(hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}").id)
+          end
+        else
+          counter += axis.heads.count
         end
       end
+
     when :grouped
       @mifal.grouped! # Set stage
       group_nums = []
       @mifal.heads.count.times do |i|
         group_nums << params[:mifal]["group_num_#{i}"].to_i
       end
-      counter = 1
-      @mifal.heads.each_with_index do |head,i|
-        group_nums[i].times do
-          counter += 1
-          Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", head_id: head.id) if Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
-          next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+      counter = 0
+      @mifal.heads.order(:hard_name).each_with_index do |head,i|
+        diff = group_nums[i] - head.groups.count
+        # puts "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~"
+        # puts "~~~~~~~~~~~ Counter: #{counter} ~~~~~~~~~~~~~"
+        # puts "~~~~~~~~~~~ Diff: #{diff} ~~~~~~~~~~~~~"
+        if diff > 0
+          group_nums[i].times do
+          # diff.times do
+            counter += 1
+            Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}",
+                         head_id: head.id, mifal_id: @mifal.id) if Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+            next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+            # puts  "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~ #{g.name}"
 
-          Staff.create(name: "#{@staff_names[0]} #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
-                        role: 'user', username: "#{ @level_names[0] } #{counter} #{@mifal.name}", staffable_type: 'Group',
-                        staffable_id: Group.find_by(name: "#{ @level_names[0] } #{counter} #{@mifal.name}").id)
+            Staff.create(name: "#{@staff_names[0]} #{counter} #{@mifal.name}", email: "g #{@mifal.name}#{counter}@gmail.com", password: '321321', password_confirmation: '321321',
+                         role: 'user', username: "#{ @level_names[0] } #{counter} #{@mifal.name}", staffable_type: 'Group',
+                         staffable_id: Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").id)
+          end
+        else
+          counter += head.groups.count
         end
       end
+      Group.create(name: "סל מחזור #{@mifal.name}", hard_name: "סל מחזור #{@mifal.name}",
+                   mifal_id: @mifal.id) if Group.find_by(hard_name: "סל מחזור #{@mifal.name}").nil?
     end
-    # @mifal.update(mifal_params)
-    # if step == :settings
-    #   @mifal.columns.delete("")
-    #   @mifal.columns.unshift("name", "last_name", "taz", "group_id")
-    #   @mifal.save
-    # end
     render_wizard @mifal
   end
 
