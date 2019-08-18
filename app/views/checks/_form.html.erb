@@ -59,8 +59,14 @@
           <%= ff.collection_radio_buttons :status, options_arr, :first, :last  %>
         </div>
       </div>
-      <%= ff.input :cause, label: "סיבת היעדרות:", collection: causes, input_html: {style:"display:none;", class: 'check_r' }, label_html: {style:"display:none;", class: 'label_r' } %>
-      <%= ff.input :cause, label: "סיבת היעדרות:",                     input_html: {style:"display:none;", class: 'check_o' }, label_html: {style:"display:none;", class: 'label_o' } %>
+      <div class="check_cause">
+        <div class="check_r">
+          <%= ff.input :cause, label: "סיבת היעדרות", collection: causes, input_html: {class: "check_r_input"} %>
+        </div>
+        <div class="check_o">
+          <%= ff.input :cause, label: "סיבת היעדרות", label_html: { class: 'label_o' }, required: false %>
+        </div>
+      </div>
       <br />
     </div>
     <% end %>
@@ -74,41 +80,54 @@
 <script>
 $(document).ready(function(){
   $("#hide").hide(1);
-$('input[type="radio"]').change(function(){
-console.log($(this).val())
-if($(this).val()==0){
-  $(this).closest("div.check_div").find(".check_r").show(400)
-  $(this).closest("div.check_div").find(".label_r").show(400)}
-else{
-  $(this).closest("div.check_div").find(".check_r").hide(400)
-  $(this).closest("div.check_div").find(".label_r").hide(400)
-  $(this).closest("div.check_div").find(".check_o").hide(400)
-  $(this).closest("div.check_div").find(".label_o").hide(400)
-  $($(this).closest("div.check_div").find(".check_o")).val("");
+  $(".check_cause").hide(1);
+  $('input[type="radio"]').change(function(){
+  console.log($(this).val())
+  if($(this).val()== 0){
+    if ($(this).closest("div.check_div").find(".check_cause").is(":hidden")){
+      $(this).closest("div.check_div").find(".check_cause").show(1)
+    };
+    $(this).closest("div.check_div").find(".check_r").show("blind", 200)
+    $(this).closest("div.check_div").find(".check_o").hide(1)
   }
-});
+  else if ($(this).val()== 2) {
+    if ($(this).closest("div.check_div").find(".check_cause").is(":hidden")){
+      $(this).closest("div.check_div").find(".check_cause").show(1)
+    };
+    $(this).closest("div.check_div").find(".check_r").hide(1)
+    $(this).closest("div.check_div").find(".check_o").show("blind", 200)
+    $(this).closest("div.check_div").find(".label_o").html("סיבת איחור")
+    }
+  else{
+    $(this).closest("div.check_div").find(".check_cause").hide("blind", 400)
+    $(this).closest("div.check_div").find(".check_r").hide("blind", 200)
+    $(this).closest("div.check_div").find(".check_o").hide("blind", 200)
+    $($(this).closest("div.check_div").find(".check_o")).val("");
+    }
+  });
 
-$(".check_r").change(function(){
-$($(this).closest("div.check_div").find(".check_o")).val($(this).val());
-console.log($(this).val())
-if($(this).val()=="אחר"){
-  $(this).closest("div.check_div").find(".check_o").show(400)
-  $(this).closest("div.check_div").find(".label_o").show(400)}
-else{
-  $(this).closest("div.check_div").find(".check_o").hide(400)
-  $(this).closest("div.check_div").find(".label_o").hide(400)}
-});
-$( function() {
-  $( "#datepicker" ).datepicker( $.datepicker.regional[ "he" ] );
-} );
-$( "#datepicker" ).on('change', function(){
-  $("#check_date").val($( "#datepicker" ).val());
-  var check_name = "נוכחות " + $( "#datepicker" ).val().slice(0, -5);
-  $("#check_name").val(check_name);
-  $("#hide").show(100);
-});
-$( "#check_name" ).on('change', function(){
-  $("#hide").show(100);
-});
+  $(".check_r_input").change(function(){
+  $($(this).closest("div.check_div").find(".check_o")).val($(this).val());
+  console.log($(this).val())
+  if($(this).val()=="אחר"){
+    $(this).closest("div.check_div").find(".label_o").html("סיבת היעדרות")
+    $(this).closest("div.check_div").find(".check_o").show("blind", 200)
+  }
+  else{
+    $(this).closest("div.check_div").find(".check_o").hide("blind", 200)
+  }
+  });
+  $( function() {
+    $( "#datepicker" ).datepicker( $.datepicker.regional[ "he" ] );
+  } );
+  $( "#datepicker" ).on('change', function(){
+    $("#check_date").val($( "#datepicker" ).val());
+    var check_name = "נוכחות " + $( "#datepicker" ).val().slice(0, -5);
+    $("#check_name").val(check_name);
+    $("#hide").show("blind", 500);
+  });
+  $( "#check_name" ).on('change', function(){
+    $("#hide").show("blind", 500);
+  });
 });
 </script>
