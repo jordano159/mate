@@ -63,7 +63,7 @@ class MifalStepsController < ApplicationController
         head_nums << params[:mifal]["head_num_#{i}"].to_i
       end
       counter = 0
-      @mifal.axes.order(:hard_name.to_s.gsub(/\D/, '')).each_with_index do |axis,i|
+      @mifal.axes.order(:hard_name).each_with_index do |axis,i|
         head_nums[i].times do
           counter += 1
           Head.create(name: "#{@level_names[2]} #{counter} #{@mifal.name}", hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}",
@@ -83,7 +83,7 @@ class MifalStepsController < ApplicationController
         group_nums << params[:mifal]["group_num_#{i}"].to_i
       end
       counter = 0
-      @mifal.heads.order(:hard_name.to_s.gsub(/\D/, '')).each_with_index do |head,i|
+      @mifal.heads.order(:hard_name).each_with_index do |head,i|
         diff = group_nums[i] - head.groups.count
         puts "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~"
         puts "~~~~~~~~~~~ Counter: #{counter} ~~~~~~~~~~~~~"

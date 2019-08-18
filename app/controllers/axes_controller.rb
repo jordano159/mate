@@ -7,11 +7,11 @@ class AxesController < ApplicationController
   # GET /axes.json
   def index
     if params[:mifal_id].present?
-      @axes = Mifal.find(params[:mifal_id]).axes.order(:hard_name.to_s.gsub(/\D/, ''))
+      @axes = Mifal.find(params[:mifal_id]).axes.order(:hard_name)
     elsif current_staff.admin?
-      @axes = Axis.all.order(:hard_name.to_s.gsub(/\D/, '')).includes(:heads, :kids)
+      @axes = Axis.all.order(:hard_name).includes(:heads, :kids)
     else
-      @axes = current_staff.staffable.axes.order(:hard_name.to_s.gsub(/\D/, ''))
+      @axes = current_staff.staffable.axes.order(:hard_name)
     end
   end
 

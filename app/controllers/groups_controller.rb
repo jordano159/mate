@@ -7,11 +7,11 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     if params[:head_id].present?
-      @groups = Head.find(params[:head_id]).groups.order(:hard_name.to_s.gsub(/\D/, ''))
+      @groups = Head.find(params[:head_id]).groups.order(:hard_name)
     elsif current_staff.admin?
-      @groups = Group.all.order(:hard_name.to_s.gsub(/\D/, '')).includes(:kids)
+      @groups = Group.all.order(:hard_name).includes(:kids)
     else
-      @groups = current_staff.staffable.groups.where.not(name: "סל מחזור #{current_staff.staffable.mifal.name}").order(:hard_name.to_s.gsub(/\D/, ''))
+      @groups = current_staff.staffable.groups.where.not(name: "סל מחזור #{current_staff.staffable.mifal.name}")
     end
   end
 

@@ -6,11 +6,11 @@ class HeadsController < ApplicationController
   # GET /heads.json
   def index
     if params[:axis_id].present?
-      @heads = Axis.find(params[:axis_id]).heads.order(:hard_name.to_s.gsub(/\D/, ''))
+      @heads = Axis.find(params[:axis_id]).heads.order(:hard_name)
     elsif current_staff.admin?
-      @heads = Head.all.order(:hard_name.to_s.gsub(/\D/, '')).includes(:groups, :kids)
+      @heads = Head.all.order(:hard_name).includes(:groups, :kids)
     else
-      @heads = current_staff.staffable.heads.order(:hard_name.to_s.gsub(/\D/, ''))
+      @heads = current_staff.staffable.heads.order(:hard_name)
     end
   end
 
