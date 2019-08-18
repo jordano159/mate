@@ -62,7 +62,7 @@ class Kid < ApplicationRecord
       row['taz'] = Kid.generate_taz unless row['taz'].present?
       kid = find_by(taz: row['taz']) || new
       kid.attributes = row.to_hash #סכנת הזרקת SQL
-      kid.group_id = Staff.find_by(username: "כיתה #{kid.group_id} #{mifal.name}").staffable.id if kid.group_id.present?
+      kid.group_id = Staff.find_by(username: "#{@level_names[0]} #{kid.group_id} #{mifal.name}").staffable.id if kid.group_id.present?
       kid.mifal_id = mifal.id
       kid.city = kid.city.strip if kid.city.present?
       kid.ken = "קן #{kid.ken}" if kid.ken.present?
