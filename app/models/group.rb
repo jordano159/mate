@@ -9,4 +9,9 @@ class Group < ApplicationRecord
   has_many :events, as: :eventable, dependent: :destroy
   validates :hard_name, uniqueness: true
   # delegate :mifal, to: :head
+
+  def all_events
+    events
+  end
+
 end
