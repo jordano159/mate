@@ -31,64 +31,64 @@
         </li>
       <% end %>
       <% if current_staff.admin? || current_staff.vip? %>
-      <% if current_staff.admin? || current_staff.staffable.has_axes %>
-      <li class="nav-item ">
-        <%= link_to "#{@level_names[5]}", axes_path, class: "nav-link" %>
-      </li>
-      <% end %>
-      <li class="nav-item ">
-        <%= link_to "#{@level_names[3]}", heads_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item ">
-        <%= link_to "#{ @level_names[1] }", groups_path, class: "nav-link" %>
-      </li>
-      <% if current_staff.admin? || current_staff.staffable.has_buses %>
+        <% if current_staff.admin? || current_staff.staffable.has_axes %>
           <li class="nav-item ">
-            <%= link_to "אוטובוסים", buses_path, class: "nav-link" %>
+            <%= link_to "#{@level_names[5]}", axes_path, class: "nav-link" %>
           </li>
+        <% end %>
+        <li class="nav-item ">
+          <%= link_to "#{@level_names[3]}", heads_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item ">
+          <%= link_to "#{ @level_names[1] }", groups_path, class: "nav-link" %>
+        </li>
+        <% if current_staff.admin? || current_staff.staffable.has_buses %>
+            <li class="nav-item ">
+              <%= link_to "אוטובוסים", buses_path, class: "nav-link" %>
+            </li>
+        <% end %>
       <% end %>
-      <% end %>
-      <% if current_staff.admin? || (current_staff.vip? && current_staff.staffable.has_events) %>
-      <li class="nav-item ">
-        <%= link_to "יומן אירועים", events_path, class: "nav-link" %>
-      </li>
+      <% if current_staff.admin? || (current_staff.staffable.mifal.has_events) %>
+        <li class="nav-item ">
+          <%= link_to "יומן אירועים", events_path, class: "nav-link" %>
+        </li>
       <% end %>
       <% if current_staff.vip? %>
-      <li class="nav-item ">
-        <%= link_to "סל מחזור", group_path(Group.find_by(hard_name: "סל מחזור #{current_staff.staffable.name}")), class: "nav-link" if Group.find_by(hard_name: "סל מחזור #{current_staff.staffable.name}").present? %>
-      </li>
-      <li class="nav-item ">
-        <%= link_to "אשף יצירת מפעל", mifal_steps_path, class: "nav-link" %>
-      </li>
+        <li class="nav-item ">
+          <%= link_to "סל מחזור", group_path(Group.find_by(hard_name: "סל מחזור #{current_staff.staffable.name}")), class: "nav-link" if Group.find_by(hard_name: "סל מחזור #{current_staff.staffable.name}").present? %>
+        </li>
+        <li class="nav-item ">
+          <%= link_to "אשף יצירת מפעל", mifal_steps_path, class: "nav-link" %>
+        </li>
       <% end %>
+      <li class="nav-item ">
+        <%= link_to "עריכת משתמש", edit_staff_registration_path, class: "nav-link" %>
+      </li>
+      <% case @level
+        when 1 %>
           <li class="nav-item ">
-            <%= link_to "עריכת משתמש", edit_staff_registration_path, class: "nav-link" %>
+            <%= link_to "עריכת שם ה#{@level_names[0]}", edit_group_path(current_staff.staffable.id), class: "nav-link" %>
           </li>
-          <% case @level
-            when 1 %>
-              <li class="nav-item ">
-                <%= link_to "עריכת שם ה#{@level_names[0]}", edit_group_path(current_staff.staffable.id), class: "nav-link" %>
-              </li>
-            <% when 2 %>
-              <li class="nav-item ">
-                <%= link_to "עריכת שם ה#{@level_names[2]}", edit_head_path(current_staff.staffable.id), class: "nav-link" %>
-              </li>
-            <% when 3 %>
-              <li class="nav-item ">
-                <%= link_to "עריכת שם ה#{@level_names[4]}", edit_axis_path(current_staff.staffable.id), class: "nav-link" %>
-              </li>
-            <% when 4 %>
-              <li class="nav-item ">
-                <%= link_to "עריכת שם המפעל", edit_mifal_path(current_staff.staffable.id), class: "nav-link" %>
-              </li>
-          <% end %>
+        <% when 2 %>
           <li class="nav-item ">
-            <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
+            <%= link_to "עריכת שם ה#{@level_names[2]}", edit_head_path(current_staff.staffable.id), class: "nav-link" %>
           </li>
-        </ul>
-        <span class="navbar-text">
-          שלום <%= current_staff.name %>
-        </span>
+        <% when 3 %>
+          <li class="nav-item ">
+            <%= link_to "עריכת שם ה#{@level_names[4]}", edit_axis_path(current_staff.staffable.id), class: "nav-link" %>
+          </li>
+        <% when 4 %>
+          <li class="nav-item ">
+            <%= link_to "עריכת שם המפעל", edit_mifal_path(current_staff.staffable.id), class: "nav-link" %>
+          </li>
+      <% end %>
+      <li class="nav-item ">
+        <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      שלום <%= current_staff.name %>
+    </span>
   </div>
 </nav>
 <% end %>
