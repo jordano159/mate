@@ -30,7 +30,7 @@ class ChecksController < ApplicationController
     if params[:bus]
       @check = Check.new
       @bus = Bus.find(params[:bus])
-      @kids = @bus.kids.order(:ken)
+      @kids = @bus.kids.order(name: :desc, ken: :asc)
       @check.name = "נוכחות אוטובוס #{@bus.name}"
       @check.bus_id = @bus.id
       @check.kids << @kids
@@ -41,7 +41,7 @@ class ChecksController < ApplicationController
       @group = Group.find(params[:g_id]) # מצהיר על הקבוצה של הנוכחות
       @check.group_id = @group.id
       @check.name = "Blank"
-      @kids = @group.kids.order(:ken) # set kids
+      @kids = @group.kids.order(name: :desc, ken: :asc) # set kids
       @check.kids << @kids # assoicate kids to check
       unless @group.mifal.has_approve
         @check.approved = true
@@ -53,10 +53,10 @@ class ChecksController < ApplicationController
   def edit
     if @check.bus_id.blank?
       @group = @check.group
-      @kids = @group.kids.order(:ken)
+      @kids = @group.kids.order(name: :desc, ken: :asc)
     elsif @check.group_id.blank?
       @bus = Bus.find(@check.bus_id)
-      @kids = @bus.kids.order(:ken)
+      @kids = @bus.kids.order(name: :desc, ken: :asc)
     end
   end
 

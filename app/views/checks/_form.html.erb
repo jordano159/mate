@@ -11,44 +11,45 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <div class="form-inputs">
-    <% if @group %>
+    <% if @group  %>
       <% if @group.mifal.checks_num %>
-      <%= f.input :name, as: :hidden %>
-      <h3>תאריך הנוכחות</h3>
-      <% check_dates = @group.checks.where.not(date: nil).pluck(:date).map{|date| date.to_date} %>
-      <% check_dates.select!{|date| date > 1.month.ago}%>
-      <% check_dates.map!{|date| date.day} %>
-      <% check_dates %>
-      <% month_date = (1..31).to_a %>
-      <% red_dates =  month_date - check_dates %>
-      <% red_dates.delete(Time.now.day) %>
-      <input type="text" id="datepicker" class="form-control" style="background-color: #fff;" required readonly>
-      <script>
-      $("#datepicker").click(function(){
-        $( "a.ui-state-default" ).each(function() {
-          var red_dates = <%= red_dates %>;
-          if (red_dates.includes(parseInt($(this).html()))) {
-            $(this).css("background", "#FF7F7F");
-          };
-        });
-      });
-      </script>
-      <%= f.input :date, as: :hidden, id: "check_date" %>
+        <%= f.input :name, as: :hidden %>
+        <h3>תאריך הנוכחות</h3>
+        <% check_dates = @group.checks.where.not(date: nil).pluck(:date).map{|date| date.to_date} %>
+        <% check_dates.select!{|date| date > 1.month.ago}%>
+        <% check_dates.map!{|date| date.day} %>
+        <% check_dates %>
+        <% month_date = (1..31).to_a %>
+        <% red_dates =  month_date - check_dates %>
+        <% red_dates.delete(Time.now.day) %>
+        <input type="text" id="datepicker" class="form-control" style="background-color: #fff;" required readonly>
+        <script>
+          $("#datepicker").click(function(){
+            $( "a.ui-state-default" ).each(function() {
+              var red_dates = <%= red_dates %>;
+              if (red_dates.includes(parseInt($(this).html()))) {
+                $(this).css("background", "#FF7F7F");
+              };
+            });
+          });
+        </script>
+        <%= f.input :date, as: :hidden, id: "check_date" %>
       <% else %>
         <% names = check_names %>
         <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names, label_method: :second, value_method: :first %>
       <% end %>
-    <% else %>
-      <script>
-      $(document).ready(function(){
-        $("#hide").attr("id","")
-      });
-      </script>
     <% end %>
+  <% if controller.action_name == 'edit' || @bus %>
+    <div id="hide" class="">
+      <script>
+        $("#datepicker").val("<%= @check.date if @check.date.present? %>");
+      </script>
+  <% elsif @group %>
+    <div id="hide" class="hidden">
+  <% end %>
     <% causes = check_causes %>
-    <br />
+    <br>
     <%#  f.input :group_id, as: :hidden, input_html: {value: params[:g_id]} %>
-    <div class="" id="hide">
     <%= f.simple_fields_for :attendances do |ff| %>
       <div class="check_div">
       <% kid = ff.object.kid %>
@@ -65,12 +66,12 @@
           <%= ff.collection_radio_buttons :status, options_arr, :first, :last  %>
         </div>
       </div>
-      <div class="check_cause">
+      <div class="check_cause hidden">
         <div class="check_r">
           <%= ff.input :cause, label: "סיבת היעדרות", collection: causes, input_html: {class: "check_r_input"} %>
         </div>
         <div class="check_o">
-          <%= ff.input :cause, label: "סיבת היעדרות", label_html: { class: 'label_o' }, required: false %>
+          <%= ff.input :cause, label: "סיבת היעדרות", label_html: { class: 'label_o' }, input_html: {class: "check_o_input"}, required: false %>
         </div>
       </div>
       <br />
@@ -85,8 +86,6 @@
 
 <script>
 $(document).ready(function(){
-  $("#hide").hide(1);
-  $(".check_cause").hide(1);
   $('input[type="radio"]').change(function(){
   console.log($(this).val())
   if($(this).val()== 0){
@@ -103,6 +102,7 @@ $(document).ready(function(){
     $(this).closest("div.check_div").find(".check_r").hide(1)
     $(this).closest("div.check_div").find(".check_o").show("blind", 200)
     $(this).closest("div.check_div").find(".label_o").html("סיבת איחור")
+    $($(this).closest("div.check_div").find(".check_o_input")).val("");
     }
   else{
     $(this).closest("div.check_div").find(".check_cause").hide("blind", 400)
@@ -113,15 +113,17 @@ $(document).ready(function(){
   });
 
   $(".check_r_input").change(function(){
-  $($(this).closest("div.check_div").find(".check_o")).val($(this).val());
-  console.log($(this).val())
-  if($(this).val()=="אחר"){
-    $(this).closest("div.check_div").find(".label_o").html("סיבת היעדרות")
-    $(this).closest("div.check_div").find(".check_o").show("blind", 200)
-  }
-  else{
-    $(this).closest("div.check_div").find(".check_o").hide("blind", 200)
-  }
+    $($(this).closest("div.check_div").find(".check_o")).val($(this).val());
+    console.log($(this).val())
+    if($(this).val()=="אחר"){
+      $(this).closest("div.check_div").find(".label_o").html("סיבת היעדרות")
+      $(this).closest("div.check_div").find(".check_o_input").val("")
+      $(this).closest("div.check_div").find(".check_o").show("blind", 200)
+    }
+    else{
+      $(this).closest("div.check_div").find(".check_o_input").val($(this).val())
+      $(this).closest("div.check_div").find(".check_o").hide("blind", 200)
+    }
   });
   $( function() {
     $( "#datepicker" ).datepicker( $.datepicker.regional[ "he" ] );
@@ -130,10 +132,10 @@ $(document).ready(function(){
     $("#check_date").val($( "#datepicker" ).val());
     var check_name = "נוכחות " + $( "#datepicker" ).val().slice(0, -5);
     $("#check_name").val(check_name);
-    $("#hide").show("blind", 500);
+    $("#hide").show("blind", 1000);
   });
   $( "#check_name" ).on('change', function(){
-    $("#hide").show("blind", 500);
+    $("#hide").show("blind", 1000);
   });
 });
 </script>
