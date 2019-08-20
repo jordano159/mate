@@ -124,6 +124,6 @@ class MifalStepsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def mifal_params
-      params.require(:mifal).permit(:name, :has_buses, :has_events, :has_approve, :has_axes, :has_late, :checks_num, columns: [], axis_ids: [])
+      params.require(:mifal).permit(:name, :has_buses, :alert_message, :has_events, :has_approve, :has_axes, :has_late, :checks_num, columns: [], axis_ids: [])
     end
 end

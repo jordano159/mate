@@ -33,6 +33,7 @@ class ChecksController < ApplicationController
       @kids = @bus.kids.order(name: :desc, ken: :asc)
       @check.name = "נוכחות אוטובוס #{@bus.name}"
       @check.bus_id = @bus.id
+      @mifal = @check.bus.mifal
       @check.kids << @kids
       @check.approved = true
       @check.save(validate: false)
@@ -40,6 +41,7 @@ class ChecksController < ApplicationController
       @check = Check.new # יוצר נוכחות חדשה וריקה
       @group = Group.find(params[:g_id]) # מצהיר על הקבוצה של הנוכחות
       @check.group_id = @group.id
+      @mifal = @check.group.mifal
       @check.name = "Blank"
       @kids = @group.kids.order(name: :desc, ken: :asc) # set kids
       @check.kids << @kids # assoicate kids to check
