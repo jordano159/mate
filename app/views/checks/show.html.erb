@@ -33,11 +33,12 @@
 
 
 <div>
-  <% counter = 0 %>
-  <% @check.attendances.each do |attendance| %>
-    <% counter += attendance.status if !attendance.status.nil? %>
-  <% end %>
-  <%= counter %> מתוך <%= @check.kids.count %> נוכחים
+  <%= how_many_attending(@check.kids) %>
+  <%# counter = 0 %>
+  <%# @check.attendances.each do |attendance| %>
+    <%# counter += attendance.status if !attendance.status.nil? %>
+  <%# end %>
+  <%# counter %> מתוך <%= @check.kids.count %> נוכחים
 </div>
 
 <!-- <% if @level > 1 %>
