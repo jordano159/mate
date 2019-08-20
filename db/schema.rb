@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_16_063623) do
+ActiveRecord::Schema.define(version: 2019_08_20_123542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 2019_08_16_063623) do
     t.boolean "checks_num", default: false, null: false
     t.text "guide_name"
     t.text "head_head_name"
+    t.string "alert_message"
   end
 
   create_table "staffs", force: :cascade do |t|
