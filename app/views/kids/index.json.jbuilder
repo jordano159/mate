@@ -24,6 +24,8 @@ json.set! :data do
     json.shabat "#{kid.shabat}"
     json.parents "#{kid.parents}"
     json.swim "#{kid.swim}"
+    month = Date.current.month
+    json.absences "נעדר #{kid.absences_this_month(month)} פעמים מתוך #{kid.attendances_this_month(month)} בחודש #{@month_names[month]}"
     if kid.group.present?
       json.group "#{link_to kid.group.name, kid.group}"
     else

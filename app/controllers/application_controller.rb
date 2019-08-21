@@ -5,12 +5,29 @@ class ApplicationController < ActionController::Base
   before_action :level
   before_action :level_names
   before_action :staff_names
+  before_action :month_names
   before_action :columns_settings
   before_action :clearence
   before_action :only_admin
   before_action :configure_permitted_parameters, if: :devise_controller?
   # after_action :track_action
 
+def month_names
+  @month_names = {
+    1 => "ינואר",
+    2 => "פברואר",
+    3 => "מרץ",
+    4 => "אפריל",
+    5 => "מאי",
+    6 => "יוני",
+    7 => "יולי",
+    8 => "אוגוסט",
+    9 => "ספטמבר",
+    10 => "אוקטובר",
+    11 => "נובמבר",
+    12 => "דצמבר"
+  }
+end
 
 def columns_settings
   if staff_signed_in?
@@ -37,7 +54,8 @@ def columns_settings
       shabat: "שמירת שבת",
       parents: "ההורים באים לביקור?",
       swim: "אישור שחייה",
-      exits: "כניסות ויציאות"
+      exits: "כניסות ויציאות",
+      absences: "היעדרויות"
     }
 
     @default_columns = [
