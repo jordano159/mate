@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_123542) do
+ActiveRecord::Schema.define(version: 2019_08_25_144618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,8 @@ ActiveRecord::Schema.define(version: 2019_08_20_123542) do
     t.bigint "taz"
     t.bigint "mifal_id"
     t.integer "last_group"
+    t.text "absences_per_month"
+    t.text "total_per_month"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
     t.index ["exits"], name: "index_kids_on_exits"

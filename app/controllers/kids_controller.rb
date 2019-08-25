@@ -51,7 +51,6 @@ class KidsController < ApplicationController
     @kid = Kid.new(kid_params)
     @mifal = current_staff.staffable
     @groups = @mifal.groups
-
     respond_to do |format|
       if @kid.save
         format.html { redirect_to @kid, notice: 'Kid was successfully created.' }

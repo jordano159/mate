@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Kid < ApplicationRecord
+  serialize :absences_per_month, Hash
+  serialize :total_per_month, Hash
   belongs_to :mifal
   belongs_to :group, optional: true
   belongs_to :bus, optional: true
@@ -17,21 +19,21 @@ class Kid < ApplicationRecord
   end
 
 
-  def absences_this_month(month)
-    absences = self.attendances.where(status: 0)
-    checks = Check.where(id: absences.pluck(:check_id), bus_id: nil)
-    this_month =  sprintf '%02d', month
-    checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
-    checks_this_month.length
-  end
-
-  def attendances_this_month(month)
-    attendances = self.attendances.where.not(status: nil)
-    checks = Check.where(id: attendances.pluck(:check_id), bus_id: nil)
-    this_month =  sprintf '%02d', month
-    checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
-    checks_this_month.length
-  end
+  # def absences_this_month(month)
+  #   absences = self.attendances.where(status: 0)
+  #   checks = Check.where(id: absences.pluck(:check_id), bus_id: nil)
+  #   this_month =  sprintf '%02d', month
+  #   checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
+  #   checks_this_month.length
+  # end
+  #
+  # def attendances_this_month(month)
+  #   attendances = self.attendances.where.not(status: nil)
+  #   checks = Check.where(id: attendances.pluck(:check_id), bus_id: nil)
+  #   this_month =  sprintf '%02d', month
+  #   checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
+  #   checks_this_month.length
+  # end
 
   def create_kid_moved_event
     if group_id_changed? && group_id_was.present?

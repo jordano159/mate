@@ -22,9 +22,39 @@ class Check < ApplicationRecord
   end
 end
 
+
 def update_attendance
-  if approved?
-    attendances.each do |a|
+  if self.group && self.group.mifal.checks_num
+    this_month = self.date.to_date.month
+    if approved?
+      attendances.each do |a|
+        kid = Kid.find(a.kid_id)
+        if kid.status != a.status || kid.cause != a.cause
+            if kid.absences_per_month[this_month].present? && a.status == 0
+              absences = kid.absences_per_month[this_month] + 1
+            elsif kid.absences_per_month[this_month].present? && a.status != 0
+              absences = kid.absences_per_month[this_month]
+            elsif a.status == 0
+              absences = 1
+            else
+              absences = 0
+            end
+            if kid.total_per_month[this_month].present? && a.status.present?
+              total = kid.total_per_month[this_month] + 1
+            elsif a.status.present?
+              total = 1
+            end
+          kid.update_columns(status: a.status, cause: a.cause,
+                       absences_per_month:  kid.absences_per_month.merge!(this_month => absences),
+                       total_per_month: kid.total_per_month.merge!(this_month => total))
+
+          kid.touch
+        end
+      end
+    end
+  else
+    if approved?
+      attendances.each do |a|
       kid = Kid.find(a.kid_id)
       if kid.status != a.status || kid.cause != a.cause
         kid.update_columns(status: a.status, cause: a.cause)
@@ -33,4 +63,5 @@ def update_attendance
       end
     end
   end
+end
 end
