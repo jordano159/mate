@@ -16,7 +16,7 @@ class ChecksController < ApplicationController
               elsif current_staff.admin?
                 Check.all.where(bus_id: [nil, ""]).order('created_at DESC')
               else
-                current_staff.staffable.checks.where(bus_id: [nil, ""]).where("checks.updated_at >= ?", 1.day.ago).order('created_at DESC')
+                current_staff.staffable.checks.where(bus_id: [nil, ""]).order('created_at DESC')
               end
 
     respond_to do |format|
@@ -55,9 +55,11 @@ class ChecksController < ApplicationController
   def edit
     if @check.bus_id.blank?
       @group = @check.group
+      @mifal = @check.group.mifal
       @kids = @group.kids.order(name: :desc, ken: :asc)
     elsif @check.group_id.blank?
       @bus = Bus.find(@check.bus_id)
+      @check.bus_id = @bus.id
       @kids = @bus.kids.order(name: :desc, ken: :asc)
     end
   end

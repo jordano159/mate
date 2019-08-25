@@ -41,10 +41,7 @@
             <th>מאושר?</th>
           <% end %>
         <% end %>
-        <th>עריכה</th>
-        <% if @level > 1 %>
-          <th>מחיקה</th>
-        <% end %>
+        <th></th>
       </tr>
   </thead>
 
@@ -71,9 +68,9 @@
           <% end %>
         </td>
         <% end %>
-        <td><%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_check_path(check),  style: "color: grey" %></td>
+        <td><%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_check_path(check), class: "ml-2", style: "color: grey" %>
         <% if @level > 1 %>
-          <td><%= link_to "<i class='far fa-trash-alt'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, style: "color: red"  %></td>
+        <%= link_to "<i class='far fa-trash-alt'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, style: "color: red"  %></td>
         <% end %>
       </tr>
     <% end %>

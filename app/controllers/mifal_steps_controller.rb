@@ -37,14 +37,12 @@ class MifalStepsController < ApplicationController
       head_head_name_single = params[:mifal][:head_head_name_single]
       head_head_name_plural = params[:mifal][:head_head_name_plural]
       @mifal.head_head_name = {single: head_head_name_single, plural: head_head_name_plural}
-      @mifal.save
-      if @mifal.checks_num && !@mifal.columns.include?("absences")
+      if params[:mifal][:checks_num] == "true"
         @mifal.columns << "absences"
-        @mifal.save
-      elsif @mifal.columns.include?("absences")
+      elsif params[:mifal][:checks_num] == "false"
         @mifal.columns.delete("absences")
-        @mifal.save
       end
+      @mifal.save
     when :axised
       @mifal.axised! # Set stage
       if @mifal.has_axes

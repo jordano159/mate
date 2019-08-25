@@ -13,5 +13,4 @@ class Group < ApplicationRecord
   def all_events
     events
   end
-
 end

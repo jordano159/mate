@@ -13,11 +13,11 @@
 
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="col-lg">
         <div class="field mb-3">
           <%= form.label :has_buses, "צריך ניהול אוטובוסים?" %>
           <div class="container">
-            <div class="button-wrap" >
+            <div class="button-wrap mr-4  marginable" >
               <%= form.collection_radio_buttons :has_buses, [[true, '<h1 id="buses_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="buses_false" class="false">לא</h1>'.html_safe]],
               :first, :last, { checked: @mifal.has_buses } %>
 
@@ -28,7 +28,7 @@
         <div class="field mb-3">
           <%= form.label :has_events, "צריך יומן אירועים?" %>
           <div class="container">
-            <div class="button-wrap">
+            <div class="button-wrap mr-4  marginable">
               <%= form.collection_radio_buttons :has_events, [[true, '<h1 id="events_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="events_false" class="false">לא</h1>'.html_safe]],
               :first, :last  %>
             </div>
@@ -37,18 +37,18 @@
         <div class="field mb-3">
           <%= form.label :has_approve, "צריך שהרמה השנייה תאשר נוכחות?" %>
           <div class="container">
-            <div class="button-wrap">
+            <div class="button-wrap mr-4  marginable">
               <%= form.collection_radio_buttons :has_approve, [[true, '<h1 id="approve_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="approve_false" class="false">לא</h1>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-lg">
         <div class="field mb-3">
           <%= form.label :has_axes, "צריך רמה שלישית?" %>
           <div class="container">
-            <div class="button-wrap">
+            <div class="button-wrap mr-4  marginable">
               <%= form.collection_radio_buttons :has_axes, [[true, '<h1 id="axes_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="axes_false" class="false">לא</h1>'.html_safe]],
               :first, :last  %>
             </div>
@@ -57,7 +57,7 @@
         <div class="field mb-3">
           <%= form.label :has_late, "צריך אפשרות לסמן איחורים?" %>
           <div class="container">
-            <div class="button-wrap">
+            <div class="button-wrap mr-4  marginable">
               <%= form.collection_radio_buttons :has_late, [[true, '<h1 id="late_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="late_false" class="false">לא</h1>'.html_safe]],
               :first, :last  %>
             </div>
@@ -67,7 +67,7 @@
         <div class="field mb-3">
           <%= form.label :checks_num, "מה תדירות הנוכחות?" %>
           <div class="container">
-            <div class="button-wrap">
+            <div class="button-wrap mr-4 marginable">
               <%= form.collection_radio_buttons :checks_num, [[true, '<h1 id="checks_num_true" class="true">פעם ביום</h1>'.html_safe] ,[false, '<h1 id="checks_num_false" class="false">שלוש פעמים ביום</h1>'.html_safe]],
               :first, :last  %>
             </div>
@@ -78,39 +78,44 @@
     </div>
   </div>
 <hr>
-
+<script>
+  console.log($( window ).width())
+  if ($( window ).width() < 1000){
+    $(".marginable").addClass("mt-2")
+  };
+</script>
 <div class="container">
   <div class="row">
     <div class="col">
       <div class="field">
           <%= form.label :group_name_single, "שם הרמה הראשונה ביחיד (למשל קבוצה):" %>
           <div class="container">
-          <%= form.text_field :group_name_single, value: @mifal.group_name[:single], required: true%>
+          <%= form.text_field :group_name_single, value: @mifal.group_name[:single], class: "form-control w-50", required: true%>
         </div>
       </div>
       <div class="field">
         <%= form.label :group_name_plural, "שם הרמה הראשונה ברבים:" %>
           <div class="container">
-        <%= form.text_field :group_name_plural, value: @mifal.group_name[:plural], required: true %>
+        <%= form.text_field :group_name_plural, value: @mifal.group_name[:plural], class: "form-control w-50", required: true %>
       </div>
       </div>
       <div class="field">
         <%= form.label :guide_name_single, "שם האחראי על הרמה הראשונה ביחיד (למשל מדריך):" %>
           <div class="container">
-        <%= form.text_field :guide_name_single, value: @mifal.guide_name[:single], required: true %>
+        <%= form.text_field :guide_name_single, value: @mifal.guide_name[:single], class: "form-control w-50", required: true %>
         </div>
       </div>
       <div class="field">
         <%= form.label :guide_name_plural, "שם האחראי על הרמה הראשונה ברבים:" %>
           <div class="container">
-        <%= form.text_field :guide_name_plural, value: @mifal.guide_name[:plural], required: true %>
+        <%= form.text_field :guide_name_plural, value: @mifal.guide_name[:plural], class: "form-control w-50", required: true %>
         </div>
       </div>
 
         <div class="field axes">
           <%= form.label :axis_name_single, "שם הרמה השלישית ביחיד (למשל ציר):" %>
             <div class="container">
-          <%= form.text_field :axis_name_single, value: @mifal.axis_name[:single] %>
+          <%= form.text_field :axis_name_single, value: @mifal.axis_name[:single], class: "form-control w-50" %>
           </div>
         </div>
     </div>
@@ -118,31 +123,31 @@
       <div class="field">
         <%= form.label :head_name_single, "שם הרמה השנייה ביחיד (למשל ראש):" %>
           <div class="container">
-        <%= form.text_field :head_name_single, value: @mifal.head_name[:single], required: true %>
+        <%= form.text_field :head_name_single, value: @mifal.head_name[:single], class: "form-control w-50", required: true %>
         </div>
       </div>
       <div class="field">
         <%= form.label :head_name_plural, "שם הרמה השנייה ברבים:" %>
           <div class="container">
-        <%= form.text_field :head_name_plural, value: @mifal.head_name[:plural], required: true %>
+        <%= form.text_field :head_name_plural, value: @mifal.head_name[:plural], class: "form-control w-50", required: true %>
         </div>
       </div>
       <div class="field">
         <%= form.label :head_head_name_single, "שם האחראי על הרמה השנייה ביחיד (למשל ראשראש):" %>
           <div class="container">
-        <%= form.text_field :head_head_name_single, value: @mifal.head_head_name[:single], required: true %>
+        <%= form.text_field :head_head_name_single, value: @mifal.head_head_name[:single], class: "form-control w-50", required: true %>
         </div>
       </div>
       <div class="field">
         <%= form.label :head_head_name_plural, "שם האחראי על הרמה השנייה ברבים:" %>
           <div class="container">
-        <%= form.text_field :head_head_name_plural, value: @mifal.head_head_name[:plural], required: true %>
+        <%= form.text_field :head_head_name_plural, value: @mifal.head_head_name[:plural], class: "form-control w-50", required: true %>
         </div>
       </div>
         <div class="field axes">
           <%= form.label :axis_name_plural, "שם הרמה השלישית ברבים:" %>
             <div class="container">
-          <%= form.text_field :axis_name_plural, value: @mifal.axis_name[:plural] %>
+          <%= form.text_field :axis_name_plural, value: @mifal.axis_name[:plural], class: "form-control w-50" %>
           </div>
         </div>
     </div>
@@ -191,9 +196,9 @@
    border-radius: 40px 0px 0px 40px !important;
 }
 
-    input[type="checkbox"] {
+    /* input[type="checkbox"] {
         display: none;
-    }
+    } */
 
   /* input[type="radio"]{
     display: block !important;
@@ -201,20 +206,22 @@
 </style>
 <script>
 mifal_columns = <%= raw @mifal.columns %>
-$('label[for*="mifal_columns_"]').each(function(){
-  var col = $(this).attr("for").replace('mifal_columns_', '');
-  if (mifal_columns.includes(col)){
-    $(this).addClass("btn btn-success m-1").css("width", "200px");
-  }else{
-    $(this).addClass("btn btn-secondary m-1").css("width", "200px");
-  }
-});
-$('label[for*="mifal_columns_"]').click(function() {
-  $(this).toggleClass("btn-success");
-  $(this).toggleClass("btn-secondary");
-
-});
-// $("label").addClass("btn btn-secondary");
+$("input[type='checkbox']").checkboxradio();
+$(".ui-button").addClass("m-2").css("width", "250px");
+// $('label[for*="mifal_columns_"]').each(function(){
+//   var col = $(this).attr("for").replace('mifal_columns_', '');
+//   if (mifal_columns.includes(col)){
+//     $(this).addClass("btn btn-success m-1").css("width", "200px");
+//   }else{
+//     $(this).addClass("btn btn-secondary m-1").css("width", "200px");
+//   }
+// });
+// $('label[for*="mifal_columns_"]').click(function() {
+//   $(this).toggleClass("btn-success");
+//   $(this).toggleClass("btn-secondary");
+//
+// });
+// // $("label").addClass("btn btn-secondary");
 $(".true").addClass("btn rounded-right btn-secondary");
 $(".false").addClass("btn rounded-left btn-secondary");
 var checked_buses = <%= @mifal.has_buses %>;
