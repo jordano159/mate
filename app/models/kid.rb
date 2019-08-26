@@ -71,7 +71,7 @@ class Kid < ApplicationRecord
   def self.update_imported_kid(file, mifal_id)
     mifal = Mifal.find(mifal_id)
     mifal.columns.map! { |x| x == "group" ? 'group_id' : x }
-    mifal.columns.reject! {|item| item =~ /full_name|status|cause/i }
+    mifal.columns.reject! {|item| item =~ /full_name|status|cause|absences/i }
     header_names = mifal.columns
     spreadsheet = open_spreadsheet(file)
     header = header_names
