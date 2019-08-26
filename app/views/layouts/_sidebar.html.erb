@@ -7,7 +7,7 @@
     </div>
     <ul class="sidebar-nav">
     <li class="nav-item">
-      <%= link_to "כל החניכות", kids_path, class: "nav-link" %>
+      <%= link_to "כל החניכות והחניכים", kids_path, class: "nav-link" %>
     </li>
     <% if @level == 2 %>
       <li class="nav-item ">
@@ -48,6 +48,11 @@
     <% if current_staff.admin? || (current_staff.staffable.mifal.has_events) %>
       <li class="nav-item ">
         <%= link_to "יומן אירועים", events_path, class: "nav-link" %>
+      </li>
+    <% end %>
+    <% if !current_staff.admin? && (current_staff.staffable.mifal.checks_num) %>
+      <li class="nav-item ">
+        <%= link_to "מעקב היעדרויות", stats_kids_path, class: "nav-link" %>
       </li>
     <% end %>
     <% if current_staff.vip? %>

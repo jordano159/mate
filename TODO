@@ -50,6 +50,18 @@ TDD
 מחיקה ושחזור החניכים
 שינוי שמות הקבוצות\ראשים\צירים, מחיקה של אחד מהם, ויצירה שלו מחדש
 
-@level_names = [0 group_name[:single], 1 group_name[:plural],
-                2 head_name[:single], 3 head_name[:plural],
-                4 axis_name[:single], 5 axis_name[:plural]]
+
+
+סקריפט להריץ בקונסול ליצירת נוכחות רנדומלית
+
+$( 'input[type="radio"]').each(function( ) {
+var randomNumber = Math.random() >= 0.5
+if (randomNumber){
+ if ($(this).val() == 1) {
+$(this).click()
+}}
+else {
+ if ($(this).val() == 0) {
+$(this).click()
+}}
+});
