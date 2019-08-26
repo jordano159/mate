@@ -27,7 +27,25 @@ class KidsController < ApplicationController
       format.xlsx
     end
   end
-
+  
+def stats
+  @mifal = current_staff.staffable.mifal unless current_staff.admin?
+  if params[:group_id].present?
+    @kids = Group.find(params[:group_id]).kids
+  elsif params[:bus_id].present?
+    @kids = Bus.find(params[:bus_id]).kids
+  else
+    if current_staff.admin?
+      @kids = Kid.all.includes(:group)
+    else
+      @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).includes(:group)
+    end
+  end
+  respond_to do |format|
+    format.html
+    format.json
+  end
+end
   # GET /kids/1
   # GET /kids/1.json
   def show; end

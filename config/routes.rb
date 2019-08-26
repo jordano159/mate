@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :kids do
     collection do
       post :import
+      get :stats
     end
   end
   # post 'kids/import' => 'kids#import'
