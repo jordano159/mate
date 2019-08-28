@@ -1,5 +1,38 @@
 <% if staff_signed_in? %>
   <div id="sidebar-wrapper">
+    <div class="dropdown user-position">
+  <button type="button" class="dropdown-toggle btn btn-light bg-transparent border-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-user-circle text-primary user-size"></i>
+  </button>
+  <div class="dropdown-menu dropdown-menu-right">
+
+      <div class="font-weight-bold dropdown-element" >
+        שלום <%= current_staff.name %> <br>
+      </div>
+<div class="dropdown-element">
+  <%= link_to "עריכת משתמש", edit_staff_registration_path %>
+
+</div>
+<div class="dropdown-element">
+      <% case @level %>
+      <% when 1 %>
+        <%= link_to "עריכת שם ה#{@level_names[0]}", edit_group_path(current_staff.staffable.id) %>
+      <% when 2 %>
+        <%= link_to "עריכת שם ה#{@level_names[2]}", edit_head_path(current_staff.staffable.id)%>
+      <% when 3 %>
+        <%= link_to "עריכת שם ה#{@level_names[4]}", edit_axis_path(current_staff.staffable.id)%>
+      <% when 4 %>
+        <%= link_to "עריכת שם המפעל", edit_mifal_path(current_staff.staffable.id)%>
+      <% end %>
+    </div>
+    <div class="dropdown-element">
+      <%= link_to "התנתקות", destroy_staff_session_path, method: :delete%>
+    </div>
+    <div class="dropdown-element">
+      <%= error_btn %>
+    </div>
+  </div>
+</div>
     <div class="sidebar-brand">
       <%= link_to root_path do %>
         <h1>המטה</h1>
@@ -64,38 +97,6 @@
     </li>
     <% end %>
     </ul>
-    <br><br>
-    <span class="navbar-text" style="color: lightgray;width:100%;text-align:center;border-top:1px solid white;padding-top:30px;font-family:'Secular One', sans-serif;">
-      שלום <%= current_staff.name %> <br>
-    </span>
-    <ul class="sidebar-nav">
-      <li class="nav-item ">
-        <%= link_to "עריכת משתמש", edit_staff_registration_path, class: "nav-link" %>
-      </li>
-      <% case @level
-        when 1 %>
-          <li class="nav-item ">
-            <%= link_to "עריכת שם ה#{@level_names[0]}", edit_group_path(current_staff.staffable.id), class: "nav-link" %>
-          </li>
-        <% when 2 %>
-          <li class="nav-item ">
-            <%= link_to "עריכת שם ה#{@level_names[2]}", edit_head_path(current_staff.staffable.id), class: "nav-link" %>
-          </li>
-        <% when 3 %>
-          <li class="nav-item ">
-            <%= link_to "עריכת שם ה#{@level_names[4]}", edit_axis_path(current_staff.staffable.id), class: "nav-link" %>
-          </li>
-        <% when 4 %>
-          <li class="nav-item ">
-            <%= link_to "עריכת שם המפעל", edit_mifal_path(current_staff.staffable.id), class: "nav-link" %>
-          </li>
-      <% end %>
-      <li class="nav-item ">
-        <%= link_to "התנתקות", destroy_staff_session_path, method: :delete, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= error_btn %>
-      </li>
-    </ul>
+
   </div>
 <% end %>

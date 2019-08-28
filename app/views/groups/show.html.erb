@@ -1,11 +1,14 @@
 
 <div class="d-flex flex-row justify-content-between">
   <div class="p-2">
-    <h1 style="font-weight:bold;"></i> <%= @group.name %> </h1>
+    <h1 style="font-weight:bold;"> <%= @group.name %>
+      <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_group_path(@group),class: "edit" if current_staff.admin? || current_staff.vip? %>
+     </h1>
   </div>
   <div class="p-2 mt-2">
+    <% unless @group.name ==  "סל מחזור #{@group.mifal.name}" %>
     <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => @group.id), class: "btn btn-primary" %>
-    <%= link_to 'עריכה', edit_group_path(@group), class: "btn btn-warning" if current_staff.admin? || current_staff.vip? %>
+    <% end %>
     <%# link_to 'חזרה לרשימה', groups_path, class: "btn btn-primary" %>
     <% next_id = @group.id + 1 %>
     <% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>

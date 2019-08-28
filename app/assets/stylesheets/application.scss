@@ -21,7 +21,14 @@ table.dataTable {
 html {
   direction: rtl;
 }
-
+.user-position{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.user-size{
+  font-size: 30px
+}
 body {
   // overflow-x: hidden;
   height: 100%;
@@ -39,6 +46,16 @@ body {
   display: none;
 }
 
+.icon-size{
+  font-size:20px;
+}
+.font-size-whatsapp{
+  font-size: 30px
+}
+
+.url-width{
+  min-width: 75px
+}
 .kid-info{
   height:500px;
   ul {
@@ -150,9 +167,18 @@ body {
   text-decoration: none;
 
     h1 {
-      line-height: 150px;
+      margin-top: 10px;
+      line-height: 75px;
       font-family: 'Secular One', sans-serif;
     }
+}
+.dropdown-element{
+  float: right;
+  margin: 5px
+}
+
+.dropdown-toggle::after {
+  display:none;
 }
 
 .sidebar-nav>.sidebar-brand a:hover {
@@ -199,6 +225,9 @@ body {
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     height: 85vh;
+}
+.page-wrapper-margin{
+  margin-top: 50px !important;
 }
 
 div.dt-buttons {

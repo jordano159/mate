@@ -1,32 +1,60 @@
-<%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
-<%= text_field_tag :search, params[:search], placeholder: "סינון לפי שם #{ @level_names[0] }...", class: "form-control mr-sm-2" %>
-<%= submit_tag "חיפוש", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
-<% end %>
-
-<% if current_staff.vip? %>
-  <%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
-  <%= submit_tag "מחיקת נוכחויות בתהליך יצירה ישנות", :name => "delete_in_progress", class: "btn btn-outline-success my-2 my-sm-0" %>
-  <% end %>
-<% end %>
-
-<%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
-<%= submit_tag "נוכחויות מכל הזמנים", :name => "show_all", class: "btn btn-outline-success my-2 my-sm-0" %>
-<%= submit_tag "נוכחויות רק מהיום האחרון", :name => "hide_all", class: "btn btn-outline-success my-2 my-sm-0" %>
-<% if current_staff.vip? || current_staff.admin? %>
-  <%= submit_tag "נוכחויות של #{@level_names[1]}", :name => "groups", class: "btn btn-outline-success my-2 my-sm-0" %>
-  <%= submit_tag "נוכחויות של אוטובוסים", :name => "buses", class: "btn btn-outline-success my-2 my-sm-0" if current_staff.admin? || current_staff.staffable.has_buses %>
-<% end %>
-<% end %>
 
 
 <% if @checks.blank? %>
   <h4> לא נמצאו נוכחויות </h4>
 <% else %>
 
-<%= link_to 'ייצוא הטבלה', checks_path(format: :xls), class: "btn btn-primary" if !current_staff.user? %>
 
-<h1>נוכחויות</h1>
+<h1 class="font-weight-bold">נוכחויות
+  <%# link_to "<i class='fas fa-download'></i>".html_safe, checks_path(format: :xls), class: 'p-2 edit text-dark' if !current_staff.user? %>
+</h1>
+<%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+<% end %>
 
+<!-- <% if current_staff.vip? %>
+<%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+<%= submit_tag "מחיקת נוכחויות בתהליך יצירה ישנות", :name => "delete_in_progress", class: "btn btn-outline-success my-2 my-sm-0" %>
+<% end %>
+<% end %> -->
+<style media="screen">
+.dropdown-toggle::after {
+  display:none;
+}
+</style>
+<%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+<%= text_field_tag :search, params[:search], placeholder: "סינון לפי שם #{ @level_names[0] }...", class: "form-control mr-sm-2" %>
+<%= button_tag(type: "submit", :name => nil, class: "btn btn-outline-success my-2 my-sm-0") do %>
+  <i class="fas fa-search"></i>
+<% end %>
+<div class="dropdown mr-2">
+  <button class="btn btn-outline-success my-2 my-sm-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-filter"></i>
+  </button>
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item">
+      <%= submit_tag "מכל הזמנים", :name => "show_all", class: "btn btn-outline-success my-2 my-sm-0 bg-transparent border-white text-success" %>
+    </a>
+    <a class="dropdown-item">
+      <%= submit_tag "מהיום האחרון", :name => "hide_all", class: "btn btn-outline-success my-2 my-sm-0 bg-transparent border-white text-success" %>
+    </a>
+    <% if current_staff.vip? || current_staff.admin? %>
+    <a class="dropdown-item">
+      <%= submit_tag "#{@level_names[1]}", :name => "groups", class: "btn btn-outline-success my-2 my-sm-0 bg-transparent border-white text-success" %>
+    </a>
+    <a class="dropdown-item">
+      <%= submit_tag "אוטובוסים", :name => "buses", class: "btn btn-outline-success my-2 my-sm-0 bg-transparent border-white text-success" if current_staff.admin? || current_staff.staffable.has_buses %>
+    </a>
+    <% end %>
+  </div>
+</div>
+<%# submit_tag "חיפוש", id:"search", :name => nil, class: "btn btn-outline-success my-2 my-sm-0" %>
+<%# submit_tag "מכל הזמנים", :name => "show_all", class: "btn btn-outline-success my-2 my-sm-0" %>
+<%# submit_tag "מהיום האחרון", :name => "hide_all", class: "btn btn-outline-success my-2 my-sm-0" %>
+<%# if current_staff.vip? || current_staff.admin? %>
+<%# submit_tag "#{@level_names[1]}", :name => "groups", class: "btn btn-outline-success my-2 my-sm-0" %>
+<%# submit_tag "אוטובוסים", :name => "buses", class: "btn btn-outline-success my-2 my-sm-0" if current_staff.admin? || current_staff.staffable.has_buses %>
+<%# end %>
+<% end %>
 <div class="table-responsive">
 <table class = "table table-hover" id="dttb">
   <thead class="thead-dark">
@@ -68,9 +96,9 @@
           <% end %>
         </td>
         <% end %>
-        <td><%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_check_path(check), class: "ml-2", style: "color: grey" %>
+        <td><%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_check_path(check), class: "ml-2 text-muted" %>
         <% if @level > 1 %>
-        <%= link_to "<i class='far fa-trash-alt'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, style: "color: red"  %></td>
+        <%= link_to "<i class='far fa-trash-alt'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class:"text-danger" %></td>
         <% end %>
       </tr>
     <% end %>

@@ -2,8 +2,8 @@ json.set! :data do
   json.array! @axes do |axis|
     json.name "#{link_to axis.name, axis}"
     json.url  "
-              #{link_to 'עריכה', edit_axis_path(axis), class: 'btn btn-warning'}
-              #{link_to 'מחיקה', axis, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
+              #{link_to '<i class="fas fa-edit"></i>'.html_safe, edit_axis_path(axis), style: 'color: grey'}
+              #{link_to "<i class='far fa-trash-alt'></i>".html_safe, axis, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class:"mx-2", style: "color: red" if current_staff.admin? || current_staff.vip?}
               "
     json.axis_counter "
      <strong class='for_sum'>#{how_many_attending(axis.kids)}</strong> מתוך <strong> #{axis.kids.count} </strong>

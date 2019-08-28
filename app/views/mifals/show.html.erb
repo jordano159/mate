@@ -1,5 +1,16 @@
-<h2><%= @mifal.name %></h2>
+<h2 class="font-weight-bold"><%= @mifal.name %>
+  <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_mifal_path(@mifal), class: "text-muted icon-size" if current_staff.admin? %>
+  <%= link_to "<i class='fas fa-download'></i>".html_safe, mifal_path(format: :xlsx), class: 'p-2 icon-size text-dark' if current_staff.admin? || current_staff.vip? %>
+</h2>
+<%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary" if current_staff.admin? %>
 
+
+<% if @level == 4 %>
+<p>
+  סה"כ:
+  <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
+</p>
+<% end %>
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-axes"
                 data-sort="false" data-source="<%= url_for(controller: 'axes', format: :json, mifal_id: @mifal.id)%>">
@@ -14,12 +25,6 @@
   </table>
 </div>
 
-<% if @level == 4 %>
-<p>
-  סה"כ:
-  <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
-</p>
-<% end %>
 
 <script>
   $(document).ready(function(){
@@ -33,24 +38,4 @@
   });
 </script>
 
-
-<strong>רכז.ת המפעל:</strong>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @mifal.staffs.each do |s|%>
-        <tr>
-          <td><%= s.name if s.admin? || s.vip? %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 <%# link_to "יצירת רכז.ת מפעל חדש.ה", new_mifal_staff_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
-<%= link_to 'עריכה', edit_mifal_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
-<%= link_to 'ייצוא', mifal_path(format: :xlsx), class: 'btn btn-primary' if current_staff.admin? || current_staff.vip? %>
-<%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary" %>

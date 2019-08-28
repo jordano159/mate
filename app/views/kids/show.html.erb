@@ -1,30 +1,33 @@
-<h1 style="font-weight:bold;color:#0984e3;"><%= @kid.name %> <%= @kid.last_name %></h1>
+<h1 class="font-weight-bold"><%= @kid.name %> <%= @kid.last_name %>
+  <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_kid_path(@kid), class: "text-muted icon-size" if current_staff.admin? || current_staff.vip? %>
+</h1>
 <br>
 
-<div class="table-responsive kid-info">
+
+
+<div id="responsive" class="table-responsive kid-info">
 <table class = "table table-hover" id="dttb">
   <thead class="thead-dark">
   </thead>
-
   <tbody>
     <tr>
       <td><%= @level_names[0] %></td>
       <td><%= link_to @kid.group.name, @kid.group if @kid.group %></td>
     </tr>
-    <% @kid.mifal.columns.reject { |e| %w(name last_name full_name group status cause).include?(e) }.each do |column| %>
+    <% @kid.mifal.columns.reject { |e| %w(name last_name full_name group status cause absences).include?(e) }.each do |column| %>
       <tr>
         <td> <%= @column_names[column.to_sym] %> </td>
-        <td> <%= @kid.send(column) if @kid.send(column).present? %> </td>
+        <td> <%= @kid.send(column) if @kid.send(column).present? %>
         <% if column == "phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&phone=972<%= @kid.phone %>" data-action="share/whatsapp/share"><i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 30px; color: green;"></i></a>
+          <a href="whatsapp://send?text=<%= " " %>&phone=972<%= @kid.phone %>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp text-success font-size-whatsapp mx-2" aria-hidden="true" ></i></a>
           <a href="tel:0<%= @kid.phone %>" ><i class="fa fa-phone fa-lg fa-2x"></i></a>
-        <% elsif column = "parent_1_phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&parent_1_phone=972<%= @kid.parent_1_phone %>" data-action="share/whatsapp/share"><i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 30px; color: green;"></i></a>
+        <% elsif column == "parent_1_phone" && mobile_device? %>
+          <a href="whatsapp://send?text=<%= " " %>&parent_1_phone=972<%= @kid.parent_1_phone %>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp text-success font-size-whatsapp mx-2" aria-hidden="true" ></i></a>
           <a href="tel:0<%= @kid.parent_1_phone %>" ><i class="fa fa-phone fa-lg fa-2x"></i></a>
-        <% elsif column = "parent_2_phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&parent_2_phone=972<%= @kid.parent_2_phone %>" data-action="share/whatsapp/share"><i class="fa fa-whatsapp" aria-hidden="true" style="font-size: 30px; color: green;"></i></a>
+        <% elsif column == "parent_2_phone" && mobile_device? %>
+          <a href="whatsapp://send?text=<%= " " %>&parent_2_phone=972<%= @kid.parent_2_phone %>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp text-success font-size-whatsapp mx-2" aria-hidden="true" ></i></a>
           <a href="tel:0<%= @kid.parent_2_phone %>" ><i class="fa fa-phone fa-lg fa-2x"></i></a>
-        <% end %>
+        <% end %></td>
       </tr>
     <% end %>
       <tr>
@@ -51,11 +54,19 @@
       <% end %>
   </tbody>
 </table>
+<%= link_to "מחיקת חניך", @kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' },  class:"btn btn-danger" if current_staff.admin? || current_staff.vip? %>
 </div>
 
 </div>
-
-
-<%= link_to 'עריכה', edit_kid_path(@kid), class: "btn btn-warning" if current_staff.admin? || current_staff.vip? %>
-<%= link_to 'מחיקה', @kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: "btn btn-danger" if current_staff.admin? || current_staff.vip? %>
-<%= link_to 'חזרה לרשימה', kids_path, class: "btn btn-primary" %>
+<% if mobile_device? %>
+  <% mobile = true %>
+  <% else %>
+  <% mobile = false %>
+  <% end %>
+<script>
+mobile = <%= mobile %>
+  if (mobile){
+    $("#responsive").removeClass("table-responsive")
+  };
+  console.log(mobile);
+</script>

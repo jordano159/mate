@@ -27,7 +27,7 @@ class KidsController < ApplicationController
       format.xlsx
     end
   end
-  
+
 def stats
   @mifal = current_staff.staffable.mifal unless current_staff.admin?
   if params[:group_id].present?
@@ -44,6 +44,7 @@ def stats
   respond_to do |format|
     format.html
     format.json
+    format.xlsx
   end
 end
   # GET /kids/1

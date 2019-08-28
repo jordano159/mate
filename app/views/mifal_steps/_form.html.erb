@@ -3,9 +3,8 @@
 
   <%= yield form %>
 
-  <div class="form-actions mb-2">
+  <div class="form-actions mb-2 mt-2">
     <%= form.submit "המשך", class: "btn btn-primary", id: "submit" %>
-    או
-    <%= link_to "דילוג לשלב הבא", next_wizard_path %>
+    <%= link_to "דילוג לשלב הבא", next_wizard_path, class: "btn btn-secondary" %>
   </div>
 <% end %>
