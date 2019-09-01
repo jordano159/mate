@@ -22,13 +22,37 @@ html {
   direction: rtl;
 }
 .user-position{
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  float: left;
+  margin-left: 10px
 }
 .user-size{
-  font-size: 30px
+  font-size: 20px
 }
+.header {
+   grid-area: header;
+   height: 5vh;
+ }
+.side {
+   grid-area: menu;
+   width: 15vw;
+}
+.main {
+  grid-area: main;
+  width: 85vw;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'menu header '
+    'menu main '
+    'menu main ';
+width: 115
+
+}
+
+
 body {
   // overflow-x: hidden;
   height: 100%;

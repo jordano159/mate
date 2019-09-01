@@ -1,8 +1,10 @@
 
+
+
 <div class="d-flex flex-row justify-content-between">
   <div class="p-2">
     <h1 style="font-weight:bold;"> <%= @group.name %>
-      <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_group_path(@group),class: "edit" if current_staff.admin? || current_staff.vip? %>
+      <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_group_path(@group),class: "text-muted icon-size" if current_staff.admin? || current_staff.vip? %>
      </h1>
   </div>
   <div class="p-2 mt-2">

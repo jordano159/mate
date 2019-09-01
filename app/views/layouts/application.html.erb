@@ -19,18 +19,34 @@
   </head>
 
   <body>
-    <%= render 'layouts/navbar' %>
-    <div id="wrapper">
-      <%= render 'layouts/sidebar' %>
-        <div id="page-content-wrapper">
-              <%= yield %>
 
-            <% if mobile_device? %>
-              <div id="error_btn">
-                <%= error_btn %>
+
+<div id="wrapper">
+<% unless mobile_device? %>
+  <div class="grid-container">
+    <div class="header">
+      <%= render 'layouts/pcNavbar' %>
+  </div>
+    <div class="side">
+      <%= render 'layouts/sidebar' %>
               </div>
-            <% end %>
-        </div>
+    <div class="main">
+      <div id="page-content-wrapper" class="ml-2">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'layouts/navbar' %>
+  <div id="wrapper">
+  <div id="page-content-wrapper" class="ml-2">
+    <%= yield %>
+    <!-- <div id="error_btn">
+      <%= error_btn %>
+    </div> -->
+  </div>
+<% end %>
+
     </div>
   </body>
 </html>
