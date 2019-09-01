@@ -24,9 +24,11 @@
 <div id="wrapper">
 <% unless mobile_device? %>
   <div class="grid-container">
+    <% if staff_signed_in? %>
     <div class="header">
       <%= render 'layouts/pcNavbar' %>
   </div>
+  <% end %>
     <div class="side">
       <%= render 'layouts/sidebar' %>
               </div>

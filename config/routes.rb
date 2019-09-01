@@ -49,4 +49,5 @@ Rails.application.routes.draw do
   get '/new_import_file', to: 'mifals#new_import_file', as: 'new_import_file'
   get '/toggle', to: 'kids#toggle', as: 'toggle'
   get '/recover/:id', to: 'kids#recover', as: 'recover'
+  get "/cause" => 'mifal_steps#settings', as: 'cause'
 end

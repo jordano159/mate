@@ -2,7 +2,7 @@ class MifalStepsController < ApplicationController
   include Wicked::Wizard
   before_action :check_permission
 
-  steps :settings, :axised, :headed, :grouped, :imported_kids, :done
+  steps :settings,:axised, :headed, :grouped, :imported_kids, :done
 
   def show
     @mifal = current_staff.staffable
@@ -37,6 +37,10 @@ class MifalStepsController < ApplicationController
       head_head_name_single = params[:mifal][:head_head_name_single]
       head_head_name_plural = params[:mifal][:head_head_name_plural]
       @mifal.head_head_name = {single: head_head_name_single, plural: head_head_name_plural}
+      unless @mifal.causes.include?("אחר")
+      @mifal.causes << "אחר"
+      end
+      @mifal.causes.reject! { |c| c.empty? }
       if params[:mifal][:checks_num] == "true"
         @mifal.columns << "absences"
       elsif params[:mifal][:checks_num] == "false"
@@ -128,6 +132,6 @@ class MifalStepsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def mifal_params
-      params.require(:mifal).permit(:name, :has_buses, :alert_message, :has_events, :has_approve, :has_axes, :has_late, :checks_num, columns: [], axis_ids: [])
+      params.require(:mifal).permit(:name, :has_buses, :alert_message, :has_events, :has_approve, :has_axes, :has_late, :checks_num, causes: [], columns: [], axis_ids: [])
     end
 end

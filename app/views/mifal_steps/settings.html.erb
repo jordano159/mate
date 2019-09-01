@@ -170,6 +170,31 @@
   </div>
 </div>
 <hr>
+<div class="field">
+  <%= form.label :causes, "סיבות אפשריות להיעדרות:" %>
+  <a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="אופציה לאחר נוספת אוטומטית">
+      <i class="far fa-question-circle"></i>
+  </a>
+  <div class="btn btn-primary btn-sm btn-round cause_button" id="cause_button">
+    <i class="fas fa-plus"></i>
+  </div>
+  <div class="container">
+    <% @mifal.causes.reject{|c| c == "אחר"}.each do |c| %>
+    <%= form.text_field :causes, multiple: true, value: c,class: "inline form-control w-25 m-1" %>
+    <% end %>
+    <div class="cause inline">
+    </div>
+    <script>
+      $(".cause_button").click(function(){
+        $('.cause').append("<%= j (render partial: 'cause', locals: {form:form}) %>")
+      });
+      $(".delete_button").click(function(){
+        $('.cause').remove("<%= j (render partial: 'cause', locals: {form:form}) %>")
+      });
+    </script>
+  </div>
+</div>
+<hr>
   <div class="field">
     <%= form.label :columns, "איזה מידע צריך להיות על חניכים:" %>
 

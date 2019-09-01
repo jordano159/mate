@@ -60,6 +60,7 @@ class ChecksController < ApplicationController
     elsif @check.group_id.blank?
       @bus = Bus.find(@check.bus_id)
       @check.bus_id = @bus.id
+      @mifal = @check.group.mifal
       @kids = @bus.kids.order(name: :desc, ken: :asc)
     end
   end
