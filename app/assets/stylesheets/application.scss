@@ -17,6 +17,9 @@
 table.dataTable {
     width: 100% !important;
 }
+.btn-light{
+    border: #d3d3d34f;
+}
 
 html {
   direction: rtl;
@@ -27,10 +30,12 @@ html {
 }
 .user-size{
   font-size: 20px
+
 }
 .header {
    grid-area: header;
-   height: 5vh;
+   height: 30px;
+   background: #d3d3d34f;
  }
 .side {
    grid-area: menu;
