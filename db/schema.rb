@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_01_113858) do
+ActiveRecord::Schema.define(version: 2019_09_02_081714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_113858) do
     t.integer "last_group"
     t.text "absences_per_month"
     t.text "total_per_month"
+    t.string "leave_cause"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
     t.index ["exits"], name: "index_kids_on_exits"

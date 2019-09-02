@@ -50,4 +50,5 @@ Rails.application.routes.draw do
   get '/toggle', to: 'kids#toggle', as: 'toggle'
   get '/recover/:id', to: 'kids#recover', as: 'recover'
   get "/cause" => 'mifal_steps#settings', as: 'cause'
+  get "/leave_cause" => 'kids#show', as: 'leave_cause'
 end

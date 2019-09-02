@@ -1,5 +1,6 @@
 json.set! :data do
   json.array! @kids do |kid|
+    unless kid.group.name == "סל מחזור #{kid.mifal.name}"
     json.name "#{link_to kid.name, kid}"
     json.last_name "#{kid.last_name}"
     json.full_name "#{link_to kid.full_name, kid}"
@@ -31,6 +32,11 @@ json.set! :data do
     else
       json.group "אין #{@level_names[0]} משוייכת"
     end
+  else
+    json.full_name "#{link_to kid.full_name, kid}"
+    json.last_group "#{Group.find(kid.last_group).name}"
+    json.leave_cause "#{kid.leave_cause}"
+  end
 
     group_hard_name = "סל מחזור #{kid.mifal.name}"
     json.url  "

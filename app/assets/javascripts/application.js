@@ -24,14 +24,28 @@
 //= require jquery-ui/widgets/datepicker
 //= require jquery-ui/i18n/datepicker-he
 
-// $( document ).ready(function() {
-//   $(function () {
-//     $('[data-toggle="popover"]').popover()
-//   });
-//   $('.popover-dismiss').popover({
-//     trigger: 'focus'
-//   });
-// });
+$( document ).ready(function() {
+  if (/Mobi/.test(navigator.userAgent)) {
+      $(".main").width("100vw")
+  };
+  // $(document).scroll(function(){
+  //   w = screen.width
+  //   $(".header").width("100vw")
+  //   v = $(".header").width()
+  //   console.log("screen.width");
+  //   console.log(w);
+  //   console.log("100vw");
+  //   console.log(v);
+  //
+  //
+  // })
+  // $(function () {
+  //   $('[data-toggle="popover"]').popover()
+  // });
+  // $('.popover-dismiss').popover({
+  //   trigger: 'focus'
+  // });
+});
 // מלא שיט
 /*!
  Buttons for DataTables 1.5.6

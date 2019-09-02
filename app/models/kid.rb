@@ -64,6 +64,7 @@ class Kid < ApplicationRecord
 
   def undelete
     self.group_id = self.last_group
+    self.leave_cause = nil
     self.save
   end
 

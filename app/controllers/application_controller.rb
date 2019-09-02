@@ -32,6 +32,8 @@ end
 def columns_settings
   if staff_signed_in?
     @column_names = {
+      name: "שם",
+      last_name: "שם משפחה",
       full_name: "שם מלא",
       status: "סטטוס",
       cause: "סיבה",

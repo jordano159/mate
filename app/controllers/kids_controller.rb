@@ -16,7 +16,11 @@ class KidsController < ApplicationController
       if current_staff.admin?
         @kids = Kid.all.includes(:group)
       else
-        @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).includes(:group)
+        if Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
+          @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).includes(:group)
+        else
+          @kids = current_staff.staffable.kids.includes(:group)
+        end
       end
     end
 
@@ -49,7 +53,13 @@ def stats
 end
   # GET /kids/1
   # GET /kids/1.json
-  def show; end
+  def show
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+   end
 
   # GET /kids/new
   def new
@@ -103,6 +113,7 @@ end
     if current_staff.admin? || !@kid.group || @kid.group.hard_name == "סל מחזור #{@mifal.name}"
       @kid.destroy
     else
+      @kid.leave_cause = params[:kid][:leave_cause]
       @kid.create_kid_left_event
     end
     respond_to do |format|
@@ -149,6 +160,6 @@ end
   def kid_params
     params.require(:kid).permit(:name, :group_id, :last_name, :sex, :phone, :medical,
                                 :meds, :food, :city, :ken, :parent_1, :parent_1_phone, :parent_2, :parent_2_phone, :size, :shabat,
-                                :parents, :swim, :exits, :comments, :status, :cause, :taz, :grade, :mifal_id)
+                                :parents, :swim, :exits, :comments, :status, :cause, :taz, :grade, :mifal_id, :leave_cause)
   end
 end

@@ -10,6 +10,10 @@
     <% else %>
       <h1 class="font-weight-bold">חניכים </h1>
     <% end %>
+    <% if @level >= 4 %>
+      <%= link_to "הוספת חניך בודד", new_kid_path %>
+      <%= link_to "הוספת חניכים מאקסל", mifal_step_path(:imported_kids) %>
+    <% end %>
   </div>
   <div class="p-2">
     <% if @level == 1 %>
@@ -39,12 +43,13 @@
 <%# end %>
 
 <div class="table-container">
-<div class="table-responsive">
+<div class="table-responsive-lg">
   <table class="table table-hover" id="dttb-kids" data-sort="true" data-source="<%= url_for(format: :json)%>">
     <thead class="thead-dark nowrap ">
       <tr>
+        <% column_names = @column_names.reject{|c| c == :name || c == :last_name} %>
         <% if current_staff.admin? %>
-          <% @column_names.each_with_index do |col,i| %>
+          <% column_names.each_with_index do |col,i| %>
             <% unless col.first == "group" %>
                 <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
             <% else %>
@@ -52,7 +57,7 @@
             <% end %>
           <% end %>
         <% else %>
-          <% @column_names.each_with_index do |col,i| %>
+          <% column_names.each_with_index do |col,i| %>
             <% if @mifal.columns.include?(col.first.to_s) %>
               <% unless col.first == "group" %>
                   <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
@@ -69,8 +74,8 @@
   </table>
 </div>
 </div>
-
 <script>
+
 if(<%= @level == 1 %>){
   var targets = [0,1,2,-1];
 } else{
@@ -101,13 +106,13 @@ $('#dttb-kids').dataTable( {
         },
 
 });
-
-var padding =  parseInt($("#page-content-wrapper").css('padding-left')) + parseInt($("#page-content-wrapper").css('padding-right'));
-if ($("#navbar").css("display") == "none"){
-  var table_width =   $("#page-content-wrapper").width() - padding;
-}else {
-  var table_width = $( document ).width() - padding;
-}
-$(".table-container").width(table_width);
-$(".progress").width(table_width);
+//
+// var padding =  parseInt($("#page-content-wrapper").css('padding-left')) + parseInt($("#page-content-wrapper").css('padding-right'));
+// if ($("#navbar").css("display") == "none"){
+//   var table_width =   $("#page-content-wrapper").width() - padding;
+// }else {
+//   var table_width = $( document ).width() - padding;
+// };
+// $(".table-container").width(table_width);
+// $(".progress").width(table_width);
 </script>
