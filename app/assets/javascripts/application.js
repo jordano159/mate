@@ -24,13 +24,14 @@
 //= require jquery-ui/widgets/datepicker
 //= require jquery-ui/i18n/datepicker-he
 
-
-$(function () {
-  $('[data-toggle="popover"]').popover()
-});
-$('.popover-dismiss').popover({
-  trigger: 'focus'
-});
+// $( document ).ready(function() {
+//   $(function () {
+//     $('[data-toggle="popover"]').popover()
+//   });
+//   $('.popover-dismiss').popover({
+//     trigger: 'focus'
+//   });
+// });
 // מלא שיט
 /*!
  Buttons for DataTables 1.5.6

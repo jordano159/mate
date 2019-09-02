@@ -172,9 +172,10 @@
 <hr>
 <div class="field">
   <%= form.label :causes, "סיבות אפשריות להיעדרות:" %>
-  <a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="אופציה לאחר נוספת אוטומטית">
+  <a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="אופציה לאחר כלולה באופן אוטומטי">
       <i class="far fa-question-circle"></i>
   </a>
+
   <div class="btn btn-primary btn-sm btn-round cause_button" id="cause_button">
     <i class="fas fa-plus"></i>
   </div>
@@ -234,6 +235,16 @@
   } */
 </style>
 <script>
+
+$( document ).ready(function() {
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  });
+  $('.popover-dismiss').popover({
+    trigger: 'focus'
+  });
+});
+
 mifal_columns = <%= raw @mifal.columns %>
 $("input[type='checkbox']").checkboxradio();
 $(".ui-button").addClass("m-2").css("width", "250px");
