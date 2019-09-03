@@ -65,12 +65,5 @@ $('#dttb-kids').dataTable( {
 
 });
 
-var padding =  parseInt($("#page-content-wrapper").css('padding-left')) + parseInt($("#page-content-wrapper").css('padding-right'));
-if ($("#navbar").css("display") == "none"){
-  var table_width =   $("#page-content-wrapper").width() - padding;
-}else {
-  var table_width = $( document ).width() - padding;
-}
-$(".table-container").width(table_width);
-$(".progress").width(table_width);
+
 </script>
