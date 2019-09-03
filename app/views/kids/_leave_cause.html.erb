@@ -1,4 +1,4 @@
 <%= simple_form_for(@kid, html: { class: 'form-inline', :method => :delete, :remote => true }) do |form| %>
     <%= form.input :leave_cause, label: "סיבת עזיבה/מחיקה:", input_html: {class: "mx-2"} %>
-    <%= form.submit "אישור",class:"btn btn-danger", data: { confirm: 'את/ה בטוח/ה?' } %>
+    <%= form.submit "אישור", class:"btn btn-danger", data: { confirm: 'את/ה בטוח/ה?' } %>
 <% end %>

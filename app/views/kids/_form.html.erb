@@ -1,4 +1,5 @@
 <%= simple_form_for(@kid, html: { class: 'm-3' }) do |form| %>
+
   <% if kid.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -33,10 +34,11 @@
     <div class="row">
     <% ["shabat", "swim","parents"].each do |col| %>
     <div class="column ml-2">
-      <%= form.input col.to_sym, as: :radio_buttons, label: "#{@column_names[col.to_sym]}", collection: ["כן", "לא"] %>
+      <%= form.input col.to_sym, as: :radio_buttons,input_html:{class:"form-inline"}, label: "#{@column_names[col.to_sym]}", collection: ["כן", "לא"] %>
     </div>
     <% end %>
   </div>
+    <%= form.input :mifal_id, as: :hidden, input_html: { value: @mifal.id }, label: "מפעל" %>
 <!--
   <div class="row">
     <div class="column ml-2">
@@ -123,10 +125,8 @@
     <% if kid.mifal %>
       <% status_options = [["לא נוכח/ת", "0"], ["נוכח/ת","1"]] %>
       <% status_options << ["איחר/ה", "2"] if kid.mifal.has_late %>
-      <div class="column">
-        <%= form.input :status, as: :radio_buttons, label: "סטטוס?", collection: status_options %>
-      </div>
+      <%= form.input :status, as: :radio_buttons, label: "סטטוס?", collection: status_options %>
     <% end %>
-  </div>
     <%= form.submit "עדכון פרטים" %>
+  </div>
 <% end %>
