@@ -112,8 +112,8 @@
   </table>
 </div>
 </p>
-<%= link_to 'עריכה', edit_check_path(@check), class: "btn btn-primary" %>
-<%= link_to 'חזרה לרשימת הנוכחויות', checks_path, class: "btn btn-primary" %>
+<%= link_to 'סיום', root_path, class: "btn btn-primary" %>
+<%= link_to 'עריכה', edit_check_path(@check), class: "btn btn-warning" %>
 <%= link_to 'מחיקה', @check, method: :delete, data: { confirm: 'את/ה בטוח/ה שאת/ה רוצה למחוק את הנוכחות הזאת?' }, class: "btn btn-danger" %>
 
 <% if @level > 1 && group && group.mifal.has_approve %>
