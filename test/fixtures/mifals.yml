@@ -2,6 +2,10 @@
 
 one:
   name: MyString
+  group_name: {single: "a", plural: "aa"}
+  head_name: {single: "a", plural: "aa"}
+  axis_name: {single: "a", plural: "aa"}
+  columns: ["name"]
 
 two:
   name: MyString

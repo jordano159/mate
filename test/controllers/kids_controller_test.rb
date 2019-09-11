@@ -3,8 +3,12 @@
 require 'test_helper'
 
 class KidsControllerTest < ActionDispatch::IntegrationTest
+	include Devise::Test::IntegrationHelpers
+
   setup do
+		sign_in staffs(:vip)
     @kid = kids(:one)
+		@mifal = mifals(:one)
   end
 
   test 'should get index' do
@@ -26,6 +30,7 @@ class KidsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show kid' do
+		@kid.mifal = mifals(:one).id
     get kid_url(@kid)
     assert_response :success
   end

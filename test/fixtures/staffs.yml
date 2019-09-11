@@ -1,11 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+vip:
   name: MyString
+  staffable: one
   staffable_id: 1
-  staffable_type: MyString
+  staffable_type: Mifal
+  role: vip
+  email: a@gmail.com
 
-two:
+admin:
   name: MyString
-  staffable_id: 1
-  staffable_type: MyString
+  role: admin
+  email: a@gmail.com

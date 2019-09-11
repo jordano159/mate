@@ -1,11 +1,13 @@
 require 'test_helper'
 
 class MifalsControllerTest < ActionDispatch::IntegrationTest
+ include Devise::Test::IntegrationHelpers
   setup do
     @mifal = mifals(:one)
+		sign_in staffs(:vip)
   end
 
-  test "should get index" do
+   test "should get index" do
     get mifals_url
     assert_response :success
   end
