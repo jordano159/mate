@@ -1,10 +1,10 @@
-<h2>עריכת משתמש</h2>
+<h2>עריכת שם משתמש</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name, label: "שם" %>
+    <%= f.input :name, label: "שם חדש" %>
     <%= f.input :email, required: true, autofocus: true if current_staff.admin? %>
     <%#= f.input :username %>
 
@@ -14,14 +14,12 @@
 
     <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false if current_staff.admin? %>
     <%= f.input :password_confirmation, required: false if current_staff.admin? %>
-    <%= f.input :current_password, label: "סיסמה נוכחית", hint: "אנחנו צריכים את הסיסמה הנוכחית שלך", required: true %>
+    <%= f.input :current_password, label: "סיסמה נוכחית", hint: "אנחנו צריכים את הסיסמה הנוכחית שלך",  required: true  %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "עדכון" %>
+    <%= f.button :submit, "עדכון", class:"btn btn-primary" %>
   </div>
 <% end %>
 
 <%= link_to "מחיקת המשתמש", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete if current_staff.admin? %>
-
-<%= link_to "אחורה", :back %>

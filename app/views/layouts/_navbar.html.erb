@@ -3,22 +3,20 @@
   <div class="d-flex flex-row justify-content-between">
     <!-- לוגו -->
     <div class="p-2">
-      <%= link_to "המטה", root_path, class: "navbar-brand" %>
+      <h2><%= link_to "המטה", root_path, class: "navbar-brand" %></h2>
     </div>
     <div class="p-2">
       <!-- עריכת משתמש -->
         <div class="dropdown user-position-mobile">
-          <button type="button" class="dropdown-toggle btn btn-light border-dark bg-transparent" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="dropdown-toggle btn btn-light btn-round border-dark bg-transparent" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle text-white icon-size mt-1"></i>
           </button>
-          <div class="dropdown-menu dropdown-menu-right">
-
-            <div class="font-weight-bold dropdown-element" >
-              שלום <%= current_staff.name %> <br>
+          <div class="dropdown-menu p-2">
+            <div class="font-weight-bold dropdown-element">
+            	שלום, <%= current_staff.name %>
             </div>
             <div class="dropdown-element">
-              <%= link_to "עריכת משתמש", edit_staff_registration_path %>
-
+              <%= link_to "עריכת שם משתמש", edit_staff_registration_path %>
             </div>
             <div class="dropdown-element">
               <% case @level %>
@@ -39,11 +37,12 @@
               <%= error_btn %>
             </div>
           </div>
+					<!-- המבורגר -->
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
         </div>
-      <!-- המבורגר -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+
     </div>
   </div>
   <!-- תוכן ההמבורגר -->
