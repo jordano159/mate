@@ -22,7 +22,11 @@
   </div>
     <% if @level == 1 %>
     <div class="d-flex flex-row">
+      <% if @kids.first.group.checks.last.present? %>
       <div class="d-flex w-100 p-2">נוכחות אחרונה: <%= @kids.first.group.checks.last.name %></div>
+      <% else %>
+      <div class="d-flex w-100 p-2"></div>  
+      <% end %>
       <% g_id = Group.find(current_staff.staffable.id) %>
       <div class="d-flex flex-shrink-1 justify-content-end">
         <%= link_to "<i class='fas fa-plus'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-primary m-2 btn-round" %>
