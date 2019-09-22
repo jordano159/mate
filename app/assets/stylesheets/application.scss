@@ -18,8 +18,11 @@
   display: block;
 }
 
+.text-center{
+	text-align: center;
+}
 .btn-round{
-  border-radius: 20px;
+  border-radius: 50%;
 }
 table.dataTable {
     width: 100% !important;
@@ -228,7 +231,7 @@ body {
     }
 }
 .dropdown-element{
-  float: right;
+  text-align: right;
   margin: 5px
 }
 

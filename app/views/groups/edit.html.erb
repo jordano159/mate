@@ -1,6 +1,3 @@
-<h1>עריכת ה<%= @level_names[0] %></h1>
+<h1>עריכת <%= @level_names[0] %></h1>
 
 <%= render 'form', group: @group %>
-
-<%= link_to "הצגת ה#{ @level_names[0] }", @group, class: "btn btn-primary" %>
-<%= link_to 'אחורה', groups_path, class: "btn btn-primary" %>

@@ -11,9 +11,9 @@
   <% end %>
   <div>
     <% unless current_staff.admin? %>
-      <h1 class="font-weight-bold"> <%= current_staff.staffable.name.sub(" #{@mifal.name}", "") %> </h1>
+      <h1 class="font-weight-bold text-center"> <%= current_staff.staffable.name.sub(" #{@mifal.name}", "") %> </h1>
     <% else %>
-      <h1 class="font-weight-bold">חניכים </h1>
+      <h1 class="font-weight-bold text-center">חניכים </h1>
     <% end %>
     <% if @level >= 4 %>
       <%= link_to "הוספת חניך", new_kid_path %>
@@ -21,30 +21,44 @@
     <% end %>
   </div>
     <% if @level == 1 %>
-    <div class="d-flex flex-row">
+    <!-- <div class="d-flex flex-row">
       <% if @kids.first.group.checks.last.present? %>
       <div class="d-flex w-100 p-2">נוכחות אחרונה: <%= @kids.first.group.checks.last.name %></div>
       <% else %>
-      <div class="d-flex w-100 p-2"></div>  
-      <% end %>
+      <div class="d-flex w-100 p-2"></div>
+      <% end %> -->
+		<hr>
+		<% counter = how_many_attending(@kids) %>
+		<!-- יש <%= counter %> חניכימות נוכחימות מתוך <%= @kids.count %> -->
+		<% percent = (counter.to_f / @kids.count.to_i * 100).to_i if @kids.exists? %>
+		<% width = "width:#{percent}%" %>
+    <div class="d-flex flex-row  justify-content-end">
+      <div class="d-flex w-100 p-2">נוכחות אחרונה:
+				<br>
+        <% if @kids.first.group.checks.last.present?  %>
+					<%= @kids.first.group.checks.last.name %> <br>
+					<%= counter %> נוכחים מתוך <%= @kids.count %>
+          <% else %>
+          לא נעשתה נוכחות <br>
+					0 נוכחים מתוך <%= @kids.count %>
+          <% end %>
+			</div>
       <% g_id = Group.find(current_staff.staffable.id) %>
-      <div class="d-flex flex-shrink-1 justify-content-end">
-        <%= link_to "<i class='fas fa-plus'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-primary m-2 btn-round" %>
+      <div class="d-flex flex-shrink-1">
+        <%= link_to "<i class='fas fa-plus'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary m-2 btn-round" %>
       </div>
     </div>
     <div class="d-flex flex-row mb-3">
-      <% counter = how_many_attending(@kids) %>
-      <!-- יש <%= counter %> חניכימות נוכחימות מתוך <%= @kids.count %> -->
-      <% percent = (counter.to_f / @kids.count.to_i * 100).to_i if @kids.exists? %>
-      <% width = "width:#{percent}%" %>
+
       <div class="d-flex w-100 p-2">
-        <div class="progress">
+        <!-- <div class="progress w-100">
           <div class="progress-bar" role="progressbar"  style=<%= width %>
-            aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= counter %> חניכים וחניכות נוכחות מתוך <%= @kids.count %></div>
+            aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= counter %> נוכחים מתוך <%= @kids.count %></div> -->
             <!-- aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%# percent %>% נוכחות</div> -->
         </div>
       </div>
     </div>
+		<hr>
   <% end %>
 </div>
 </div>

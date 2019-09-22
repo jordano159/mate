@@ -7,7 +7,7 @@
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 </script>
 
-<%= simple_form_for(@group, html: { class: 'form-inline' }) do |form| %>
+<%= simple_form_for(@group) do |form| %>
   <% if group.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -24,17 +24,17 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.input :name, label: " שם ה#{ @level_names[0] }: " %>
+    <%= form.input :name, label: "שם", input_html: { class: 'my-2' }  %>
   </div>
   <% if @level > 3 %>
-    <div class="field">
+    <div class="my-2 field">
       <%= form.input_field :head_id, collection: @heads, input_html: { class: 'select' } %>
     </div>
-    <div class="field">
-      <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "select"}, collection: @mifal.kids, label_method: :full_name, value_method: :id %>
+    <div class="my-2 field">
+      <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "mx-2 select"}, collection: @mifal.kids, label_method: :full_name, value_method: :id %>
     </div>
   <% end %>
   <div class="actions">
-    <%= form.submit "שליחה" %>
+    <%= form.submit "עדכון", class:"btn btn-primary" %>
   </div>
 <% end %>
