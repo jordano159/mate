@@ -29,7 +29,8 @@ $.extend( $.fn.dataTable.defaults, {
   responsive: true,
   pagingType: 'full',
   language: {
-    url: "/he_he.lang"
+    url: "/he_he.lang",
+    searchPlaceholder: "חיפוש חופשי"
   },
   "order": [],
   "pageLength": 25

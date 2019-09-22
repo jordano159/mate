@@ -8,7 +8,7 @@
     "lengthMenu":     "מציג _MENU_ רשומות",
     "loadingRecords": "טוען...",
     "processing":     "מעבד...",
-    "search":         "חיפוש:",
+    "search":         "",
     "zeroRecords":    "לא נמצאו רשומות תואמות",
     "paginate": {
         "first":      "ראשון",

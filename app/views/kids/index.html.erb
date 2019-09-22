@@ -5,8 +5,8 @@
 <div id="head">
 <div>
   <% if @level == 1 %>
-    <strong>
-      <%= @mifal.name %> <i class="fas fa-angle-left"></i> <%= @kids.first.group.head.name.sub(" #{@mifal.name}", "") if @kids.exists? %>
+    <strong class="text-secondary">
+      <%= @mifal.name %> <i class="fas fa-angle-left text-dark"></i> <%= @kids.first.group.head.name.sub(" #{@mifal.name}", "") if @kids.exists? %>
     </strong>
   <% end %>
   <div>
@@ -21,47 +21,54 @@
     <% end %>
   </div>
     <% if @level == 1 %>
-    <!-- <div class="d-flex flex-row">
-      <% if @kids.first.group.checks.last.present? %>
-      <div class="d-flex w-100 p-2">נוכחות אחרונה: <%= @kids.first.group.checks.last.name %></div>
-      <% else %>
-      <div class="d-flex w-100 p-2"></div>
-      <% end %> -->
 		<hr>
 		<% counter = how_many_attending(@kids) %>
 		<!-- יש <%= counter %> חניכימות נוכחימות מתוך <%= @kids.count %> -->
 		<% percent = (counter.to_f / @kids.count.to_i * 100).to_i if @kids.exists? %>
 		<% width = "width:#{percent}%" %>
-    <div class="d-flex flex-row  justify-content-end">
-      <div class="d-flex w-100 p-2">נוכחות אחרונה:
-				<br>
-        <% if @kids.first.group.checks.last.present?  %>
-					<%= @kids.first.group.checks.last.name %> <br>
-					<%= counter %> נוכחים מתוך <%= @kids.count %>
-          <% else %>
-          לא נעשתה נוכחות <br>
-					0 נוכחים מתוך <%= @kids.count %>
-          <% end %>
-			</div>
-      <% g_id = Group.find(current_staff.staffable.id) %>
-      <div class="d-flex flex-shrink-1">
-        <%= link_to "<i class='fas fa-plus'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary m-2 btn-round" %>
-      </div>
-    </div>
-    <div class="d-flex flex-row mb-3">
 
-      <div class="d-flex w-100 p-2">
-        <!-- <div class="progress w-100">
-          <div class="progress-bar" role="progressbar"  style=<%= width %>
-            aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= counter %> נוכחים מתוך <%= @kids.count %></div> -->
-            <!-- aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%# percent %>% נוכחות</div> -->
-        </div>
+    <div class="check-container">
+      <div class="check-title text-right"><strong class="mr-2">נוכחות אחרונה:</strong></div>
+        <% if @kids.first.group.checks.last.present?  %>
+        <div class="check-stat">
+        <% if @kids.first.group.checks.last.approved? %>
+          <i class="far fa-check-circle icon-lg mt-2" style="color:#00F2B1"></i>
+        <% else %>
+        <i class="far fa-times-circle icon-lg mt-2" style="color:#FF5E63"></i>
+        <% end %>
       </div>
+        <div class="check-data text-right">
+          <div class="mr-2">
+            <ul style="list-style-type:none; padding-right: 0; line-height:120%">
+              <li></li>
+              <li><%= @kids.first.group.checks.last.name %></li>
+              <li><%= counter %> מתוך <%= @kids.count %></li>
+              <li class="date-text"><%= @kids.first.group.checks.last.created_at.strftime("%d.%m.%Y") %></li>
+            </ul>
+          </div>
+        </div>
+          <% else %>
+          <div class="check-data text-right">
+            <div class="mr-2">
+              <ul style="list-style-type:none; padding-right: 0; line-height:120%">
+                <li></li>
+                <li>עדיין לא נעשתה נוכחות</li>
+                <li>0 מתוך <%= @kids.count %></li>
+              </ul>
+            </div>
+          </div>
+          <% end %>
+          <% g_id = Group.find(current_staff.staffable.id) %>
+          <div class="check-new">
+            <%= link_to "<i class='fas fa-plus'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary btn-round" %>
+          </div>
+			</div>
+    </div>
+
     </div>
 		<hr>
   <% end %>
-</div>
-</div>
+
 
 <%# if current_staff.admin? || current_staff.vip? %>
 <%# link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary mb-3" %>
@@ -71,24 +78,24 @@
 <div class="table-container">
 <div class="table-responsive-lg">
   <table class="table table-hover" id="dttb-kids" data-sort="true" data-source="<%= url_for(format: :json)%>">
-    <thead class="thead-dark nowrap ">
+    <thead class="thead-grey nowrap">
       <tr>
         <% column_names = @column_names.reject{|c| c == :name || c == :last_name} %>
         <% if current_staff.admin? %>
           <% column_names.each_with_index do |col,i| %>
             <% unless col.first == "group" %>
-                <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
+                <th data-data="<%= col.first %>" class="text-grey"><%= col.last %></th>
             <% else %>
-                <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th>
+                <th data-data="group" class="text-grey"><%= @level_names[0] %></th>
             <% end %>
           <% end %>
         <% else %>
           <% column_names.each_with_index do |col,i| %>
             <% if @mifal.columns.include?(col.first.to_s) %>
               <% unless col.first == "group" %>
-                  <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
+                  <th data-data="<%= col.first %>" class="text-grey"><%= col.last %></th>
               <% else %>
-                <% if @level > 1 %> <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th> <% end %>
+                <% if @level > 1 %> <th data-data="group" class="text-grey"><%= @level_names[0] %></th> <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -100,20 +107,22 @@
   </table>
 </div>
 </div>
-<script>
 
+
+<script>
 if(<%= @level == 1 %>){
   var targets = [0,1,2,-1];
 } else{
   var targets = [0,1,2,3,-1];
 }
 $('#dttb-kids').dataTable( {
-        dom: 'Bfrtip',
+        // dom: 'Bfrtip',
+        dom: '<"row"<"col-8"f><"col-4"B>rtip>',
         stateSave: true,
         columnDefs: [
            {
                targets: targets,
-               className: 'noVis'
+               className: 'noVis pr-4'
            },
             {   targets: targets, visible: true },
             {   targets: "_all", visible: false }
@@ -123,6 +132,7 @@ $('#dttb-kids').dataTable( {
                extend: 'colvis',
                columns: ':not(.noVis)',
                collectionLayout: 'fixed two-column',
+               className: 'btn btn-primary'
            }
        ],
        language: {
@@ -130,8 +140,18 @@ $('#dttb-kids').dataTable( {
                 colvis: '<i class="fas fa-columns"></i> עמודות'
             }
         },
-
+        "initComplete": function(settings, json) {
+   var height = $(".buttons-colvis").outerHeight();
+   $(".form-control").outerHeight(height);
+   $(".buttons-colvis").removeClass("dt-button");
+ }
 });
+$(window).scroll(function(){
+    $('.form-control').css({
+        'right': $(this).scrollRight() + 15 //Why this 15, because in the CSS, we have set left 15, so as we scroll, we would want this to remain at 15px left
+    });
+});
+
 //
 // var padding =  parseInt($("#page-content-wrapper").css('padding-left')) + parseInt($("#page-content-wrapper").css('padding-right'));
 // if ($("#navbar").css("display") == "none"){
