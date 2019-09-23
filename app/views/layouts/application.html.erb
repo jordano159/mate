@@ -33,7 +33,7 @@
       <%= render 'layouts/sidebar' %>
               </div>
     <div class="main">
-      <div id="page-content-wrapper">
+      <div id="page-content-wrapper" class="mr-2">
         <%= yield %>
       </div>
     </div>
@@ -41,7 +41,7 @@
 <% else %>
   <%= render 'layouts/navbar' %>
   <div id="wrapper">
-  <div id="page-content-wrapper" class="ml-2">
+  <div id="page-content-wrapper" >
     <%= yield %>
     <!-- <div id="error_btn">
       <%# error_btn %>

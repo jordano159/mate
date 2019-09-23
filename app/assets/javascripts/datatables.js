@@ -27,13 +27,14 @@
 
 $.extend( $.fn.dataTable.defaults, {
   responsive: true,
-  pagingType: 'full',
+  // pagingType: 'full',
+  paging: false,
   language: {
     url: "/he_he.lang",
     searchPlaceholder: "חיפוש חופשי"
   },
-  "order": [],
-  "pageLength": 25
+  order: [[ 0, 'desc' ]],
+  // "pageLength": 25
   // ,
   // columnDefs: [
   //    "targets": "_all",

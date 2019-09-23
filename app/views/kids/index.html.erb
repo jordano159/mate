@@ -5,7 +5,7 @@
 <div id="head">
 <div>
   <% if @level == 1 %>
-    <strong class="text-secondary">
+    <strong class="text-secondary pr-2">
       <%= @mifal.name %> <i class="fas fa-angle-left text-dark"></i> <%= @kids.first.group.head.name.sub(" #{@mifal.name}", "") if @kids.exists? %>
     </strong>
   <% end %>
@@ -32,7 +32,7 @@
         <% if @kids.first.group.checks.last.present?  %>
         <div class="check-stat">
         <% if @kids.first.group.checks.last.approved? %>
-          <i class="far fa-check-circle icon-lg mt-2" style="color:#00F2B1"></i>
+          <i class="far fa-check-circle icon-lg mt-2" style="color:#07E39A"></i>
         <% else %>
         <i class="far fa-times-circle icon-lg mt-2" style="color:#FF5E63"></i>
         <% end %>
@@ -60,7 +60,7 @@
           <% end %>
           <% g_id = Group.find(current_staff.staffable.id) %>
           <div class="check-new">
-            <%= link_to "<i class='fas fa-plus'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary btn-round" %>
+            <%= link_to "<i class='fas fa-plus plus-icon'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary-cus btn-plus" %>
           </div>
 			</div>
     </div>
@@ -99,7 +99,7 @@
               <% end %>
             <% end %>
           <% end %>
-          <th data-data="url" class="url-width"></th>
+          <% if @level > 1 %> <th data-data="url" class="url-width"></th> <% end %>
         <% end %>
 
       </tr>
@@ -111,7 +111,7 @@
 
 <script>
 if(<%= @level == 1 %>){
-  var targets = [0,1,2,-1];
+  var targets = [0,1,2];
 } else{
   var targets = [0,1,2,3,-1];
 }
@@ -132,25 +132,23 @@ $('#dttb-kids').dataTable( {
                extend: 'colvis',
                columns: ':not(.noVis)',
                collectionLayout: 'fixed two-column',
-               className: 'btn btn-primary'
+               className: 'btn btn-primary-cus'
            }
        ],
        language: {
             buttons: {
-                colvis: '<i class="fas fa-columns"></i> עמודות'
+                colvis: '<i class="fas fa-columns"></i> עמודות',
+                className: 'btn btn-primary-cus'
             }
         },
         "initComplete": function(settings, json) {
    var height = $(".buttons-colvis").outerHeight();
    $(".form-control").outerHeight(height);
    $(".buttons-colvis").removeClass("dt-button");
+  $(".buttons-columnVisibility").addClass("btn-primary-cus");
  }
 });
-$(window).scroll(function(){
-    $('.form-control').css({
-        'right': $(this).scrollRight() + 15 //Why this 15, because in the CSS, we have set left 15, so as we scroll, we would want this to remain at 15px left
-    });
-});
+
 
 //
 // var padding =  parseInt($("#page-content-wrapper").css('padding-left')) + parseInt($("#page-content-wrapper").css('padding-right'));

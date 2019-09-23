@@ -39,6 +39,7 @@ json.set! :data do
   end
 
     group_hard_name = "סל מחזור #{kid.mifal.name}"
+
     json.url  "
               #{link_to '<i class="fas fa-redo"></i>'.html_safe, recover_path(kid) if kid.group && kid.group.hard_name == group_hard_name}
               #{link_to '<i class="fas fa-edit"></i>'.html_safe, edit_kid_path(kid), class:'text-muted mx-2' if current_staff.admin? || current_staff.vip?}
