@@ -1,5 +1,5 @@
 {
-    "master_picture": "app/assets/images/wand.png",
+    "master_picture": "app/assets/images/logo.png",
     "favicon_design": {
         "ios": {
             "picture_aspect": "background_and_margin",
@@ -18,7 +18,7 @@
         ],
         "windows": {
             "picture_aspect": "no_change",
-            "background_color": "#da532c",
+            "background_color": "#2d89ef",
             "on_conflict": "override",
             "assets": {
                 "windows_80_ie_10_tile": false,
@@ -52,7 +52,8 @@
         }
     },
     "settings": {
-        "scaling_algorithm": "on",
+        "compression": 5,
+        "scaling_algorithm": "Mitchell",
         "error_on_image_too_small": false,
         "readme_file": false,
         "html_code_file": false,

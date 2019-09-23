@@ -59,7 +59,6 @@ gem 'google_drive'
 gem 'ahoy_matey'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'jquery-ui-rails'
-gem 'rails_real_favicon'
 
 
 # Efficiency tests
