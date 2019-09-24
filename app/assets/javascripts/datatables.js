@@ -29,11 +29,28 @@ $.extend( $.fn.dataTable.defaults, {
   responsive: true,
   // pagingType: 'full',
   paging: false,
+  buttons: [
+      {
+          extend: 'colvis',
+          columns: ':not(.noVis)',
+          collectionLayout: 'fixed two-column'
+      }
+  ],
   language: {
     url: "/he_he.lang",
-    searchPlaceholder: "חיפוש חופשי"
+    searchPlaceholder: "חיפוש חופשי",
+    buttons: {
+        colvis: '<i class="fas fa-columns"></i> עמודות',
+        className: 'btn btn-primary-cus'
+    }
   },
-  order: [[ 0, 'desc' ]],
+  initComplete: function(settings, json) {
+var height = $(".buttons-colvis").outerHeight();
+$(".form-control").outerHeight(height);
+$(".buttons-colvis").removeClass("dt-button");
+$(".buttons-colvis").addClass("btn btn-primary-cus");
+},
+  order: [],
   // "pageLength": 25
   // ,
   // columnDefs: [

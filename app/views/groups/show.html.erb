@@ -76,7 +76,7 @@
 <script>
 
 $('#dttb-kids').dataTable( {
-        dom: 'Bfrtip',
+        dom: '<"row"<"col-8"f><"col-4"B>rtip>',
         stateSave: true,
         columnDefs: [
            {
@@ -85,19 +85,19 @@ $('#dttb-kids').dataTable( {
            },
             {   targets: [0,1,2,3,-1], visible: true },
             {   targets: "_all", visible: false }
-       ],
-       buttons: [
-           {
-               extend: 'colvis',
-               columns: ':not(.noVis)',
-               collectionLayout: 'fixed two-column'
-           }
-       ],
-       language: {
-            buttons: {
-                colvis: '<i class="fas fa-columns"></i> עמודות'
-            }
-        },
+       ]
+       // buttons: [
+       //     {
+       //         extend: 'colvis',
+       //         columns: ':not(.noVis)',
+       //         collectionLayout: 'fixed two-column'
+       //     }
+       // ],
+       // language: {
+       //      buttons: {
+       //          colvis: '<i class="fas fa-columns"></i> עמודות'
+       //      }
+       //  },
 
 });
   </script>
