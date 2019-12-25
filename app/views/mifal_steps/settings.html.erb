@@ -7,10 +7,10 @@
 <h1 class="mb-5">הגדרות מפעל</h1>
 <%= render layout: 'form' do |form| %>
   <!-- <div class="field">
-    <%= form.label :has_buses, "צריך ניהול אוטובוסים?" %>
+    <%# form.label :has_buses, "צריך ניהול אוטובוסים?" %>
     <div class="container">
       <div class="button-wrap btn-group" >
-        <%= form.collection_radio_buttons :has_buses, [[true, '<h1>כן</h1>'.html_safe] ,[false, '<h1>לא</h1>'.html_safe]],
+        <%# form.collection_radio_buttons :has_buses, [[true, '<h1>כן</h1>'.html_safe] ,[false, '<h1>לא</h1>'.html_safe]],
         :first, :last, { checked: @mifal.has_buses } %>
       </div>
     </div>
@@ -89,6 +89,11 @@
   };
 </script>
 <div class="container">
+  <!-- <div class="field">
+      <%# form.label :preset, "בחירת ברירת מחדל:" %>
+      <div class="container">
+      <%# form.select :preset, value: @mifal.group_name[:single], class: "form-control w-50", required: true%>
+    </div> -->
   <div class="row">
     <div class="col">
       <div class="field">

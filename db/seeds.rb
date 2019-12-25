@@ -5,8 +5,8 @@
 #
 
 # יצירת אדמין
-# Staff.create!(name: 'ירדן', email: 'yarden11111@gmail.com', password: '12341234', password_confirmation: '12341234',
-#   role: 'admin', username: 'Jordan')
+# Staff.create!(name: 'הקוד השומרי', email: 'codecircle13@gmail.com', password: 'mered1913', password_confirmation: 'mered1913',
+#   role: 'admin', username: 'codecircle')
 
 60.times do
   mifal_id = Mifal.all.ids.sample
