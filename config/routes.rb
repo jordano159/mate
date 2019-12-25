@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # get 'landing/index'
+  resources :landing, only: [:index, :new, :create]
   resources :buses
   resources :events
   resources :checks
@@ -51,5 +53,4 @@ Rails.application.routes.draw do
   get '/recover/:id', to: 'kids#recover', as: 'recover'
   get "/cause" => 'mifal_steps#settings', as: 'cause'
   get "/leave_cause" => 'kids#show', as: 'leave_cause'
-  get "landing_page" => 'application#landing_page'
 end

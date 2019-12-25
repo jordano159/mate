@@ -120,10 +120,6 @@ end
     end
   end
 
-  def landing_page
-    render :layout => false
-  end
-
   def only_admin
     blocked = %w[kids groups heads axes]
     if staff_signed_in?
