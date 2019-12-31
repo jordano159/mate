@@ -99,7 +99,7 @@ end
   def home_page
     if staff_signed_in?
       if @level == 1
-        redirect_to kids_path
+        redirect_to group_path(Group.find(current_staff.staffable_id))
       elsif @level == 2 || @level == 3 || @level == 4
         redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: 'show', id: current_staff.staffable_id
       elsif @level == 5
