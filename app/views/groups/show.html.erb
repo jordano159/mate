@@ -15,43 +15,104 @@
     <% next_id = @group.id + 1 %>
     <% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>
       <%= link_to "ה#{@level_names[0]} הבאה", group_path(next_id), class: "btn btn-primary" %>
+
+
+<div id="head">
+<div>
+  <%# if @level == 1 %>
+    <strong class="text-secondary pr-2">
+      <%= @group.mifal.name %> <i class="fas fa-angle-left text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? %>
+    </strong>
+  <%# end %>
+  <div>
+
+      <h1 class="font-weight-bold text-center"><%= @group.name.sub(" #{@group.mifal.name}", "") %></h1>
+
+    <% if @level >= 4 %>
+      <%= link_to "הוספת חניך", new_kid_path %>
+      <%= link_to "הוספת חניכים מאקסל", mifal_step_path(:imported_kids) %>
     <% end %>
-</div>
+  </div>
+	<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
+		<hr>
+		<% counter = how_many_attending(@group.kids) %>
+		<!-- יש <%# counter %> חניכימות נוכחימות מתוך <%# @kids.count %> -->
+		<% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i if @group.kids.exists? %>
+		<% width = "width:#{percent}%" %>
 
-</div>
-
-
-
-  <% unless @group.name ==  "סל מחזור #{@group.mifal.name}" %>
-    <% counter = how_many_attending(@group.kids) %>
-    יש <%= counter %> חניכים וחניכות נוכחים מתוך <%= @group.kids.count %>
-    <% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i if @group.kids.exists? %>
-    <% width = "width:#{percent}%" %>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar"  style=<%= width %>
-        aria-valuenow="#{percent}" aria-valuemin="0" aria-valuemax="100"><%= percent %>% נוכחות</div>
+    <div class="check-container">
+      <div class="check-title text-right"><strong class="mr-2">נוכחות אחרונה:</strong></div>
+        <% if @group.checks.last.present?  %>
+        <div class="check-stat">
+        <% if @group.checks.last.approved? %>
+          <i class="far fa-check-circle icon-lg mt-2" style="color:#07E39A"></i>
+        <% else %>
+        <i class="far fa-times-circle icon-lg mt-2" style="color:#FF5E63"></i>
+        <% end %>
       </div>
-      <% else %>
-        יש <%= @group.kids.count %> חניכים וחניכות בסל המחזור
-  <% end %>
+        <div class="check-data text-right">
+          <div class="mr-2">
+            <ul style="list-style-type:none; padding-right: 0; line-height:120%">
+              <li></li>
+              <li><%= @group.checks.last.name %></li>
+              <li><%= counter %> מתוך <%= @group.kids.count %></li>
+              <li class="date-text"><%= @group.checks.last.created_at.strftime("%d.%m.%Y") %></li>
+            </ul>
+          </div>
+        </div>
+          <% else %>
+          <div class="check-data text-right">
+            <div class="mr-2">
+              <ul style="list-style-type:none; padding-right: 0; line-height:120%">
+                <li></li>
+                <li>עדיין לא נעשתה נוכחות</li>
+                <li>0 מתוך <%= @group.kids.count %></li>
+              </ul>
+            </div>
+          </div>
+          <% end %>
+          <% g_id = @group.id %>
+          <div class="check-new">
+            <%= link_to "<i class='fas fa-plus plus-icon'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary-cus btn-plus" %>
+          </div>
+			</div>
+    </div>
+
+    </div>
+		<hr>
+<% end %>
+
+
+
 
 
 <p>
   <div class="table-responsive-lg">
     <table class="table table-hover" id="dttb-kids" data-sort="true"
                         data-source="<%= url_for(format: :json, controller: 'kids', group_id: @group.id)%>">
-      <thead class="thead-dark">
+      <thead class="thead-grey nowrap">
         <tr>
-          <% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
-          <% @column_names.each_with_index do |col,i| %>
-            <% if @group.mifal.columns.include?(col.first.to_s) %>
-              <% unless col.first == "group" %>
-                <th data-data="<%= col.first %>" class="<%= i %>"><%= col.last %></th>
-              <% else %>
-                <% if @level > 1 %> <th data-data="group" class="<%= i %>"><%= @level_names[0] %></th> <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
+					<% column_names = @column_names.reject{|c| c == :name || c == :last_name || c == :group} %>
+          <% if @group.name !=  "סל מחזור #{@group.mifal.name}"%>
+						<% if current_staff.admin? %>
+		          <% column_names.each_with_index do |col,i| %>
+		            <% if col.first != "group" %>
+		                <th data-data="<%= col.first %>" class="text-grey"><%= col.last %></th>
+		            <% else %>
+		                <th data-data="group" class="text-grey"><%= @level_names[0] %></th>
+		            <% end %>
+		          <% end %>
+	        	<% else %>
+		          <% column_names.each_with_index do |col| %>
+		            <% if @group.mifal.columns.include?(col.first.to_s) %>
+		              <% if col.first != "group" %>
+		                <th data-data="<%= col.first %>" class="text-grey"><%= col.last %></th>
+		              <% else %>
+		                <% if @level > 1 %> <th data-data="group" class="text-grey"><%= @level_names[0] %></th> <% end %>
+		              <% end %>
+		            <% end %>
+		          <% end %>
+						<% end %>
           <% else %>
             <th data-data="full_name">שם מלא</th>
             <th data-data="last_group"><%= @level_names[0] %></th>
@@ -71,30 +132,41 @@
 
 
 <script>
-
-$('#dttb-kids').dataTable( {
-        dom: '<"row"<"col-8"f><"col-4"B>rtip>',
-        stateSave: true,
-        columnDefs: [
-           {
-               targets: [0,1,2,3,-1],
-               className: 'noVis'
-           },
-            {   targets: [0,1,2,3,-1], visible: true },
-            {   targets: "_all", visible: false }
-       ]
-       // buttons: [
-       //     {
-       //         extend: 'colvis',
-       //         columns: ':not(.noVis)',
-       //         collectionLayout: 'fixed two-column'
-       //     }
-       // ],
-       // language: {
-       //      buttons: {
-       //          colvis: '<i class="fas fa-columns"></i> עמודות'
-       //      }
-       //  },
-
-});
+	if(<%= @level == 1 %>){
+	  var targets = [0,1,2];
+	} else{
+	  var targets = [0,1,2,-1];
+	}
+	$('#dttb-kids').dataTable( {
+	        dom: '<"row"<"col-8"f><"col-4"B>rtip>',
+	        stateSave: true,
+	        columnDefs: [
+	           {
+	               targets: targets,
+	               className: 'noVis pr-4'
+	           },
+	            {   targets: targets, visible: true },
+	            {   targets: "_all", visible: false }
+	       ],
+	       buttons: [
+	           {
+	               extend: 'colvis',
+	               columns: ':not(.noVis)',
+	               collectionLayout: 'fixed two-column',
+	               className: 'btn btn-primary-cus'
+	           }
+	       ],
+	       language: {
+	            buttons: {
+	                colvis: '<i class="fas fa-columns"></i> עמודות',
+	                className: 'btn btn-primary-cus'
+	            }
+	        },
+	        "initComplete": function(settings, json) {
+	   var height = $(".buttons-colvis").outerHeight();
+	   $(".form-control").outerHeight(height);
+	   $(".buttons-colvis").removeClass("dt-button");
+	  $(".buttons-columnVisibility").addClass("btn-primary-cus");
+	 }
+	});
   </script>
