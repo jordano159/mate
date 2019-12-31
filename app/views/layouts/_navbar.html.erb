@@ -50,14 +50,18 @@
   <!-- תוכן ההמבורגר -->
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav">
-      <% unless @level == 1 %>
+      <% if @level == 1 %>
+        <li class="nav-item">
+          <%= link_to "החניכים והחניכות", group_path(Group.find(current_staff.staffable_id)), class: "nav-link" %>
+        </li>
+      <% else %>
         <li class="nav-item ">
           <%= link_to "בית", root_path, class: "nav-link" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "כל החניכים והחניכות", kids_path, class: "nav-link" %>
+        </li>
       <% end %>
-      <li class="nav-item">
-        <%= link_to "כל החניכות והחניכים", kids_path, class: "nav-link" %>
-      </li>
       <% if @level == 2 %>
         <li class="nav-item ">
           <%= link_to "ה#{ @level_names[1] } שלי", root_path, class: "nav-link" %>
