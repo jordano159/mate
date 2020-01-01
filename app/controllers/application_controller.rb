@@ -161,12 +161,32 @@ end
 
   def clearence
     case controller_name
-    # when 'mifals'
-    #   redirect_to root_path unless current_staff.admin? || @level == 4 && params[:id].to_i == current_staff.staffable_id
-    # when 'axes'
-    #   redirect_to root_path if @level < 3
-    # when 'heads'
-    #   redirect_to root_path if @level < 2
+    when 'mifals'
+      if params[:id].present?
+        if @level == 4 && params[:id].to_i != current_staff.staffable_id
+          redirect_to root_path
+        end
+      else
+        redirect_to root_path if @level < 5
+      end
+    when 'axes'
+      if params[:id].present?
+        if @level < 5 && ((@level == 3 && params[:id].to_i != current_staff.staffable_id) ||
+           (@level > 3 && current_staff.staffable.axes.pluck(:id).exclude?(params[:id].to_i)))
+          redirect_to root_path
+        end
+      else
+        redirect_to root_path if @level < 4
+      end
+    when 'heads'
+      if params[:id].present?
+        if @level < 5 && ((@level == 2 && params[:id].to_i != current_staff.staffable_id) ||
+           (@level > 2 && current_staff.staffable.heads.pluck(:id).exclude?(params[:id].to_i)))
+          redirect_to root_path
+        end
+      else
+        redirect_to root_path if @level < 3
+      end
     when 'groups'
       if params[:id].present?
         if @level < 5 && ((@level == 1 && params[:id].to_i != current_staff.staffable_id) ||
@@ -185,7 +205,6 @@ end
         redirect_to root_path if @level < 2
       end
     end
-    # Guide cant go to kid index
   end
 
 end

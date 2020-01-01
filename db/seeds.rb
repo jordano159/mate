@@ -9,7 +9,7 @@
 #   role: 'admin', username: 'codecircle')
 
 80.times do
-  mifal_id = 4
+  mifal_id = 2
   Kid.create(
       name:   Faker::Name.first_name     ,
       last_name:   Faker::Name.last_name   ,
