@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationController < ActionController::Base
   before_action :authenticate_staff!
   before_action :level
@@ -171,15 +169,21 @@ end
     #   redirect_to root_path if @level < 2
     when 'groups'
       if params[:id].present?
-        if (@level == 1 && params[:id].to_i != current_staff.staffable_id) ||
-           (@level > 1 && current_staff.staffable.groups.pluck(:id).exclude?(params[:id].to_i))
+        if @level < 5 && ((@level == 1 && params[:id].to_i != current_staff.staffable_id) ||
+           (@level > 1 && current_staff.staffable.groups.pluck(:id).exclude?(params[:id].to_i)))
           redirect_to root_path
         end
       else
         redirect_to root_path if @level < 2
       end
-    # when 'kids'
-    #   redirect_to root_path if @level < 1
+    when 'kids'
+      if params[:id].present?
+        if @level < 5 && ((current_staff.staffable.kids.pluck(:id).exclude?(params[:id].to_i)))
+          redirect_to root_path
+        end
+      else
+        redirect_to root_path if @level < 2
+      end
     end
     # Guide cant go to kid index
   end

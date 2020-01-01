@@ -1,4 +1,6 @@
 class LandingController < ApplicationController
+  skip_before_filter :authenticate_staff!
+
   def index
     render :layout => false
     @contact = Landing.new(params[:landing])
