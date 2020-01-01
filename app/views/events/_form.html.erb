@@ -4,10 +4,15 @@
   <% options = event_options %>
   <div class="form-inputs">
     <%= f.input :content, label: "פירוט:" %>
-    <%= f.input :eventable_type, as: :hidden %>
-    <%= f.input :eventable_id, as: :hidden %>
-    <%= select_tag "outcome_based", content_tag(:option,'נא לבחור',:value=>"") +
+    <% if @level == 1 %>
+      <%= f.input :eventable_type, as: :hidden, :input_html => { value: "Group" } %>
+      <%= f.input :eventable_id, as: :hidden, :input_html => { value: current_staff.staffable_id } %>
+    <% else %>
+      <%= f.input :eventable_type, as: :hidden %>
+      <%= f.input :eventable_id, as: :hidden %>
+      <%= select_tag "outcome_based", content_tag(:option,'נא לבחור',:value=>"") +
         grouped_options_for_select(options), class:"form-control" %>
+    <% end %>
   </div>
 
   <div class="form-actions">

@@ -3,7 +3,11 @@ wb.add_worksheet(name: 'חניכי וחניכות המפעל') do |sheet|
   import_columns = ["שם פרטי", "שם משפחה"]
   @mifal.columns.each do |col|
     unless ["full_name", "status", "cause", "name", "last_name", "absences"].include?(col)
-      import_columns << @column_names[col.to_sym]
+      if col == "group"
+        import_columns << "שם ה#{@level_names[0]}"
+      else
+        import_columns << @column_names[col.to_sym]
+      end
     end
   end
   sheet.add_row import_columns
