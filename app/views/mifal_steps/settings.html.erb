@@ -6,15 +6,6 @@
 </style>
 <h1 class="mb-5">הגדרות מפעל</h1>
 <%= render layout: 'form' do |form| %>
-  <!-- <div class="field">
-    <%# form.label :has_buses, "צריך ניהול אוטובוסים?" %>
-    <div class="container">
-      <div class="button-wrap btn-group" >
-        <%# form.collection_radio_buttons :has_buses, [[true, '<h1>כן</h1>'.html_safe] ,[false, '<h1>לא</h1>'.html_safe]],
-        :first, :last, { checked: @mifal.has_buses } %>
-      </div>
-    </div>
-  </div><hr> -->
   <div class="container mt-2">
     <div class="row">
       <div class="col-lg">
@@ -89,42 +80,70 @@
   };
 </script>
 <div class="container">
-  <!-- <div class="field">
-      <%# form.label :preset, "בחירת ברירת מחדל:" %>
-      <div class="container">
-      <%# form.select :preset, value: @mifal.group_name[:single], class: "form-control w-50", required: true%>
-    </div> -->
+  <div class="">
+    בחירת ברירת מחדל:
+    <button type="button" name="youth" id="youth" class="btn btn-primary mr-2">תנועת נוער</button>
+    <button type="button" name="school" id="school" class="btn btn-primary mr-2">בית ספר</button>
+  </div>
+
+  <script>
+    $( "#youth" ).click(function() {
+      $("#group_name_single").val("קבוצה");
+      $("#group_name_plural").val("קבוצות");
+      $("#guide_name_single").val("מדריכה");
+      $("#guide_name_plural").val("מדריכות");
+      $("#axis_name_single").val("ציר");
+      $("#head_name_single").val("ראש");
+      $("#head_name_plural").val("ראשים");
+      $("#head_head_name_single").val("ראשראש");
+      $("#head_head_name_plural").val("ראשראשים");
+      $("#axis_name_plural").val("צירים");
+    });
+    $( "#school" ).click(function() {
+      $("#group_name_single").val("כיתה");
+      $("#group_name_plural").val("כיתות");
+      $("#guide_name_single").val("מורה");
+      $("#guide_name_plural").val("מורות");
+      $("#axis_name_single").val("חטיבה");
+      $("#head_name_single").val("שכבה");
+      $("#head_name_plural").val("שכבות");
+      $("#head_head_name_single").val("רכז שכבה");
+      $("#head_head_name_plural").val("רכז שכבה");
+      $("#axis_name_plural").val("חטיבות");
+    });
+  </script>
+
   <div class="row">
     <div class="col">
       <div class="field">
           <%= form.label :group_name_single, "שם הרמה הראשונה ביחיד (למשל קבוצה):" %>
           <div class="container">
-          <%= form.text_field :group_name_single, value: @mifal.group_name[:single], class: "form-control w-50", required: true%>
+          <%= form.text_field :group_name_single, value: @mifal.group_name[:single], class: "form-control w-50", id:"group_name_single", required: true%>
         </div>
       </div>
       <div class="field">
         <%= form.label :group_name_plural, "שם הרמה הראשונה ברבים:" %>
           <div class="container">
-        <%= form.text_field :group_name_plural, value: @mifal.group_name[:plural], class: "form-control w-50", required: true %>
+        <%= form.text_field :group_name_plural, value: @mifal.group_name[:plural], class: "form-control w-50", id:"group_name_plural", required: true %>
       </div>
       </div>
       <div class="field">
         <%= form.label :guide_name_single, "שם האחראי על הרמה הראשונה ביחיד (למשל מדריך):" %>
           <div class="container">
-        <%= form.text_field :guide_name_single, value: @mifal.guide_name[:single], class: "form-control w-50", required: true %>
+        <%= form.text_field :guide_name_single, value: @mifal.guide_name[:single], class: "form-control w-50", id:"guide_name_single", required: true %>
         </div>
       </div>
       <div class="field">
         <%= form.label :guide_name_plural, "שם האחראי על הרמה הראשונה ברבים:" %>
           <div class="container">
-        <%= form.text_field :guide_name_plural, value: @mifal.guide_name[:plural], class: "form-control w-50", required: true %>
+        <%= form.text_field :guide_name_plural, value: @mifal.guide_name[:plural], class: "form-control w-50", id:"guide_name_plural", required: true %>
         </div>
       </div>
 
         <div class="field axes">
           <%= form.label :axis_name_single, "שם הרמה השלישית ביחיד (למשל ציר):" %>
             <div class="container">
-          <%= form.text_field :axis_name_single, value: @mifal.axis_name[:single], class: "form-control w-50" %>
+          <%= form.text_field :axis_name_single, value: @mifal.axis_name[:single], class: "form-control w-50", id:"axis_name_single" %>
           </div>
         </div>
     </div>
@@ -132,31 +151,31 @@
       <div class="field">
         <%= form.label :head_name_single, "שם הרמה השנייה ביחיד (למשל ראש):" %>
           <div class="container">
-        <%= form.text_field :head_name_single, value: @mifal.head_name[:single], class: "form-control w-50", required: true %>
+        <%= form.text_field :head_name_single, value: @mifal.head_name[:single], class: "form-control w-50", id:"head_name_single", required: true %>
         </div>
       </div>
       <div class="field">
         <%= form.label :head_name_plural, "שם הרמה השנייה ברבים:" %>
           <div class="container">
-        <%= form.text_field :head_name_plural, value: @mifal.head_name[:plural], class: "form-control w-50", required: true %>
+        <%= form.text_field :head_name_plural, value: @mifal.head_name[:plural], class: "form-control w-50", id:"head_name_plural", required: true %>
         </div>
       </div>
       <div class="field">
         <%= form.label :head_head_name_single, "שם האחראי על הרמה השנייה ביחיד (למשל ראשראש):" %>
           <div class="container">
-        <%= form.text_field :head_head_name_single, value: @mifal.head_head_name[:single], class: "form-control w-50", required: true %>
+        <%= form.text_field :head_head_name_single, value: @mifal.head_head_name[:single], class: "form-control w-50", id:"head_head_name_single", required: true %>
         </div>
       </div>
       <div class="field">
         <%= form.label :head_head_name_plural, "שם האחראי על הרמה השנייה ברבים:" %>
           <div class="container">
-        <%= form.text_field :head_head_name_plural, value: @mifal.head_head_name[:plural], class: "form-control w-50", required: true %>
+        <%= form.text_field :head_head_name_plural, value: @mifal.head_head_name[:plural], class: "form-control w-50", id:"head_head_name_plural", required: true %>
         </div>
       </div>
         <div class="field axes">
           <%= form.label :axis_name_plural, "שם הרמה השלישית ברבים:" %>
             <div class="container">
-          <%= form.text_field :axis_name_plural, value: @mifal.axis_name[:plural], class: "form-control w-50" %>
+          <%= form.text_field :axis_name_plural, value: @mifal.axis_name[:plural], class: "form-control w-50", id:"axis_name_plural" %>
           </div>
         </div>
     </div>
@@ -177,7 +196,7 @@
 <hr>
 <div class="field">
   <%= form.label :causes, "סיבות אפשריות להיעדרות:" %>
-  <a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="אופציה לאחר כלולה באופן אוטומטי">
+  <a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="אפשרות לאחר כלולה באופן אוטומטי">
       <i class="far fa-question-circle"></i>
   </a>
 
@@ -185,18 +204,25 @@
     <i class="fas fa-plus"></i>
   </div>
   <div class="container">
+    <!-- <button type="button" name="preset_cause" id="preset_cause" class="btn">ברירת מחדל</button> -->
+    <%# preset_causes = [["היעדרות מסיבה רפואית", "היעדרות מסיבה רפואית"], ["היעדרות מסיבה אישית", "היעדרות מסיבה אישית"]] %>
+      <%# form.collection_check_boxes :causes, preset_causes, :first, :last %>
     <% if @mifal.causes.present? %>
       <% @mifal.causes.reject{|c| c == "אחר"}.each do |c| %>
-        <%= form.text_field :causes, multiple: true, value: c,class: "inline form-control w-25 m-1" %>
+        <%= form.text_field :causes, multiple: true, value: c, class: "inline form-control w-25 m-1" %>
       <% end %>
     <% else %>
-      <%= form.text_field :causes, multiple: true,class: "inline form-control w-25 m-1" %>
+      <%= form.text_field :causes, multiple: true, class: "inline form-control w-25 m-1" %>
     <% end %>
-    <div class="cause inline">
+    <div class="cause inline" id="causes">
     </div>
     <script>
       $(".cause_button").click(function(){
         $('.cause').append("<%= j (render partial: 'cause', locals: {form:form}) %>")
+      });
+      $("#preset_cause").click(function(){
+        $('.cause').append("<%= j (render partial: 'cause', locals: {form:form}) %>")
+        $('.causes').last().val("Hello");
       });
       $(".delete_button").click(function(){
         $('.cause').remove("<%= j (render partial: 'cause', locals: {form:form}) %>")
@@ -208,9 +234,9 @@
   <div class="field">
     <%= form.label :columns, "איזה מידע צריך להיות על חניכים:" %>
 
-<a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="שם פרטי, שם משפחה ותעודת זהות כלולים באופן אוטומטי">
-    <i class="far fa-question-circle"></i>
-</a>
+    <a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="שם פרטי, שם משפחה ותעודת זהות כלולים באופן אוטומטי">
+        <i class="far fa-question-circle"></i>
+    </a>
     <div class="container">
 
       <%= form.collection_check_boxes :columns,
