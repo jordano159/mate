@@ -1,22 +1,3 @@
-<div class="d-flex flex-row justify-content-between">
-  <div class="p-2">
-    <h1 style="font-weight:bold;"> <%= @group.name %>
-      <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_group_path(@group),class: "text-muted icon-size" if current_staff.admin? || current_staff.vip? %>
-      <strong class="icon-size">
-        <%= link_to @group.head.name, @group.head if @group.head %>
-      </strong>
-     </h1>
-  </div>
-  <div class="p-2 mt-2">
-    <% unless @group.name ==  "סל מחזור #{@group.mifal.name}" %>
-    <%= link_to "יצירת נוכחות חדשה", new_check_path(:g_id => @group.id), class: "btn btn-primary" %>
-    <% end %>
-    <%# link_to 'חזרה לרשימה', groups_path, class: "btn btn-primary" %>
-    <% next_id = @group.id + 1 %>
-    <% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>
-      <%= link_to "ה#{@level_names[0]} הבאה", group_path(next_id), class: "btn btn-primary" %>
-
-
 <div id="head">
 <div>
   <%# if @level == 1 %>
@@ -125,6 +106,11 @@
     </table>
   </div>
 </p>
+
+<% next_id = @group.id + 1 %>
+<% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>
+  <%= link_to "ה#{@level_names[0]} הבאה", group_path(next_id), class: "btn btn-primary" %>
+<% end %>
 
   <%# link_to "יצירת #{@staff_names[0]} חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
 
