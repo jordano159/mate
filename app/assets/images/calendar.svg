@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52.917mm" height="64.186mm" version="1.1" viewBox="0 0 52.917 64.186" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="linearGradient1368" x1="-88.548" x2="-30.108" y1="20.583" y2="20.583" gradientTransform="matrix(.90549 0 0 .90549 80.179 13.455)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#35ced4" offset="0"/>
+   <stop stop-color="#0d98ed" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <path d="m11.992 0v8.2168h-9.5953a2.396 2.396 0 0 0-2.3967 2.3962v51.176a2.396 2.396 0 0 0 2.3967 2.3967h48.123a2.396 2.396 0 0 0 2.3967-2.3967v-51.176a2.396 2.396 0 0 0-2.3967-2.3962h-8.7235v-8.2168h-8.1414v8.2168h-13.521v-8.2168zm-7.199 21.372h43.331v38.023h-43.331zm15.929 2.9461 1.5217 17.973h8.4297l1.5217-17.973h-7.0877zm5.7368 20.461a5.4521 5.4521 0 0 0-5.4523 5.4523 5.4521 5.4521 0 0 0 5.4523 5.4518 5.4521 5.4521 0 0 0 5.4518-5.4518 5.4521 5.4521 0 0 0-5.4518-5.4523z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="url(#linearGradient1368)" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+</svg>

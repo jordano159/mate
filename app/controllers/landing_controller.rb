@@ -1,5 +1,5 @@
 class LandingController < ApplicationController
-  skip_before_filter :authenticate_staff!
+  skip_before_action :authenticate_staff!
 
   def index
     render :layout => false

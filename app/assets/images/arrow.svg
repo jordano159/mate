@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64.964mm" height="209.92mm" version="1.1" viewBox="0 0 64.964 209.92" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="linearGradient936" x1="-551.63" x2="-640.38" y1="-107.85" y2="685.26" gradientTransform="matrix(.26458 0 0 .26458 174.2 28.535)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#35ced4" offset="0"/>
+   <stop stop-color="#0d94e6" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <path d="m28.246 6.729e-4a3.9691 3.9691 0 0 0-2.2283 0.73484 3.9691 3.9691 0 0 0-0.68781 5.8436c23.83 28.087 34.994 64.769 30.849 101.37-3.9301 34.709-21.295 66.408-48.243 88.395l5.292e-4 -41.333a3.9691 3.9691 0 0 0-2.8531-3.8644 3.9691 3.9691 0 0 0-5.0834 3.8649l-5.2917e-4 50.864a3.9691 3.9691 0 0 0 0 8e-3 3.9692 3.9692 0 0 0 0.0067204 0.21653 3.9691 3.9691 0 0 0 4.7578 3.7445l50.067-2e-3a3.9691 3.9691 0 0 0 1.0609-7.8078 3.9691 3.9691 0 0 0-1.0594-0.12815l-41.161-5.3e-4c28.139-23.268 46.265-56.604 50.393-93.064 4.3903-38.773-7.4382-77.641-32.683-107.4a3.9691 3.9691 0 0 0-3.1362-1.4444z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="url(#linearGradient936)" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+</svg>

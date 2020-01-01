@@ -9,6 +9,7 @@
     <%= csrf_meta_tags %>
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
   </head>
 
@@ -16,39 +17,93 @@
     * {
       font-family: 'Rubik', sans-serif;
     }
+    .bg-landing{
+      background: url("<%= asset_path 'bg.svg' %>") ;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    .landing-grad{
+      background: rgb(53,206,212);
+      background: linear-gradient(90deg, rgba(53,206,212,1) 0%, rgba(13,152,237,1) 100%);
+    }
+    #top-left #path914{
+      transform: translate(-50%, -50%);
+      r: 100%;
+    }
+    .bottom-10 {
+      bottom: 10%
+    }
+    #bottom-right #path914{
+      transform: translate(50%, 0%);
+    }
+    #bottom-left #path914{
+      transform: translate(-20%, 20%);
+    }
+    .flip{
+      transform: scaleX(-1);
+    }
+    .rotate180{
+      transform: rotate(180deg);
+    }
   </style>
+  <%# inline_svg_tag("bg.svg") %>
+<!-- <div class="abg-cover abg-center absolute z-0 h-screen aabg-no-repeat" ></div> -->
+<div class="absolute right-0 top-0">
+  <%= inline_svg_tag("mate-logo.svg", size: '30% * 20%', preserve_aspect_ratio: 'xMaxYMax meet') %>
+</div>
+<div class="absolute left-0 top-0">
+  <%= inline_svg_tag("circle.svg", size: '100% * 20%', id:"top-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
+</div>
+<div  class="absolute right-0 bottom-10">
+  <%= inline_svg_tag("circle.svg", size: '60% * 20%',id:"bottom-right", preserve_aspect_ratio: 'xMaxYMax meet') %>
+</div>
+<div dir="ltr" class="absolute left-0 bottom-0">
+  <%= inline_svg_tag("circle.svg", size: '70%',id:"bottom-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
+</div>
+  <div class="flex flex-col justify-center h-24 w-screen absolute bottom-0 content-center">
+    <div class="z-50 h-12 w-full flex justify-center">
+      <button type="button" name="button" class="landing-grad text-white w-2/5 h-12 rounded-full font-bold ">יצירת קשר</button>
+    </div>
+  </div>
+  <%= image_tag "divider.svg", class:"w-screen absolute bottom-0" %>
 
-<div class="bg-cover bg-center absolute z-0 h-screen bg-no-repeat" style="background-image:url('http://preview.uxtheme.website/xpider-preview/xpider/img/hero-8.png')"></div>
-    <div class="z-0 opacity-90 w-full h-full absolute" style="background: linear-gradient(-45deg, #2f1ce0 0%, #53a0fd 50%, #51eca5 100%);"></div>
-    <div class="absolute w-full flex flex-col">
-        <div class="bg-bottom bg-no-repeat bg-cover" style="background-image:url('https://galaxy.up.video/media/backgsrounds/bg-curve.svg')">
-            <header class="z-20 w-full xl:px-0 px-2">
-                <div class="container mx-auto flex flex-wrap mt-8 mb-8 ">
-                  <div class="flex sm:w-1/2 flex">
-                    <%= image_tag "code_logo", style: "height:40px;" %>
-                  </div>
-                  <div class="w-1/2 hidden sm:flex justify-end">
-                    <button class="border border-white bg-transparent text-white uppercase rounded-full py-2 px-4 hover:bg-blue-600">יצירת קשר</button>
-                  </div>
-                </div>
-            </header>
-            <section class="w-full">
-                <div class="container mx-auto flex flex-row sm:items-center xl:pb-16 xl:px-0 px-4">
-                    <div class="w-1/2 text-white flex flex-col">
-                        <h1 class="sm:text-5xl text-xl font-weight-bolder sm:mb-4">אפליקציית המטה</h1>
-                        <h2 class="sm:text-2xl text-base mb-2">עשיית נוכחות ומעקב אחרי כוח אדם</h2>
-                        <p class="text-xs sm:text-base">עשיית נוכחות מעולם לא הייתה קלה יותר</p>
-                        <!-- <form class="xl:mt-4 mt-8 flex hidden xl:flex">
-                            <input class="rounded-l-full p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="your@mail.com"/>
-                            <button class="px-8 rounded-r-full bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r">Subscribe</button>
-                        </form> -->
-                    </div>
-                    <div class="w-1/2 xl:pt-8 xl:items-center flex justify-end">
-                      <%= image_tag "mate-story", class: "", alt: "Mobile phone" %>
-                    </div>
-                </div>
-            </section>
-        </div>
+    <div class="w-full h-screen bg-landing landing-grad">
+        <section class="w-full h-full flex flex-col">
+          <div class="container h-full mx-auto flex flex-row items-center xl:pb-16 xl:px-0 px-4">
+            <div class="w-full mx-auto text-center text-white flex flex-col">
+              <h1 class=" text-5xl font-extrabold sm:mb-4">אפליקציית המטה</h1>
+              <p class="text-md sm:text-base">עשיית נוכחות מעולם לא הייתה קלה יותר</p>
+              <!-- <form class="xl:mt-4 mt-8 flex hidden xl:flex">
+                <input class="rounded-l-full p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="your@mail.com"/>
+                <button class="px-8 rounded-r-full bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r">Subscribe</button>
+              </form> -->
+            </div>
+            <!-- <div class="w-1/2 xl:pt-8 xl:items-center flex justify-end">
+              <%# image_tag "mate-story", class: "", alt: "Mobile phone" %>
+            </div> -->
+          </div>
+        </section>
+      </div>
+        <%= image_tag "divider-bottom.svg", class:"w-screen" %>
+<div class="flex flex-col my-10">
+  <div class="flex items-center justify-center">
+    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
+  </div>
+  <div class="h-32 w-full" dir="ltr">
+    <%= image_tag "arrow.svg", class: "h-32 ml-10 flip"%>
+  </div>
+  <div class="flex items-center justify-center">
+    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
+  </div>
+  <div class="h-32 w-full">
+<%= image_tag "arrow.svg", class: "h-32 mr-10"%>
+  </div>
+  <div class="flex items-center justify-center">
+    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
+  </div>
+</div>
+<%= image_tag "divider-bottom.svg", class:"w-screen rotate180" %>
+    <div class="flex flex-col">
         <div class="bg-white pb-8 w-full pt-8">
             <div class="container mx-auto">
                 <!-- <form class="flex xl:hidden p-2 w-full justify-center pb-16">
@@ -157,7 +212,7 @@
         </div>
 
         <div id="contact">
-          <%= render 'contact_form' %>
+          <%# render 'contact_form' %>
         </div>
 
         <footer class="container text-center pb-8 border-t border-gray-200 pt-8 text-xs text-gray-700">

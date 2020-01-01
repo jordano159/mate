@@ -186,6 +186,9 @@ GEM
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     iniparse (1.4.4)
+    inline_svg (1.6.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     io-like (0.3.0)
     jaro_winkler (1.5.1)
     jbuilder (2.7.0)
@@ -443,6 +446,7 @@ DEPENDENCIES
   geocoder
   google_drive
   hirb
+  inline_svg
   jbuilder (~> 2.5)
   jquery-datatables
   jquery-rails
