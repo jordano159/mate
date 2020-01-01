@@ -167,7 +167,7 @@ end
           redirect_to root_path
         end
       else
-        redirect_to root_path if @level < 5
+        redirect_to root_path if @level < 5 && action_name != "new_import_file"
       end
     when 'axes'
       if params[:id].present?
@@ -202,7 +202,7 @@ end
           redirect_to root_path
         end
       else
-        redirect_to root_path if @level < 2
+        redirect_to root_path if @level < 1
       end
     end
   end
