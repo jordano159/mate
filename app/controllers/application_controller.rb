@@ -99,9 +99,9 @@ end
   def home_page
     if staff_signed_in?
       if @level == 1
-        redirect_to kids_path
+        redirect_to group_path(Group.find(current_staff.staffable_id))
       elsif @level == 2 || @level == 3 || @level == 4
-        redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: 'show', id: current_staff.staffable_id
+        redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: 'show', id: current_staff.staffable_id #fix
       elsif @level == 5
         redirect_to mifals_path
       end
@@ -163,14 +163,25 @@ end
 
   def clearence
     case controller_name
-    when 'axes'
-      redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה' if @level < 3
-    when 'heads'
-      redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה' if @level < 2
+    # when 'mifals'
+    #   redirect_to root_path unless current_staff.admin? || @level == 4 && params[:id].to_i == current_staff.staffable_id
+    # when 'axes'
+    #   redirect_to root_path if @level < 3
+    # when 'heads'
+    #   redirect_to root_path if @level < 2
     when 'groups'
-      redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה' if @level < 1
-    when 'kids'
-      redirect_to root_path, notice: 'אין לך הרשאה לצפות בזה' if @level < 1
+      if params[:id].present?
+        if (@level == 1 && params[:id].to_i != current_staff.staffable_id) ||
+           (@level > 1 && current_staff.staffable.groups.pluck(:id).exclude?(params[:id].to_i))
+          redirect_to root_path
+        end
+      else
+        redirect_to root_path if @level < 2
+      end
+    # when 'kids'
+    #   redirect_to root_path if @level < 1
     end
+    # Guide cant go to kid index
   end
+
 end

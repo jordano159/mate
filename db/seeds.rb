@@ -8,8 +8,8 @@
 # Staff.create!(name: 'הקוד השומרי', email: 'codecircle13@gmail.com', password: 'mered1913', password_confirmation: 'mered1913',
 #   role: 'admin', username: 'codecircle')
 
-60.times do
-  mifal_id = Mifal.all.ids.sample
+80.times do
+  mifal_id = 4
   Kid.create(
       name:   Faker::Name.first_name     ,
       last_name:   Faker::Name.last_name   ,

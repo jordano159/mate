@@ -1,7 +1,5 @@
-
-
 <% if @checks.blank? %>
-  <h4> לא נמצאו נוכחויות </h4>
+  <h4 class="mt-2 mr-2"> לא נמצאו נוכחויות </h4>
 <% else %>
 
 
@@ -65,11 +63,11 @@
           <th>אוטובוס</th>
         <% else %>
           <th><%= @level_names[0] %></th>
-          <% if current_staff.admin? || current_staff.vip? && current_staff.staffable.mifal.has_approve %>
+          <% if current_staff.admin? || current_staff.staffable.mifal.has_approve %>
             <th>מאושר?</th>
           <% end %>
         <% end %>
-        <th></th>
+        <th data-orderable="false"></th>
       </tr>
   </thead>
 

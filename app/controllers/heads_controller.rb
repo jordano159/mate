@@ -37,7 +37,7 @@ class HeadsController < ApplicationController
       @axes = Axis.all
       @groups = Group.all
     else
-      @axes = current_staff.staffable.axes
+      @axes = current_staff.staffable.axes if @level > 2
       @groups = current_staff.staffable.groups
     end
   end
