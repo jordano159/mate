@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ChecksController < ApplicationController
   before_action :set_check, only: %i[show edit update destroy]
 
@@ -60,7 +58,7 @@ class ChecksController < ApplicationController
     elsif @check.group_id.blank?
       @bus = Bus.find(@check.bus_id)
       @check.bus_id = @bus.id
-      @mifal = @check.group.mifal
+      @mifal = @check.bus.mifal
       @kids = @bus.kids.order(name: :desc, ken: :asc)
     end
   end
