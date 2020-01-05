@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :contacts
   # get 'landing/index'
   resources :landing, only: [:index, :new, :create]
   resources :buses
