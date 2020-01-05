@@ -45,6 +45,21 @@
     .rotate180{
       transform: rotate(180deg);
     }
+    .h-05{
+      height: 50%;
+    }
+    .h-025{
+      height: 25%;
+    }
+    .h-015{
+      height: 15%;
+    }
+    .h-half{
+      height: 33vh;
+    }
+    .path-white path{
+      fill: white
+    }
   </style>
   <%# inline_svg_tag("bg.svg") %>
 <!-- <div class="abg-cover abg-center absolute z-0 h-screen aabg-no-repeat" ></div> -->
@@ -96,13 +111,101 @@
     <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
   </div>
   <div class="h-32 w-full">
-<%= image_tag "arrow.svg", class: "h-32 mr-10"%>
+    <%= image_tag "arrow.svg", class: "h-32 mr-10"%>
   </div>
   <div class="flex items-center justify-center">
     <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
   </div>
 </div>
 <%= image_tag "divider-bottom.svg", class:"w-screen rotate180" %>
+
+<div class="flex flex-col mt-10 text-lg" id="properties">
+  <div class="flex h-half my-10 mx-4 ">
+    <div class="w-1/2 h-full text-center mx-2">
+      <%# render "people" %>
+      <%= inline_svg_tag("people.svg",class:"h-025 w-full aapeople", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold">
+        יצירת נוכחות חניכים בצורה נוחה ופשוטה
+      </h2>
+      <p>
+        תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+      </p>
+    </div>
+    <div class="w-1/2 h-full text-center mx-2">
+      <%= inline_svg_tag("clipboard.svg",class:"h-025 w-full", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold">
+        ניהול ומעקב אחרי נוכחויות
+      </h2>
+      <p>
+        מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+      </p>
+    </div>
+  </div>
+
+  <div class=" landing-grad">
+    <%= image_tag "divider-sm.svg", class:"w-screen rotate180" %>
+    <div class="flex h-half my-10 text-white mx-4 ">
+      <div class="w-1/2 h-full text-center mx-2">
+        <%= inline_svg_tag("calendar.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+        <h2 class="font-bold">
+          יצירת נוכחות חניכים בצורה נוחה ופשוטה
+        </h2>
+        <p>
+          תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+        </p>
+      </div>
+      <div class="w-1/2 h-full text-center mx-2">
+        <%= inline_svg_tag("bus.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+        <h2 class="font-bold">
+          ניהול ומעקב אחרי נוכחויות
+        </h2>
+        <p>
+          מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+        </p>
+      </div>
+    </div>
+  <%= image_tag "divider-sm.svg", class:"w-screen" %>
+  </div>
+  <div class="flex h-half amy-10">
+    <div class="w-1/2 h-full text-center mx-2">
+      <%= inline_svg_tag("tools.svg",class:"h-025 w-full", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold">
+        יצירת נוכחות חניכים בצורה נוחה ופשוטה
+      </h2>
+      <p>
+        תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+      </p>
+    </div>
+    <div class="w-1/2 h-full text-center mx-2">
+      <%= inline_svg_tag("responsive.svg",class:"h-025 w-full", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold">
+        ניהול ומעקב אחרי נוכחויות
+      </h2>
+      <p>
+        מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+      </p>
+    </div>
+  </div>
+  <div class="landing-grad">
+    <%= image_tag "divider-sm.svg", class:"w-screen rotate180" %>
+  <div class="flex h-half my-10 text-white">
+    <div class="w-full h-full text-center mx-2 ">
+      <%= inline_svg_tag("hey.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <div class="w-1/2 m-auto">
+        <h2 class="font-bold">
+          יצירת נוכחות חניכים בצורה נוחה ופשוטה
+        </h2>
+        <p>
+          תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+        </p>
+      </div>
+    </div>
+  </div>
+      <%= image_tag "divider-sm.svg", class:"w-screen" %>
+</div>
+</div>
+
+
     <div class="flex flex-col">
         <div class="bg-white pb-8 w-full pt-8">
             <div class="container mx-auto">
@@ -114,7 +217,7 @@
                     <h3 class="sm:text-3xl text-2xl text-black-800 pt-4 xl:w-3/5 mx-auto">אפליקציית המטה נולדה מתוך צורך ממשי בשטח לפתרון טוב יותר לבעיית
                        הנוכחות. בקורס ההדרכה הנוכחות על מאות החניכים והחניכות נעשתה על ידי פתקים קטנים ולפעמים נאבדו בדרך, והוקלדו לתוך
                         טבלה. בנקודה זו נולד הרעיון לפיתוח אפליקציה שתקצר את התהליך דרמטית, ותשחרר את המדריכים והמדריכות להתעסק בחינוך עצמו במקום בפתקים שהלכו לאיבוד.
-אנחנו מאמינים שטכנולוגיה צריכה לעמוד לשירות האדם, ולעזור לכם להתעסק במה שחשוב באמת, בגלל זה בנינו את המטה</h3>
+                        אנחנו מאמינים שטכנולוגיה צריכה לעמוד לשירות האדם, ולעזור לכם להתעסק במה שחשוב באמת, בגלל זה בנינו את המטה</h3>
                     <!-- <p class="sm:text-3xl text-2xl text-black-800 pt-4 xl:w-1/2 mx-auto">
                         A simple, proven way to boost your team perfomance.
                     </p> -->
