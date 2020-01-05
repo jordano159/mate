@@ -1,16 +1,16 @@
 
-<%= simple_form_for(@contact) do |f| %>
+<%= simple_form_for(contact)  do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :email %>
-    <%= f.input :message %>
-    <%= f.input :tel %>
+    <%= f.input :name, placeholder: "שם מלא*", input_html: {class:"contact-input rounded w-full my-2 h-8"}, label: false, required: true %>
+    <%= f.input :tel,  placeholder: "טלפון", input_html: {class:"contact-input rounded w-full my-2 h-8"}, label: false %>
+    <%= f.input :email,  placeholder: "מייל*", input_html: {class:"contact-input rounded w-full my-2 h-8"},label: false, required: true %>
+    <%= f.input :message,  placeholder: "תוכן ההודעה", input_html: {class:"contact-input rounded w-full my-2 h-24"},label: false %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, "שליחה", class:"bg-white text-black rounded-full w-24 h-8", id:"submit-contact" %>
   </div>
 <% end %>
