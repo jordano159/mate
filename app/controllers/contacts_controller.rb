@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_staff!, only: [:create]
+  skip_before_action :verify_authenticity_token, only: [:create]
   # GET /contacts
   # GET /contacts.json
   def index
@@ -28,8 +29,9 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
-        format.json { render :show, status: :created, location: @contact }
+        format.html {}
+        format.js { flash[:notice] = "Here is my flash notice"}
+        flash.now[:notice] = "הההודעה התקבלה! ניצור קשר בקרוב"
       else
         format.html { render :new }
         format.json { render json: @contact.errors, status: :unprocessable_entity }

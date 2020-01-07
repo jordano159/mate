@@ -27,6 +27,10 @@
       background: rgb(53,206,212);
       background: linear-gradient(90deg, rgba(53,206,212,1) 0%, rgba(13,152,237,1) 100%);
     }
+    .secondary-grad{
+      background: rgb(97,98,98);
+      background: linear-gradient(81deg, rgba(97,98,98,1) 0%, rgba(53,53,53,1) 100%);
+    }
     #top-left #path914{
       transform: translate(-50%, -50%);
       r: 100%;
@@ -76,20 +80,35 @@
     .h-screen2{
       height: 200vh
     }
+    .h-75vh{
+      height: 75vh
+    }
     .h-half{
       height: 50vh;
     }
-    .contact-input{
-
+    .circle-logo{
+      background: url("<%= asset_path 'logo-circle.svg' %>");
+      background-repeat: no-repeat;
+      background-position: top right;
+      background-size:contain;
     }
+    .text-primary{
+      background: linear-gradient(90deg, rgba(53,206,212,1) 40%, rgba(13,152,237,1) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+     }
+     .login-btn{
+       border: 4px solid rgb(13,152,237);
+       color: rgb(97,98,98)
+     }
+     .h-80{
+       height: 80%
+     }
   </style>
   <%# inline_svg_tag("bg.svg") %>
 <!-- <div class="abg-cover abg-center absolute z-0 h-screen aabg-no-repeat" ></div> -->
-<div class="absolute right-0 top-0">
-  <%= inline_svg_tag("mate-logo.svg", size: '30% * 20%', preserve_aspect_ratio: 'xMaxYMax meet') %>
-</div>
 <div class="absolute left-0 top-0">
-  <%= inline_svg_tag("circle.svg", size: '100% * 20%', id:"top-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
+  <%= inline_svg_tag("circle.svg",class:"z-10", size: '100% * 20%', id:"top-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
 </div>
 <div  class="absolute right-0 bottom-10">
   <%= inline_svg_tag("circle.svg", size: '60% * 20%',id:"bottom-right", preserve_aspect_ratio: 'xMaxYMax meet') %>
@@ -97,9 +116,38 @@
 <div dir="ltr" class="absolute left-0 bottom-0">
   <%= inline_svg_tag("circle.svg", size: '70%',id:"bottom-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
 </div>
-  <div class="flex flex-col justify-center h-24 w-screen absolute bottom-0 content-center">
-    <div class="z-50 h-12 w-full flex justify-center">
-      <button type="button" name="button" class="landing-grad text-white w-2/5 h-12 rounded-full font-bold ">יצירת קשר</button>
+<div class="absolute right-0 top-0 w-1/4 h-32 circle-logo flex flex-col items-center justify-center">
+  <%# inline_svg_tag("logo-circle.svg",id:"circle-logo", class:"z-50", size: '100% * 20%', preserve_aspect_ratio: 'xMaxYMax meet') %>
+  <div class="h-full w-3/4 flex-col items-center  justify-center hidden pb-16 amr-24" id="to_hide">
+    <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center z-50">
+      <button type="button" name="button" class="create" >איך המטה נוצר?</button>
+    </div>
+    <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center ">
+      <button type="button" name="button" class="properties">תכונות</button>
+    </div>
+    <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center">
+      <button type="button" name="button" class="quote">מה משתמשים אומרים?</button>
+    </div>
+    <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center">
+      <button type="button" name="button" class="us">מי אנחנו?</button>
+    </div>
+    <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center landing-grad text-white">
+      <button href="#contact" type="button" name="button" class="font-bold contact">יצירת קשר</button>
+    </div>
+    <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center login-btn atext-white">
+      <button  type="button" name="button" class="font-bold "><%= link_to "התחברות", new_staff_session_path %></button>
+    </div>
+  </div>
+</div>
+<div class="absolute right-0 top-0 ">
+  <%= inline_svg_tag("mate-logo.svg",id:"logo", class:"z-40", size: '30% * 20%', preserve_aspect_ratio: 'xMaxYMax meet') %>
+</div>
+  <div class="flex justify-center h-24 w-screen absolute bottom-0 content-center pt-6">
+    <div class="z-50 h-12 w-full flex content-center justify-center">
+      <button href="#contact" type="button" name="button" class="contact landing-grad text-white w-4/5 h-full rounded-full font-bold">יצירת קשר</button>
+    </div>
+    <div class="z-50 h-12 w-full flex content-center justify-center">
+      <button type="button" name="button" class="bg-white   w-4/5 h-full login-btn rounded-full font-bold"><span class="text-primary"><%= link_to "התחברות", new_staff_session_path %></span></button>
     </div>
   </div>
   <%= image_tag "divider.svg", class:"w-screen absolute bottom-0" %>
@@ -110,19 +158,12 @@
             <div class="w-full mx-auto text-center text-white flex flex-col">
               <h1 class=" text-5xl font-extrabold sm:mb-4">אפליקציית המטה</h1>
               <p class="text-md sm:text-base">עשיית נוכחות מעולם לא הייתה קלה יותר</p>
-              <!-- <form class="xl:mt-4 mt-8 flex hidden xl:flex">
-                <input class="rounded-l-full p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="your@mail.com"/>
-                <button class="px-8 rounded-r-full bg-yellow-400  text-gray-800 font-bold p-4 uppercase border-yellow-500 border-t border-b border-r">Subscribe</button>
-              </form> -->
             </div>
-            <!-- <div class="w-1/2 xl:pt-8 xl:items-center flex justify-end">
-              <%# image_tag "mate-story", class: "", alt: "Mobile phone" %>
-            </div> -->
           </div>
         </section>
       </div>
         <%= image_tag "divider-bottom.svg", class:"w-screen" %>
-<div class="flex flex-col my-10">
+<div class="flex flex-col my-10" id="create">
   <div class="flex items-center justify-center">
     <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
   </div>
@@ -142,7 +183,7 @@
 <%= image_tag "divider-bottom.svg", class:"w-screen rotate180" %>
 
 <div class="flex flex-col mt-10 text-lg" id="properties">
-  <div class="flex h-third my-10 mx-4 ">
+  <div class="flex h-third my-10 mx-4 my-24">
     <div class="w-1/2 h-full text-center mx-2">
       <%# render "people" %>
       <%= inline_svg_tag("people.svg",class:"h-025 w-full aapeople", preserve_aspect_ratio: 'xMidYMid meet') %>
@@ -164,10 +205,10 @@
     </div>
   </div>
 
-  <div class=" landing-grad">
+  <div class=" landing-grad pb-24">
     <%= image_tag "divider-sm.svg", class:"w-screen rotate180" %>
     <div class="flex h-third my-10 text-white mx-4 ">
-      <div class="w-1/2 h-full text-center mx-2">
+      <div class="w-1/2 text-center mx-2">
         <%= inline_svg_tag("calendar.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
         <h2 class="font-bold">
           יצירת נוכחות חניכים בצורה נוחה ופשוטה
@@ -176,7 +217,7 @@
           תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
         </p>
       </div>
-      <div class="w-1/2 h-full text-center mx-2">
+      <div class="w-1/2 text-center mx-2">
         <%= inline_svg_tag("bus.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
         <h2 class="font-bold">
           ניהול ומעקב אחרי נוכחויות
@@ -186,9 +227,9 @@
         </p>
       </div>
     </div>
-  <%= image_tag "divider-sm.svg", class:"w-screen" %>
   </div>
-  <div class="flex h-third amy-10">
+  <%= image_tag "divider-sm.svg", class:"w-screen landing-grad" %>
+  <div class="flex h-third mt-10 mb-24">
     <div class="w-1/2 h-full text-center mx-2">
       <%= inline_svg_tag("tools.svg",class:"h-025 w-full", preserve_aspect_ratio: 'xMidYMid meet') %>
       <h2 class="font-bold">
@@ -211,7 +252,7 @@
   <div class="landing-grad">
     <%= image_tag "divider-sm.svg", class:"w-screen rotate180" %>
     <div class="flex h-third my-10 text-white">
-      <div class="w-full h-full text-center mx-2 ">
+      <div class="w-full h-full text-center mx-2">
         <%= inline_svg_tag("hey.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
         <div class="w-1/2 m-auto">
           <h2 class="font-bold">
@@ -223,7 +264,7 @@
         </div>
       </div>
     </div>
-    <%= image_tag "divider-sm.svg", class:"w-screen" %>
+    <%= image_tag "divider-sm.svg", class:"w-screen pt-8" %>
     </div>
 </div>
 
@@ -246,7 +287,7 @@
   <div class="rounded-full h-24 w-24 flex items-center justify-center bg-white avatar bg-cover bg-center"></div>
 </div>
 
-<div class="flex flex-col landing-grad text-white">
+<div class="flex flex-col landing-grad text-white" id="us">
   <%= image_tag "divider-sm.svg", class:"w-screen rotate180" %>
   <div class="flex flex-col justify-center items-center my-10">
     <div class="rounded-full h-24 w-24 flex items-center justify-center bg-white avatara bg-cover bg-center"></div>
@@ -269,86 +310,122 @@
   <%= image_tag "divider-sm.svg", class:"w-screen" %>
 </div>
 
-<div class="flex flex-col w-screen h-screen items-center" >
-  <div class="landing-grad w-11/12 h-075 rounded-lg flex items-center justify-center" id="form">
-  <%# render "contacts/form", contact: Contact.new %>
-	<%# j (render partial: "contacts/form", contact: Contact.new) %>
+<div class="flex flex-col w-screen h-75vh my-4 items-center" id="contact" >
+  <div class="landing-grad w-11/12 h-full rounded-lg flex items-center justify-center" id="submitform">
+    <div class="hidden w-3/4 rounded-lg text-xl text-center text-white font-bold flex flex-col justify-center items-center" id="after-submit">
+      <p>
+        ההודעה התקבלה!
+        ניצור קשר בקרוב
+      </p>
+    </div>
   </div>
 </div>
+<%= image_tag "scroll2.svg", size:"50", class:'scrollToTop aahidden fixed bottom-0 pb-1 pr-1 md:pr-2 md:pb-2 md:h-12 md:w-12 h-10 w-10' %>
 
 
 <script type="text/javascript">
-
-$('#form').html("<%= j (render partial: "contacts/form", locals: {contact: Contact.new}) %>")
-$( "#new_contact" ).submit(function( event ) {
-	event.preventDefault();
-
-});
-  $("#submit-contact").click(function(event) {
-		email = $("#contact_email").val()
-		if (validateEmail(email)) {
-			// $( "#new_contact" ).submit()
-			$(this).parents('form').submit();
-			console.log(this);
-			// $("#new_contact").hide()
-		}
-  });
-
-			$('#new_contact').validate({ // initialize the plugin
-	      submitHandler: function(form) {
-	        $( "#newquiz" ).hide(1)
-	        // $('.contact-form').addClass("flex items-center bg-transparent")
-	        // $('.contact-form').removeClass("bg-white shadow-2xl")
-	        // $("#after-submit").show(1000)
-	        form.submit();
-	      },
-				errorPlacement: function(label, element) {
-				 label.addClass('er');
-				 label.insertAfter(element);
-	 			},
-	 			wrapper: 'span',
-					rules: {
-						"quiz[full_name]": {
-								required: true
-						},
-	          "quiz[org_name]": {
-								required: false
-						},
-							"quiz[email]": {
-								required: true,
-								email: true
-						},
-						"quiz[phone]": {
-							digits: true,
-	    				minlength: 9,
-	    				maxlength: 10
-						}
-					},
-					messages: {
-			      "quiz[full_name]": {
-			      required: "יש לכתוב שם מלא",
-			     },
-			     "quiz[email]": {
-			      required: "יש לכתוב אימייל תקני",
-						email: "יש לכתוב אימייל תקני"
-			     },
-			     "quiz[phone]": {
-						 digits: "יש להכניס מספר טלפון תקני",
-			       minlength: "יש להכניס מספר טלפון תקני",
-			       maxlength: "יש להכניס מספר טלפון תקני",
-			     },
-	  	 		}
-
-				});
+  	$( document ).ready(function() {
 
 
-			$( "#newquiz" ).submit(function( event ) {
-	      event.preventDefault();
+            $('#submitform').append("<%= j (render partial: "contacts/form", locals: {contact: Contact.new}) %>")
+            $('#new_contact').validate({ // initialize the plugin
+              submitHandler: function(form) {
+                $( "#new_contact" ).hide(1)
+                $("#after-submit").show(1000)
+                form.submit();
+              },
+              errorPlacement: function(label, element) {
+                label.addClass('text-red-600 font-bold bg-white px-1');
+                label.insertAfter(element);
+              },
+              wrapper: 'span',
+              rules: {
+                "contact[name]": {
+                  required: true
+                },
+                "contact[email]": {
+                  required: true,
+                  email: true
+                },
+                "contact[tel]": {
+                  digits: true,
+                  minlength: 9,
+                  maxlength: 10
+                }
+              },
+              messages: {
+                "contact[name]": {
+                  required: "יש לכתוב שם מלא",
+                },
+                "contact[email]": {
+                  required: "יש לכתוב אימייל תקני",
+                  email: "יש לכתוב אימייל תקני"
+                },
+                "contact[tel]": {
+                  digits: "יש להכניס מספר טלפון תקני",
+                  minlength: "יש להכניס מספר טלפון תקני",
+                  maxlength: "יש להכניס מספר טלפון תקני",
+                },
+              }
 
-	    });
+            });
+            $( "#new_contact" ).submit(function( event ) {
+              event.preventDefault();
+            });
+            $("#logo").click(function(event) {
+              if ($(".circle-logo").hasClass('changed')) {
+                $("#to_hide").hide()
+                  $(".circle-logo").animate({width: ("1vw"), height: ("1vh")},500);
+                  $(".circle-logo").toggleClass('changed');
+              }
+              else {
+                $("#to_hide").show(400).css('display', 'flex')
+                var a = $(".circle-logo").animate({width: ("100vw"), height: ("70vh")},500)
+                $(".circle-logo").toggleClass('changed');
 
-	function validateEmail(email) {
-  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-  return emailReg.test( email );
-	}
+              }
+              // $("#logo").attr("viewBox", "0 0 100 100");
+            });
+
+            // function scrollToAnchor(aid){
+            //   console.log(aid);
+            //   var aTag = $("button[name='"+ aid +"']");
+            //   console.log(aTag);
+            //   $('html,body').animate({scrollTop: $("#contact").offset().top},'slow');
+            // }
+
+            $(".properties").click(function(event) {
+              $('html,body').animate({scrollTop: $("#properties").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".create").click(function(event) {
+              console.log("create");
+              $('html,body').animate({scrollTop: $("#create").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".quote").click(function(event) {
+              $('html,body').animate({scrollTop: $("#quotes").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".us").click(function(event) {
+              $('html,body').animate({scrollTop: $("#us").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".contact").click(function(event) {
+              $('html,body').animate({scrollTop: $("#contact").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".scrollToTop").click(function() {
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              return false;
+            });
+            $(document).scroll(function(event) {
+              if ($(document).scrollTop() > 100) {
+                  $(".scrollToTop").show(500)
+              }
+              else {
+                  $(".scrollToTop").hide(500)
+              }
+            });
+    });
 </script>
