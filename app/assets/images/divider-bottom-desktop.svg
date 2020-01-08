@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg21" width="197.34mm" height="18.516mm" version="1.1" viewBox="0 0 197.34 18.516" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs id="defs7">
+  <linearGradient id="linearGradient879" x1="1.1807" x2="198.52" y1="35.153" y2="35.153" gradientTransform="translate(-1.1807 -25.895)" gradientUnits="userSpaceOnUse">
+   <stop id="stop2" stop-color="#35ced4" offset="0"/>
+   <stop id="stop4" stop-color="#0d94e6" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata id="metadata9">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <path id="path871" d="m197.34 18.516-3e-3 -1e-3 -6e-3 -2.7502s-7.9951-3.6303-18.158-7.2595c-10.163-3.6292-22.423-7.3148-31.584-7.3148-17.959 0-32.448 9.6449-48.924 9.6449-16.476 0-30.966-9.6449-48.924-9.6449-9.162 0-21.423 3.6856-31.586 7.3148-10.158 3.6275-18.148 7.2552-18.155 7.2584l-0.0026-1.1891s7.9952-3.6303 18.158-7.2595c10.163-3.6292 22.424-7.3148 31.586-7.3148 17.958 0 32.448 9.6449 48.924 9.6449 16.476 0 30.965-9.6449 48.924-9.6449 9.1616 0 21.421 3.6856 31.584 7.3148s18.158 7.2595 18.158 7.2595z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="url(#linearGradient879)" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;paint-order:normal;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+ <path id="path869" d="m0.003633 5.2374c1e-6 0 0.0041 0.0015 0.0041 0.0016v-1e-3z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="#9e9e9e" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;paint-order:normal;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+</svg>

@@ -1,16 +1,16 @@
 
-<%= simple_form_for contact, html:{class:"w-full px-4"}, remote: true do |f| %>
+<%= simple_form_for contact, html:{class:"w-full px-4 lg:flex lg:flex-col lg:justify-center lg:items-center"}, remote: true do |f| %>
   <%# f.error_notification %>
   <%# f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :name, placeholder: "שם מלא*", input_html: {class:"contact-input rounded w-full my-4 h-8"}, label: false, required: true %>
-    <%= f.input :tel,  placeholder: "טלפון", input_html: {class:"contact-input rounded w-full my-4 h-8"}, label: false %>
-    <%= f.input :email,  placeholder: "מייל*", input_html: {class:"contact-input rounded w-full my-4 h-8"},label: false, required: true %>
-    <%= f.input :message,  placeholder: "תוכן ההודעה", input_html: {class:"contact-input rounded w-full my-4 h-24"},label: false %>
+  <div class="form-inputs w-full lg:flex lg:flex-col lg:justify-center lg:items-center">
+    <%= f.input :name, placeholder: "שם מלא*", wrapper_html: {class:"lg:w-11/12"}, input_html: {class:"contact-input rounded w-full my-4 lg:h-10 h-8"}, label: false, required: true %>
+    <%= f.input :tel,  placeholder: "טלפון", wrapper_html: {class:"lg:w-11/12"}, input_html: {class:"contact-input rounded w-full my-4 lg:h-10 h-8"}, label: false %>
+    <%= f.input :email,  placeholder: "מייל*", wrapper_html: {class:"lg:w-11/12"}, input_html: {class:"contact-input rounded w-full my-4 lg:h-10 h-8"},label: false, required: true %>
+    <%= f.input :message,  placeholder: "תוכן ההודעה", wrapper_html: {class:"lg:w-11/12"}, input_html: {class:"contact-input rounded w-full my-4 lg:h-32 h-24"},label: false %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "שליחה", class:"bg-white text-black rounded-full w-24 h-8 float-left", id:"submit-contact" %>
+    <%= f.button :submit, "שליחה", class:"bg-white text-white w-32 h-12 rounded-full w-24 h-8 float-left cta-btn", id:"submit-contact" %>
   </div>
 <% end %>

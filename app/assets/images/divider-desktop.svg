@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="c" width="197.34mm" height="25.888mm" version="1.1" viewBox="0 0 197.34 25.888" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <metadata id="f">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="a" transform="translate(14.726 50.47)" fill="#666">
+  <g id="d" transform="translate(-309.09,202.57)" fill="#666">
+   <g id="e" transform="translate(374,-401.88)" fill="#666">
+    <path id="path876" transform="matrix(.26458 0 0 .26458 -79.636 148.84)" d="m745.86 0-0.01 0.0039062-0.0234 10.395s-30.218 13.721-68.629 27.438-84.747 27.646-119.37 27.646c-67.877 0-122.64-36.453-184.91-36.453s-117.04 36.453-184.91 36.453c-34.628 0-80.97-13.93-119.38-27.646-38.393-13.71-68.592-27.421-68.619-27.434l-0.0097656 4.4941s30.218 13.721 68.629 27.438c38.411 13.717 84.753 27.646 119.38 27.646 67.873 0 122.64-36.453 184.91-36.453s117.03 36.453 184.91 36.453c34.627 0 80.962-13.93 119.37-27.646 38.411-13.717 68.629-27.438 68.629-27.438zm-745.85 19.795c2.35e-6 1e-6 0.015595 0.0058 0.015625 0.0059v-0.0039zm0.015625 0.0059v1.2266l-0.027344 76.818h745.81l0.0312-78.05s-35.931 14.716-73.705 28.205-83.884 26.773-114.33 26.773c-62.272 0-117.04-36.451-184.91-36.451s-122.64 36.451-184.91 36.451c-30.446 0-76.554-13.284-114.33-26.773-37.748-13.48-73.584-28.179-73.633-28.199z" color="#000000" color-rendering="auto" dominant-baseline="auto" fill="#fff" image-rendering="auto" shape-rendering="auto" solid-color="#000000" stroke-width="3.7795" style="font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;isolation:auto;mix-blend-mode:normal;paint-order:normal;shape-padding:0;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
+   </g>
+  </g>
+ </g>
+</svg>

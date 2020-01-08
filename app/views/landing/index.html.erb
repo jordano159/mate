@@ -50,6 +50,16 @@
     .rotate180{
       transform: rotate(180deg);
     }
+    .flip-rotate90{
+      transform: rotate(90deg) scaleX(-1);
+    }
+    .rotate90{
+      transform: rotate(90deg);
+    }
+    .rotate45{
+      transform: rotate(45deg);
+    }
+
     .h-075{
       height: 75%;
     }
@@ -65,12 +75,26 @@
     .h-third{
       height: 33vh;
     }
+    .h-25vh{
+      height: 25vh;
+    }
+    .w-50vh{
+      width: 50vh;
+    }
     .path-white path{
       fill: white
     }
     .avatar{
       transform: translate(0%, -50%);
       background-image: url("<%= asset_path 'katya.jpeg' %>")
+    }
+    #pashi{
+      transform: translate(0%, 50%);
+      background-image: url("<%= asset_path 'pashi.webp' %>")
+    }
+    #yarden{
+      transform: translate(0%, 50%);
+      background-image: url("<%= asset_path 'yarden.webp' %>")
     }
     .quotes{
       position: relative;
@@ -87,15 +111,18 @@
       height: 50vh;
     }
     .circle-logo{
-      background: url("<%= asset_path 'logo-circle.svg' %>");
+      background: url("<%= asset_path 'logo-circle-shadow.svg' %>");
       background-repeat: no-repeat;
       background-position: top right;
       background-size:contain;
     }
-    .text-primary{
+    .text-primary-grad{
       background: linear-gradient(90deg, rgba(53,206,212,1) 40%, rgba(13,152,237,1) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+     }
+     .text-primary{
+       color: rgb(13,152,237)
      }
      .login-btn{
        border: 4px solid rgb(13,152,237);
@@ -114,9 +141,15 @@
      .w-95{
        width: 95%
      }
+     .w-99{
+       width: 99vw
+     }
+     .rounded-xl{
+       border-radius: 4rem;
+     }
   </style>
-  <%# inline_svg_tag("bg.svg") %>
-<!-- <div class="abg-cover abg-center absolute z-0 h-screen aabg-no-repeat" ></div> -->
+
+<% if mobile_device? %>
 <div class="absolute left-0 top-0">
   <%= inline_svg_tag("circle.svg",class:"z-10", size: '100% * 20%', id:"top-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
 </div>
@@ -127,18 +160,17 @@
   <%= inline_svg_tag("circle.svg", size: '70%',id:"bottom-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
 </div>
 <div class="absolute right-0 top-0 w-1/4 h-32 circle-logo flex flex-col items-center justify-center">
-  <%# inline_svg_tag("logo-circle.svg",id:"circle-logo", class:"z-50", size: '100% * 20%', preserve_aspect_ratio: 'xMaxYMax meet') %>
   <div class="h-full w-3/4 flex-col items-center  justify-center hidden pb-16 amr-24" id="to_hide">
-    <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center z-50">
+    <div class="h-10 w-full text-primary-grad font-bold text-lg flex items-center justify-center z-50">
       <button type="button" name="button" class="create" >איך המטה נוצר?</button>
     </div>
-    <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center ">
+    <div class="h-10 w-full text-primary-grad font-bold text-lg flex items-center justify-center ">
       <button type="button" name="button" class="properties">תכונות</button>
     </div>
-    <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center">
+    <div class="h-10 w-full text-primary-grad font-bold text-lg flex items-center justify-center">
       <button type="button" name="button" class="quote">מה משתמשים אומרים?</button>
     </div>
-    <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center">
+    <div class="h-10 w-full text-primary-grad font-bold text-lg flex items-center justify-center">
       <button type="button" name="button" class="us">מי אנחנו?</button>
     </div>
     <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center cta-btn text-white">
@@ -146,7 +178,7 @@
     </div>
     <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center login-btna landing-grada text-white">
       <div class="landing-grad w-full h-full rounded-full flex content-center justify-center items-center">
-        <button type="button" name="button" class="bg-white  w-95 h-85 rounded-full font-bold text-whitea"><span class="text-primary"><%= link_to "התחברות", new_staff_session_path %></span></button>
+        <button type="button" name="button" class="bg-white  w-95 h-85 rounded-full font-bold text-whitea"><span class="text-primary-grad"><%= link_to "התחברות", new_staff_session_path %></span></button>
       </div>
     </div>
   </div>
@@ -160,7 +192,7 @@
     </div>
     <div class="z-50 h-12 w-full flex content-center justify-center">
       <div class="landing-grad w-4/5 h-full rounded-full flex content-center justify-center items-center">
-        <button type="button" name="button" class="bg-white  w-95 h-85 aslogin-btn landing-grada rounded-full font-bold text-whitea"><span class="text-primary"><%= link_to "התחברות", new_staff_session_path %></span></button>
+        <button type="button" name="button" class="bg-white  w-95 h-85 aslogin-btn landing-grada rounded-full font-bold text-whitea"><span class="text-primary-grad"><%= link_to "התחברות", new_staff_session_path %></span></button>
       </div>
     </div>
   </div>
@@ -443,3 +475,358 @@
             });
     });
 </script>
+
+
+
+
+
+
+<% else %>
+<div class="absolute left-0 top-0">
+  <%= inline_svg_tag("circle.svg",class:"", size: '100% * 20%', id:"top-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
+</div>
+<div  class="absolute right-0 bottom-10">
+  <%= inline_svg_tag("circle.svg", size: '60% * 20%',id:"bottom-right", preserve_aspect_ratio: 'xMaxYMax meet') %>
+</div>
+<!-- <div dir="ltr" class="absolute left-0 bottom-0"> -->
+  <%# inline_svg_tag("circle.svg", size: '70%',id:"bottom-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
+<!-- </div> -->
+<%= image_tag "divider-desktop.svg", class:"w-screen absolute bottom-0" %>
+<div class="fixed right-0 top-0 z-50">
+  <%= inline_svg_tag("mate-logo.svg",id:"logo", class:"z-50", size: '30% * 20%', preserve_aspect_ratio: 'xMaxYMax meet') %>
+</div>
+<div class="fixed right-0 top-0 w-1 h-1 circle-logo flex flex-col z-30">
+  <div class="h-full w-1/4 flex-col items-center  justify-center hidden pb-16 amr-24" id="to_hide">
+    <div class="h-10 w-full text-primary-grad font-bold text-lg flex items-center justify-center">
+      <button type="button" name="button" class="create" >איך המטה נוצר?</button>
+    </div>
+    <div class="h-10 w-full text-primary-grad font-bold text-lg flex items-center justify-center ">
+      <button type="button" name="button" class="properties">תכונות</button>
+    </div>
+    <div class="h-10 w-full text-primary-grad font-bold text-lg flex items-center justify-center">
+      <button type="button" name="button" class="quote">מה משתמשים אומרים?</button>
+    </div>
+    <div class="h-10 w-full text-primary-grad font-bold text-lg flex items-center justify-center">
+      <button type="button" name="button" class="us">מי אנחנו?</button>
+    </div>
+    <!-- <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center cta-btn text-white"> -->
+      <button href="#contact" type="button" name="button" class="font-bold contact mb-4 h-10 w-1/2 rounded-full flex items-center justify-center cta-btn text-white">יצירת קשר</button>
+    <!-- </div> -->
+    <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center login-btna landing-grada text-white">
+      <div class="landing-grad w-full h-full rounded-full flex content-center justify-center items-center">
+        <%= link_to "התחברות", new_staff_session_path, class:"bg-white  w-95 h-85 rounded-full font-bold text-primary flex content-center justify-center items-center" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="w-full h-screen bg-landing landing-grad flex">
+        <div class="w-1/2 h-full flex flex-col">
+          <div class="container h-full mx-auto flex flex-row items-center xl:pb-16 xl:px-0 px-4">
+            <div class="w-full mx-auto text-center text-white flex flex-col items-center">
+              <div class="mb-24">
+                <h1 class=" text-5xl font-extrabold sm:mb-4">אפליקציית המטה</h1>
+                <p class="text-md sm:text-base">עשיית נוכחות מעולם לא הייתה קלה יותר</p>
+              </div>
+                <div class="h-12 w-1/3 flex content-center justify-center">
+                  <button href="#contact" type="button" name="button" class="contact cta-btn text-white w-4/5 h-full rounded-full font-bold">יצירת קשר</button>
+                </div>
+                <div class="h-12 mt-4 w-1/3 flex content-center justify-center">
+                    <%= link_to "התחברות", new_staff_session_path, class:"bg-white  w-4/5 h-full aslogin-btn landing-grada rounded-full font-bold text-primary flex content-center justify-center items-center" %>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="h-full w-1/2 flex flex-col items-center justify-center">
+          <%= image_tag "mockups.svg", class:"w-3/4 z-50" %>
+        </div>
+      </div>
+        <%# image_tag "divider-bottom-desktop.svg", class:"w-screen" %>
+<div class="flex my-10 w-full justify-center" id="create">
+  <div class="flex items-center justify-center mr-4">
+    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad text-white">Circle</div>
+  </div>
+  <div class="h-32 w-full flex justify-center ">
+    <div class="">
+      <%= image_tag "arrow.svg", class: "h-32 ml-10 flip-rotate90"%>
+    </div>
+  </div>
+  <div class="flex items-center justify-center">
+    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad text-white">Circle</div>
+  </div>
+  <div class="h-32 w-full flex justify-center self-end">
+    <%= image_tag "arrow.svg", class: "h-32 mr-10 rotate90"%>
+  </div>
+  <div class="flex items-center justify-center ml-4">
+    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad text-white">Circle</div>
+  </div>
+</div>
+
+<div class="flex flex-col text-lg landing-grad text-white" id="properties">
+<%= image_tag "divider-desktop.svg", class:"w-screen alanding-grad rotate180" %>
+  <div class="flex h-25vh my-10 mx-4 my-24 justify-center">
+    <div class="w-1/6 h-full text-center mx-2">
+      <%= inline_svg_tag("people.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold text-xl my-4">
+        יצירת נוכחות חניכים בצורה נוחה ופשוטה
+      </h2>
+      <p>
+        תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+      </p>
+    </div>
+    <div class="w-1/6 h-full text-center mx-2">
+      <%= inline_svg_tag("clipboard.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold text-xl my-4">
+        ניהול ומעקב אחרי נוכחויות
+      </h2>
+      <p>
+        מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+      </p>
+    </div>
+
+      <div class="w-1/6 text-center mx-2">
+        <%= inline_svg_tag("calendar.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+        <h2 class="font-bold text-xl my-4">
+          יצירת נוכחות חניכים בצורה נוחה ופשוטה
+        </h2>
+        <p>
+          תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+        </p>
+      </div>
+      <div class="w-1/6 text-center mx-2">
+        <%= inline_svg_tag("bus.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+        <h2 class="font-bold text-xl my-4">
+          ניהול ומעקב אחרי נוכחויות
+        </h2>
+        <p>
+          מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+        </p>
+      </div>
+    </div>
+
+  <div class="flex h-25vh mt-10 mb-24 justify-center">
+    <div class="w-1/6 h-full text-center mx-2">
+      <%= inline_svg_tag("tools.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold text-xl my-4">
+        יצירת נוכחות חניכים בצורה נוחה ופשוטה
+      </h2>
+      <p>
+        תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+      </p>
+    </div>
+    <div class="w-1/6 h-full text-center mx-2">
+      <%= inline_svg_tag("responsive.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold text-xl my-4">
+        ניהול ומעקב אחרי נוכחויות
+      </h2>
+      <p>
+        מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+      </p>
+    </div>
+    <div class="w-1/6 h-full text-center mx-2">
+      <%= inline_svg_tag("hey.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
+      <h2 class="font-bold text-xl my-4">
+        ניהול ומעקב אחרי נוכחויות
+      </h2>
+      <p>
+        מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+      </p>
+    </div>
+
+    </div>
+    <%= image_tag "divider-desktop.svg", class:"w-screen arotate180" %>
+</div>
+
+<div class="flex aw-screen items-center text-white" id="quotes">
+  <div class="flex flex-col justify-center items-center">
+    <div class="landing-grad w-11/12 h-half rounded-lg flex items-center justify-center">
+      <%= image_tag "quotes.svg", class:"amb-2 quotes" %>
+      <p class="w-3/4 text-2xl italic">
+        המטה קיצר תהליכים - הוריד את זמן ההמתנה לעדכון נוכחות בחצי, שיפר את היכולת להפיק מידע קריטי בשניות, והפך את המידע להרבה יותר חסוי ופרטי. פינה את הצוות להתעסק בחניכים עצמם.
+        <span class="not-italic float-left">-קטיה נובק</span>
+      </p>
+    </div>
+    <div class="rounded-full h-32 w-32 flex items-center justify-center bg-white avatar bg-cover bg-center"></div>
+  </div>
+  <div class="flex flex-col justify-center items-center">
+    <div class="landing-grad w-11/12 h-half rounded-lg flex items-center justify-center">
+      <%= image_tag "quotes.svg", class:"amb-2 quotes" %>
+      <p class="w-3/4 text-2xl italic">
+        המטה קיצר תהליכים - הוריד את זמן ההמתנה לעדכון נוכחות בחצי, שיפר את היכולת להפיק מידע קריטי בשניות, והפך את המידע להרבה יותר חסוי ופרטי. פינה את הצוות להתעסק בחניכים עצמם.
+        <span class="not-italic float-left">-קטיה נובק</span>
+      </p>
+    </div>
+    <div class="rounded-full h-32 w-32 flex items-center justify-center bg-white avatar bg-cover bg-center"></div>
+  </div>
+  </div>
+
+  <div class="flex flex-col w-99 h-half items-center text-primary justify-center mb-16" id="us">
+    <div class="w-1/2 h-full flex flex-col landing-grad items-center  justify-center  rounded-xl">
+      <h1 class="text-white text-5xl mt-4">מי אנחנו</h1>
+      <div class="flex w-full h-full">
+        <div class="flex flex-col justify-center w-full h-full items-center">
+          <div class="rounded-full h-32 w-32 flex items-center justify-center bg-white bg-cover bg-center" id="pashi"></div>
+          <div class="bg-white w-1/2 h-050 rounded-lg flex flex-col items-center justify-center">
+            <h1 class="font-bold my-2 text-2xl">
+              גיא "פשי" נתן
+            </h1>
+            <p class="text-lg">
+              מפתח תוכנה
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col justify-center h-full  w-full items-center">
+          <div class="rounded-full h-32 w-32 flex items-center justify-center bg-white bg-cover bg-center" id="yarden"></div>
+          <div class="bg-white w-1/2 h-050 rounded-lg flex flex-col items-center justify-center">
+            <h1 class="font-bold my-2 text-2xl">
+              ירדן שפנר
+            </h1>
+            <p class="text-lg">
+              מפתח תוכנה
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+
+<div class="w-99 flex items-center justify-center">
+
+  <div class="flex flex-col w-1/3 h-75vh my-4 items-center justify-center" id="contact" >
+    <div class="landing-grad w-11/12 h-full rounded-lg flex items-center justify-center" id="submitform">
+      <div class="hidden w-3/4 rounded-lg text-xl text-center text-white font-bold flex flex-col justify-center items-center" id="after-submit">
+        <p>
+          ההודעה התקבלה!
+          ניצור קשר בקרוב
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="text-2xl text-center shadow-2xl rounded-lg mx-32 bg-white p-6">
+    <div class="">
+      הקוד השומרי <br>
+      רחוב הפרדס 11, אזור <br>
+      codecircle13@gmail.com
+    </div>
+    <div class="flex justify-center mt-4">
+      <%= link_to "https://www.facebook.com/%D7%94%D7%A7%D7%95%D7%93-%D7%94%D7%A9%D7%95%D7%9E%D7%A8%D7%99-109072317196522" do %>
+      <%= image_tag "facebook_circle.png", class: "h-12" %>
+      <% end %>
+      <%= link_to "https://www.instagram.com/code_circle/" do %>
+      <%= image_tag "Instagram_logo.svg.webp", class: "h-12 mr-5" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= image_tag "scroll2.svg", size:"50", class:'scrollToTop aahidden fixed bottom-0 pb-1 pr-1 md:pr-2 md:pb-2 md:h-12 md:w-12 h-10 w-10' %>
+
+
+<script type="text/javascript">
+  	$( document ).ready(function() {
+
+
+            $('#submitform').append("<%= j (render partial: "contacts/form", locals: {contact: Contact.new}) %>")
+            $('#new_contact').validate({ // initialize the plugin
+              submitHandler: function(form) {
+                $( "#new_contact" ).hide(1)
+                $("#after-submit").show(1000)
+                form.submit();
+              },
+              errorPlacement: function(label, element) {
+                label.addClass('text-red-600 font-bold bg-white px-1');
+                label.insertAfter(element);
+              },
+              wrapper: 'span',
+              rules: {
+                "contact[name]": {
+                  required: true
+                },
+                "contact[email]": {
+                  required: true,
+                  email: true
+                },
+                "contact[tel]": {
+                  digits: true,
+                  minlength: 9,
+                  maxlength: 10
+                }
+              },
+              messages: {
+                "contact[name]": {
+                  required: "יש לכתוב שם מלא",
+                },
+                "contact[email]": {
+                  required: "יש לכתוב אימייל תקני",
+                  email: "יש לכתוב אימייל תקני"
+                },
+                "contact[tel]": {
+                  digits: "יש להכניס מספר טלפון תקני",
+                  minlength: "יש להכניס מספר טלפון תקני",
+                  maxlength: "יש להכניס מספר טלפון תקני",
+                },
+              }
+
+            });
+            $( "#new_contact" ).submit(function( event ) {
+              event.preventDefault();
+            });
+            $("#logo").click(function(event) {
+              if ($(".circle-logo").hasClass('changed')) {
+                $("#to_hide").hide()
+                  $(".circle-logo").animate({width: ("1vw"), height: ("1vh")},500);
+                  $(".circle-logo").toggleClass('changed');
+              }
+              else {
+                $("#to_hide").show(400).css('display', 'flex')
+                var a = $(".circle-logo").animate({width: ("100vw"), height: ("50vh")},500)
+                $(".circle-logo").toggleClass('changed');
+
+              }
+              // $("#logo").attr("viewBox", "0 0 100 100");
+            });
+
+            // function scrollToAnchor(aid){
+            //   console.log(aid);
+            //   var aTag = $("button[name='"+ aid +"']");
+            //   console.log(aTag);
+            //   $('html,body').animate({scrollTop: $("#contact").offset().top},'slow');
+            // }
+
+            $(".properties").click(function(event) {
+              $('html,body').animate({scrollTop: $("#properties").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".create").click(function(event) {
+              console.log("create");
+              $('html,body').animate({scrollTop: $("#create").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".quote").click(function(event) {
+              $('html,body').animate({scrollTop: $("#quotes").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".us").click(function(event) {
+              $('html,body').animate({scrollTop: $("#us").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".contact").click(function(event) {
+              $('html,body').animate({scrollTop: $("#contact").offset().top},'slow');
+              /* Act on the event */
+            });
+            $(".scrollToTop").click(function() {
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              return false;
+            });
+            $(document).scroll(function(event) {
+              if ($(document).scrollTop() > 100) {
+                  $(".scrollToTop").show(500)
+              }
+              else {
+                  $(".scrollToTop").hide(500)
+              }
+            });
+    });
+</script>
+
+<% end %>
