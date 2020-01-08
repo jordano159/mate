@@ -101,8 +101,18 @@
        border: 4px solid rgb(13,152,237);
        color: rgb(97,98,98)
      }
-     .h-80{
-       height: 80%
+     .h-85{
+       height: 85%
+     }
+     .cta-btn{
+       background: rgb(209,13,76);
+       background: linear-gradient(90deg, rgba(209,13,76,1) 0%, rgba(255,84,139,1) 100%);
+     }
+     .h-95{
+       height: 95%
+     }
+     .w-95{
+       width: 95%
      }
   </style>
   <%# inline_svg_tag("bg.svg") %>
@@ -131,11 +141,13 @@
     <div class="h-10 w-full text-primary font-bold text-lg flex items-center justify-center">
       <button type="button" name="button" class="us">מי אנחנו?</button>
     </div>
-    <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center landing-grad text-white">
+    <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center cta-btn text-white">
       <button href="#contact" type="button" name="button" class="font-bold contact">יצירת קשר</button>
     </div>
-    <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center login-btn atext-white">
-      <button  type="button" name="button" class="font-bold "><%= link_to "התחברות", new_staff_session_path %></button>
+    <div class="mb-4 h-10 w-1/2 rounded-full flex items-center justify-center login-btna landing-grada text-white">
+      <div class="landing-grad w-full h-full rounded-full flex content-center justify-center items-center">
+        <button type="button" name="button" class="bg-white  w-95 h-85 rounded-full font-bold text-whitea"><span class="text-primary"><%= link_to "התחברות", new_staff_session_path %></span></button>
+      </div>
     </div>
   </div>
 </div>
@@ -144,10 +156,12 @@
 </div>
   <div class="flex justify-center h-24 w-screen absolute bottom-0 content-center pt-6">
     <div class="z-50 h-12 w-full flex content-center justify-center">
-      <button href="#contact" type="button" name="button" class="contact landing-grad text-white w-4/5 h-full rounded-full font-bold">יצירת קשר</button>
+      <button href="#contact" type="button" name="button" class="contact cta-btn text-white w-4/5 h-full rounded-full font-bold">יצירת קשר</button>
     </div>
     <div class="z-50 h-12 w-full flex content-center justify-center">
-      <button type="button" name="button" class="bg-white   w-4/5 h-full login-btn rounded-full font-bold"><span class="text-primary"><%= link_to "התחברות", new_staff_session_path %></span></button>
+      <div class="landing-grad w-4/5 h-full rounded-full flex content-center justify-center items-center">
+        <button type="button" name="button" class="bg-white  w-95 h-85 aslogin-btn landing-grada rounded-full font-bold text-whitea"><span class="text-primary"><%= link_to "התחברות", new_staff_session_path %></span></button>
+      </div>
     </div>
   </div>
   <%= image_tag "divider.svg", class:"w-screen absolute bottom-0" %>
