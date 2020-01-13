@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_staff!
+  before_action :authenticate_staff!, except: [:home_page]
   before_action :level
   before_action :level_names
   before_action :staff_names
@@ -97,12 +97,12 @@ end
   def home_page
     if staff_signed_in?
       if @level < 5
-        redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: 'show', id: current_staff.staffable_id #fix
+        redirect_to controller: current_staff.staffable_type.downcase.pluralize, action: 'show', id: current_staff.staffable_id
       elsif @level == 5
         redirect_to mifals_path
       end
     else
-      redirect_to controller: 'landing', action: 'index'
+      redirect_to landing_index_path
     end
   end
 
