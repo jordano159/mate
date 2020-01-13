@@ -2,7 +2,7 @@
 <div>
   <%# if @level == 1 %>
     <strong class="text-secondary pr-2">
-      <%= @group.mifal.name %> <i class="fas fa-angle-left text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? %>
+      <%= @group.mifal.name %> <i class="fas fa-angle-left text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? && @group.head %>
     </strong>
   <%# end %>
   <div>

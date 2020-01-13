@@ -127,6 +127,6 @@
       <% status_options << ["איחר/ה", "2"] if kid.mifal.has_late %>
       <%= form.input :status, as: :radio_buttons, label: "סטטוס?", collection: status_options %>
     <% end %>
-    <%= form.submit "עדכון פרטים" %>
+    <%= form.submit "עדכון פרטים", class: "btn btn-success" %>
   </div>
 <% end %>

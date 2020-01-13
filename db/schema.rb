@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_05_170823) do
+ActiveRecord::Schema.define(version: 2020_01_13_124221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(version: 2020_01_05_170823) do
     t.string "swim"
     t.text "exits"
     t.text "comments"
-    t.integer "status", default: 0
+    t.integer "status"
     t.text "cause"
     t.integer "bus_id"
     t.string "grade"
@@ -221,6 +221,11 @@ ActiveRecord::Schema.define(version: 2020_01_05_170823) do
     t.text "head_head_name"
     t.string "alert_message"
     t.text "causes"
+    t.integer "kids_count", default: 0, null: false
+    t.integer "present_kids", default: 0, null: false
+    t.text "city_coords"
+    t.integer "started_kids", default: 0, null: false
+    t.text "check_log"
   end
 
   create_table "staffs", force: :cascade do |t|

@@ -1,5 +1,6 @@
 <h1 class="font-weight-bold"><%= @kid.name %> <%= @kid.last_name %>
   <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_kid_path(@kid), class: "text-muted icon-size" if current_staff.admin? || current_staff.vip? %>
+  <%= link_to '<i class="fas fa-redo"></i>'.html_safe, recover_path(@kid), class: "text-muted icon-size" if @kid.group.hard_name == "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?) %>
 </h1>
 <br>
 
@@ -55,7 +56,7 @@
   </tbody>
 </table>
 <%# link_to "מחיקת חניך", @kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' },  class:"btn btn-danger" if current_staff.admin? || current_staff.vip? %>
-<%= link_to "מחיקת חניך", @kid, remote: true, id: "leave_button", class:"btn btn-danger" if current_staff.admin? || current_staff.vip? %>
+<%= link_to "מחיקת חניך", @kid, remote: true, id: "leave_button", class:"btn btn-danger" if @kid.group.hard_name != "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?)  %>
 <div id="leave_cause"></div>
 </div>
 </div>
