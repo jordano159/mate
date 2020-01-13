@@ -3,15 +3,27 @@
   <head>
     <title>אפליקציית המטה</title>
     <%= render 'application/favicon' %>
-    <meta property="og:title" content="מטה מפעל של השומר הצעיר" />
-    <meta property="og:description" content="אפליקציית מטה למפעלי התנועה, נבנה על ידי מעגל הקוד השומרי" />
+    <meta property="og:title" content="אפליקציית המטה" />
+    <meta property="og:description" content="רישום נוכחות מעולם לא היה קל יותר!" />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="<%= image_url('logo.png') %>" />
     <%= csrf_meta_tags %>
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js'></script>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <% if false %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153691372-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-153691372-1');
+      </script>
+    <% end %>
   </head>
 
   <style media="screen">
@@ -84,17 +96,21 @@
     .path-white path{
       fill: white
     }
-    .avatar{
+    #katya{
       transform: translate(0%, -50%);
-      background-image: url("<%= asset_path 'katya.jpeg' %>")
+      background-image: url("<%= asset_path 'katya.jpg' %>")
+    }
+    #sanchez{
+      transform: translate(0%, -50%);
+      background-image: url("<%= asset_path 'sanchez.png' %>")
     }
     #pashi{
       transform: translate(0%, 50%);
       background-image: url("<%= asset_path 'pashi.webp' %>")
     }
-    #yarden{
+    #jordan{
       transform: translate(0%, 50%);
-      background-image: url("<%= asset_path 'yarden.webp' %>")
+      background-image: url("<%= asset_path 'jordan.webp' %>")
     }
     .quotes{
       position: relative;
@@ -203,7 +219,7 @@
           <div class="container h-full mx-auto flex flex-row items-center xl:pb-16 xl:px-0 px-4">
             <div class="w-full mx-auto text-center text-white flex flex-col">
               <h1 class=" text-5xl font-extrabold sm:mb-4">אפליקציית המטה</h1>
-              <p class="text-md sm:text-base">עשיית נוכחות מעולם לא הייתה קלה יותר</p>
+              <p class="text-md sm:text-base">רישום נוכחות מעולם לא היה קל יותר</p>
             </div>
           </div>
         </section>
@@ -211,19 +227,22 @@
         <%= image_tag "divider-bottom.svg", class:"w-screen" %>
 <div class="flex flex-col my-10" id="create">
   <div class="flex items-center justify-center">
-    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
+    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad">
+      <span class="text-white text-center "><span class="font-bold">אפליקציית המטה</span> נולדה מתוך צורך לפתרון לבעיית רישום הנוכחות. בקורס ההדרכה הנוכחות על מאות החניכים והחניכות נרשמה בפתקים שלפעמים נאבדו בדרך, ואז הוקלדו ידנית</span></div>
   </div>
   <div class="h-32 w-full" dir="ltr">
     <%= image_tag "arrow.svg", class: "h-32 ml-10 flip"%>
   </div>
   <div class="flex items-center justify-center">
-    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
+    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad">
+      <span class="text-white text-center mx-2"><span class="font-bold">בנקודה זו</span> נולד הרעיון לפיתוח אפליקציה שתקצר את התהליך דרמטית, ותשחרר את המדריכים והמדריכות להתעסק בחינוך עצמו במקום בפתקים שהלכו לאיבוד</span></div>
   </div>
   <div class="h-32 w-full">
     <%= image_tag "arrow.svg", class: "h-32 mr-10"%>
   </div>
   <div class="flex items-center justify-center">
-    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad text-white">Circle</div>
+    <div class="rounded-full h-64 w-64 flex items-center justify-center landing-grad">
+      <span class="text-white text-center "><span class="font-bold">אנחנו מאמינים </span>שטכנולוגיה צריכה לעמוד לשירות האדם, ולעזור לכם להתעסק במה שחשוב באמת, בגלל זה בנינו את המטה</span></div>
   </div>
 </div>
 <%= image_tag "divider-bottom.svg", class:"w-screen rotate180" %>
@@ -257,19 +276,19 @@
       <div class="w-1/2 text-center mx-2">
         <%= inline_svg_tag("calendar.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
         <h2 class="font-bold">
-          יצירת נוכחות חניכים בצורה נוחה ופשוטה
+          ניהול יומן אירועים
         </h2>
         <p>
-          תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+          מעקב מסודר אחרי אירועים חריגים שקורים
         </p>
       </div>
       <div class="w-1/2 text-center mx-2">
         <%= inline_svg_tag("bus.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
         <h2 class="font-bold">
-          ניהול ומעקב אחרי נוכחויות
+          ניהול נוכחות על אוטובוסים
         </h2>
         <p>
-          מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+          יצירה חכמה של אוטובוסים ויצירת נוכחות עליהם מתוך האפליקציה
         </p>
       </div>
     </div>
@@ -279,19 +298,19 @@
     <div class="w-1/2 h-full text-center mx-2">
       <%= inline_svg_tag("tools.svg",class:"h-025 w-full", preserve_aspect_ratio: 'xMidYMid meet') %>
       <h2 class="font-bold">
-        יצירת נוכחות חניכים בצורה נוחה ופשוטה
+        התאמת התוכנה לצרכים היחודיים שלכם
       </h2>
       <p>
-        תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+        דרך הגדרות מגוונות האפליקציה תתאים כמו כפפה ליד
       </p>
     </div>
     <div class="w-1/2 h-full text-center mx-2">
       <%= inline_svg_tag("responsive.svg",class:"h-025 w-full", preserve_aspect_ratio: 'xMidYMid meet') %>
       <h2 class="font-bold">
-        ניהול ומעקב אחרי נוכחויות
+        גישה מכל טלפון ומחשב ללא הורדה
       </h2>
       <p>
-        מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+        טכנולוגיה של אפליקציית רשת מאפשרת לא להוריד קבצים גדולים, להיות תמיד בגרסה העדכנית ביותר, ולגשת למידע השמור בענן
       </p>
     </div>
   </div>
@@ -302,10 +321,10 @@
         <%= inline_svg_tag("hey.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
         <div class="w-1/2 m-auto">
           <h2 class="font-bold">
-            יצירת נוכחות חניכים בצורה נוחה ופשוטה
+            ליווי ותמיכה לאורך כל הדרך
           </h2>
           <p>
-            תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+            בתור אנשי חינוך, אנחנו מכירים את הקשיים שיש בתהליך שינוי טכנולוגי ופה כדי לעזור בכל שלב בדרך, ולתקן כל בעיה בתצוץ בהקדם האפשרי
           </p>
         </div>
       </div>
@@ -319,24 +338,24 @@
     <%= image_tag "quotes.svg", class:"amb-2 quotes" %>
     <p class="w-3/4 md:text-xl text-md italic">
       המטה קיצר תהליכים - הוריד את זמן ההמתנה לעדכון נוכחות בחצי, שיפר את היכולת להפיק מידע קריטי בשניות, והפך את המידע להרבה יותר חסוי ופרטי. פינה את הצוות להתעסק בחניכים עצמם.
-      <span class="not-italic float-left">-קטיה נובק</span>
+      <span class="not-italic float-left">- קטיה נובק</span>
     </p>
   </div>
-  <div class="rounded-full h-24 w-24 flex items-center justify-center bg-white avatar bg-cover bg-center"></div>
+  <div id="katya" class="rounded-full h-24 w-24 flex items-center justify-center bg-white bg-cover bg-center"></div>
   <div class="landing-grad w-11/12 h-half rounded-lg flex items-center justify-center">
     <%= image_tag "quotes.svg", class:"amb-2 quotes" %>
     <p class="w-3/4 md:text-xl text-md italic">
-      המטה קיצר תהליכים - הוריד את זמן ההמתנה לעדכון נוכחות בחצי, שיפר את היכולת להפיק מידע קריטי בשניות, והפך את המידע להרבה יותר חסוי ופרטי. פינה את הצוות להתעסק בחניכים עצמם.
-      <span class="not-italic float-left">-קטיה נובק</span>
+      בנוכחות כמו בניווט, חשוב לעקוב אחרי הפרטים הקטנים. עם אפליקציית המטה, הצלחנו להיות במעקב על המידע של כל החניכים והחניכות שלנו, בזמן אמת
+      <span class="not-italic float-left">- עידו אברהם</span>
     </p>
   </div>
-  <div class="rounded-full h-24 w-24 flex items-center justify-center bg-white avatar bg-cover bg-center"></div>
+  <div id="sanchez" class="rounded-full h-24 w-24 flex items-center justify-center bg-white bg-cover bg-center"></div>
 </div>
 
 <div class="flex flex-col landing-grad text-white" id="us">
   <%= image_tag "divider-sm.svg", class:"w-screen rotate180" %>
   <div class="flex flex-col justify-center items-center my-10">
-    <div class="rounded-full h-24 w-24 flex items-center justify-center bg-white avatara bg-cover bg-center"></div>
+    <div id="jordan" class="mb-12 rounded-full h-24 w-24 flex items-center justify-center bg-white bg-cover bg-center"></div>
     <h1 class="font-bold my-2 text-xl">
       ירדן שפנר
     </h1>
@@ -345,7 +364,7 @@
     </p>
   </div>
   <div class="flex flex-col justify-center items-center my-10">
-    <div class="rounded-full h-24 w-24 flex items-center justify-center bg-white avatara bg-cover bg-center"></div>
+    <div id="pashi" class="mb-12 rounded-full h-24 w-24 flex items-center justify-center bg-white bg-cover bg-center"></div>
     <h1 class="font-bold my-2 text-xl">
       גיא "פשי" נתן
     </h1>
@@ -480,7 +499,7 @@
 
 
 
-
+<!-- Desktop -->
 <% else %>
 <div class="absolute left-0 top-0">
   <%= inline_svg_tag("circle.svg",class:"", size: '100% * 20%', id:"top-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
@@ -526,7 +545,7 @@
             <div class="w-full mx-auto text-center text-white flex flex-col items-center">
               <div class="mb-24">
                 <h1 class=" text-5xl font-extrabold sm:mb-4">אפליקציית המטה</h1>
-                <p class="text-md sm:text-base">עשיית נוכחות מעולם לא הייתה קלה יותר</p>
+                <p class="text-md sm:text-base">רישום נוכחות מעולם לא היה קל יותר</p>
               </div>
                 <div class="h-12 w-1/3 flex content-center justify-center">
                   <button href="#contact" type="button" name="button" class="contact cta-btn text-white w-4/5 h-full rounded-full font-bold">יצירת קשר</button>
@@ -544,7 +563,8 @@
         <%# image_tag "divider-bottom-desktop.svg", class:"w-screen" %>
 <div class="flex my-10 w-full justify-center" id="create">
   <div class="flex items-center justify-center mr-4">
-    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad text-white">Circle</div>
+    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad">
+      <span class="text-white text-2xl text-justify mx-16"><span class="font-bold">אפליקציית המטה</span> נולדה מתוך צורך  בשטח לפתרון טוב יותר לבעיית רישום הנוכחות. בקורס ההדרכה הנוכחות על מאות החניכים והחניכות נרשמה בפתקים שלפעמים נאבדו בדרך, ואז הוקלדו ידנית</span></div>
   </div>
   <div class="h-32 w-full flex justify-center ">
     <div class="">
@@ -552,84 +572,86 @@
     </div>
   </div>
   <div class="flex items-center justify-center">
-    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad text-white">Circle</div>
+    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad">
+      <span class="text-white text-2xl text-justify mx-16"><span class="font-bold">בנקודה זו</span> נולד הרעיון לפיתוח אפליקציה שתקצר את התהליך דרמטית, ותשחרר את המדריכים והמדריכות להתעסק בחינוך עצמו במקום בפתקים שהלכו לאיבוד</span></div>
   </div>
   <div class="h-32 w-full flex justify-center self-end">
     <%= image_tag "arrow.svg", class: "h-32 mr-10 rotate90"%>
   </div>
   <div class="flex items-center justify-center ml-4">
-    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad text-white">Circle</div>
+    <div class="rounded-full h-half w-50vh flex items-center justify-center landing-grad">
+      <span class="text-white text-2xl text-justify mx-16"><span class="font-bold">אנחנו מאמינים</span> שטכנולוגיה צריכה לעמוד לשירות האדם, ולעזור לכם להתעסק במה שחשוב באמת, בגלל זה בנינו את המטה</span></div>
   </div>
 </div>
 
 <div class="flex flex-col text-lg landing-grad text-white" id="properties">
 <%= image_tag "divider-desktop.svg", class:"w-screen alanding-grad rotate180" %>
   <div class="flex h-25vh my-10 mx-4 my-24 justify-center">
-    <div class="w-1/6 h-full text-center mx-2">
+    <div class="w-1/6 h-full text-center mx-6">
       <%= inline_svg_tag("people.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
-      <h2 class="font-bold text-xl my-4">
-        יצירת נוכחות חניכים בצורה נוחה ופשוטה
+      <h2 class="font-bold text-2xl my-4">
+        רישום נוכחות חניכים בצורה נוחה ופשוטה
       </h2>
-      <p>
-        תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+      <p class="text-xl">
+        תהליך רישום הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
       </p>
     </div>
-    <div class="w-1/6 h-full text-center mx-2">
+    <div class="w-1/6 h-full text-center mx-6">
       <%= inline_svg_tag("clipboard.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
-      <h2 class="font-bold text-xl my-4">
+      <h2 class="font-bold text-2xl my-4">
         ניהול ומעקב אחרי נוכחויות
       </h2>
-      <p>
+      <p class="text-xl">
         מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
       </p>
     </div>
 
-      <div class="w-1/6 text-center mx-2">
+      <div class="w-1/6 text-center mx-6">
         <%= inline_svg_tag("calendar.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
-        <h2 class="font-bold text-xl my-4">
-          יצירת נוכחות חניכים בצורה נוחה ופשוטה
+        <h2 class="font-bold text-2xl my-4">
+          ניהול יומן אירועים
         </h2>
-        <p>
-          תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+        <p class="text-xl">
+          מעקב מסודר אחרי אירועים חריגים שקורים
         </p>
       </div>
-      <div class="w-1/6 text-center mx-2">
+      <div class="w-1/6 text-center mx-6">
         <%= inline_svg_tag("bus.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
-        <h2 class="font-bold text-xl my-4">
-          ניהול ומעקב אחרי נוכחויות
+        <h2 class="font-bold text-2xl my-4">
+          ניהול נוכחות על אוטובוסים
         </h2>
-        <p>
-          מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+        <p class="text-xl">
+          יצירה חכמה של אוטובוסים ויצירת נוכחות עליהם מתוך האפליקציה
         </p>
       </div>
     </div>
 
   <div class="flex h-25vh mt-10 mb-24 justify-center">
-    <div class="w-1/6 h-full text-center mx-2">
+    <div class="w-1/6 h-full text-center mx-6">
       <%= inline_svg_tag("tools.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
-      <h2 class="font-bold text-xl my-4">
-        יצירת נוכחות חניכים בצורה נוחה ופשוטה
+      <h2 class="font-bold text-2xl my-4">
+        התאמת התוכנה לצרכים היחודיים שלכם
       </h2>
-      <p>
-        תהליך יצירת הנוכחות יכול לקחת פחות מדקה, ודורש מעבר דרך שלושה מסכים בלבד!
+      <p class="text-xl">
+        דרך הגדרות מגוונות האפליקציה תתאים כמו כפפה ליד
       </p>
     </div>
-    <div class="w-1/6 h-full text-center mx-2">
+    <div class="w-1/6 h-full text-center mx-6">
       <%= inline_svg_tag("responsive.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
-      <h2 class="font-bold text-xl my-4">
-        ניהול ומעקב אחרי נוכחויות
+      <h2 class="font-bold text-2xl my-4">
+        גישה מכל טלפון ומחשב ללא הורדה
       </h2>
-      <p>
-        מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+      <p class="text-xl">
+        טכנולוגיה של אפליקציית רשת מאפשרת לא להוריד קבצים גדולים, להיות תמיד בגרסה העדכנית ביותר, ולגשת למידע השמור בענן
       </p>
     </div>
-    <div class="w-1/6 h-full text-center mx-2">
+    <div class="w-1/6 h-full text-center mx-6">
       <%= inline_svg_tag("hey.svg",class:"h-025 w-full path-white", preserve_aspect_ratio: 'xMidYMid meet') %>
-      <h2 class="font-bold text-xl my-4">
-        ניהול ומעקב אחרי נוכחויות
+      <h2 class="font-bold text-2xl my-4">
+        ליווי ותמיכה לאורך כל הדרך
       </h2>
-      <p>
-        מסך מותאם לכל משתמש שמראה רק את המידע הרלוונטי, עם חיפוש מהיר למציאת המידע המבוקש
+      <p class="text-xl">
+        בתור אנשי חינוך, אנחנו מכירים את הקשיים שיש בתהליך שינוי טכנולוגי ופה כדי לעזור בכל שלב בדרך, ולתקן כל בעיה בתצוץ בהקדם האפשרי
       </p>
     </div>
 
@@ -643,20 +665,20 @@
       <%= image_tag "quotes.svg", class:"amb-2 quotes" %>
       <p class="w-3/4 text-2xl italic">
         המטה קיצר תהליכים - הוריד את זמן ההמתנה לעדכון נוכחות בחצי, שיפר את היכולת להפיק מידע קריטי בשניות, והפך את המידע להרבה יותר חסוי ופרטי. פינה את הצוות להתעסק בחניכים עצמם.
-        <span class="not-italic float-left">-קטיה נובק</span>
+        <span class="not-italic float-left">- קטיה נובק</span>
       </p>
     </div>
-    <div class="rounded-full h-32 w-32 flex items-center justify-center bg-white avatar bg-cover bg-center"></div>
+    <div id="katya" class="rounded-full h-32 w-32 flex items-center justify-center bg-white bg-cover bg-center"></div>
   </div>
   <div class="flex flex-col justify-center items-center">
     <div class="landing-grad w-11/12 h-half rounded-lg flex items-center justify-center">
       <%= image_tag "quotes.svg", class:"amb-2 quotes" %>
       <p class="w-3/4 text-2xl italic">
-        המטה קיצר תהליכים - הוריד את זמן ההמתנה לעדכון נוכחות בחצי, שיפר את היכולת להפיק מידע קריטי בשניות, והפך את המידע להרבה יותר חסוי ופרטי. פינה את הצוות להתעסק בחניכים עצמם.
-        <span class="not-italic float-left">-קטיה נובק</span>
+        בנוכחות כמו בניווט, חשוב לעקוב אחרי הפרטים הקטנים. עם אפליקציית המטה, הצלחנו להיות במעקב על המידע של כל החניכים והחניכות שלנו, בזמן אמת
+        <span class="not-italic float-left">- עידו אברהם</span>
       </p>
     </div>
-    <div class="rounded-full h-32 w-32 flex items-center justify-center bg-white avatar bg-cover bg-center"></div>
+    <div id="sanchez" class="rounded-full h-32 w-32 flex items-center justify-center bg-white bg-cover bg-center"></div>
   </div>
   </div>
 
@@ -676,7 +698,7 @@
           </div>
         </div>
         <div class="flex flex-col justify-center h-full  w-full items-center">
-          <div class="rounded-full h-32 w-32 flex items-center justify-center bg-white bg-cover bg-center" id="yarden"></div>
+          <div class="rounded-full h-32 w-32 flex items-center justify-center bg-white bg-cover bg-center" id="jordan"></div>
           <div class="bg-white w-1/2 h-050 rounded-lg flex flex-col items-center justify-center">
             <h1 class="font-bold my-2 text-2xl">
               ירדן שפנר
