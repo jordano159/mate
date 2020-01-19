@@ -221,11 +221,6 @@ ActiveRecord::Schema.define(version: 2020_01_13_124221) do
     t.text "head_head_name"
     t.string "alert_message"
     t.text "causes"
-    t.integer "kids_count", default: 0, null: false
-    t.integer "present_kids", default: 0, null: false
-    t.text "city_coords"
-    t.integer "started_kids", default: 0, null: false
-    t.text "check_log"
   end
 
   create_table "staffs", force: :cascade do |t|

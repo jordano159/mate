@@ -203,15 +203,16 @@
 <div class="absolute right-0 top-0 ">
   <%= inline_svg_tag("mate-logo.svg",id:"logo", class:"z-40", size: '30% * 20%', preserve_aspect_ratio: 'xMaxYMax meet') %>
 </div>
-  <div class="flex justify-center h-24 w-screen absolute bottom-0 content-center pt-6">
+  <div class="flex justify-center h-32 w-screen absolute bottom-0 content-center pt-6">
     <div class="z-50 h-12 w-full flex content-center justify-center">
       <button href="#contact" type="button" name="button" class="contact cta-btn text-white w-4/5 h-full rounded-full font-bold">יצירת קשר</button>
     </div>
     <div class="z-50 h-12 w-full flex content-center justify-center">
       <div class="landing-grad w-4/5 h-full rounded-full flex content-center justify-center items-center">
-        <button type="button" name="button" class="bg-white  w-95 h-85 aslogin-btn landing-grada rounded-full font-bold text-whitea"><span class="text-primary-grad"><%= link_to "התחברות", new_staff_session_path %></span></button>
+        <button type="button" name="button" class="bg-white  w-95 h-85 aslogin-btn landing-grada rounded-full font-bold  create"><span class="text-primary-grad">מידע נוסף</span></button>
       </div>
     </div>
+		<%= image_tag "scroll-hero.svg", size:"70", class:'absolute bottom-0 mb-2 create z-50' %>
   </div>
   <%= image_tag "divider.svg", class:"w-screen absolute bottom-0" %>
 
@@ -502,6 +503,7 @@
 
 <!-- Desktop -->
 <% else %>
+
 <div class="absolute left-0 top-0">
   <%= inline_svg_tag("circle.svg",class:"", size: '100% * 20%', id:"top-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
 </div>
@@ -511,7 +513,10 @@
 <!-- <div dir="ltr" class="absolute left-0 bottom-0"> -->
   <%# inline_svg_tag("circle.svg", size: '70%',id:"bottom-left", preserve_aspect_ratio: 'xMaxYMax meet') %>
 <!-- </div> -->
+<div class="w-full absolute bottom-0 flex justify-center ">
 <%= image_tag "divider-desktop.svg", class:"w-screen absolute bottom-0" %>
+<%= image_tag "scroll-hero.svg", size:"100", class:'absolute bottom-0 mb-6 create' %>
+</div>
 <div class="fixed right-0 top-0 z-50">
   <%= inline_svg_tag("mate-logo.svg",id:"logo", class:"z-50", size: '30% * 20%', preserve_aspect_ratio: 'xMaxYMax meet') %>
 </div>
@@ -540,6 +545,9 @@
   </div>
 </div>
 
+
+
+
     <div class="w-full h-screen bg-landing landing-grad flex">
         <div class="w-1/2 h-full flex flex-col">
           <div class="container h-full mx-auto flex flex-row items-center xl:pb-16 xl:px-0 px-4">
@@ -552,7 +560,9 @@
                   <button href="#contact" type="button" name="button" class="contact cta-btn text-white w-4/5 h-full rounded-full font-bold">יצירת קשר</button>
                 </div>
                 <div class="h-12 mt-4 w-1/3 flex content-center justify-center">
-                    <%= link_to "התחברות", new_staff_session_path, class:"bg-white  w-4/5 h-full aslogin-btn landing-grada rounded-full font-bold text-primary flex content-center justify-center items-center" %>
+									<div class="bg-white create  w-4/5 h-full aslogin-btn landing-grada rounded-full font-bold text-primary flex content-center justify-center items-center">
+										מידע נוסף
+									</div>
                 </div>
             </div>
           </div>
