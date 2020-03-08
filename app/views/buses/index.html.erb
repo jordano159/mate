@@ -19,21 +19,24 @@
     <% mifal = Mifal.find(current_staff.staffable.mifal.id) %>
   <% end %>
   <%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
-  <button class="btn" id="prop" >הצגה והסתרה של הצעת צירי הנסיעה</button>
-  <div class="prop" style="display: none;">
-    <h2>הצעה לצירי אוטובוס</h2>
-    <ul>
-      <% if mifal.bus_proposal.present? %>
-        <% mifal.bus_proposal.each do |a| %>
-          <%= bus = "" %>
-          <% a[1][0].each { |x| bus += "#{x[0]}(#{x[1]}), "} %>
-          <% bus += "#{a[1][1]} חניכים וחניכות, " %>
-          <% bus += "#{a[1][2].to_i} ק''מ אווירי" %>
-          <li> <%= bus %> </li>
+  <% if false %>
+  <!-- צריך לתקן, כרגע עובד מאוד מוזר -->
+    <button class="btn" id="prop" >הצגה והסתרה של הצעת צירי הנסיעה</button>
+    <div class="prop" style="display: none;">
+      <h2>הצעה לצירי אוטובוס</h2>
+      <ul>
+        <% if mifal.bus_proposal.present? %>
+          <% mifal.bus_proposal.each do |a| %>
+            <%= bus = "" %>
+            <% a[1][0].each { |x| bus += "#{x[0]}(#{x[1]}), "} %>
+            <% bus += "#{a[1][1]} חניכים וחניכות, " %>
+            <% bus += "#{a[1][2].to_i} ק''מ אווירי" %>
+            <li> <%= bus %> </li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
-    <%= button_to 'הצעה חדשה לאוטובוסים', prop_path, method: :get, params: { id: mifal.id}, data: { confirm: 'אנחנו עובדים על זה ברקע. אפשר לסגור את החלון ולחזור עוד כמה דקות' } %>
+      </ul>
+      <%= button_to 'הצעה חדשה לאוטובוסים', prop_path, method: :get, params: { id: mifal.id}, data: { confirm: 'אנחנו עובדים על זה ברקע. אפשר לסגור את החלון ולחזור עוד כמה דקות' } %>
+    <% end %>
 </div>
 <% end %>
 
