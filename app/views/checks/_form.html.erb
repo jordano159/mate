@@ -42,8 +42,10 @@
         </script>
         <%= f.input :date, as: :hidden, id: "check_date" %>
       <% else %>
-        <% names = check_names %>
-        <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names, label_method: :second, value_method: :first %>
+        <%# names = check_names %>
+        <% names = @mifal.check_names %>
+        <%# f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names, label_method: :second, value_method: :first %>
+        <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names %>
       <% end %>
     <% end %>
   <% if controller.action_name == 'edit' || @bus %>

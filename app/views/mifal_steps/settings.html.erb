@@ -44,7 +44,8 @@
           <%= form.label :has_axes, "צריך רמה שלישית?" %>
           <div class="container">
             <div class="button-wrap mr-4  marginable">
-              <%= form.collection_radio_buttons :has_axes, [[true, '<h1 id="axes_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="axes_false" class="false">לא</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :has_axes, [[true, '<h1 id="axes_true" class="true">כן</h1>'.html_safe],
+                                                            [false, '<h1 id="axes_false" class="false">לא</h1>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
@@ -53,7 +54,8 @@
           <%= form.label :has_late, "צריך אפשרות לסמן איחורים?" %>
           <div class="container">
             <div class="button-wrap mr-4  marginable">
-              <%= form.collection_radio_buttons :has_late, [[true, '<h1 id="late_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="late_false" class="false">לא</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :has_late, [[true, '<h1 id="late_true" class="true">כן</h1>'.html_safe],
+                                                            [false, '<h1 id="late_false" class="false">לא</h1>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
@@ -63,7 +65,8 @@
           <%= form.label :checks_num, "מה תדירות הנוכחות?" %>
           <div class="container">
             <div class="button-wrap mr-4 marginable">
-              <%= form.collection_radio_buttons :checks_num, [[true, '<h1 id="checks_num_true" class="true">פעם ביום</h1>'.html_safe] ,[false, '<h1 id="checks_num_false" class="false">שלוש פעמים ביום</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :checks_num, [[true, '<h1 id="checks_num_true" class="true">פעם ביום</h1>'.html_safe],
+                                                              [false, '<h1 id="checks_num_false" class="false">מספר פעמים ביום</h1>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
@@ -80,7 +83,7 @@
   };
 </script>
 <div class="container">
-  <div class="">
+  <div>
     בחירת ברירת מחדל:
     <button type="button" name="youth" id="youth" class="btn btn-primary mr-2">תנועת נוער</button>
     <button type="button" name="school" id="school" class="btn btn-primary mr-2">בית ספר</button>
@@ -191,6 +194,51 @@
       <% alert_message = "ראית את החניכים והחניכות בעיניים?"  %>
     <% end %>
     <%= form.text_field :alert_message,class: "form-control", value: alert_message, required: true %>
+  </div>
+</div>
+<hr>
+<div class="field">
+  <%= form.label :check_names, "שמות הנוכחויות:" %>
+
+  <div class="btn btn-primary btn-sm btn-round check_name_button" id="check_name_button">
+    <i class="fas fa-plus"></i>
+  </div>
+  <div>
+    בחירת ברירת מחדל:
+    <button type="button" name="youth_names" id="youth_names" class="btn btn-primary mr-2">תנועת נוער - 3 פעמים ביום</button>
+  </div>
+
+  <div class="container">
+    <% if @mifal.check_names.present? %>
+      <% @mifal.check_names.each do |c| %>
+        <%= form.text_field :check_names, multiple: true, value: c, class: "inline form-control w-25 m-1" %>
+      <% end %>
+    <% else %>
+      <%= form.text_field :check_names, multiple: true, class: "inline form-control w-25 m-1" %>
+    <% end %>
+    <div class="check_name inline" id="check_names">
+    </div>
+
+    <script>
+      $(".check_name_button").click(function(){
+        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+      });
+      $( "#youth_names" ).click(function() {
+        console.log("preset");
+        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+        $('.check_names').last().val("נוכחות בוקר");
+        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+        $('.check_names').last().val("נוכחות צהריים");
+        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+        $('.check_names').last().val("נוכחות ערב");
+        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+        $('.check_names').last().val("נוכחות אוטובוס");
+        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+        $('.check_names').last().val("אירוע חירום");
+        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+        $('.check_names').last().val("בדיקה");
+      });
+    </script>
   </div>
 </div>
 <hr>
