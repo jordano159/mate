@@ -45,7 +45,13 @@
         <%# names = check_names %>
         <% names = @mifal.check_names %>
         <%# f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names, label_method: :second, value_method: :first %>
-        <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names %>
+        <div id="name">
+          <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names, input_html: {id: "name_input"} %>
+        </div>
+        <div id="other">
+          <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, label_html: { id: 'other_label' }, input_html: {id: "other_input"}, required: false %>
+        </div>
+
       <% end %>
     <% end %>
   <% if controller.action_name == 'edit' || @bus %>

@@ -41,6 +41,9 @@ class MifalStepsController < ApplicationController
       @mifal.causes << "אחר"
       end
       @mifal.causes.reject! { |c| c.empty? }
+      if @mifal.check_names.exclude?("אחר") && @mifal.has_other_check_name
+        @mifal.check_names << "אחר"
+      end
       @mifal.check_names.reject! { |c| c.empty? }
       if params[:mifal][:checks_num] == "true"
         @mifal.columns << "absences"
@@ -133,6 +136,6 @@ class MifalStepsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def mifal_params
-      params.require(:mifal).permit(:name, :has_buses, :alert_message, :has_events, :has_approve, :has_axes, :has_late, :checks_num, causes: [], columns: [], axis_ids: [], check_names: [])
+      params.require(:mifal).permit(:name, :has_buses, :alert_message, :has_events, :has_approve, :has_other_check_name, :has_axes, :has_late, :checks_num, causes: [], columns: [], axis_ids: [], check_names: [])
     end
 end

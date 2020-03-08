@@ -224,7 +224,6 @@
         $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
       });
       $( "#youth_names" ).click(function() {
-        console.log("preset");
         $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
         $('.check_names').last().val("נוכחות בוקר");
         $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
@@ -240,6 +239,18 @@
       });
     </script>
   </div>
+
+  <div class="field mt-4">
+    <%= form.label :has_other_check_name, "צריך אפשרות של 'אחר' לשמות הנוכחות?" %>
+    <div class="container">
+      <div class="button-wrap msr-4 mardginable">
+        <%= form.collection_radio_buttons :has_other_check_name, [[true, '<h1 id="other_check_name_true" class="true">כן</h1>'.html_safe],
+                                                        [false, '<h1 id="other_check_name_false" class="false">לא</h1>'.html_safe]],
+        :first, :last  %>
+      </div>
+    </div>
+  </div>
+
 </div>
 <hr>
 <div class="field">
@@ -353,6 +364,7 @@ var checked_approve = <%= @mifal.has_approve %>;
 var checked_axes = <%= @mifal.has_axes %>;
 var checked_late = <%= @mifal.has_late %>;
 var checked_checks_num = <%= @mifal.checks_num %>;
+var other_check_name = <%= @mifal.has_other_check_name %>;
 if (checked_buses == true){
   $("#buses_true").addClass("btn-success");
   $("#buses_true").removeClass("btn-secondary");
@@ -443,8 +455,23 @@ $("#mifal_checks_num_true").click(function() {
   $("#checks_num_false").removeClass("btn-success").addClass("btn-secondary");
 });
 $("#mifal_checks_num_false").click(function() {
-$("#checks_num_true").addClass("btn-secondary").removeClass("btn-success");
-$("#checks_num_false").addClass("btn-success").removeClass("btn-secondary");
+  $("#checks_num_true").addClass("btn-secondary").removeClass("btn-success");
+  $("#checks_num_false").addClass("btn-success").removeClass("btn-secondary");
+});
+if (other_check_name == true){
+  $("#other_check_name_true").addClass("btn-success");
+  $("#other_check_name_true").removeClass("btn-secondary");
+} else{
+  $("#other_check_name_false").addClass("btn-danger");
+  $("#other_check_name_false").removeClass("btn-secondary");
+};
+$("#mifal_has_other_check_name_true").click(function() {
+  $("#other_check_name_true").addClass("btn-success").removeClass("btn-secondary");
+  $("#other_check_name_false").removeClass("btn-danger").addClass("btn-secondary");
+});
+$("#mifal_has_other_check_name_false").click(function() {
+  $("#other_check_name_true").addClass("btn-secondary").removeClass("btn-success");
+  $("#other_check_name_false").addClass("btn-danger").removeClass("btn-secondary");
 });
 
 </script>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_08_073940) do
+ActiveRecord::Schema.define(version: 2020_03_08_101423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_073940) do
     t.integer "started_kids", default: 0, null: false
     t.text "check_log"
     t.text "check_names"
+    t.boolean "has_other_check_name", default: false, null: false
   end
 
   create_table "staffs", force: :cascade do |t|
