@@ -3,7 +3,11 @@ json.set! :data do
     unless kid.group.name == "סל מחזור #{kid.mifal.name}"
     json.name "#{link_to kid.name, kid}"
     json.last_name "#{kid.last_name}"
-    json.full_name "#{link_to kid.full_name, kid}"
+    if params[:bus_id].present?
+      json.full_name "#{kid.full_name}"
+    else
+      json.full_name "#{link_to kid.full_name, kid}"
+    end
     json.phone "#{link_to kid.phone, 'tel:#{kid.phone}' if kid.phone.present?}"
     json.medical "#{kid.medical}"
     json.meds "#{kid.meds}"
