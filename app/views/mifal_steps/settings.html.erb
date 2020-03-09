@@ -208,7 +208,7 @@
     <button type="button" name="youth_names" id="youth_names" class="btn btn-primary mr-2">תנועת נוער - 3 פעמים ביום</button>
   </div>
 
-  <div class="container">
+  <div class="container" id="check_names">
     <% if @mifal.check_names.present? %>
       <% @mifal.check_names.each do |c| %>
         <%= form.text_field :check_names, multiple: true, value: c, class: "inline form-control w-25 m-1" %>
@@ -216,7 +216,7 @@
     <% else %>
       <%= form.text_field :check_names, multiple: true, class: "inline form-control w-25 m-1" %>
     <% end %>
-    <div class="check_name inline" id="check_names">
+    <div class="check_name inline">
     </div>
 
     <script>
@@ -224,18 +224,19 @@
         $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
       });
       $( "#youth_names" ).click(function() {
-        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
-        $('.check_names').last().val("נוכחות בוקר");
-        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
-        $('.check_names').last().val("נוכחות צהריים");
-        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
-        $('.check_names').last().val("נוכחות ערב");
-        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
-        $('.check_names').last().val("נוכחות אוטובוס");
-        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
-        $('.check_names').last().val("אירוע חירום");
-        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
-        $('.check_names').last().val("בדיקה");
+        $('#check_names').html("<%= j (render partial: 'default_check_names', locals: {form:form}) %>")
+        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+        // $('.check_names').last().val("נוכחות בוקר");
+        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+        // $('.check_names').last().val("נוכחות צהריים");
+        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+        // $('.check_names').last().val("נוכחות ערב");
+        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+        // $('.check_names').last().val("נוכחות אוטובוס");
+        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+        // $('.check_names').last().val("אירוע חירום");
+        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+        // $('.check_names').last().val("בדיקה");
       });
     </script>
   </div>

@@ -48,8 +48,9 @@
         <div id="name">
           <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, collection: names, input_html: {id: "name_input"} %>
         </div>
-        <div id="other">
-          <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, label_html: { id: 'other_label' }, input_html: {id: "other_input"}, required: false %>
+        <div id="other" style="display: none">
+          <%= f.input :name, label: "<h3>שם הנוכחות</h3>".html_safe, label_html: { id: 'other_label' },
+                             input_html: {id: "other_input", placeholder: "שם הנוכחות"}, required: false %>
         </div>
 
       <% end %>
@@ -101,6 +102,22 @@
 
 
 <script>
+  $('#name').change(function(){
+    if ($('#name_input').val() == "אחר") {
+      $('#other').show(400);
+      if ($('#other_input').val() == "נוכחות חדשה") {
+        $('#other_input').val("");
+      }
+      $(this).hide(400);
+      $('#other_input').focus();
+      $("#hide").show("blind", 1000);
+    }
+    else {
+      $('#other_input').val($('#name_input').val());
+      $("#hide").show("blind", 1000);
+    }
+  });
+
 $(document).ready(function(){
   console.log( new Date(Date.now()).getDate());
   $('input[type="radio"]').change(function(){
@@ -151,8 +168,8 @@ $(document).ready(function(){
     $("#check_name").val(check_name);
     $("#hide").show("blind", 1000);
   });
-  $( "#check_name" ).on('change', function(){
-    $("#hide").show("blind", 1000);
-  });
+  // $( "#check_name" ).on('change', function(){
+  //   $("#hide").show("blind", 1000);
+  // });
 });
 </script>

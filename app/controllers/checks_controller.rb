@@ -40,7 +40,7 @@ class ChecksController < ApplicationController
       @group = Group.find(params[:g_id]) # מצהיר על הקבוצה של הנוכחות
       @check.group_id = @group.id
       @mifal = @check.group.mifal
-      @check.name = "Blank"
+      @check.name = "נוכחות חדשה"
       @kids = @group.kids.order(name: :desc, ken: :asc) # set kids
       @check.kids << @kids # assoicate kids to check
       unless @group.mifal.has_approve
