@@ -197,7 +197,7 @@
   </div>
 </div>
 <hr>
-<div class="field">
+<div class="field" id="check_names">
   <%= form.label :check_names, "שמות הנוכחויות:" %>
 
   <div class="btn btn-primary btn-sm btn-round check_name_button" id="check_name_button">
@@ -447,6 +447,7 @@ $("#late_false").addClass("btn-danger").removeClass("btn-secondary");
 if (checked_checks_num == true){
   $("#checks_num_true").addClass("btn-success");
   $("#checks_num_true").removeClass("btn-secondary");
+  $('#check_names').hide(10);
 } else{
   $("#checks_num_false").addClass("btn-success");
   $("#checks_num_false").removeClass("btn-secondary");
@@ -473,6 +474,12 @@ $("#mifal_has_other_check_name_true").click(function() {
 $("#mifal_has_other_check_name_false").click(function() {
   $("#other_check_name_true").addClass("btn-secondary").removeClass("btn-success");
   $("#other_check_name_false").addClass("btn-danger").removeClass("btn-secondary");
+});
+$("#checks_num_true").click(function() {
+  $('#check_names').hide(400);
+});
+$("#checks_num_false").click(function() {
+  $('#check_names').show(400);
 });
 
 </script>

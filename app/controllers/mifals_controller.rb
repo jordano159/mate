@@ -67,6 +67,12 @@ class MifalsController < ApplicationController
   # DELETE /mifals/1
   # DELETE /mifals/1.json
   def destroy
+    @mifal.axes.each do |axis|
+      axis.destroy
+    end
+    @mifal.groups.each do |group|
+      group.destroy
+    end
     @mifal.destroy
     respond_to do |format|
       format.html { redirect_to mifals_url, notice: 'Mifal was successfully destroyed.' }
