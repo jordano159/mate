@@ -40,7 +40,7 @@ $.extend( $.fn.dataTable.defaults, {
     url: "/he_he.lang",
     searchPlaceholder: "חיפוש חופשי",
     buttons: {
-        colvis: '<i class="fas fa-columns"></i> עמודות',
+        colvis: '<i class="icon icon-columns-solid"></i> עמודות',
         className: 'btn btn-primary-cus'
     }
   },

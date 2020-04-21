@@ -6,13 +6,13 @@
 </p>
 <% end %>
 
-<%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_head_path(@head),class: "text-muted icon-size" if current_staff.admin? %>
+<%= link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_head_path(@head),class: "text-muted icon-size" if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', heads_path %>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-groups" data-sort="false"
                 data-source="<%= url_for(controller: 'groups', head_id: @head.id, format: :json)%>">
-    <thead class="thead-dark">
+    <thead class="thead-grey">
       <tr>
         <th data-data="name">שם</th>
         <th data-data="group_counter" data-orderable="false" data-searchable="false">נוכחות</th>

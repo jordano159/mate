@@ -2,7 +2,7 @@
 <div>
   <%# if @level == 1 %>
     <strong class="text-secondary pr-2">
-      <%= @group.mifal.name %> <i class="fas fa-angle-left text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? && @group.head %>
+      <%= @group.mifal.name %> <i class="icon icon-angle-left-solid text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? && @group.head %>
     </strong>
   <%# end %>
   <div>
@@ -10,8 +10,14 @@
       <h1 class="font-weight-bold text-center"><%= @group.name.sub(" #{@group.mifal.name}", "") %></h1>
 
     <% if @level >= 4 %>
-      <%= link_to "הוספת חניך", new_kid_path %>
-      <%= link_to "הוספת חניכים מאקסל", mifal_step_path(:imported_kids) %>
+			<%= link_to new_kid_path, class:"btn btn-primary-cus-outline font-weight-bold" do %>
+			  <i class='icon icon-user-plus-solid'></i>
+			  <span>הוספת חניך</span>
+			<% end %>
+			<%= link_to mifal_step_path(:imported_kids), class:"btn btn-primary-cus-outline font-weight-bold" do %>
+			 <i class='icon icon-file-excel-solid'></i>
+			 <span>הוספה מטבלה</span>
+			<% end %>
     <% end %>
   </div>
 	<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
@@ -26,9 +32,9 @@
         <% if @group.checks.last.present?  %>
         <div class="check-stat">
         <% if @group.checks.last.approved? %>
-          <i class="far fa-check-circle icon-lg mt-2" style="color:#07E39A"></i>
+          <i class="icon icon-check-circle-regular icon-lg mt-2" style="color:#07E39A"></i>
         <% else %>
-        <i class="far fa-times-circle icon-lg mt-2" style="color:#FF5E63"></i>
+        <i class="icon icon-times-circle-regular icon-lg mt-2" style="color:#FF5E63"></i>
         <% end %>
       </div>
         <div class="check-data text-right">
@@ -54,7 +60,7 @@
           <% end %>
           <% g_id = @group.id %>
           <div class="check-new">
-            <%= link_to "<i class='fas fa-plus plus-icon'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary-cus btn-plus" %>
+            <%= link_to "<i class='icon icon-plus-solid plus-icon'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary-cus btn-plus" %>
           </div>
 			</div>
     </div>
@@ -144,7 +150,7 @@
 	       ],
 	       language: {
 	            buttons: {
-	                colvis: '<i class="fas fa-columns"></i> עמודות',
+	                colvis: '<i class="icon icon-columns-solid"></i> עמודות',
 	                className: 'btn btn-primary-cus'
 	            }
 	        },

@@ -1,6 +1,6 @@
 <% if staff_signed_in? %>
   <div class="dropdown user-position">
-    <button type="button" class="dropdown-toggle btn btn-light bg-transparent border-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class=" btn btn-light bg-transparent border-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <div class="badge badge-pill btn-primary-cus-outline">
       <% case @level %>
       <% when 1 %>
@@ -13,10 +13,10 @@
       <%= "רכז/ת מפעל" %>
       <% end %>
     </div>
-  <span class="text-muted"> שלום, <%= current_staff.name %> <i class="fas fa-chevron-down"></i></span>
+  <span class="text-muted"> שלום, <%= current_staff.name %> <i class="icon icon-chevron-down-solid"></i></span>
 
     </button>
-    <div class="dropdown-menu dropdown-menu-right">
+    <div class="dropdown-menu dropdown-menu-right text-right px-2">
 
       <div class="font-weight-bold dropdown-element" >
         שלום <%= current_staff.name %> <br>

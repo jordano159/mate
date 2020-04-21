@@ -1,6 +1,6 @@
 <h2 class="font-weight-bold"><%= @mifal.name %>
-  <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_mifal_path(@mifal), class: "text-muted icon-size" if current_staff.admin? %>
-  <%= link_to "<i class='fas fa-download'></i>".html_safe, mifal_path(format: :xlsx), class: 'p-2 icon-size text-dark' if current_staff.admin? || current_staff.vip? %>
+  <%= link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_mifal_path(@mifal), class: "text-muted icon-size" if current_staff.admin? %>
+  <%= link_to "<i class='icon icon-download-solid'></i>".html_safe, mifal_path(format: :xlsx), class: 'p-2 icon-size text-dark' if current_staff.admin? || current_staff.vip? %>
 </h2>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary" if current_staff.admin? %>
 
@@ -14,7 +14,7 @@
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-axes"
                 data-sort="false" data-source="<%= url_for(controller: 'axes', format: :json, mifal_id: @mifal.id)%>">
-    <thead class="thead-dark">
+    <thead class="thead-grey">
       <tr>
         <th data-data="name">שם</th>
         <th data-data="axis_counter" data-orderable="false" data-searchable="false">נוכחות</th>

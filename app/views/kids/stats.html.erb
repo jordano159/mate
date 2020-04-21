@@ -6,7 +6,7 @@
 <div class="d-flex flex-row justify-content-between">
   <div class="p-2">
       <h1 style="font-weight:bold;">מעקב היעדרויות  <%= current_staff.staffable.name %>
-        <%= link_to "<i class='fas fa-download'></i>".html_safe, stats_kids_path(format: :xlsx), style: "font-size: 16px", class: 'p-2 text-dark' if current_staff.vip? %>
+        <%= link_to "<i class='icon icon-download-solid'></i>".html_safe, stats_kids_path(format: :xlsx), style: "font-size: 16px", class: 'p-2 text-dark' if current_staff.vip? %>
       </h1>
   </div>
 </div>
@@ -20,7 +20,7 @@
 <div class="table-container">
 <div class="table-responsive">
   <table class="table table-hover" id="dttb-kids" data-sort="true" data-source="<%= url_for(format: :json)%>">
-    <thead class="thead-dark nowrap ">
+    <thead class="thead-grey nowrap ">
       <tr>
         <th data-data="full_name" class="">שם מלא</th>
         <th data-data="status" class="">סטטוס</th>
@@ -59,7 +59,7 @@ $('#dttb-kids').dataTable( {
        ],
        language: {
             buttons: {
-                colvis: '<i class="fas fa-columns"></i> עמודות'
+                colvis: '<i class="icon icon-columns-solid"></i> עמודות'
             }
         },
 

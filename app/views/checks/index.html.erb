@@ -4,7 +4,7 @@
 
 
 <h1 class="font-weight-bold">נוכחויות
-  <%# link_to "<i class='fas fa-download'></i>".html_safe, checks_path(format: :xls), class: 'p-2 edit text-dark' if !current_staff.user? %>
+  <%# link_to "<i class='icon icon-download-solid'></i>".html_safe, checks_path(format: :xls), class: 'p-2 edit text-dark' if !current_staff.user? %>
 </h1>
 <%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
 <% end %>
@@ -22,11 +22,11 @@
 <%= form_tag(checks_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
 <%= text_field_tag :search, params[:search], placeholder: "סינון לפי שם #{ @level_names[0] }...", class: "form-control mr-sm-2" %>
 <%= button_tag(type: "submit", :name => nil, class: "btn btn-outline-success my-2 my-sm-0") do %>
-  <i class="fas fa-search"></i>
+  <i class="icon icon-search-solid"></i>
 <% end %>
 <div class="dropdown mr-2">
   <button class="btn btn-outline-success my-2 my-sm-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fas fa-filter"></i>
+    <i class="icon icon-filter-solid"></i>
   </button>
   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item">
@@ -55,7 +55,7 @@
 <% end %>
 <div class="table-responsive">
 <table class = "table table-hover" id="dttb">
-  <thead class="thead-dark">
+  <thead class="thead-grey">
     <tr>
         <th>שם</th>
         <th>תאריך</th>
@@ -88,15 +88,15 @@
         <% if params[:buses].blank? && (current_staff.admin? || current_staff.staffable.mifal.has_approve) %>
         <td>
           <% if check.approved? %>
-            <span style="color:green;">מאושר</span> <i class="fas fa-check-circle"></i>
+            <span style="color:green;">מאושר</span> <i class="icon icon-check-circle-regular"></i>
           <% else %>
             <span style="color:red;">עוד לא מאושר</span>
           <% end %>
         </td>
         <% end %>
-        <td><%= link_to "<i class='fas fa-edit'></i>".html_safe, edit_check_path(check), class: "ml-2 text-muted" %>
+        <td><%= link_to "<i class='icon icon-edit-solid'></i>".html_safe, edit_check_path(check), class: "ml-2 text-muted" %>
         <% if @level > 1 %>
-        <%= link_to "<i class='far fa-trash-alt'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class:"text-danger" %></td>
+        <%= link_to "<i class='icon icon-trash-alt-regular'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class:"text-danger" %></td>
         <% end %>
       </tr>
     <% end %>

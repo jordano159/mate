@@ -1,23 +1,30 @@
-
+<span class="icon icon-redo-solid"></span>
 <%# if !current_staff.user? %>
   <%# render 'filter' %>
 <%# end %>
+
 <div id="head">
 <div>
   <% if @level == 1 %>
     <strong class="text-secondary pr-2">
-      <%= @mifal.name %> <i class="fas fa-angle-left text-dark"></i> <%= @kids.first.group.head.name.sub(" #{@mifal.name}", "") if @kids.exists? %>
+      <%= @mifal.name %> <i class="icon icon-angle-left-solid text-dark"></i> <%= @kids.first.group.head.name.sub(" #{@mifal.name}", "") if @kids.exists? %>
     </strong>
   <% end %>
-  <div>
+  <div class="mb-2">
     <% unless current_staff.admin? %>
       <h1 class="font-weight-bold text-center"> <%= current_staff.staffable.name.sub(" #{@mifal.name}", "") %> </h1>
     <% else %>
       <h1 class="font-weight-bold text-center">חניכים וחניכות</h1>
     <% end %>
     <% if @level >= 4 %>
-      <%= link_to "הוספת חניך", new_kid_path %>
-      <%= link_to "הוספת חניכים מאקסל", mifal_step_path(:imported_kids) %>
+      <%= link_to new_kid_path, class:"btn btn-primary-cus-outline font-weight-bold" do %>
+				<i class='icon icon-user-plus-solid'></i>
+				<span>הוספת חניך</span>
+			<% end %>
+      <%= link_to mifal_step_path(:imported_kids), class:"btn btn-primary-cus-outline font-weight-bold" do %>
+			 <i class='icon icon-file-excel-solid'></i>
+			 <span>הוספה מטבלה</span>
+			<% end %>
     <% end %>
   </div>
     <% if @level == 1 %>
@@ -32,9 +39,9 @@
         <% if @kids.first.group.checks.last.present?  %>
         <div class="check-stat">
         <% if @kids.first.group.checks.last.approved? %>
-          <i class="far fa-check-circle icon-lg mt-2" style="color:#07E39A"></i>
+          <i class="icon icon-check-circle-regular icon-lg mt-2" style="color:#07E39A"></i>
         <% else %>
-        <i class="far fa-times-circle icon-lg mt-2" style="color:#FF5E63"></i>
+        <i class="icon icon-times-circle-regular icon-lg mt-2" style="color:#FF5E63"></i>
         <% end %>
       </div>
         <div class="check-data text-right">
@@ -60,7 +67,7 @@
           <% end %>
           <% g_id = Group.find(current_staff.staffable.id) %>
           <div class="check-new">
-            <%= link_to "<i class='fas fa-plus plus-icon'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary-cus btn-plus" %>
+            <%= link_to "<i class='icon icon-plus-solid plus-icon'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary-cus btn-plus" %>
           </div>
 			</div>
     </div>
@@ -137,7 +144,7 @@ $('#dttb-kids').dataTable( {
        ],
        language: {
             buttons: {
-                colvis: '<i class="fas fa-columns"></i> עמודות',
+                colvis: '<i class="icon icon-columns-solid"></i> עמודות',
                 className: 'btn btn-primary-cus'
             }
         },
