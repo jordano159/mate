@@ -5,16 +5,14 @@
       <%= @group.mifal.name %> <i class="fas fa-angle-left text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? && @group.head %>
     </strong>
   <%# end %>
+  <h1 class="font-weight-bold text-center"><%= @group.name.sub(" #{@group.mifal.name}", "") %></h1>
+	<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
   <div>
-
-      <h1 class="font-weight-bold text-center"><%= @group.name.sub(" #{@group.mifal.name}", "") %></h1>
-
     <% if @level >= 4 %>
-      <%= link_to "הוספת חניך", new_kid_path %>
-      <%= link_to "הוספת חניכים מאקסל", mifal_step_path(:imported_kids) %>
+    <%= link_to "הוספת חניך", new_kid_path %>
+    <%= link_to "הוספת חניכים מאקסל", mifal_step_path(:imported_kids) %>
     <% end %>
   </div>
-	<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
 		<hr>
 		<% counter = how_many_attending(@group.kids) %>
 		<!-- יש <%# counter %> חניכימות נוכחימות מתוך <%# @kids.count %> -->
