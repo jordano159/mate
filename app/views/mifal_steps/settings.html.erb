@@ -193,7 +193,7 @@
   </div>
 </div>
 <hr>
-<div class="field" id="check_names">
+<div class="field" id="check_names_div">
   <%= form.label :check_names, "שמות הנוכחויות:" %>
 
   <div class="btn btn-primary btn-sm btn-round check_name_button" id="check_name_button">
@@ -212,9 +212,10 @@
     <% else %>
       <%= form.text_field :check_names, multiple: true, class: "inline form-control w-25 m-1" %>
     <% end %>
-    <div class="check_name inline">
-    </div>
 
+
+		<div class="check_name inline">
+		</div>
     <script>
       $(".check_name_button").click(function(){
         $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
@@ -236,7 +237,6 @@
       });
     </script>
   </div>
-
   <div class="field mt-4">
     <%= form.label :has_other_check_name, "צריך אפשרות של 'אחר' לשמות הנוכחות?" %>
     <div class="container">
