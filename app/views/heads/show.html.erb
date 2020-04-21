@@ -1,5 +1,5 @@
 <h1 style="font-weight:bold;"><i class="fa fa-chevron-left"></i> <%= @head.name %> </h1>
-<% if @level == 2 %>
+<% if @level >= 2 %>
 <p>
   סה"כ:
   <strong class="total"></strong> מתוך <strong><%= @head.kids.count %></strong>
@@ -7,7 +7,7 @@
 <% end %>
 
 <%= link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_head_path(@head),class: "text-muted icon-size" if current_staff.admin? %>
-<%= link_to 'חזרה לרשימה', heads_path %>
+<%= link_to 'חזרה לרשימה', heads_path if @level > 2 %>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-groups" data-sort="false"

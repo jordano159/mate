@@ -2,10 +2,10 @@
 <%= form_tag import_kids_path, multipart: true do %>
   <%= file_field_tag :file, class: 'form-control' %><br>
   <div class="form-actions">
-    <%= submit_tag 'ייבוא מקובץ xlsx', class: 'btn btn-primary'%>
+    <%= submit_tag 'ייבוא מקובץ xlsx', class: 'btn btn-primary-cus'%>
     או
     <%= link_to "דילוג לשלב הבא", next_wizard_path %>
     או
-    <%= link_to 'הורדת קובץ ריק לייבוא', new_import_file_path(format: :xlsx), class: 'btn btn-primary' if current_staff.admin? || current_staff.vip? %>
+    <%= link_to 'הורדת קובץ ריק לייבוא', new_import_file_path(format: :xlsx), class: 'btn btn-primary-cus' if current_staff.admin? || current_staff.vip? %>
   </div>
 <% end %>

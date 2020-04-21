@@ -2,7 +2,7 @@
   <%= link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_mifal_path(@mifal), class: "text-muted icon-size" if current_staff.admin? %>
   <%= link_to "<i class='icon icon-download-solid'></i>".html_safe, mifal_path(format: :xlsx), class: 'p-2 icon-size text-dark' if current_staff.admin? || current_staff.vip? %>
 </h2>
-<%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary" if current_staff.admin? %>
+<%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary-cus" if current_staff.admin? %>
 
 
 <% if @level == 4 %>
@@ -38,4 +38,4 @@
   });
 </script>
 
-<%# link_to "יצירת רכז.ת מפעל חדש.ה", new_mifal_staff_path(@mifal), class: "btn btn-primary" if current_staff.admin? %>
+<%# link_to "יצירת רכז.ת מפעל חדש.ה", new_mifal_staff_path(@mifal), class: "btn btn-primary-cus" if current_staff.admin? %>

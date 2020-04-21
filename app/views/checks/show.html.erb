@@ -112,7 +112,7 @@
   </table>
 </div>
 </p>
-<%= link_to 'סיום', root_path, class: "btn btn-primary" %>
+<%= link_to 'סיום', root_path, class: "btn btn-primary-cus" %>
 <%= link_to 'עריכה', edit_check_path(@check), class: "btn btn-warning" %>
 <%= link_to 'מחיקה', @check, method: :delete, data: { confirm: 'את/ה בטוח/ה שאת/ה רוצה למחוק את הנוכחות הזאת?' }, class: "btn btn-danger" %>
 
@@ -120,12 +120,12 @@
   <% unless @check.approved? %>
     <%= form_for @check do |f| %>
       <%= f.hidden_field :approved, value: true %>
-      <%= f.submit 'שינוי סטטוס - מאושר', class: 'btn btn-primary' %>
+      <%= f.submit 'שינוי סטטוס - מאושר', class: 'btn btn-primary-cus' %>
     <% end %>
     <% else %>
     <%= form_for @check do |f| %>
       <%= f.hidden_field :approved, value: false %>
-      <%= f.submit 'שינוי סטטוס - לא מאושר', class: 'btn btn-primary' %>
+      <%= f.submit 'שינוי סטטוס - לא מאושר', class: 'btn btn-primary-cus' %>
     <% end %>
   <% end %>
 <% end %>

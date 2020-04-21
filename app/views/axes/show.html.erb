@@ -46,13 +46,13 @@
       <% @axis.staffs.each do |s|%>
         <tr>
           <% if s.user? %>
-            <td class = "btn btn-primary"><%= s.name %></td>
+            <td class = "btn btn-primary-cus"><%= s.name %></td>
           <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%# link_to "יצירת רכז.ת #{@level_names[4]} חדש.ה", new_axis_staff_path(@axis), class: "btn btn-primary" if current_staff.admin? %>
+  <%# link_to "יצירת רכז.ת #{@level_names[4]} חדש.ה", new_axis_staff_path(@axis), class: "btn btn-primary-cus" if current_staff.admin? %>
 
-<%= link_to 'עריכה', edit_axis_path(@axis), class: "btn btn-primary" if current_staff.admin? %>
-<%= link_to 'חזרה לרשימה', axes_path, class: "btn btn-primary" %>
+<%= link_to 'עריכה', edit_axis_path(@axis), class: "btn btn-primary-cus" if current_staff.admin? %>
+<%= link_to 'חזרה לרשימה', axes_path, class: "btn btn-primary-cus" %>

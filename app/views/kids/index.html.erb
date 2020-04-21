@@ -78,8 +78,8 @@
 
 
 <%# if current_staff.admin? || current_staff.vip? %>
-<%# link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary mb-3" %>
-<%# link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary" %>
+<%# link_to 'חניך.ה חדש.ה', new_kid_path, class: "btn btn-primary-cus mb-3" %>
+<%# link_to  'ייצוא הטבלה לאקסל', kids_path(format: :xlsx), class: "btn btn-primary-cus" %>
 <%# end %>
 
 <div class="table-container">
@@ -152,7 +152,7 @@ $('#dttb-kids').dataTable( {
    var height = $(".buttons-colvis").outerHeight();
    $(".form-control").outerHeight(height);
    $(".buttons-colvis").removeClass("dt-button");
-  $(".buttons-columnVisibility").addClass("btn-primary-cus");
+
  }
 });
 

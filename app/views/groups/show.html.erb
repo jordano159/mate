@@ -102,10 +102,10 @@
 
 <% next_id = @group.id + 1 %>
 <% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>
-  <%= link_to "ה#{@level_names[0]} הבאה", group_path(next_id), class: "btn btn-primary" %>
+  <%= link_to "ה#{@level_names[0]} הבאה", group_path(next_id), class: "btn btn-primary-cus" %>
 <% end %>
 
-  <%# link_to "יצירת #{@staff_names[0]} חדש.ה", new_group_staff_path(@group), class: "btn btn-primary"  if current_staff.admin? %> <br>
+  <%# link_to "יצירת #{@staff_names[0]} חדש.ה", new_group_staff_path(@group), class: "btn btn-primary-cus"  if current_staff.admin? %> <br>
 
 
 
