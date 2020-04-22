@@ -7,8 +7,12 @@
 }
 
 body {
-background: #007bff;
-background: linear-gradient(to right, #0062E6, #33AEFF);
+	background: rgb(13,148,230);
+background: linear-gradient(49deg, rgba(13,148,230,1) 0%, rgba(53,206,212,1) 100%);
+}
+#wrapper{
+	background: rgb(13,148,230);
+background: linear-gradient(49deg, rgba(13,148,230,1) 0%, rgba(53,206,212,1) 100%);
 }
 
 .card-signin {
@@ -182,8 +186,11 @@ background-color: #3b5998;
    <div class="row">
      <div class="col center-login mx-auto" style="width:500px">
        <div class="card card-signin my-5">
+				 <div class="d-flex align-items-center justify-content-center w-100">
+					 <%= image_tag "clean-logo.svg", size:"200" %>
+				 </div>
          <div class="card-body">
-           <h3 class="card-title text-center">כניסה למטה</h3>
+           <h3 class="card-title text-center">המטה</h3>
            <div class="form-signin">
              <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
              <div class="form-label-group">
@@ -217,4 +224,9 @@ background-color: #3b5998;
    $( "#error_btn" ).insertAfter( "#submit" );
  $( "#staff_remember_me" ).checkboxradio();
 } );
+$(document).ready(function() {
+	if (window.innerWidth > 1000) {
+		$("#con").addClass("w-50s")
+	}
+});
  </script>

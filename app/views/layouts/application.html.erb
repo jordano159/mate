@@ -31,23 +31,33 @@
   <body>
 
 
-<div id="wrapper">
 <% unless mobile_device? %>
-  <div class="grid-container">
     <% if staff_signed_in? %>
+		<div id="wrapper">
+		<div class="grid-container">
     <div class="header">
       <%= render 'layouts/pcNavbar' %>
   </div>
+	<div class="side">
+		<%= render 'layouts/sidebar'%>
+	</div>
+	<div class="main">
+		<div id="page-content-wrapper" class="amr-2">
+			<%= yield %>
+		</div>
+	</div>
+</div>
+</div>
+<% else %>
+<div class="d-flex justify-content-center w-100">
+	<div id="page-content-wrapper" class="d-flex  flex-column align-items-center justify-content-center">
+
+		<%= yield %>
+	</div>
+</div>
   <% end %>
-    <div class="side">
-      <%= render 'layouts/sidebar' %>
-              </div>
-    <div class="main">
-      <div id="page-content-wrapper" class="mr-2">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
+	<%# unless  current_page?(controller: "sessions", action: "new")  %>
+	<%# end %>
 <% else %>
   <%= render 'layouts/navbar' %>
   <div id="wrapper">
