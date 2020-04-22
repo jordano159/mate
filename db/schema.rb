@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_08_101423) do
+ActiveRecord::Schema.define(version: 2020_04_22_094554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,6 +221,11 @@ ActiveRecord::Schema.define(version: 2020_03_08_101423) do
     t.text "head_head_name"
     t.string "alert_message"
     t.text "causes"
+    t.integer "kids_count", default: 0, null: false
+    t.integer "present_kids", default: 0, null: false
+    t.text "city_coords"
+    t.integer "started_kids", default: 0, null: false
+    t.text "check_log"
     t.text "check_names"
     t.boolean "has_other_check_name", default: false, null: false
   end
@@ -243,6 +248,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_101423) do
     t.inet "last_sign_in_ip"
     t.string "username"
     t.integer "role"
+    t.string "phone"
     t.index ["email"], name: "index_staffs_on_email"
     t.index ["name"], name: "index_staffs_on_name"
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true

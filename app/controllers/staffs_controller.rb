@@ -15,7 +15,7 @@ class StaffsController < ApplicationController
   end
 
   def edit
-    redirect_to '/' unless current_staff.admin?
+    redirect_to '/' if @level < 4 
   end
 
   def create
