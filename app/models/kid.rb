@@ -43,6 +43,7 @@ class Kid < ApplicationRecord
       event.staff_id = mifal.staffs.first.id
       event.eventable_type = "Mifal"
       event.eventable_id = mifal.id
+      event.level = "auto"
       event.save
     end
     yield #kid.save
@@ -50,11 +51,12 @@ class Kid < ApplicationRecord
   end
 
   def create_kid_left_event
-    event = Event.new
-    event.content = "#{full_name} מ#{Group.find(group_id).name} עזב.ה את המפעל"
-    event.staff_id = mifal.staffs.first.id
-    event.eventable_type = "Mifal"
-    event.eventable_id = mifal.id
+    # event = Event.new
+    # event.content = "#{full_name} מ#{Group.find(group_id).name} עזב.ה את המפעל"
+    # event.staff_id = mifal.staffs.first.id
+    # event.eventable_type = "Mifal"
+    # event.eventable_id = mifal.id
+    # event.level = "auto"
     # event.save
     self.last_group = group.id
     puts last_group
