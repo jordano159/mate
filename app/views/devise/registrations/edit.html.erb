@@ -1,20 +1,26 @@
-<h2>עריכת שם משתמש</h2>
+<h2>עריכת המשתמש</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name, label: "שם חדש" %>
+    <%= f.input :name, label: "שם",  required: true %>
+    <%= f.input :username, label: "שם משתמש", disabled: true, hint: 'לא ניצן לשנות את שם המשתמש' %>
+    <%= f.input :phone, label: "מספר טלפון", as: :tel,  required: true %>
     <%= f.input :email, required: true, autofocus: true if current_staff.admin? %>
-    <%#= f.input :username %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false if current_staff.admin? %>
-    <%= f.input :password_confirmation, required: false if current_staff.admin? %>
-    <%= f.input :current_password, label: "סיסמה נוכחית", hint: "אנחנו צריכים את הסיסמה הנוכחית שלך",  required: true  %>
+    <% if params[:first] %>
+      <%= f.input :password, label: "סיסמה חדשה", autocomplete: "off", hint: "חובה להחליף סיסמה בכניסה ראשונית", required: true %>
+      <%= f.input :password_confirmation, label: "אימות סיסמה חדשה", required: true %>
+    <% else %>
+    <%= f.input :password, label: "סיסמה חדשה", autocomplete: "off", hint: "להשאיר ריק אם לא רוצים לשנות", required: false %>
+    <%= f.input :password_confirmation, label: "אימות סיסמה חדשה", required: false %>
+    <% end %>
+    <%= f.input :current_password, label: "סיסמה נוכחית", hint: "אנחנו צריכים את הסיסמה הנוכחית שלך כדי לאשר את השינויים",  required: true  %>
   </div>
 
   <div class="form-actions">

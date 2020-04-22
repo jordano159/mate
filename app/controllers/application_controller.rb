@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :clearence
   before_action :only_admin
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :first_sign_in
   # after_action :track_action
 
 def month_names
@@ -134,9 +135,13 @@ end
   private
 
   def configure_permitted_parameters
-    attributes = %i[name email]
+    attributes = %i[name email phone]
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
+  end
+
+  def first_sign_in
+    redirect_to edit_staff_registration_path(first: "y") if staff_signed_in? && current_staff.sign_in_count < 2 && controller_name != "registrations" && current_staff.phone.nil?
   end
 
   def level
