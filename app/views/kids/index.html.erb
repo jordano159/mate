@@ -12,9 +12,9 @@
   <% end %>
   <div class="mb-2">
     <% unless current_staff.admin? %>
-      <h1 class="font-weight-bold text-center"> <%= current_staff.staffable.name.sub(" #{@mifal.name}", "") %> </h1>
+      <h1 > <%= current_staff.staffable.name.sub(" #{@mifal.name}", "") %> </h1>
     <% else %>
-      <h1 class="font-weight-bold text-center">חניכים וחניכות</h1>
+      <h1 >חניכים וחניכות</h1>
     <% end %>
     <% if @level >= 4 %>
       <%= link_to new_kid_path, class:"btn btn-primary-cus-outline font-weight-bold" do %>
@@ -117,6 +117,9 @@
 
 
 <script>
+$(document).ready(function() {
+
+
 if(<%= @level == 1 %>){
   var targets = [0,1,2];
 } else{
@@ -166,4 +169,6 @@ $('#dttb-kids').dataTable( {
 // };
 // $(".table-container").width(table_width);
 // $(".progress").width(table_width);
+
+});
 </script>

@@ -449,11 +449,14 @@ div.dt-buttons {
   }
 h1{
 	margin: 1rem;
+	font-weight: bold;
 }
 a{
 	margin-left: 1rem;
 	margin-right: 1rem;
-
+}
+.row{
+	margin-right: 0px !important
 }
   .sidebar-nav li a:hover {
     text-decoration: none;

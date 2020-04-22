@@ -21,6 +21,18 @@ class MifalStepsController < ApplicationController
       @mifal.settings! # Set stage
       @mifal.update(mifal_params)
       @mifal.columns.delete("")
+			puts "****************mifal_params************************"
+			puts mifal_params[:columns]
+			if @mifal.columns.include?("parents_info")
+				puts "***************true info*************************"
+				puts @mifal.columns
+				@mifal.columns.delete("parents_info")
+				puts "***************after delete*************************"
+				puts @mifal.columns
+				@mifal.columns += ["parent_1", "parent_1_phone", "parent_2", "parent_2_phone"]
+				puts "***************after add*************************"
+				@mifal.columns
+			end
       @mifal.columns.unshift("name", "last_name", "full_name", "taz", "group", "status", "cause")
       group_name_single = params[:mifal][:group_name_single]
       group_name_plural = params[:mifal][:group_name_plural]

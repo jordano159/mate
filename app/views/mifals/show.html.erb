@@ -1,7 +1,7 @@
-<h2 class="font-weight-bold"><%= @mifal.name %>
+<h1 class="font-weight-bold"><%= @mifal.name %>
   <%= link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_mifal_path(@mifal), class: "text-muted icon-size" if current_staff.admin? %>
   <%= link_to "<i class='icon icon-download-solid'></i>".html_safe, mifal_path(format: :xlsx), class: 'p-2 icon-size text-dark' if current_staff.admin? || current_staff.vip? %>
-</h2>
+</h1>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary-cus" if current_staff.admin? %>
 
 

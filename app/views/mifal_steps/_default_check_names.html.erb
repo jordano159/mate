@@ -6,3 +6,13 @@
 <%= form.text_field :check_names, style: "display: inline;", multiple: true, value: "בדיקה", class: "form-control w-25 m-1 check_names" %>
 <div class="check_name inline">
 </div>
+<div class="btn btn-primary-cus btn-sm btn-round check_name_button" >
+	<i class="icon icon-plus-solid"></i>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".check_name_button").click(function(){
+			$('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+		});
+	});
+</script>

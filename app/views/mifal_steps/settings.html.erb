@@ -9,7 +9,7 @@
           <%= form.label :has_buses, "צריך ניהול אוטובוסים?" %>
           <div class="container">
             <div class="button-wrap mr-4  marginable" >
-              <%= form.collection_radio_buttons :has_buses, [[true, '<h1 id="buses_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="buses_false" class="false">לא</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :has_buses, [[true, '<span id="buses_true" class="true">כן</span>'.html_safe] ,[false, '<span id="buses_false" class="false">לא</span>'.html_safe]],
               :first, :last, { checked: @mifal.has_buses } %>
 
             </div>
@@ -20,7 +20,7 @@
           <%= form.label :has_events, "צריך יומן אירועים?" %>
           <div class="container">
             <div class="button-wrap mr-4  marginable">
-              <%= form.collection_radio_buttons :has_events, [[true, '<h1 id="events_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="events_false" class="false">לא</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :has_events, [[true, '<span id="events_true" class="true">כן</span>'.html_safe] ,[false, '<span id="events_false" class="false">לא</span>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
@@ -29,7 +29,7 @@
           <%= form.label :has_approve, "צריך שהרמה השנייה תאשר נוכחות?" %>
           <div class="container">
             <div class="button-wrap mr-4  marginable">
-              <%= form.collection_radio_buttons :has_approve, [[true, '<h1 id="approve_true" class="true">כן</h1>'.html_safe] ,[false, '<h1 id="approve_false" class="false">לא</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :has_approve, [[true, '<span id="approve_true" class="true">כן</span>'.html_safe] ,[false, '<span id="approve_false" class="false">לא</span>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
@@ -40,8 +40,8 @@
           <%= form.label :has_axes, "צריך רמה שלישית?" %>
           <div class="container">
             <div class="button-wrap mr-4  marginable">
-              <%= form.collection_radio_buttons :has_axes, [[true, '<h1 id="axes_true" class="true">כן</h1>'.html_safe],
-                                                            [false, '<h1 id="axes_false" class="false">לא</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :has_axes, [[true, '<span id="axes_true" class="true">כן</span>'.html_safe],
+                                                            [false, '<span id="axes_false" class="false">לא</span>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
@@ -50,8 +50,8 @@
           <%= form.label :has_late, "צריך אפשרות לסמן איחורים?" %>
           <div class="container">
             <div class="button-wrap mr-4  marginable">
-              <%= form.collection_radio_buttons :has_late, [[true, '<h1 id="late_true" class="true">כן</h1>'.html_safe],
-                                                            [false, '<h1 id="late_false" class="false">לא</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :has_late, [[true, '<span id="late_true" class="true">כן</span>'.html_safe],
+                                                            [false, '<span id="late_false" class="false">לא</span>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
@@ -61,8 +61,8 @@
           <%= form.label :checks_num, "מה תדירות הנוכחות?" %>
           <div class="container">
             <div class="button-wrap mr-4 marginable">
-              <%= form.collection_radio_buttons :checks_num, [[true, '<h1 id="checks_num_true" class="true">פעם ביום</h1>'.html_safe],
-                                                              [false, '<h1 id="checks_num_false" class="false">מספר פעמים ביום</h1>'.html_safe]],
+              <%= form.collection_radio_buttons :checks_num, [[true, '<span id="checks_num_true" class="true">פעם ביום</span>'.html_safe],
+                                                              [false, '<span id="checks_num_false" class="false">מספר פעמים ביום</span>'.html_safe]],
               :first, :last  %>
             </div>
           </div>
@@ -79,38 +79,6 @@
   };
 </script>
 <div class="container">
-  <div>
-    בחירת ברירת מחדל:
-    <button type="button" name="youth" id="youth" class="btn btn-primary-cus mr-2">תנועת נוער</button>
-    <button type="button" name="school" id="school" class="btn btn-primary-cus mr-2">בית ספר</button>
-  </div>
-
-  <script>
-    $( "#youth" ).click(function() {
-      $("#group_name_single").val("קבוצה");
-      $("#group_name_plural").val("קבוצות");
-      $("#guide_name_single").val("מדריכה");
-      $("#guide_name_plural").val("מדריכות");
-      $("#axis_name_single").val("ציר");
-      $("#head_name_single").val("ראש");
-      $("#head_name_plural").val("ראשים");
-      $("#head_head_name_single").val("ראשראש");
-      $("#head_head_name_plural").val("ראשראשים");
-      $("#axis_name_plural").val("צירים");
-    });
-    $( "#school" ).click(function() {
-      $("#group_name_single").val("כיתה");
-      $("#group_name_plural").val("כיתות");
-      $("#guide_name_single").val("מורה");
-      $("#guide_name_plural").val("מורות");
-      $("#axis_name_single").val("חטיבה");
-      $("#head_name_single").val("שכבה");
-      $("#head_name_plural").val("שכבות");
-      $("#head_head_name_single").val("רכז שכבה");
-      $("#head_head_name_plural").val("רכז שכבה");
-      $("#axis_name_plural").val("חטיבות");
-    });
-  </script>
 
   <div class="row">
     <div class="col">
@@ -179,10 +147,43 @@
         </div>
     </div>
     </div>
+		<div class="mt-2">
+			בחירת ברירת מחדל:
+			<button type="button" name="youth" id="youth" class="btn btn-primary-cus mr-2">תנועת נוער</button>
+			<button type="button" name="school" id="school" class="btn btn-primary-cus mr-2">בית ספר</button>
+		</div>
+
+		<script>
+			$( "#youth" ).click(function() {
+				$("#group_name_single").val("קבוצה");
+				$("#group_name_plural").val("קבוצות");
+				$("#guide_name_single").val("מדריכה");
+				$("#guide_name_plural").val("מדריכות");
+				$("#axis_name_single").val("ציר");
+				$("#head_name_single").val("ראש");
+				$("#head_name_plural").val("ראשים");
+				$("#head_head_name_single").val("ראשראש");
+				$("#head_head_name_plural").val("ראשראשים");
+				$("#axis_name_plural").val("צירים");
+			});
+			$( "#school" ).click(function() {
+				$("#group_name_single").val("כיתה");
+				$("#group_name_plural").val("כיתות");
+				$("#guide_name_single").val("מורה");
+				$("#guide_name_plural").val("מורות");
+				$("#axis_name_single").val("חטיבה");
+				$("#head_name_single").val("שכבה");
+				$("#head_name_plural").val("שכבות");
+				$("#head_head_name_single").val("רכז שכבה");
+				$("#head_head_name_plural").val("רכז שכבה");
+				$("#axis_name_plural").val("חטיבות");
+			});
+		</script>
+
 </div>
 <hr>
 <div class="field">
-  <%= form.label :alert_message, "התראה להצגה בשליחת  נוכחות:" %>
+  <h3><%= form.label :alert_message, "התראה להצגה בשליחת  נוכחות:" %></h3>
   <div class="container">
     <%  if @mifal.alert_message.present? %>
       <% alert_message =  @mifal.alert_message %>
@@ -194,15 +195,10 @@
 </div>
 <hr>
 <div class="field" id="check_names_div">
-  <%= form.label :check_names, "שמות הנוכחויות:" %>
+  <h3><%= form.label :check_names, "שמות הנוכחויות:" %></h3>
 
-  <div class="btn btn-primary-cus btn-sm btn-round check_name_button" id="check_name_button">
-    <i class="icon icon-plus-solid"></i>
-  </div>
-  <div>
-    בחירת ברירת מחדל:
-    <button type="button" name="youth_names" id="youth_names" class="btn btn-primary-cus mr-2">תנועת נוער - 3 פעמים ביום</button>
-  </div>
+
+
 
   <div class="container" id="check_names">
     <% if @mifal.check_names.present? %>
@@ -213,36 +209,46 @@
       <%= form.text_field :check_names, multiple: true, class: "inline form-control w-25 m-1" %>
     <% end %>
 
-
 		<div class="check_name inline">
 		</div>
-    <script>
-      $(".check_name_button").click(function(){
-        $('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
-      });
-      $( "#youth_names" ).click(function() {
-        $('#check_names').html("<%= j (render partial: 'default_check_names', locals: {form:form}) %>")
-        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
-        // $('.check_names').last().val("נוכחות בוקר");
-        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
-        // $('.check_names').last().val("נוכחות צהריים");
-        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
-        // $('.check_names').last().val("נוכחות ערב");
-        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
-        // $('.check_names').last().val("נוכחות אוטובוס");
-        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
-        // $('.check_names').last().val("אירוע חירום");
-        // $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
-        // $('.check_names').last().val("בדיקה");
-      });
-    </script>
+		<div class="btn btn-primary-cus btn-sm btn-round check_name_button" >
+	    <i class="icon icon-plus-solid"></i>
+	  </div>
   </div>
+	<div>
+    בחירת ברירת מחדל:
+    <button type="button" name="youth_names" id="youth_names" class="btn btn-primary-cus mr-2 mt-2">תנועת נוער - 3 פעמים ביום</button>
+  </div>
+<script>
+$(document).ready(function() {
+	$(".check_name_button").click(function(){
+		$('.check_name').append("<%= j (render partial: 'check_name', locals: {form:form}) %>")
+		console.log("check");
+	});
+	$( "#youth_names" ).click(function() {
+		$('#check_names').html("<%= j (render partial: 'default_check_names', locals: {form:form}) %>")
+		// $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+		// $('.check_names').last().val("נוכחות בוקר");
+		// $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+		// $('.check_names').last().val("נוכחות צהריים");
+		// $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+		// $('.check_names').last().val("נוכחות ערב");
+		// $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+		// $('.check_names').last().val("נוכחות אוטובוס");
+		// $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+		// $('.check_names').last().val("אירוע חירום");
+		// $('.check_name').append("<%# j (render partial: 'check_name', locals: {form:form}) %>")
+		// $('.check_names').last().val("בדיקה");
+	});
+
+});
+  </script>
   <div class="field mt-4">
     <%= form.label :has_other_check_name, "צריך אפשרות של 'אחר' לשמות הנוכחות?" %>
     <div class="container">
       <div class="button-wrap msr-4 mardginable">
-        <%= form.collection_radio_buttons :has_other_check_name, [[true, '<h1 id="other_check_name_true" class="true">כן</h1>'.html_safe],
-                                                        [false, '<h1 id="other_check_name_false" class="false">לא</h1>'.html_safe]],
+        <%= form.collection_radio_buttons :has_other_check_name, [[true, '<span id="other_check_name_true" class="true">כן</span>'.html_safe],
+                                                        [false, '<span id="other_check_name_false" class="false">לא</span>'.html_safe]],
         :first, :last  %>
       </div>
     </div>
@@ -251,14 +257,13 @@
 </div>
 <hr>
 <div class="field">
-  <%= form.label :causes, "סיבות אפשריות להיעדרות:" %>
-  <a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="אפשרות לאחר כלולה באופן אוטומטי">
-      <i class="icon icon-question-circle-regular"></i>
-  </a>
+  <h3><%= form.label :causes, "סיבות אפשריות להיעדרות:" %>
+			<a tabindex="0" role="button"  class="text-muted icon-size" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="אפשרות לאחר כלולה באופן אוטומטי">
+				<i class="icon icon-question-circle-regular"></i>
+			</a>
+	</h3>
 
-  <div class="btn btn-primary-cus btn-sm btn-round cause_button" id="cause_button">
-    <i class="icon icon-plus-solid"></i>
-  </div>
+
   <div class="container">
     <!-- <button type="button" name="preset_cause" id="preset_cause" class="btn">ברירת מחדל</button> -->
     <%# preset_causes = [["היעדרות מסיבה רפואית", "היעדרות מסיבה רפואית"], ["היעדרות מסיבה אישית", "היעדרות מסיבה אישית"]] %>
@@ -272,6 +277,9 @@
     <% end %>
     <div class="cause inline" id="causes">
     </div>
+		<div class="btn btn-primary-cus btn-sm btn-round cause_button" id="cause_button">
+			<i class="icon icon-plus-solid"></i>
+		</div>
     <script>
       $(".cause_button").click(function(){
         $('.cause').append("<%= j (render partial: 'cause', locals: {form:form}) %>")
@@ -288,21 +296,29 @@
 </div>
 <hr>
   <div class="field">
-    <%= form.label :columns, "איזה מידע צריך להיות על חניכים:" %>
+    <h3><%= form.label :columns, "איזה מידע צריך להיות על חניכים:" %>
+			<a tabindex="0" role="button"  class="text-muted icon-size" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="שם פרטי, שם משפחה ותעודת זהות כלולים באופן אוטומטי">
+				<i class="icon icon-question-circle-regular"></i>
+			</a>
+		</h3>
 
-    <a tabindex="0" role="button"  class="text-muted" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="שם פרטי, שם משפחה ותעודת זהות כלולים באופן אוטומטי">
-        <i class="icon icon-question-circle-regular"></i>
-    </a>
     <div class="container">
 
       <%= form.collection_check_boxes :columns,
       [["ken", 'קן'], ["grade", "שכבה"], ["sex", "מין"],
       ["phone", "טלפון"], ["medical", "רגישויות ובעיות רפואיות"], ["meds", "תרופות"],
       ["food", "אוכל"], ["comments", "הערות"], ["city", "יישוב"],
+      ["parents_info", "פרטי הורים"], ["size", "מידת חולצה"], ["shabat", "שומר/ת שבת"],
+      ["parents", "הגעת הורים לטקס"], ["swim", "יכולת שחייה"], ["exits", "כניסות ויציאות"]],
+      :first, :last %>
+      <!-- <%= form.collection_check_boxes :columns,
+      [["ken", 'קן'], ["grade", "שכבה"], ["sex", "מין"],
+      ["phone", "טלפון"], ["medical", "רגישויות ובעיות רפואיות"], ["meds", "תרופות"],
+      ["food", "אוכל"], ["comments", "הערות"], ["city", "יישוב"],
       ["parent_1", "שם הורה 1"], ["parent_1_phone", "טלפון הורה 1"],["parent_2", "שם הורה 2"],
       ["parent_2_phone", "טלפון הורה 2"], ["size", "מידת חולצה"], ["shabat", "שומר/ת שבת"],
       ["parents", "הגעת הורים לטקס"], ["swim", "יכולת שחייה"], ["exits", "כניסות ויציאות"]],
-      :first, :last %>
+      :first, :last %> -->
     </div>
   </div>
 
@@ -445,6 +461,7 @@ if (checked_checks_num == true){
   $("#checks_num_true").addClass("btn-success");
   $("#checks_num_true").removeClass("btn-secondary");
   $('#check_names').hide(10);
+  $('#check_names_div').hide(10);
 } else{
   $("#checks_num_false").addClass("btn-success");
   $("#checks_num_false").removeClass("btn-secondary");
@@ -474,9 +491,15 @@ $("#mifal_has_other_check_name_false").click(function() {
 });
 $("#checks_num_true").click(function() {
   $('#check_names').hide(400);
+  $('#check_names_div').hide(400);
 });
 $("#checks_num_false").click(function() {
   $('#check_names').show(400);
+  $('#check_names_div').show(400);
 });
-
+if ("<%= @mifal.columns.include?('parent_1') %>" == "true") {
+	$("#mifal_columns_parents_info").prop('checked', 'checked');
+		$("#mifal_columns_parents_info").labels().addClass('ui-checkboxradio-checked ui-state-active')
+		$("#mifal_columns_parents_info").labels().children('.ui-checkboxradio-icon').removeClass('ui-icon-blank').addClass('ui-icon-check ui-state-checked ui-state-hover')
+}
 </script>
