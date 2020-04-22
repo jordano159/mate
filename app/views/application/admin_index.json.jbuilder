@@ -1,6 +1,6 @@
 json.set! :data do
   json.array! @staffs do |staff|
-    if staff.staffable
+    if staff.staffable && @level > 3
       edit = eval("edit_#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})")
       delete = eval("#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})")
       become = eval("become_#{staff.staffable_type.downcase}_staff_path(#{eval('#{staff.staffable_type.downcase}_id:')} #{staff.staffable.id}, id: #{staff.id})")
@@ -14,5 +14,10 @@ json.set! :data do
       json.url  " "
     end
     json.username "#{staff.username}"
+    if staff.phone.present?
+      json.phone "#{link_to staff.phone, "tel:#{staff.phone}"} #{link_to 'וואטסאפ', "https://api.whatsapp.com/send?phone=972#{staff.phone}"}"
+    else
+      json.phone "אין מספר במערכת"
+    end
   end
 end

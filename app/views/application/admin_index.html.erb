@@ -1,5 +1,4 @@
 <h1>צוות</h1>
-<h4>כניסה לתוך המשתמשים של הצוות</h4>
 
 <%# link_to "יצירת אדמין חדש", new_axis_staff_path(Axis.first.id), class: "btn btn-primary-cus" %>
 
@@ -8,7 +7,10 @@
     <thead class="thead-grey nowrap">
       <tr>
         <th data-data="name">שם</th>
-        <th data-data="username">שם משתמש</th>
+        <% if @level > 3 %>
+          <th data-data="username">שם משתמש</th>
+        <% end %>
+        <th data-data="phone">טלפון</th>
         <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
       </tr>
     </thead>

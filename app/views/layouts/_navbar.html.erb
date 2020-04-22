@@ -70,11 +70,9 @@
       <li class="nav-item ">
         <%= link_to "נוכחויות", checks_path, class: "nav-link" %>
       </li>
-      <% if current_staff.admin? || current_staff.vip? %>
-        <li class="nav-item ">
-          <%= link_to "צוות", staffs_path, class: "nav-link" %>
-        </li>
-        <% end %>
+      <li class="nav-item ">
+        <%= link_to "צוות", staffs_path, class: "nav-link" %>
+      </li>
         <% if current_staff.admin? %>
         <li class="nav-item ">
           <%= link_to "מפעלים", mifals_path, class: "nav-link" %>

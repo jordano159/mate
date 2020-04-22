@@ -110,10 +110,8 @@ end
   def admin_index
     if current_staff.admin?
       @staffs = Staff.all
-    elsif current_staff.vip?
-      @staffs = current_staff.staffable.all_staffs
     else
-      redirect_to root_path
+      @staffs = current_staff.staffable.mifal.all_staffs
     end
   end
 
