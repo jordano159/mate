@@ -1,6 +1,6 @@
 class Bus < ApplicationRecord
   validates :name, presence: true
-  has_many :kids
+  has_and_belongs_to_many :kids
   has_many :checks
   belongs_to :mifal
 

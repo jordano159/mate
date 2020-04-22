@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_094554) do
+ActiveRecord::Schema.define(version: 2020_04_22_135239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,11 @@ ActiveRecord::Schema.define(version: 2020_04_22_094554) do
     t.datetime "updated_at", null: false
     t.bigint "mifal_id"
     t.index ["mifal_id"], name: "index_buses_on_mifal_id"
+  end
+
+  create_table "buses_kids", id: false, force: :cascade do |t|
+    t.bigint "kid_id", null: false
+    t.bigint "bus_id", null: false
   end
 
   create_table "checks", force: :cascade do |t|
@@ -168,7 +173,6 @@ ActiveRecord::Schema.define(version: 2020_04_22_094554) do
     t.text "comments"
     t.integer "status"
     t.text "cause"
-    t.integer "bus_id"
     t.string "grade"
     t.bigint "taz"
     t.bigint "mifal_id"

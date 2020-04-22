@@ -34,10 +34,20 @@
     <%= form.text_field :name, required: :true %>
   </div>
   <div class="field">
-    <%= form.label :city, "קנים או ערים שהאוטובוס עוצר בהם: " %>
+    <%= form.label :city, "ערים שהאוטובוס עוצר בהם: " %>
     <% places = @mifal.kids.pluck(:city).uniq %>
-    <% @mifal.kids.pluck(:ken).uniq.each { |p| places << p } %>
     <%= form.select :city, options_for_select(places), {}, {multiple: true, class: "select", style: "width: 100%"} %>
+  </div>
+  <div class="field">
+    <%= form.label :ken, "קנים שהאוטובוס עוצר בהם: " %>
+    <% @mifal.kids.pluck(:ken).uniq.each { |p| places << p } %>
+    <%= form.select :ken, options_for_select(places), {}, {multiple: true, class: "select", style: "width: 100%"} %>
+  </div>
+  <div class="field">
+    <%= form.label :group, "קבוצות של המפעל שעולות על האוטובוס: " %>
+    <% excluded = @mifal.groups.where("name LIKE :prefix", prefix: "סל מחזור%").first.name %>
+    <% places = @mifal.groups.pluck(:name).reject { |x| excluded.include?(x) } %>
+    <%= form.select :group, options_for_select(places), {}, {multiple: true, class: "select", style: "width: 100%"} %>
   </div>
   <div class="field">
     <%= form.label :kid_ids, "החניכים: (מתעדכן לאחר שמירה)" %>

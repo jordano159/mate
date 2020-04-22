@@ -39,7 +39,7 @@ class BusesController < ApplicationController
 
     respond_to do |format|
       if @bus.save
-        populate_bus(params[:bus][:city]) if params[:bus][:city]
+        populate_bus(params[:bus][:city], params[:bus][:ken], params[:bus][:group]) if params[:bus][:city] && params[:bus][:ken] && params[:bus][:group]
         format.html { redirect_to @bus, notice: 'Bus was successfully created.' }
         format.json { render :show, status: :created, location: @bus }
       else
@@ -55,7 +55,7 @@ class BusesController < ApplicationController
     respond_to do |format|
       if @bus.update(bus_params)
         if params[:bus].present? && params[:bus][:city].present?
-          populate_bus(params[:bus][:city])
+          populate_bus(params[:bus][:city], params[:bus][:ken], params[:bus][:group]) if params[:bus][:city] && params[:bus][:ken] && params[:bus][:group]
         end
         format.html { redirect_to @bus, notice: 'Bus was successfully updated.' }
         format.json { render :show, status: :ok, location: @bus }
@@ -77,22 +77,21 @@ class BusesController < ApplicationController
   end
 
   private
-    def populate_bus(cities)
-      cities.each do |c|
-        Kid.where("city = ?", c).each do |k|
-          k.bus_id = @bus.id
-          k.save
+
+    def populate_bus(cities, kens, groups)
+      mifal = Mifal.find(current_staff.staffable.id)
+      cities.each do |city|
+        mifal.kids.where("city = ?", city).each do |k|
+          @bus.kids << k
         end
       end
-    end
-
-    def populate_bus(places)
-      mifal = Mifal.find(current_staff.staffable.id)
-      places.each do |p|
-        mifal.kids.where("city = ? OR ken = ?", p, p).each do |k|
-          k.bus_id = @bus.id
-          k.save
+      kens.each do |ken|
+        mifal.kids.where("ken = ?", ken).each do |k|
+          @bus.kids << k
         end
+      end
+      groups.each do |group|
+        @bus.kids << Group.find_by(name: group).kids if Group.find_by(name: group) && Group.find_by(name: group).kids.present?
       end
     end
     # Use callbacks to share common setup or constraints between actions.
