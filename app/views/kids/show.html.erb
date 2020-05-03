@@ -20,14 +20,14 @@
         <td> <%= @column_names[column.to_sym] %> </td>
         <td> <%= @kid.send(column) if @kid.send(column).present? %>
         <% if column == "phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&phone=972<%= @kid.phone %>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp text-success font-size-whatsapp mx-2" aria-hidden="true" ></i></a>
-          <a href="tel:0<%= @kid.phone %>" ><i class="fa fa-phone fa-lg fa-2x"></i></a>
+          <a href="whatsapp://send?text=<%= " " %>&phone=972<%= @kid.phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
+          <a href="tel:0<%= @kid.phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
         <% elsif column == "parent_1_phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&parent_1_phone=972<%= @kid.parent_1_phone %>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp text-success font-size-whatsapp mx-2" aria-hidden="true" ></i></a>
-          <a href="tel:0<%= @kid.parent_1_phone %>" ><i class="fa fa-phone fa-lg fa-2x"></i></a>
+          <a href="whatsapp://send?text=<%= " " %>&parent_1_phone=972<%= @kid.parent_1_phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
+          <a href="tel:0<%= @kid.parent_1_phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
         <% elsif column == "parent_2_phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&parent_2_phone=972<%= @kid.parent_2_phone %>" data-action="share/whatsapp/share"><i class="fab fa-whatsapp text-success font-size-whatsapp mx-2" aria-hidden="true" ></i></a>
-          <a href="tel:0<%= @kid.parent_2_phone %>" ><i class="fa fa-phone fa-lg fa-2x"></i></a>
+          <a href="whatsapp://send?text=<%= " " %>&parent_2_phone=972<%= @kid.parent_2_phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
+          <a href="tel:0<%= @kid.parent_2_phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
         <% end %></td>
       </tr>
     <% end %>

@@ -15,7 +15,7 @@ json.set! :data do
     end
     json.username "#{staff.username}"
     if staff.phone.present?
-      json.phone "#{link_to staff.phone, "tel:#{staff.phone}"} #{link_to 'וואטסאפ', "https://api.whatsapp.com/send?phone=972#{staff.phone}"}"
+      json.phone "#{link_to "", "tel:#{staff.phone}",class:'icon icon-phone-solid icon-size'} #{link_to "", "https://api.whatsapp.com/send?phone=972#{staff.phone}",class:'icon icon-whatsapp-brands icon-size text-success'}"
     else
       json.phone "אין מספר במערכת"
     end

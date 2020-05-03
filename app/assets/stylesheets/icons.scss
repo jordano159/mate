@@ -1,8 +1,8 @@
 @import "variables";
 
 @font-face {
-	font-family: '#{$icomoon-font-family}';
-	src:  asset_url('#{$icomoon-font-family}.eot');
+  font-family: '#{$icomoon-font-family}';
+  src:  asset_url('#{$icomoon-font-family}.eot');
 	src:  asset_url('#{$icomoon-font-family}.eot') format('embedded-opentype'),
 		asset_url('#{$icomoon-font-family}.ttf') format('truetype'),
 		asset_url('#{$icomoon-font-family}.woff') format('woff'),
@@ -27,6 +27,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-whatsapp-brands {
+  &:before {
+    content: $icon-whatsapp-brands;
+  }
+}
+.icon-phone-solid {
+  &:before {
+    content: $icon-phone-solid;
+  }
+}
 .icon-check-circle-regular {
   &:before {
     content: $icon-check-circle-regular;
