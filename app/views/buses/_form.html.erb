@@ -44,7 +44,7 @@
     <%= form.select :ken, options_for_select(kens), {}, {multiple: true, class: "select", style: "width: 100%"} %>
   </div>
   <div class="field">
-    <%= form.label :group, "קבוצות של המפעל שעולות על האוטובוס: " %>
+    <%= form.label :group, "#{@level_names[1]} של המפעל שעולות על האוטובוס: " %>
     <% excluded = @mifal.groups.where("name LIKE :prefix", prefix: "סל מחזור%").first.name %>
     <% groups = @mifal.groups.pluck(:name).reject { |x| excluded.include?(x) } %>
     <%= form.select :group, options_for_select(groups), {}, {multiple: true, class: "select", style: "width: 100%"} %>
