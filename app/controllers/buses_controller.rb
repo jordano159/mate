@@ -13,6 +13,11 @@ class BusesController < ApplicationController
         @buses = current_staff.staffable.mifal.buses.order('id ASC')
       end
     end
+    respond_to do |format|
+      format.html
+      format.xlsx
+      format.json
+    end
   end
 
   # GET /buses/1
