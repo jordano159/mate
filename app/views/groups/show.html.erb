@@ -4,6 +4,7 @@
     <strong class="text-secondary pr-2">
       <%= @group.mifal.name %> <i class="icon icon-angle-left-solid text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? && @group.head %>
     </strong>
+    <%= render 'layouts/latest_events' if @level == 1 %>
   <%# end %>
   <h1 class="font-weight-bold text-center"><%= @group.name.sub(" #{@group.mifal.name}", "") %></h1>
 	<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
