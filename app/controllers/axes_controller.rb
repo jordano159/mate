@@ -22,10 +22,13 @@ class AxesController < ApplicationController
   # GET /axes/new
   def new
     @axis = Axis.new
+    @heads = current_staff.staffable.heads
   end
 
   # GET /axes/1/edit
-  def edit; end
+  def edit
+    @heads = current_staff.staffable.heads
+  end
 
   # POST /axes
   # POST /axes.json

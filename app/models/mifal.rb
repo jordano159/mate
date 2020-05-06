@@ -10,14 +10,13 @@ class Mifal < ApplicationRecord
   serialize :check_names, Array
   serialize :causes, Array
   has_many :axes, dependent: :destroy
-  has_many :heads, through: :axes
-  # has_many :groups, through: :heads
+  # has_many :heads, through: :axes
+  has_many :heads
   has_many :groups
   has_many :kids
   has_many :checks, through: :axes
   has_many :buses, dependent: :destroy
   has_many :staffs, as: :staffable, dependent: :destroy
-  # has_many :events, through: :axes, source: :events
   has_many :events, as: :eventable
 
   def mifal

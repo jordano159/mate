@@ -1,6 +1,6 @@
 json.set! :data do
   json.array! @kids do |kid|
-    unless kid.group.name == "סל מחזור #{kid.mifal.name}"
+    if kid.group_id.nil? || kid.group.name != "סל מחזור #{kid.mifal.name}"
 	    json.name "#{link_to kid.name, kid}"
 	    json.last_name "#{kid.last_name}"
 	    if params[:bus_id].present?
@@ -38,13 +38,13 @@ json.set! :data do
 	    end
   	else
 	    json.full_name "#{link_to kid.full_name, kid}"
-	    json.last_group "#{Group.find(kid.last_group).name}"
+	    json.last_group "#{Group.find(kid.last_group).name}" unless kid.last_group.nil?
 	    json.leave_cause "#{kid.leave_cause}"
   	end
 
     group_hard_name = "סל מחזור #{kid.mifal.name}"
-		puts "*****************סל מחזור******************"
-		puts group_hard_name
+		# puts "*****************סל מחזור******************"
+		# puts group_hard_name
     json.url  "
               #{link_to '<i class="icon icon-redo-solid"></i>'.html_safe, recover_path(kid) if kid.group && kid.group.hard_name == group_hard_name}
               #{link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_kid_path(kid), class:'text-muted mx-2' if current_staff.admin? || current_staff.vip?}
