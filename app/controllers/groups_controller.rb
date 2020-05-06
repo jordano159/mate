@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[show edit update destroy]
 
@@ -54,7 +52,9 @@ class GroupsController < ApplicationController
   def update
     @heads = Head.all
     respond_to do |format|
+      puts "******************** Update group ********************"
       if @group.update(group_params)
+        puts "*********************Update successfull *******************"
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else

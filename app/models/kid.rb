@@ -12,7 +12,7 @@ class Kid < ApplicationRecord
   accepts_nested_attributes_for :attendances, allow_destroy: true
 
   # Callbacks
-  around_save :create_kid_moved_event
+  before_save :create_kid_moved_event
   # before_destroy :create_kid_left_event
 
   def to_s
@@ -46,7 +46,7 @@ class Kid < ApplicationRecord
       event.level = "auto"
       event.save
     end
-    yield #kid.save
+    # yield #kid.save
     puts "Success"
   end
 

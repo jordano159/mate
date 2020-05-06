@@ -12,6 +12,8 @@
   </table>
 </div>
 
+<%= link_to  'ייצוא אוטובוסים לאקסל', buses_path(format: :xlsx), class: "btn btn-primary-cus" %>
+
 <% if current_staff.vip? %>
   <% if current_staff.staffable_type == "Mifal" %>
     <% mifal = Mifal.find(current_staff.staffable.id) %>

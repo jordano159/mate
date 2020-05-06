@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Axis < ApplicationRecord
-  has_many :heads, dependent: :destroy
+  has_many :heads
   has_many :groups, through: :heads
   has_many :staffs, as: :staffable, dependent: :destroy
   has_many :kids, through: :heads
@@ -10,6 +10,10 @@ class Axis < ApplicationRecord
   has_many :events, as: :eventable
   belongs_to :mifal
   validates :hard_name, uniqueness: true
+
+  before_destroy :kill_the_heads
+
+  private
 
   def all_events
     my_events = Array.new
@@ -36,5 +40,9 @@ class Axis < ApplicationRecord
       end
     end
     return my_staffs
+  end
+
+  def kill_the_heads
+    heads.destroy_all
   end
 end

@@ -89,7 +89,7 @@ class MifalStepsController < ApplicationController
           head_nums[i].times do
             counter += 1
             Head.create(name: "#{@level_names[2]} #{counter} #{@mifal.name}", hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}",
-                        axis_id: axis.id) if Head.find_by(hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
+                        axis_id: axis.id, mifal_id: @mifal.id) if Head.find_by(hard_name: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
             next unless Staff.find_by(username: "#{@level_names[2]} #{counter} #{@mifal.name}").nil?
 
             Staff.create(name: "#{@staff_names[2]} #{counter} #{@mifal.name}", email: "h#{@mifal.name}#{counter}@gmail.com", password: '123123',

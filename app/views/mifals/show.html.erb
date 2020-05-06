@@ -21,6 +21,7 @@
   <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
 </p>
 <% end %>
+
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-axes"
                 data-sort="false" data-source="<%= url_for(controller: 'axes', format: :json, mifal_id: @mifal.id)%>">
@@ -34,6 +35,14 @@
 
   </table>
 </div>
+
+<% if @level == 4 %>
+<p>
+  סה"כ:
+  <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
+</p>
+<%= render 'layouts/latest_events' %>
+<% end %>
 
 
 <script>

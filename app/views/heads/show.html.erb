@@ -24,6 +24,14 @@
   </table>
 </div>
 
+<% if @level >= 2 %>
+<p>
+  סה"כ:
+  <strong class="total"></strong> מתוך <strong><%= @head.kids.count %></strong>
+</p>
+<%= render 'layouts/latest_events'  if @level == 2%>
+<% end %>
+
 <script>
   $(document).ready(function(){
   var x = 0;

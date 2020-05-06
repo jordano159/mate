@@ -17,7 +17,9 @@ class KidsController < ApplicationController
         @kids = Kid.all.includes(:group)
       else
         if Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
-          @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).includes(:group)
+          @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).or(current_staff.staffable.kids.where(group_id: nil)).includes(:group)
+          # Post.where(id: 1).or(Post.where(title: 'Learn Rails'))
+          # @kids = current_staff.staffable.kids.where(group_id: nil).includes(:group)
         else
           @kids = current_staff.staffable.kids.includes(:group)
         end
@@ -117,7 +119,12 @@ end
       @kid.destroy
     else
       @kid.leave_cause = params[:kid][:leave_cause]
-      @kid.create_kid_left_event
+      # @kid.create_kid_left_event
+      @kid.last_group = @kid.group.id
+      # puts last_group
+      @kid.group_id = Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id
+      # puts group_id
+      @kid.save
     end
     respond_to do |format|
       format.html { redirect_to kids_url, notice: 'Kid was successfully destroyed.' }
