@@ -1,12 +1,15 @@
-<h1>יצירת <%= @level_names[1] %></h1>
-<%= render layout: 'form' do |form| %>
-<% if @mifal.heads.count == 0 %>
-  <h3>אי אפשר ליצור <%= @level_names[1] %> לפני שיש <%= @level_names[4] %>. בבקשה ליצור <%= @level_names[4] %> ולנסות שוב</h3>
-<% end %>
-  <% @mifal.heads.order(:hard_name).each_with_index do |h,i| %>
-    <div class="field">
-      <%= form.label "group_num_#{i}".to_sym, "כמה #{ @level_names[1] } יש ב#{h.name}?" %>
-      <%= form.number_field "group_num_#{i}".to_sym, value: h.groups.count %>
-    </div>
-  <% end %>
-<% end %>
+<%= render "progress", step: step %>
+	<h1>יצירת <%= @level_names[1] %></h1>
+	<div class="mr-3">
+	<%= render layout: 'form' do |form| %>
+	<% if @mifal.heads.count == 0 %>
+	  <h3>אי אפשר ליצור <%= @level_names[1] %> לפני שיש <%= @level_names[3] %>. בבקשה ליצור <%= @level_names[3] %> ולנסות שוב</h3>
+	<% end %>
+	  <% @mifal.heads.order(:hard_name).each_with_index do |h,i| %>
+	    <div class="field">
+	      <%= form.label "group_num_#{i}".to_sym, "כמה #{ @level_names[1] } יש ב#{h.name}?" %>
+	      <%= form.number_field "group_num_#{i}".to_sym, value: h.groups.count %>
+	    </div>
+	  <% end %>
+	<% end %>
+</div>

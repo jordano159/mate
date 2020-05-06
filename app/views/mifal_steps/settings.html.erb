@@ -1,3 +1,4 @@
+<%= render "progress", step: step %>
 
 <div class="m-2">
 <h1 class="mb-5">הגדרות מפעל</h1>
@@ -73,7 +74,7 @@
   </div>
 <hr>
 <script>
-  console.log($( window ).width())
+  // console.log($( window ).width())
   if ($( window ).width() < 1000){
     $(".marginable").addClass("mt-2")
   };
@@ -323,7 +324,9 @@ $(document).ready(function() {
   </div>
 
   <hr>
-
+	<% if params[:not_new] %>
+		<%= form.hidden_field :not_new, value: true %>
+	<% end %>
   <% end %>
 	</div>
 <style>

@@ -1,4 +1,4 @@
-<h1><%= @level_names[5] %></h1>
+<%= render "layouts/index_header", level: 4, link: "axised" %>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-axes" data-sort="true" data-source="<%= url_for(format: :json)%>">

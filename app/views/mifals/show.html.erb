@@ -2,11 +2,21 @@
   <%= link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_mifal_path(@mifal), class: "text-muted icon-size" if current_staff.admin? %>
   <%= link_to "<i class='icon icon-download-solid'></i>".html_safe, mifal_path(format: :xlsx), class: 'p-2 icon-size text-dark' if current_staff.admin? || current_staff.vip? %>
 </h1>
+<% if @level >= 4 %>
+	<%= link_to new_kid_path, class:"btn btn-primary-cus-outline font-weight-bold" do %>
+		<i class='icon icon-user-plus-solid'></i>
+		<span>הוספת חניך</span>
+	<% end %>
+	<%= link_to mifal_step_path(:imported_kids), class:"btn btn-primary-cus-outline font-weight-bold" do %>
+	 <i class='icon icon-file-excel-solid'></i>
+	 <span>ייבוא מטבלה</span>
+	<% end %>
+<% end %>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary-cus" if current_staff.admin? %>
 
 
 <% if @level == 4 %>
-<p>
+<p class="p-total">
   סה"כ:
   <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
 </p>

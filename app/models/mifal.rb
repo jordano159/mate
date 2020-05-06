@@ -24,6 +24,15 @@ class Mifal < ApplicationRecord
     self
   end
 
+	def next_stage
+		if self.stage == "imported_kids"
+			return "settings"
+		else
+			return	Mifal.stages.key(self.stage_before_type_cast+1)
+		end
+	  #code
+	end
+
   def reset_events
     self.events.destroy_all
   end

@@ -1,18 +1,28 @@
-<h1>יצירת <%= @level_names[5] %></h1>
-<%= render layout: 'form' do |form| %>
-  <div class="field">
-    <%= form.label :axis_num, "כמה #{@level_names[5]} יש במפעל?" %>
-    <%= form.number_field :axis_num, value: @mifal.axes.count %>
-  </div>
-<% end %>
+<%= render "progress", step: step %>
 
-<% unless @mifal.has_axes %>
-<style>
-  body{
-    display: none;
-  }
-</style>
-<script>
-$("#submit").trigger('click');
-</script>
-<% end %>
+	<h1>יצירת <%= @level_names[5] %></h1>
+	<div class="mr-3">
+	<%= render layout: 'form' do |form| %>
+	<div class="field">
+		<%= form.label :axis_num, "כמה #{@level_names[5]} יש במפעל?" %>
+		<% if  @mifal.axes.count == 0 %>
+		  <!-- true -->
+			<%= form.number_field :axis_num, value: 1 %>
+		<% else %>
+			<%= form.number_field :axis_num, value: @mifal.axes.count %>
+		<% end %>
+	</div>
+	<% end %>
+
+	<% unless @mifal.has_axes %>
+	<style>
+	body{
+		display: none;
+	}
+	</style>
+	<script>
+		$("#submit").trigger('click');
+	</script>
+	<% end %>
+
+</div>

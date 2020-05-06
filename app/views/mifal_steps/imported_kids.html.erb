@@ -1,11 +1,15 @@
-<h1>ייבוא החניכים מתוך אקסל</h1>
-<%= form_tag import_kids_path, multipart: true do %>
-  <%= file_field_tag :file, class: 'form-control' %><br>
-  <div class="form-actions">
-    <%= submit_tag 'ייבוא מקובץ xlsx', class: 'btn btn-primary-cus'%>
-    או
-    <%= link_to "דילוג לשלב הבא", next_wizard_path %>
-    או
-    <%= link_to 'הורדת קובץ ריק לייבוא', new_import_file_path(format: :xlsx), class: 'btn btn-primary-cus' if current_staff.admin? || current_staff.vip? %>
-  </div>
-<% end %>
+<%= render "progress", step: step %>
+<h1>ייבוא חניכים מאקסל</h1>
+<div class="p-total">
+	<%= link_to new_import_file_path(format: :xlsx), class: 'btn btn-primary-cus my-2' do %>
+	<i class="icon icon-download-solid"></i>
+	קובץ ריק לייבוא
+	<% end %>
+	<%= form_tag import_kids_path, multipart: true do %>
+	  <%= file_field_tag :file, class: 'form-control' %><br>
+	  <div class="form-actions">
+	    <%= submit_tag 'ייבוא', class: 'btn btn-primary-cus'%>
+	    <%= link_to "דילוג לשלב הבא", next_wizard_path %>
+	  </div>
+	<% end %>
+</div>

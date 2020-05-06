@@ -1,4 +1,4 @@
-<h1 class="font-weight-bold"><%= @level_names[1] %></h1>
+<%= render "layouts/index_header", level: 0, link: "grouped" %>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-groups" data-sort="true" data-source="<%= url_for(format: :json)%>">

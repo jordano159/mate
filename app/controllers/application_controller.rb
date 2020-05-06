@@ -9,7 +9,14 @@ class ApplicationController < ActionController::Base
   before_action :only_admin
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :first_sign_in
+	before_action :new_mifal, except: [:mifal_steps]
   # after_action :track_action
+
+	def new_mifal
+		if current_staff.staffable.mifal.stage == nil && current_staff.vip?
+			redirect_to mifal_steps_path unless controller_name == "mifal_steps"
+		end
+	end
 
 def month_names
   @month_names = {

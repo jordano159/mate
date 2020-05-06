@@ -21,16 +21,11 @@ class MifalStepsController < ApplicationController
       @mifal.settings! # Set stage
       @mifal.update(mifal_params)
       @mifal.columns.delete("")
-			puts "****************mifal_params************************"
-			puts mifal_params[:columns]
+			puts "****************************************"
+			puts params[:mifal][:not_new]
 			if @mifal.columns.include?("parents_info")
-				puts "***************true info*************************"
-				puts @mifal.columns
 				@mifal.columns.delete("parents_info")
-				puts "***************after delete*************************"
-				puts @mifal.columns
 				@mifal.columns += ["parent_1", "parent_1_phone", "parent_2", "parent_2_phone"]
-				puts "***************after add*************************"
 				@mifal.columns
 			end
       @mifal.columns.unshift("name", "last_name", "full_name", "taz", "group", "status", "cause")
@@ -89,6 +84,7 @@ class MifalStepsController < ApplicationController
       counter = 0
       @mifal.axes.order(:hard_name).each_with_index do |axis,i|
         diff = head_nums[i] - axis.heads.count
+
         if diff > 0
           head_nums[i].times do
             counter += 1
@@ -136,8 +132,12 @@ class MifalStepsController < ApplicationController
       end
       Group.create(name: "סל מחזור #{@mifal.name}", hard_name: "סל מחזור #{@mifal.name}",
                    mifal_id: @mifal.id) if Group.find_by(hard_name: "סל מחזור #{@mifal.name}").nil?
-    end
-    render_wizard @mifal
+		end
+		if params[:mifal][:not_new]
+			redirect_to root_path
+		else
+			render_wizard @mifal
+		end
   end
 
   private

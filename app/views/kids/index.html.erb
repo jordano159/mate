@@ -17,14 +17,16 @@
       <h1 >חניכים וחניכות</h1>
     <% end %>
     <% if @level >= 4 %>
-      <%= link_to new_kid_path, class:"btn btn-primary-cus-outline font-weight-bold" do %>
-				<i class='icon icon-user-plus-solid'></i>
-				<span>הוספת חניך</span>
+		<div class="mr-3">
+			<%= link_to new_kid_path, class:"btn btn-primary-cus-outline font-weight-bold" do %>
+			<i class='icon icon-user-plus-solid'></i>
+			<span>הוספת חניך</span>
 			<% end %>
-      <%= link_to mifal_step_path(:imported_kids), class:"btn btn-primary-cus-outline font-weight-bold" do %>
-			 <i class='icon icon-file-excel-solid'></i>
-			 <span>הוספה מטבלה</span>
+			<%= link_to mifal_step_path(:imported_kids), class:"btn btn-primary-cus-outline font-weight-bold" do %>
+			<i class='icon icon-file-excel-solid'></i>
+			<span>ייבוא מטבלה</span>
 			<% end %>
+		</div>
     <% end %>
   </div>
     <% if @level == 1 %>
