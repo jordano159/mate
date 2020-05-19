@@ -9,8 +9,6 @@ class Group < ApplicationRecord
 
   before_destroy :kill_the_kids
 
-  private
-
   def all_events
     events
   end

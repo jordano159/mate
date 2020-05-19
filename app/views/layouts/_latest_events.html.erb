@@ -5,20 +5,22 @@ else
   # @events = Event.where("created_at > ?", 10.days.ago)
 end %>
 <div class="">
-  <h5>אירועים אחרונים</h5>
   <% @events = current_staff.staffable.all_events %>
   <% if @level == 1 %>
     <% @events = @events.where("updated_at > ?", 3.days.ago).last(3) %>
   <% else %>
     <% @events.reject!{ |event| event.updated_at < 3.days.ago }.last(3) %>
   <% end %>
-  <ul>
-    <% @events.each do |event| %>
-      <% if event.critical? %>
-        <li style="color: red"><%= event.content %></li>
-      <% else %>
-        <li><%= event.content %></li>
+  <% if @events.present? %>
+    <h5>אירועים אחרונים</h5>
+    <ul>
+      <% @events.each do |event| %>
+        <% if event.critical? %>
+          <li style="color: red"><%= event.content %></li>
+        <% else %>
+          <li><%= event.content %></li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
+  <% end %>
 </div>
