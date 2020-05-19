@@ -64,6 +64,7 @@
     <% end %>
   </div>
 <% else %>
+<%= @heads.count %>
   <% @heads.each do |head| %>
     <div class="card-deck">
       <% head.groups.each do |group| %>
