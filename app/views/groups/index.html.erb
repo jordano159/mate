@@ -1,4 +1,5 @@
 <%= render "layouts/index_header", level: 0, link: "grouped" %>
+<% if false %>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-groups" data-sort="true" data-source="<%= url_for(format: :json)%>">
@@ -16,23 +17,74 @@
 </div>
 
 <%# link_to "#{ @level_names[0] } חדשה", new_group_path if current_staff.admin? %>
+<% end %>
 
 <% if params[:head_id].present? %>
   <div class="card-deck">
     <% @groups.each do |group| %>
       <div class="card">
+        <% if group.checks.exists? %>
+          <% if group.checks.last.approved? %>
+            <div class="card-header bg-success">
+              <h5 class="card-title text-white"><%= group.name %></h5> <i class='fa fa-check-circle'></i>
+            </div>
+          <% else %>
+          <div class="card-header bg-danger">
+            <h5 class="card-title text-white"><%= group.name %></h5>
+          </div>
+          <% end %>
+        <% else %>
+          <h5 class="card-title"><%= group.name %></h5>
+        <% end %>
+        <div class="card-body">
+          <div class="">
+            <% if group.checks.present? %>
+              <p class="card-text float-right">נוכחות אחרונה: <%= group.checks.last.name %></p>
+            <% else %>
+              <p class="card-text float-right">לא נעשתה עדיין נוכחות</p>
+            <% end %>
+            <a class="float-left" data-toggle="collapse" href="#collapseExample<%= group.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <i class="icon icon-chevron-down-solid"></i>
+            </a>
+          </div>
+          <br> <br>
+          <div class="collapse" id="collapseExample<%= group.id %>">
+            <div class="card card-body">
+              <p class="card-text">לא נוכחים:</p>
+              <ol class="show-kids">
+                <% group.kids.where(status: 0).each do |kid| %>
+                <li> <%= kid.full_name %> </li>
+                <% end %>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <strong class='card-text'> <%= how_many_attending(group.kids) %> </strong> מתוך <strong> <%= group.kids.count %> </strong>
+          <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <%# @heads.count %>
+  <% @heads.each do |head| %>
+    <div class="card-deck mr-2 mt-2">
+      <% head.groups.each do |group| %>
+        <div class="card">
           <% if group.checks.exists? %>
             <% if group.checks.last.approved? %>
               <div class="card-header bg-success">
                 <h5 class="card-title text-white"><%= group.name %></h5> <i class='fa fa-check-circle'></i>
+              </div>
             <% else %>
             <div class="card-header bg-danger">
               <h5 class="card-title text-white"><%= group.name %></h5>
+            </div>
             <% end %>
           <% else %>
             <h5 class="card-title"><%= group.name %></h5>
           <% end %>
-        </div>
           <div class="card-body">
             <div class="">
               <% if group.checks.present? %>
@@ -56,54 +108,6 @@
               </div>
             </div>
           </div>
-        <div class="card-footer">
-          <strong class='card-text'> <%= how_many_attending(group.kids) %> </strong> מתוך <strong> <%= group.kids.count %> </strong>
-          <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
-        </div>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-<%= @heads.count %>
-  <% @heads.each do |head| %>
-    <div class="card-deck">
-      <% head.groups.each do |group| %>
-        <div class="card">
-            <% if group.checks.exists? %>
-              <% if group.checks.last.approved? %>
-                <div class="card-header bg-success">
-                  <h5 class="card-title text-white"><%= group.name %></h5> <i class='fa fa-check-circle'></i>
-              <% else %>
-              <div class="card-header bg-danger">
-                <h5 class="card-title text-white"><%= group.name %></h5>
-              <% end %>
-            <% else %>
-              <h5 class="card-title"><%= group.name %></h5>
-            <% end %>
-          </div>
-            <div class="card-body">
-              <div class="">
-                <% if group.checks.present? %>
-                  <p class="card-text float-right">נוכחות אחרונה: <%= group.checks.last.name %></p>
-                <% else %>
-                  <p class="card-text float-right">לא נעשתה עדיין נוכחות</p>
-                <% end %>
-                <a class="float-left" data-toggle="collapse" href="#collapseExample<%= group.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  <i class="icon icon-chevron-down-solid"></i>
-                </a>
-              </div>
-              <br> <br>
-              <div class="collapse" id="collapseExample<%= group.id %>">
-                <div class="card card-body">
-                  <p class="card-text">לא נוכחים:</p>
-                  <ol class="show-kids">
-                    <% group.kids.where(status: 0).each do |kid| %>
-                    <li> <%= kid.full_name %> </li>
-                    <% end %>
-                  </ol>
-                </div>
-              </div>
-            </div>
           <div class="card-footer">
             <strong class='card-text'> <%= how_many_attending(group.kids) %> </strong> מתוך <strong> <%= group.kids.count %> </strong>
             <!-- <small class="text-muted">Last updated 3 mins ago</small> -->

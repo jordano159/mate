@@ -24,10 +24,10 @@ class Mifal < ApplicationRecord
   end
 
 	def next_stage
-		if self.stage == "imported_kids"
+		if self.stage == "imported_kids" || self.stage.nil?
 			return "settings"
 		else
-			return	Mifal.stages.key(self.stage_before_type_cast+1)
+			return Mifal.stages.key(self.stage_before_type_cast+1)
 		end
 	  #code
 	end

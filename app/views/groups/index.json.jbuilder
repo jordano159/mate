@@ -8,9 +8,13 @@ json.set! :data do
     json.group_counter "
      <strong class='for_sum'>#{how_many_attending(group.kids)}</strong> מתוך <strong> #{group.kids.count} </strong>
     "
-    json.previous_group_counter "
-     <strong class='for_sum'>#{how_many_attending(group.checks.last(2).first.attendances)}</strong> מתוך <strong> #{group.checks.last(2).first.kids.count} </strong>
-    "
+    if group.checks.present? && group.checks.last(2).first.present?
+      json.previous_group_counter "
+          <strong class='for_sum'>#{how_many_attending(group.checks.last(2).first.attendances)}</strong> מתוך <strong> #{group.checks.last(2).first.kids.count} </strong>
+      "
+    else
+      json.previous_group_counter "אין נוכחות קודמת"
+    end
     if group.checks.exists?
       if group.checks.last.approved?
         json.last_attendence "<span style='color:green;'>  #{group.checks.last.name} </span> <i class='fa fa-check-circle'></i>"
