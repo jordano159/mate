@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
   # after_action :track_action
 
 	def new_mifal
-		if current_staff && current_staff.vip? && current_staff.staffable.mifal.stage == nil 
-			redirect_to mifal_steps_path unless controller_name == "mifal_steps"
+		if current_staff && current_staff.vip? && current_staff.staffable.mifal.stage == nil
+			redirect_to mifal_steps_path if controller_name != "mifal_steps" && controller_name != "registrations"
 		end
 	end
 

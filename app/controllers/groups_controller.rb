@@ -8,8 +8,10 @@ class GroupsController < ApplicationController
       @groups = Head.find(params[:head_id]).groups.order(:hard_name)
     elsif current_staff.admin?
       @groups = Group.all.order(:hard_name).includes(:kids)
+      @heads = Head.all.order(:hard_name).includes(:kids)
     else
       @groups = current_staff.staffable.groups.where.not(name: "סל מחזור #{current_staff.staffable.mifal.name}")
+      @heads = current_staff.staffable.heads if @level > 2
     end
   end
 

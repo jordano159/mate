@@ -41,7 +41,7 @@
   סה"כ:
   <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
 </p>
-<%# render 'layouts/latest_events' %>
+<%= render 'layouts/latest_events' unless current_staff.staffable.all_events.blank? %>
 <% end %>
 
 
