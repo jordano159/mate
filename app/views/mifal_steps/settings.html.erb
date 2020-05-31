@@ -158,26 +158,32 @@
 			$( "#youth" ).click(function() {
 				$("#group_name_single").val("קבוצה");
 				$("#group_name_plural").val("קבוצות");
+				$("#progress-groups").html("קבוצות");
 				$("#guide_name_single").val("מדריכה");
 				$("#guide_name_plural").val("מדריכות");
 				$("#axis_name_single").val("ציר");
 				$("#head_name_single").val("ראש");
 				$("#head_name_plural").val("ראשים");
+				$("#progress-heads").html("ראשים");
 				$("#head_head_name_single").val("ראשראש");
 				$("#head_head_name_plural").val("ראשראשים");
 				$("#axis_name_plural").val("צירים");
+				$("#progress-axes").html("צירים");
 			});
 			$( "#school" ).click(function() {
 				$("#group_name_single").val("כיתה");
 				$("#group_name_plural").val("כיתות");
+				$("#progress-groups").html("כיתות");
 				$("#guide_name_single").val("מורה");
 				$("#guide_name_plural").val("מורות");
 				$("#axis_name_single").val("חטיבה");
 				$("#head_name_single").val("שכבה");
 				$("#head_name_plural").val("שכבות");
+				$("#progress-heads").html("שכבות");
 				$("#head_head_name_single").val("רכז שכבה");
 				$("#head_head_name_plural").val("רכז שכבה");
 				$("#axis_name_plural").val("חטיבות");
+				$("#progress-axes").html("חטיבות");
 			});
 		</script>
 
@@ -439,11 +445,21 @@ $("#mifal_has_axes_true").click(function() {
   $("#axes_true").addClass("btn-success").removeClass("btn-secondary");
   $("#axes_false").removeClass("btn-danger").addClass("btn-secondary");
   $(".axes").show(200);
+	$(".step_num").each(function(index, el) {
+		var num = parseInt($(el).html())
+		var new_num = num + 1
+		$(el).html(new_num)
+	});
 });
 $("#mifal_has_axes_false").click(function() {
 $("#axes_true").addClass("btn-secondary").removeClass("btn-success");
 $("#axes_false").addClass("btn-danger").removeClass("btn-secondary");
 $(".axes").hide(200);
+$(".step_num").each(function(index, el) {
+	var num = parseInt($(el).html())
+	var new_num = num - 1
+	$(el).html(new_num)
+});
 });
 if (checked_late == true){
   $("#late_true").addClass("btn-success");
@@ -505,4 +521,13 @@ if ("<%= @mifal.columns.include?('parent_1') %>" == "true") {
 		$("#mifal_columns_parents_info").labels().addClass('ui-checkboxradio-checked ui-state-active')
 		$("#mifal_columns_parents_info").labels().children('.ui-checkboxradio-icon').removeClass('ui-icon-blank').addClass('ui-icon-check ui-state-checked ui-state-hover')
 }
+$("#axis_name_plural").change(function(event) {
+	$("#progress-axes").html($(this).val())
+});
+$("#head_name_plural").change(function(event) {
+	$("#progress-heads").html($(this).val())
+});
+$("#group_name_plural").change(function(event) {
+	$("#progress-groups").html($(this).val())
+});
 </script>

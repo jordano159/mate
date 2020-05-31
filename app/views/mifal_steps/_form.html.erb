@@ -11,7 +11,11 @@
 	</div>
 <% else %>
   <div class="form-actions mb-2 mt-2">
-		<%= link_to "הקודם", previous_wizard_path, class: "btn btn-primary-cus-outline font-weight-bold ml-2" unless step == :settings %>
+		<% if step == :headed && current_staff.staffable.mifal.has_axes == false %>
+			<%= link_to "הקודם",  mifal_steps_path(id:  "settings"), class: "btn btn-primary-cus-outline font-weight-bold ml-2" unless step == :settings %>
+	  <% elsif step != :settings %>
+			<%= link_to "הקודם", previous_wizard_path, class: "btn btn-primary-cus-outline font-weight-bold ml-2" unless step == :settings %>
+		<% end %>
     <%= form.submit "המשך", class: "btn btn-primary-cus ml-2", id: "submit" %>
     <%= link_to "דילוג", next_wizard_path %>
   </div>
