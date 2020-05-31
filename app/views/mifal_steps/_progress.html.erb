@@ -11,18 +11,21 @@
 		</h4>
 	</div>
 
-	<div class="flex-fill">
+	<% if current_staff.staffable.mifal.has_axes %>
+	<div class="flex-fill axes">
 		<div class="d-flex justify-content-center progress-secondary axised progress-line">
 			<div class="rounded-circle bg-secondary  px-3 py-2 progress-circle axised">
 				2
 			</div>
 		</div>
-		<% if current_staff.staffable.mifal.has_axes %>
 		<h4 class="m-0 mt-4 p-1 text-center">
+			<%# if @level_names %>
+			  <!-- true -->
+			<%# end %>
 			<%= link_to @level_names[5] ,mifal_steps_path(id: "axised"), class:"progress-link text-muted axised" %>
 		</h4>
-		<% end %>
 	</div>
+	<% end %>
 
 	<div class="flex-fill">
 	<div class="d-flex justify-content-center progress-secondary headed progress-line">
@@ -83,4 +86,5 @@ $(".progress-circle").each(function(index, el) {
 		return false
 	}
 });
+
 </script>
