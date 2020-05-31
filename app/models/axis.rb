@@ -13,8 +13,6 @@ class Axis < ApplicationRecord
 
   before_destroy :kill_the_heads
 
-  private
-
   def all_events
     my_events = Array.new
     self.events.each do |e|

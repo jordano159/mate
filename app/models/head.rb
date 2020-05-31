@@ -14,8 +14,6 @@ class Head < ApplicationRecord
 
   before_destroy :kill_the_groups
 
-  private
-
   def all_events
     my_events = Array.new
     self.events.each do |e|
