@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
   # after_action :track_action
 
 	def new_mifal
-		if current_staff && current_staff.vip? && current_staff.staffable.mifal.stage == nil 
-			redirect_to mifal_steps_path unless controller_name == "mifal_steps"
+		if current_staff && current_staff.vip? && current_staff.staffable.mifal.stage == nil
+			redirect_to mifal_steps_path if controller_name != "mifal_steps" && controller_name != "registrations"
 		end
 	end
 
@@ -83,6 +83,9 @@ end
         @level_names = [mifal.group_name[:single], mifal.group_name[:plural],
                         mifal.head_name[:single], mifal.head_name[:plural],
                         mifal.axis_name[:single], mifal.axis_name[:plural]]
+				if @level_names[0] == nil
+					@level_names = %w(קבוצה קבוצות ראש ראשים ציר צירים)
+				end
       else
         @level_names = %w(קבוצה קבוצות ראש ראשים ציר צירים)
       end

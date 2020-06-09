@@ -1,48 +1,49 @@
 <h1><i class="fa fa-chevron-left"></i> <%= @head.name %> </h1>
-<% if @level >= 2 %>
-<p class="p-total">
-  סה"כ:
-  <strong class="total"></strong> מתוך <strong><%= @head.kids.count %></strong>
-</p>
-<% end %>
 
 <%= link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_head_path(@head),class: "text-muted icon-size" if current_staff.admin? %>
 <%= link_to 'חזרה לרשימה', heads_path if @level > 2 %>
 
-<div class="table-responsive">
-  <table class="nowrap table table-hover" id="dttb-groups" data-sort="false"
-                data-source="<%= url_for(controller: 'groups', head_id: @head.id, format: :json)%>">
-    <thead class="thead-grey">
-      <tr>
-        <th data-data="name">שם</th>
-        <th data-data="group_counter" data-orderable="false" data-searchable="false">נוכחות</th>
-        <th data-data="last_attendence" data-orderable="false">נוכחות אחרונה</th>
-        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
-      </tr>
-    </thead>
+<%= link_to "טבלה", head_path(@head, view: "table"), class: "btn btn-primary-cus-outline font-weight-bold" %>
+<%= link_to "רשת", head_path(@head, view: "grid"), class: "btn btn-primary-cus-outline font-weight-bold" %>
 
-  </table>
-</div>
+<% if params[:view] == "table" || params[:view].nil? %>
+  <div class="table-responsive">
+    <table class="nowrap table table-hover" id="dttb-groups" data-sort="false"
+                  data-source="<%= url_for(controller: 'groups', head_id: @head.id, format: :json)%>">
+      <thead class="thead-grey">
+        <tr>
+          <th data-data="name">שם</th>
+          <th data-data="group_counter" data-orderable="false" data-searchable="false">נוכחות</th>
+          <th data-data="last_attendence" data-orderable="false">נוכחות אחרונה</th>
+          <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+        </tr>
+      </thead>
 
-<% if @level >= 2 %>
-<p>
-  סה"כ:
-  <strong class="total"></strong> מתוך <strong><%= @head.kids.count %></strong>
-</p>
-<%= render 'layouts/latest_events'  if @level == 2%>
-<% end %>
+    </table>
+  </div>
 
-<script>
-  $(document).ready(function(){
-  var x = 0;
-  setTimeout(function(){
-    $(".for_sum").each(function(){
-    x += Number($(this).text());
-    })
-    $(".total").html(x);
-   }, 1000);
-  });
-</script>
+  <% if @level >= 2 %>
+  <p>
+    סה"כ:
+    <strong class="total"></strong> מתוך <strong><%= @head.kids.count %></strong>
+  </p>
+  <%= render 'layouts/latest_events'  if @level == 2%>
+  <% end %>
+
+  <script>
+    $(document).ready(function(){
+    var x = 0;
+    setTimeout(function(){
+      $(".for_sum").each(function(){
+      x += Number($(this).text());
+      })
+      $(".total").html(x);
+     }, 1000);
+    });
+  </script>
 
 
   <%# link_to "יצירת #{@staff_names[3]} חדש.ה", new_head_staff_path(@head) if current_staff.admin? %>
+  <% else %>
+    <%= render 'layouts/grid', head: @head %>
+  <% end %>

@@ -1,4 +1,3 @@
-
 <div class="d-flex  text-white m-4">
 	<div class="flex-fill">
 		<div id="111" class=" d-flex justify-content-center progress-secondary settings progress-line">
@@ -10,46 +9,43 @@
 			<%= link_to "הגדרות" ,mifal_steps_path(id: "settings"), class:"progress-link text-muted settings" %>
 		</h4>
 	</div>
-
-	<div class="flex-fill">
+		<div class="flex-fill axes">
 		<div class="d-flex justify-content-center progress-secondary axised progress-line">
 			<div class="rounded-circle bg-secondary  px-3 py-2 progress-circle axised">
 				2
 			</div>
 		</div>
-		<% if current_staff.staffable.mifal.has_axes %>
 		<h4 class="m-0 mt-4 p-1 text-center">
-			<%= link_to @level_names[5] ,mifal_steps_path(id: "axised"), class:"progress-link text-muted axised" %>
+			<%= link_to @level_names[5] ,mifal_steps_path(id: "axised"), class:"progress-link text-muted axised", id:"progress-axes" %>
 		</h4>
-		<% end %>
 	</div>
 
 	<div class="flex-fill">
 	<div class="d-flex justify-content-center progress-secondary headed progress-line">
-		<div class="rounded-circle bg-secondary  px-3 py-2 progress-circle headed">
+		<div class="rounded-circle bg-secondary  px-3 py-2 progress-circle headed step_num">
 			3
 		</div>
 	</div>
 	<h4 class="m-0 mt-4 p-1 text-center">
-		<%= link_to @level_names[3] ,mifal_steps_path(id: "headed"), class:"progress-link text-muted headed" %>
+		<%= link_to @level_names[3] ,mifal_steps_path(id: "headed"), class:"progress-link text-muted headed", id:"progress-heads" %>
 	</h4>
 </div>
 
 	<div class="flex-fill">
 	<div class="d-flex justify-content-center progress-secondary grouped progress-line">
-		<div class="rounded-circle bg-secondary  px-3 py-2 progress-circle grouped">
+		<div class="rounded-circle bg-secondary  px-3 py-2 progress-circle grouped step_num">
 			4
 		</div>
 	</div>
 	<h4 class="m-0 mt-4 p-1 text-center">
-		<%= link_to @level_names[1] ,mifal_steps_path(id: "grouped"), class:"progress-link text-muted grouped" %>
+		<%= link_to @level_names[1] ,mifal_steps_path(id: "grouped"), class:"progress-link text-muted grouped", id:"progress-groups" %>
 		<%=  %>
 	</h4>
 </div>
 
 	<div class="flex-fill">
 	<div class="d-flex justify-content-center progress-secondary imported_kids progress-line">
-		<div class="rounded-circle bg-secondary  px-3 py-2 progress-circle imported_kids">
+		<div class="rounded-circle bg-secondary  px-3 py-2 progress-circle imported_kids step_num">
 			5
 		</div>
 	</div>
@@ -61,26 +57,38 @@
 </div>
 
 <script type="text/javascript">
-var step = "<%= step %>";
-$("a." + step).addClass('text-gradient font-weight-bold')
+$(document).ready(function() {
+	var step = "<%= step %>";
+	$("a." + step).addClass('text-gradient font-weight-bold')
 
-$(".progress-line").each(function(index, el) {
-	$(el).removeClass('progress-secondary').addClass('progress-primary')
-	if ($(el).hasClass(step)) {
-		return false
+	if ("<%= current_staff.staffable.mifal.has_axes %>" == "false") {
+		console.log("has axes");
+		$(".axes").hide(10)
+		$(".step_num").each(function(index, el) {
+			var num = parseInt($(el).html())
+			var new_num = num - 1
+			$(el).html(new_num)
+		});
 	}
-});
+	$(".progress-line").each(function(index, el) {
+		$(el).removeClass('progress-secondary').addClass('progress-primary')
+		if ($(el).hasClass(step)) {
+			return false
+		}
+	});
 
-$(".progress-link").each(function(index, el) {
-	$(el).addClass('text-gradient')
-	if ($(el).hasClass(step)) {
-		return false
-	}
-});
-$(".progress-circle").each(function(index, el) {
-	$(el).removeClass('bg-secondary').addClass('bg-primary-cus')
-	if ($(el).hasClass(step)) {
-		return false
-	}
+	$(".progress-link").each(function(index, el) {
+		$(el).addClass('text-gradient')
+		if ($(el).hasClass(step)) {
+			return false
+		}
+	});
+	$(".progress-circle").each(function(index, el) {
+		$(el).removeClass('bg-secondary').addClass('bg-primary-cus')
+		if ($(el).hasClass(step)) {
+			return false
+		}
+	});
+
 });
 </script>
