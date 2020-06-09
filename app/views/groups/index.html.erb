@@ -1,9 +1,10 @@
 <%= render "layouts/index_header", level: 0, link: "grouped" %>
 
-<%= link_to "טבלה", groups_path(view: "table"), class: "btn btn-primary-cus-outline font-weight-bold" %>
-<%= link_to "רשת", groups_path(view: "grid"), class: "btn btn-primary-cus-outline font-weight-bold" %>
-
-<% if params[:view] == "table" || params[:view].nil? %>
+<% unless mobile_device? %>
+  <%= link_to "טבלה", groups_path(view: "table"), class: "btn btn-primary-cus-outline font-weight-bold" %>
+  <%= link_to "רשת", groups_path(view: "grid"), class: "btn btn-primary-cus-outline font-weight-bold" %>
+<% end %>
+<% if params[:view] == "table" || params[:view].nil? || mobile_device? %>
   <div class="table-responsive mt-4">
     <table class="nowrap table table-hover" id="dttb-groups" data-sort="true" data-source="<%= url_for(format: :json)%>">
       <thead class="thead-grey">
@@ -67,7 +68,7 @@
           <% if group.checks.exists? %>
             <% if group.checks.last.approved? %>
               <div class="card-header bg-success">
-                <h5 class="card-title"><%= link_to group.name, group, class: "text-white" %></h5> <i class='fa fa-check-circle'></i>
+                <h5 class="card-title"><%= link_to group.name, group, class: "text-white" %> <i class='icon icon-check-circle-regular text-white'></i></h5>
               </div>
             <% else %>
             <div class="card-header bg-danger">
@@ -108,6 +109,29 @@
       <% end %>
     </div>
   <% else %>
+  <!-- <div class="d-flex flex-wrap">
+    <div class="bg-success text-white w-50a m-2 rounded " style="height:100px;text-align:center;">
+      <div class="px-3 d-flex flex-column justify-content-around">
+        <div style="text-align:center;" class="mb-2 font-weight-bold">קבוצה 1 בדיקה</div>
+        <div style="text-align:center;" class=" mb-2">נוכחות בוקר</div>
+        <div style="text-align:center;" class="">5 מתוך 7</div>
+      </div>
+    </div>
+    <div class="border bg-success text-white w-50a m-2 rounded" style="height:100px;text-align:center;">
+      <p style="text-align:center;">קבוצה 1 בדיקה</p>
+      <p style="text-align:center;">נוכחות בוקר</p>
+      <p style="text-align:center;">5 מתוך 7</p>
+    </div>
+    <div class="border bg-success text-white w-50a m-2 rounded" style="height:100px;text-align:center;">
+      <p style="text-align:center;">קבוצה 1 בדיקה</p>
+      <p style="text-align:center;">נוכחות בוקר</p>
+      <p style="text-align:center;">5 מתוך 7</p>
+    </div>
+    <div class="border bg-success text-white w-50a m-2" style="height:100px;text-align:center;">
+      קבוצה 1 בדיקה
+    </div>
+  </div> -->
+
     <% @heads.each do |head| %>
       <%= render 'layouts/grid', head: head %>
     <% end %>

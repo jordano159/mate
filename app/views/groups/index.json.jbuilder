@@ -17,7 +17,7 @@ json.set! :data do
     end
     if group.checks.exists?
       if group.checks.last.approved?
-        json.last_attendence "<span style='color:green;'>  #{group.checks.last.name} </span> <i class='fa fa-check-circle'></i>"
+        json.last_attendence "<span style='color:green;'><i class='icon icon-check-circle-regular'></i> #{group.checks.last.name}</span>"
       else
        json.last_attendence "<span style='color:red;'>  #{link_to group.checks.last.name, check_path(Check.find(group.checks.last.id)), class: "check-link"} </span>"
       end

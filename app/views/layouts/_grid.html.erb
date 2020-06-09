@@ -1,6 +1,12 @@
 
-  <div class="card-deck mr-2 mt-4">
-    <div class="card-header" style="background-color: #54ffefa6; position: relative; width: 13%;">
+  <% if mobile_device? %>
+    <div class="card-deck mx-2 mt-4 ">
+      <div class="card-header mb-2" style="background-color: #54ffefa6; position: relative; width: 100%;">
+    <!-- true -->
+  <% else %>
+    <div class="card-deck mr-2 mt-4">
+      <div class="card-header" style="background-color: #54ffefa6; position: relative; width: 13%;">
+  <% end %>
       <h5 class="card-title text-wrap"><%= head.name %></h5>
       <div class="cadrd-footer" style="position: absolute; bottom: 12px;">
         <strong class='card-text'> <%= how_many_attending(head.kids) %> </strong> מתוך <strong> <%= head.kids.count %> </strong>
@@ -17,11 +23,11 @@
       </div>
     </div> -->
     <% head.groups.each do |group| %>
-      <div class="card">
+      <div class="card w-50">
         <% if group.checks.exists? %>
           <% if group.checks.last.approved? %>
             <div class="card-header bg-success">
-              <h5 class="card-title"><%= link_to group.name, group, class: "text-white" %></h5> <i class='fa fa-check-circle'></i>
+              <h5 class="card-title"><%= link_to group.name, group, class: "text-white" %> <i class='icon icon-check-circle-regular text-white'></i></h5>
             </div>
           <% else %>
           <div class="card-header bg-danger">
