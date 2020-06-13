@@ -69,29 +69,35 @@
     <%#  f.input :group_id, as: :hidden, input_html: {value: params[:g_id]} %>
     <%= f.simple_fields_for :attendances do |ff| %>
       <div class="check_div">
-      <% kid = ff.object.kid %>
-      <%= "#{kid.name} #{kid.last_name}" %>
-      <% if kid.ken.present? %>
-        <%= + "מקן #{kid.ken}"  %>
-      <% elsif kid.city.present? %>
-        <%= + "מ#{kid.city}" %>
-      <% end %>
-      <% options_arr = [["0", '<h1>לא נוכח/ת</h1>'.html_safe], ["1", '<h1>נוכח/ת</h1>'.html_safe]] %>
-      <% options_arr << ["2", '<h1>איחר/ה</h1>'.html_safe] if @check.group_id && Group.find(@check.group_id).mifal.has_late %>
-      <div class="container">
-        <div class="button-wrap">
-          <%= ff.collection_radio_buttons :status, options_arr, :first, :last  %>
+        <% kid = ff.object.kid %>
+        <%= "#{kid.name} #{kid.last_name}" %>
+        <% if kid.ken.present? %>
+          <%= + "מקן #{kid.ken}"  %>
+        <% elsif kid.city.present? %>
+          <%= + "מ#{kid.city}" %>
+        <% end %>
+        <% options_arr = [["1", '<h1>נוכח/ת</h1>'.html_safe], ["0", '<h1>לא נוכח/ת</h1>'.html_safe]] %>
+        <% options_arr << ["2", '<h1>איחר/ה</h1>'.html_safe] if @check.group_id && Group.find(@check.group_id).mifal.has_late %>
+        <div class="container">
+          <div class="button-wrap">
+            <%= ff.collection_radio_buttons :status, options_arr, :first, :last  %>
+          </div>
         </div>
-      </div>
-      <div class="check_cause hidden">
-        <div class="check_r">
-          <%= ff.input :cause, label: "סיבת היעדרות", collection: causes, input_html: {class: "check_r_input"} %>
+        <% fever_options = [["no_fever", "אין חום"], ["has_fever", "יש חום"]] %>
+        <div class="container hidden fever">
+          <div class="button-wrap">
+            <%= ff.collection_radio_buttons :fever, fever_options, :first, :last  %>
+          </div>
         </div>
-        <div class="check_o">
-          <%= ff.input :cause, label: "סיבת היעדרות", label_html: { class: 'label_o' }, input_html: {class: "check_o_input"}, required: false %>
+        <div class="check_cause hidden">
+          <div class="check_r">
+            <%= ff.input :cause, label: "סיבת היעדרות", collection: causes, input_html: {class: "check_r_input"} %>
+          </div>
+          <div class="check_o">
+            <%= ff.input :cause, label: "סיבת היעדרות", label_html: { class: 'label_o' }, input_html: {class: "check_o_input"}, required: false %>
+          </div>
         </div>
-      </div>
-      <br />
+        <br />
     </div>
     <% end %>
       <%= f.submit 'עדכון פרטים', class: "btn btn-success mb-4", data: {confirm: @mifal.alert_message} %>
@@ -121,7 +127,7 @@
 $(document).ready(function(){
   console.log( new Date(Date.now()).getDate());
   $('input[type="radio"]').change(function(){
-  console.log($(this).val())
+  // console.log($(this).val())
   if($(this).val()== 0){
     if ($(this).closest("div.check_div").find(".check_cause").is(":hidden")){
       $(this).closest("div.check_div").find(".check_cause").show(1)
@@ -138,7 +144,11 @@ $(document).ready(function(){
     $(this).closest("div.check_div").find(".label_o").html("סיבת איחור")
     $($(this).closest("div.check_div").find(".check_o_input")).val("");
     }
-  else{
+  else {
+    if ($('#name_input').val() == "נוכחות בוקר") {
+      console.log($(this));
+      $(this).closest("div.check_div").find(".fever").show("blind", 200);
+    }
     $(this).closest("div.check_div").find(".check_cause").hide("blind", 400)
     $(this).closest("div.check_div").find(".check_r").hide("blind", 200)
     $(this).closest("div.check_div").find(".check_o").hide("blind", 200)
