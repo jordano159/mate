@@ -9,7 +9,7 @@ end %>
   <% if @level == 1 %>
     <% @events = @events.where("updated_at > ?", 3.days.ago).last(3) %>
   <% else %>
-    <% @events.reject!{ |event| event.updated_at < 3.days.ago }.last(3) %>
+    <% @events = @events.reject{ |event| event.updated_at < 3.days.ago }.last(3) %>
   <% end %>
   <% if @events.present? %>
     <h5>אירועים אחרונים</h5>
