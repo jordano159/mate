@@ -69,6 +69,17 @@
           </div>
         </div>
 
+        <div class="field mb-3">
+          <%= form.label :check_fever, "צריך למדוד חום?" %>
+          <div class="container">
+            <div class="button-wrap mr-4 marginable">
+              <%= form.collection_radio_buttons :check_fever, [[true, '<span id="fever_true" class="true">כן</span>'.html_safe],
+                                                              [false, '<span id="fever_false" class="false">לא</span>'.html_safe]],
+              :first, :last  %>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -387,6 +398,7 @@ var checked_approve = <%= @mifal.has_approve %>;
 var checked_axes = <%= @mifal.has_axes %>;
 var checked_late = <%= @mifal.has_late %>;
 var checked_checks_num = <%= @mifal.checks_num %>;
+var checked_fever = <%= @mifal.check_fever %>;
 var other_check_name = <%= @mifal.has_other_check_name %>;
 if (checked_buses == true){
   $("#buses_true").addClass("btn-success");
@@ -452,15 +464,26 @@ $("#mifal_has_axes_true").click(function() {
 	});
 });
 $("#mifal_has_axes_false").click(function() {
-$("#axes_true").addClass("btn-secondary").removeClass("btn-success");
-$("#axes_false").addClass("btn-danger").removeClass("btn-secondary");
-$(".axes").hide(200);
-$(".step_num").each(function(index, el) {
-	var num = parseInt($(el).html())
-	var new_num = num - 1
-	$(el).html(new_num)
+  $("#axes_true").addClass("btn-secondary").removeClass("btn-success");
+  $("#axes_false").addClass("btn-danger").removeClass("btn-secondary");
+  $(".axes").hide(200);
+  $(".step_num").each(function(index, el) {
+  	var num = parseInt($(el).html())
+  	var new_num = num - 1
+  	$(el).html(new_num)
+  });
 });
+
+$("#fever_true").click(function() {
+  $("#fever_true").addClass("btn-success").removeClass("btn-secondary");
+  $("#fever_false").removeClass("btn-danger").addClass("btn-secondary");
 });
+
+$("#fever_false").click(function() {
+  $("#fever_true").addClass("btn-secondary").removeClass("btn-success");
+  $("#fever_false").addClass("btn-danger").removeClass("btn-secondary");
+});
+
 if (checked_late == true){
   $("#late_true").addClass("btn-success");
   $("#late_true").removeClass("btn-secondary");
@@ -484,6 +507,13 @@ if (checked_checks_num == true){
 } else{
   $("#checks_num_false").addClass("btn-success");
   $("#checks_num_false").removeClass("btn-secondary");
+};
+if (checked_fever == true){
+  $("#fever_true").addClass("btn-success");
+  $("#fever_true").removeClass("btn-secondary");
+} else{
+  $("#fever_false").addClass("btn-danger");
+  $("#fever_false").removeClass("btn-secondary");
 };
 $("#mifal_checks_num_true").click(function() {
   $("#checks_num_true").addClass("btn-success").removeClass("btn-secondary");

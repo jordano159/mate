@@ -43,6 +43,7 @@ def columns_settings
       full_name: "שם מלא",
       status: "סטטוס",
       cause: "סיבה",
+      fever: "חום",
       group: "#{@level_names[0]}",
       sex: "מין",
       taz: "תעודת זהות",

@@ -29,6 +29,15 @@ json.set! :data do
 	    json.shabat "#{kid.shabat}"
 	    json.parents "#{kid.parents}"
 	    json.swim "#{kid.swim}"
+      if kid.mifal.check_fever?
+        if kid.has_fever?
+          json.fever "יש חום"
+        elsif
+          json.fever "אין חום"
+        else
+          json.fever "אין מידע"
+        end
+      end
 	    month = Date.current.month
 	    json.absences "נעדר #{kid.absences_per_month[month]} פעמים מתוך #{kid.total_per_month[month]} בחודש #{@month_names[month]}"
 	    if kid.group.present?

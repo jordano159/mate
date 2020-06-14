@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_13_143633) do
+ActiveRecord::Schema.define(version: 2020_06_14_062027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 2020_06_13_143633) do
     t.text "absences_per_month"
     t.text "total_per_month"
     t.string "leave_cause"
+    t.integer "fever"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
     t.index ["exits"], name: "index_kids_on_exits"
@@ -236,6 +237,7 @@ ActiveRecord::Schema.define(version: 2020_06_13_143633) do
     t.text "check_log"
     t.text "check_names"
     t.boolean "has_other_check_name", default: false, null: false
+    t.boolean "check_fever", default: false, null: false
   end
 
   create_table "staffs", force: :cascade do |t|
