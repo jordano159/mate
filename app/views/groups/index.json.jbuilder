@@ -16,8 +16,10 @@ json.set! :data do
       json.previous_group_counter "אין נוכחות קודמת"
     end
     if group.checks.exists?
+      puts "*******************  group.checks.last: #{group.checks.last}  *********************"
       if group.checks.last.approved?
         json.last_attendence "<span style='color:green;'><i class='icon icon-check-circle-regular'></i> #{group.checks.last.name}</span>"
+        puts "********************  Last Attendance: #{group.checks.last.name} of #{group.name}  ********************"
       else
        json.last_attendence "<span style='color:red;'>  #{link_to group.checks.last.name, check_path(Check.find(group.checks.last.id)), class: "check-link"} </span>"
       end
