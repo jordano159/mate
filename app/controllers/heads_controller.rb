@@ -7,6 +7,8 @@ class HeadsController < ApplicationController
   def index
     if params[:axis_id].present?
       @heads = Axis.find(params[:axis_id]).heads.order(:hard_name)
+    elseif params[:mifal_id].present?
+      @heads = Mifal.find(params[:mifal_id]).heads.order(:hard_name)
     elsif current_staff.admin?
       @heads = Head.all.order(:hard_name).includes(:groups, :kids)
     else
