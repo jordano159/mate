@@ -17,6 +17,7 @@ json.set! :data do
     end
     if group.checks.exists?
       puts "*******************  group.checks.last: #{group.checks.last.name}  *********************"
+      puts "*******************  group.checks: #{group.checks.pluck(:name)}  *********************"
       if group.checks.last.approved?
         json.last_attendence "<span style='color:green;'><i class='icon icon-check-circle-regular'></i> #{group.checks.last.name}</span>"
         puts "********************  Last Attendance: #{group.checks.last.name} of #{group.name}  ********************"
