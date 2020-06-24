@@ -122,7 +122,13 @@ end
     if current_staff.admin?
       @staffs = Staff.all
     else
-      @staffs = current_staff.staffable.mifal.all_staffs
+      mifal = current_staff.staffable.mifal
+      if mifal.has_axes?
+        @staffs = mifal.all_staffs
+      else
+        @staffs = mifal.all_staffs.reject { |staff| staff.staffable_type == "Axis" }
+      end
+
     end
   end
 
