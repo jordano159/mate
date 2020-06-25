@@ -8,7 +8,11 @@ json.set! :data do
 	    else
 	      json.full_name "#{link_to kid.full_name, kid}"
 	    end
-	    json.phone "#{link_to kid.phone, 'tel:#{kid.phone}' if kid.phone.present?}"
+      if kid.phone.present?
+  	    json.phone "#{link_to kid.phone, 'tel:#{kid.phone}'}"
+      else
+        json.phone "לא הוזן טלפון"
+      end
 	    json.medical "#{kid.medical}"
 	    json.meds "#{kid.meds}"
 	    json.food "#{kid.food}"
