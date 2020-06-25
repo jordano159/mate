@@ -7,9 +7,9 @@ end %>
 <div class="">
   <% @events = current_staff.staffable.all_events %>
   <% if @level == 1 %>
-    <% @events = @events.where("updated_at > ?", 3.days.ago).last(3) %>
+    <% @events = @events.where("updated_at > ?", 3.days.ago).order(created_at: :asc).last(3) %>
   <% else %>
-    <% @events = @events.reject{ |event| event.updated_at < 3.days.ago }.last(3) %>
+    <% @events = @events.reject{ |event| event.updated_at < 3.days.ago }.order(created_at: :asc).last(3) %>
   <% end %>
   <% if @events.present? %>
     <h5>אירועים אחרונים</h5>
