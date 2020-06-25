@@ -25,7 +25,7 @@
     <% head.groups.each do |group| %>
       <div class="card w-50">
         <% if group.checks.exists? %>
-          <% if group.checks.last.approved? %>
+          <% if group.checks.order(created_at: :asc).last.approved? %>
             <div class="card-header bg-success">
               <h5 class="card-title"><%= link_to group.name, group, class: "text-white" %> <i class='icon icon-check-circle-regular text-white'></i></h5>
             </div>
@@ -42,8 +42,8 @@
         <div class="card-body">
           <div class="">
             <% if group.checks.present? %>
-              <p class="card-text float-right">נוכחות אחרונה: <%= group.checks.last.name %></p>
-              <% if group.checks.last.kids.where(status: 0).count > 0 %>
+              <p class="card-text float-right">נוכחות אחרונה: <%= group.checks.order(created_at: :asc).last.name %></p>
+              <% if group.checks.order(created_at: :asc).last.kids.where(status: 0).count > 0 %>
                 <a class="float-left" data-toggle="collapse" href="#collapseExample<%= group.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
                   <i class="icon icon-chevron-down-solid"></i>
                 </a>
