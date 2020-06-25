@@ -21,7 +21,7 @@ json.set! :data do
       puts "*******************b  group.checks.last: #{group.checks.order(created_at: :asc).last.name}  *********************"
       puts "*******************b  group.checks: #{group.checks.order(created_at: :asc).pluck(:name)}  *********************"
       if group.checks.last.approved?
-        json.last_attendence "<span style='color:green;'><i class='icon icon-check-circle-regular'></i> #{group.checks.last.name}</span>"
+        json.last_attendence "<span style='color:green;'><i class='icon icon-check-circle-regular'></i> #{group.checks.order(created_at: :asc).last.name}</span>"
         puts "********************  Last Attendance: #{group.checks.order(created_at: :asc).last.name} of #{group.name}  ********************"
       else
        json.last_attendence "<span style='color:red;'>  #{link_to group.checks.order(created_at: :asc).last.name, check_path(Check.find(group.checks.order(created_at: :asc).last.id)), class: "check-link"} </span>"
