@@ -20,7 +20,7 @@
   <% else %>
     <% mifal = Mifal.find(current_staff.staffable.mifal.id) %>
   <% end %>
-  <%= link_to 'יצירת אוטובוס חדש', new_bus_path %>
+  <%= link_to 'יצירת אוטובוס חדש', new_bus_path, class: "btn btn-primary-cus" %>
   <% if false %>
   <!-- צריך לתקן, כרגע עובד מאוד מוזר -->
     <button class="btn" id="prop" >הצגה והסתרה של הצעת צירי הנסיעה</button>
