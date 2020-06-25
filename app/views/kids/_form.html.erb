@@ -15,7 +15,7 @@
       </ul>
     </div>
   <% end %>
-  <% inputs = @mifal.columns.reject { |e| %w(full_name status cause absences shabat swim parents).include?(e) } %>
+  <% inputs = @mifal.columns.reject { |e| %w(full_name status cause absences shabat swim parents fever).include?(e) } %>
     <% inputs.each_slice(3) do | batch | %>
       <div class="row">
         <% batch.each do | col | %>
@@ -32,7 +32,7 @@
       </div>
     <% end %>
     <div class="row">
-    <% ["shabat", "swim","parents"].each do |col| %>
+    <% ["shabat", "swim","parents","fever"].each do |col| %>
     <div class="column ml-2">
       <%= form.input col.to_sym, as: :radio_buttons,input_html:{class:"form-inline"}, label: "#{@column_names[col.to_sym]}", collection: ["כן", "לא"] %>
     </div>
