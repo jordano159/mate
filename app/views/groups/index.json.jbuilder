@@ -20,11 +20,12 @@ json.set! :data do
       puts "*******************  group.checks: #{group.checks.pluck(:name)}  *********************"
       puts "*******************b  group.checks.last: #{group.checks.order(created_at: :asc).last.name}  *********************"
       puts "*******************b  group.checks: #{group.checks.order(created_at: :asc).pluck(:name)}  *********************"
+      last_check = group.checks.order(created_at: :asc).last
       if group.checks.last.approved?
-        json.last_attendence "<span style='color:green;'><i class='icon icon-check-circle-regular'></i> #{group.checks.order(created_at: :asc).last.name}</span>"
-        puts "********************  Last Attendance: #{group.checks.order(created_at: :asc).last.name} of #{group.name}  ********************"
+        json.last_attendence "<span style='color:green;'><i class='icon icon-check-circle-regular'></i> #{last_check.name} #{last_check.updated_at.strftime('%d/%m')}</span>"
+        puts "********************  Last Attendance: #{last_check.name} of #{group.name}  ********************"
       else
-       json.last_attendence "<span style='color:red;'>  #{link_to group.checks.order(created_at: :asc).last.name, check_path(Check.find(group.checks.order(created_at: :asc).last.id)), class: "check-link"} </span>"
+       json.last_attendence "<span style='color:red;'>  #{link_to last_check.name, check_path(Check.find(last_check.id)), class: "check-link"} #{last_check.updated_at.strftime('%d/%m')} </span>"
       end
     else
       json.last_attendence "לא נעשתה עדיין נוכחות..."

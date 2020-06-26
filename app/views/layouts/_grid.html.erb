@@ -42,7 +42,8 @@
         <div class="card-body">
           <div class="">
             <% if group.checks.present? %>
-              <p class="card-text float-right">נוכחות אחרונה: <%= group.checks.order(created_at: :asc).last.name %></p>
+            <% last_check = group.checks.order(created_at: :asc).last %>
+              <p class="card-text float-right">נוכחות אחרונה: <%= last_check.name %> <%= last_check.updated_at.strftime('%d/%m') %> </p>
               <% if group.checks.order(created_at: :asc).last.kids.where(status: 0).count > 0 %>
                 <a class="float-left" data-toggle="collapse" href="#collapseExample<%= group.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
                   <i class="icon icon-chevron-down-solid"></i>
