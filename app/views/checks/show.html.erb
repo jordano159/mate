@@ -10,21 +10,21 @@
   <% group = Group.find(@check.group_id) %>
 <% end %>
 
-  <% if @check.bus_id.blank? %>
-    <p><strong><%= @level_names[0] %>:</strong>
-    <%= group.name %></p>
-    <% if group.mifal.has_approve %>
-      <p><strong>סטטוס:</strong>
-      <% if @check.approved? %>
+<% if @check.bus_id.blank? %>
+  <p><strong><%= @level_names[0] %>:</strong>
+  <%= group.name %></p>
+  <% if group.mifal.has_approve %>
+    <p><strong>סטטוס:</strong>
+    <% if @check.approved? %>
       <span style="color:green;">מאושר</span> <i class="fa fa-check-circle"></i>
-      <% else %>
+    <% else %>
       <span style="color:red;">עוד לא מאושר</span>
-      <% end %></p>
-    <% end %>
-  <% elsif @check.group_id.blank? %>
+    <% end %></p>
+  <% end %>
+<% elsif @check.group_id.blank? %>
   <strong>אוטובוס:</strong>
   <%= Bus.find(@check.bus_id).name %>
-  <% end %>
+<% end %>
 
 <p>
   <strong> נוצר בשעה: </strong>
@@ -33,12 +33,12 @@
 
 
 <div>
-  <%= how_many_attending(@check.kids) %>
-  <%# counter = 0 %>
-  <%# @check.attendances.each do |attendance| %>
-    <%# counter += attendance.status if !attendance.status.nil? %>
-  <%# end %>
-  <%# counter %> מתוך <%= @check.kids.count %> נוכחים
+  <%# how_many_attending(@check.kids) %>
+  <% counter = 0 %>
+  <% @check.attendances.each do |attendance| %>
+    <% counter += attendance.status if attendance.status == 1 %>
+  <% end %>
+  <%= counter %> מתוך <%= @check.kids.count %> נוכחים
 </div>
 
 <!-- <% if @level > 1 %>
