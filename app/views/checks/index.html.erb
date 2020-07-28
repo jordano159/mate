@@ -94,8 +94,9 @@
         <td>
           <% if check.created_at > 2.hours.ago || @level > 2 %>
             <%= link_to "<i class='icon icon-edit-solid'></i>".html_safe, edit_check_path(check), class: "ml-2 text-muted" %>
+            <!-- <span class="text-muted float-left"><%= (check.created_at + 2.hours - DateTime.now).round / 60 %> -> <span class="text-muted"><i class='icon icon-lock'></i></span></span> -->
           <% else %>
-            <span class="ml-2 text-muted"><i class='icon icon-times-solid'></i></span>
+            <span class="ml-2 text-muted"><i class='icon icon-lock'></i></span>
           <% end %>
           <%= link_to "<i class='icon icon-trash-alt-regular'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class:"text-danger" if @level > 1 %>
         </td>
