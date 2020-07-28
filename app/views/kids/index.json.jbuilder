@@ -8,7 +8,11 @@ json.set! :data do
 	    else
 	      json.full_name "#{link_to kid.full_name, kid}"
 	    end
-	    json.phone "#{link_to kid.phone, 'tel:#{kid.phone}' if kid.phone.present?}"
+      if kid.phone.present?
+  	    json.phone "#{link_to kid.phone, 'tel:#{kid.phone}'}"
+      else
+        json.phone "לא הוזן טלפון"
+      end
 	    json.medical "#{kid.medical}"
 	    json.meds "#{kid.meds}"
 	    json.food "#{kid.food}"
@@ -29,6 +33,15 @@ json.set! :data do
 	    json.shabat "#{kid.shabat}"
 	    json.parents "#{kid.parents}"
 	    json.swim "#{kid.swim}"
+      if kid.mifal.check_fever?
+        if kid.has_fever?
+          json.fever "יש חום"
+        elsif
+          json.fever "אין חום"
+        else
+          json.fever "אין מידע"
+        end
+      end
 	    month = Date.current.month
 	    json.absences "נעדר #{kid.absences_per_month[month]} פעמים מתוך #{kid.total_per_month[month]} בחודש #{@month_names[month]}"
 	    if kid.group.present?

@@ -80,6 +80,15 @@ input[value="1"]:checked + .collection_radio_buttons {
   }
 }
 
+input[value="no_fever"]:checked + .collection_radio_buttons {
+  background: $green;
+  color: $light;
+  &:hover {
+    background: darken($green, 5%);
+    color: darken($light, 5%);
+  }
+}
+
 input[value="כן"]:checked + .collection_radio_buttons {
   background: $green;
   color: $light;
@@ -90,6 +99,15 @@ input[value="כן"]:checked + .collection_radio_buttons {
 }
 
 input[value="0"]:checked + .collection_radio_buttons {
+  background: $red;
+  color: $light;
+  &:hover {
+    background: darken($red, 5%);
+    color: darken($light, 5%);
+  }
+}
+
+input[value="has_fever"]:checked + .collection_radio_buttons {
   background: $red;
   color: $light;
   &:hover {

@@ -12,14 +12,21 @@ wb.add_worksheet(name: 'חניכים') do |sheet|
   @kids.order('group_id ASC').each do |kid|
     export_attributes = []
     @mifal.columns.each do |col|
-      unless ["full_name", "group", "status", "cause"].include?(col)
+      unless ["full_name", "group", "status", "cause", "fever"].include?(col)
         export_attributes << kid.send(col)
       end
     end
-                              attributes = [kid.name, kid.last_name, kid.sex, kid.phone, kid.medical, kid.meds, kid.grade, kid.taz,
-                                            kid.food, kid.city, kid.ken, kid.parent_1, kid.parent_1_phone, kid.parent_2,
-                                            kid.parent_2_phone, kid.size, kid.shabat, kid.parents,
-                                            kid.swim, kid.exits, kid.comments]
+    attributes = [kid.name, kid.last_name, kid.sex, kid.phone, kid.medical, kid.meds, kid.grade, kid.taz,
+                  kid.food, kid.city, kid.ken, kid.parent_1, kid.parent_1_phone, kid.parent_2,
+                  kid.parent_2_phone, kid.size, kid.shabat, kid.parents,
+                  kid.swim, kid.exits, kid.comments]
+    if kid.fever == "no_fever"
+      export_attributes << "אין חום"
+    elsif kid.fever == "has_fever"
+      export_attributes << "יש חום"
+    else
+      export_attributes << ""
+    end
     if kid.group
       export_attributes << Group.find(kid.group_id).name
     end

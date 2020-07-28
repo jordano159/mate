@@ -3,6 +3,8 @@
 class Kid < ApplicationRecord
   serialize :absences_per_month, Hash
   serialize :total_per_month, Hash
+  enum fever: [ :has_fever, :no_fever ]
+  validates :fever, inclusion: { in: fevers.keys }, allow_nil: true
   belongs_to :mifal
   belongs_to :group, optional: true
   # belongs_to :bus, optional: true

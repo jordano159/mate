@@ -57,6 +57,13 @@ class MifalStepsController < ApplicationController
       elsif params[:mifal][:checks_num] == "false"
         @mifal.columns.delete("absences")
       end
+      if params[:mifal][:check_fever] == "true"
+        @mifal.check_fever = true
+        @mifal.columns << "fever"
+      elsif params[:mifal][:check_fever] == "false"
+        @mifal.check_fever = false
+        @mifal.columns = @mifal.columns.reject { |c| c == "fever" }
+      end
       @mifal.save
     when :axised
       @mifal.axised! # Set stage

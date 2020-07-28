@@ -53,12 +53,21 @@ def update_attendance
       end
     end
   else
-    if approved?
-      attendances.each do |a|
+    attendances.each do |a|
       kid = Kid.find(a.kid_id)
-      if kid.status != a.status || kid.cause != a.cause
-        kid.update_columns(status: a.status, cause: a.cause)
-        # kid.update_columns(cause: a.cause)
+      if a.has_fever?
+        event = Event.new
+        event.content = "#{kid.full_name} נמדד.ה עם חום"
+        event.staff_id = kid.mifal.staffs.first.id
+        event.eventable_type = "Mifal"
+        event.eventable_id = kid.mifal.id
+        event.level = "critical"
+        event.save
+        puts "******************* Create #{kid.full_name} נמדד.ה עם חום Event *********************"
+      end
+    if approved?
+      if kid.status != a.status || kid.cause != a.cause || kid.fever != a.fever
+        kid.update_columns(status: a.status, cause: a.cause, fever: a.fever)
         kid.touch
       end
     end

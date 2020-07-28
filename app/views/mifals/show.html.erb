@@ -14,35 +14,52 @@
 <% end %>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary-cus" if current_staff.admin? %>
 
+<% if @mifal.has_axes? %>
+  <div class="table-responsive">
+    <table class="nowrap table table-hover" id="dttb-axes"
+                  data-sort="false" data-source="<%= url_for(controller: 'axes', format: :json, mifal_id: @mifal.id)%>">
+      <thead class="thead-grey">
+        <tr>
+          <th data-data="name">שם</th>
+          <th data-data="axis_counter" data-orderable="false" data-searchable="false">נוכחות</th>
+          <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+        </tr>
+      </thead>
 
-<% if @level == 4 %>
-<p class="p-total">
-  סה"כ:
-  <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
-</p>
+    </table>
+  </div>
+
+  <% if @level == 4 %>
+    <p>
+      סה"כ:
+      <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
+    </p>
+    <%= render 'layouts/latest_events' unless current_staff.staffable.all_events.blank? %>
+  <% end %>
+<% else %>
+  <div class="table-responsive">
+    <table class="nowrap table table-hover" id="dttb-heads" data-sort="true" data-source="<%= url_for(controller: 'heads', format: :json, mifal_id: @mifal.id) %>">
+      <thead class="thead-grey">
+        <tr>
+          <th data-data="name">שם</th>
+          <th data-data="head_counter" data-orderable="false" data-searchable="false">נוכחות</th>
+          <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+        </tr>
+      </thead>
+
+    </table>
+  </div>
+
+  <% if @level == 4 %>
+    <p>
+      סה"כ:
+      <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
+    </p>
+    <%= render 'layouts/latest_events' unless current_staff.staffable.all_events.blank? %>
+  <% end %>
 <% end %>
 
-<div class="table-responsive">
-  <table class="nowrap table table-hover" id="dttb-axes"
-                data-sort="false" data-source="<%= url_for(controller: 'axes', format: :json, mifal_id: @mifal.id)%>">
-    <thead class="thead-grey">
-      <tr>
-        <th data-data="name">שם</th>
-        <th data-data="axis_counter" data-orderable="false" data-searchable="false">נוכחות</th>
-        <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
-      </tr>
-    </thead>
 
-  </table>
-</div>
-
-<% if @level == 4 %>
-<p>
-  סה"כ:
-  <strong class="total"></strong> מתוך <strong><%= @mifal.kids.count %></strong>
-</p>
-<%= render 'layouts/latest_events' unless current_staff.staffable.all_events.blank? %>
-<% end %>
 
 
 <script>

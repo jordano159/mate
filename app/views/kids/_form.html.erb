@@ -15,7 +15,7 @@
       </ul>
     </div>
   <% end %>
-  <% inputs = @mifal.columns.reject { |e| %w(full_name status cause absences shabat swim parents).include?(e) } %>
+  <% inputs = @mifal.columns.reject { |e| %w(full_name status cause absences shabat swim parents fever).include?(e) } %>
     <% inputs.each_slice(3) do | batch | %>
       <div class="row">
         <% batch.each do | col | %>
@@ -34,94 +34,15 @@
     <div class="row">
     <% ["shabat", "swim","parents"].each do |col| %>
     <div class="column ml-2">
-      <%= form.input col.to_sym, as: :radio_buttons,input_html:{class:"form-inline"}, label: "#{@column_names[col.to_sym]}", collection: ["כן", "לא"] %>
+      <%= form.input col.to_sym, as: :radio_buttons, input_html:{class:"form-inline"}, label: "#{@column_names[col.to_sym]}", collection: ["כן", "לא"] %>
     </div>
     <% end %>
   </div>
+  <% fever_options = [["no_fever", "אין חום"], ["has_fever", "יש חום"]] %>
+  <div class="column ml-2">
+    <%= form.collection_radio_buttons :fever, fever_options, :first, :last  %>
+  </div>
     <%= form.input :mifal_id, as: :hidden, input_html: { value: @mifal.id }, label: "מפעל" %>
-<!--
-  <div class="row">
-    <div class="column ml-2">
-      <%= form.input :name, label: "שם" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :last_name, label: "שם משפחה" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :mifal_id, as: :hidden, input_html: { value: @mifal.id }, label: "מפעל" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :sex, label: "מין" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column ml-2">
-      <%= form.input :phone, label: "פלאפון" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :medical, label: "רגישות ובעיות רפואיות" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :meds, label: "תרופות" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column ml-2">
-      <%= form.input :food, label: "אוכל" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :city, label: "מקום מגורים" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :ken, label: "קן מקור" %>
-      </div>
-  </div>
-  <div class="row">
-    <div class="column ml-2">
-      <%= form.input :parent_1, label: "שם הורה 1" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :parent_1_phone, label: "טלפון הורה 1" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :parent_2, label: "שם הורה 2" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column ml-2">
-      <%= form.input :parent_2_phone, label: "טלפון הורה 2" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :size, label: "מידת חולצה" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :exits, label: "כניסות ויציאות" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column ml-2">
-      <%= form.input :comments, label: "הערות" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :group_id, collection: @groups, label: "#{@level_names[0]}" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :grade, label: "שכבה" %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :taz, label: "תעודת זהות" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="column ml-2">
-      <%= form.input :shabat, as: :radio_buttons, label: "שומר.ת שבת?", collection: ["כן", "לא"] %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :parents, as: :radio_buttons, label: "ההורים באים?", collection: ["כן", "לא"] %>
-    </div>
-    <div class="column ml-2">
-      <%= form.input :swim, as: :radio_buttons, label: "יודע.ת לשחות?", collection: ["כן", "לא"] %>
-    </div> -->
     <% if kid.mifal %>
       <% status_options = [["לא נוכח/ת", "0"], ["נוכח/ת","1"]] %>
       <% status_options << ["איחר/ה", "2"] if kid.mifal.has_late %>

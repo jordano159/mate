@@ -78,6 +78,12 @@ class ChecksController < ApplicationController
 
   def update
     respond_to do |format|
+      # @check.kids.count.times do |index|
+      #   check_params[:attendances_attributes][index.to_s]["fever"] = check_params[:attendances_attributes][index.to_s]["fever"].to_i
+      #   puts check_params[:attendances_attributes][index.to_s]["fever"].is_a? Integer
+      # end
+      # puts "****************************************"
+      # puts check_params[:attendances_attributes]
       if @check.update(check_params)
         @check.delete_blank_checks
         format.html { redirect_to @check, notice: 'Check was successfully updated.' }
@@ -106,6 +112,6 @@ class ChecksController < ApplicationController
 
 
   def check_params
-    params.require(:check).permit(:name, :group_id, :approved, :date, attendances_attributes: %i[status id cause], kid_ids: [])
+    params.require(:check).permit(:name, :group_id, :approved, :date, attendances_attributes: %i[status id cause fever], kid_ids: [])
   end
 end

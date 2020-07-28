@@ -86,17 +86,25 @@ class BusesController < ApplicationController
     def populate_bus(cities, kens, groups)
       mifal = Mifal.find(current_staff.staffable.id)
       cities.each do |city|
-        mifal.kids.where("city = ?", city).each do |k|
-          @bus.kids << k
+        unless city.blank?
+          mifal.kids.where("city = ?", city).each do |k|
+            @bus.kids << k
+          end
         end
       end
       kens.each do |ken|
-        mifal.kids.where("ken = ?", ken).each do |k|
-          @bus.kids << k
+        unless ken.blank?
+          mifal.kids.where("ken = ?", ken).each do |k|
+            @bus.kids << k
+          end
         end
       end
       groups.each do |group|
-        @bus.kids << Group.find_by(name: group).kids if Group.find_by(name: group) && Group.find_by(name: group).kids.present?
+        unless group.blank?
+          if Group.find_by(name: group) && Group.find_by(name: group).kids.present?
+            @bus.kids << Group.find_by(name: group).kids
+          end
+        end
       end
     end
     # Use callbacks to share common setup or constraints between actions.

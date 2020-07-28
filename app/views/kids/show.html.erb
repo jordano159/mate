@@ -15,7 +15,7 @@
       <td><%= @level_names[0] %></td>
       <td><%= link_to @kid.group.name, @kid.group if @kid.group %></td>
     </tr>
-    <% @kid.mifal.columns.reject { |e| %w(name last_name full_name group status cause absences).include?(e) }.each do |column| %>
+    <% @kid.mifal.columns.reject { |e| %w(name last_name full_name group status cause absences fever).include?(e) }.each do |column| %>
       <tr>
         <td> <%= @column_names[column.to_sym] %> </td>
         <td> <%= @kid.send(column) if @kid.send(column).present? %>
@@ -31,6 +31,14 @@
         <% end %></td>
       </tr>
     <% end %>
+    <tr>
+      <td>חום</td>
+      <% if @kid.fever == "no_fever" %>
+        <td>אין חום</td>
+      <% elsif @kid.fever == "has_fever" %>
+        <td>יש חום</td>
+      <% end %>
+    </tr>
       <tr>
         <td>סטטוס עדכני</td>
         <td><%= if @kid.status.present?
