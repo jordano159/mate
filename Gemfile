@@ -40,6 +40,7 @@ gem 'hirb'
 gem 'simple_form'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+gem 'bcrypt', '~> 3.1', '>= 3.1.13'
 gem 'devise'
 # gem "font-awesome-rails"
 gem 'rails_real_favicon'

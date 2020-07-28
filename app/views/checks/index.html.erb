@@ -83,18 +83,22 @@
           </td>
         <% end %>
         <% if params[:buses].blank? && (current_staff.admin? || current_staff.staffable.mifal.has_approve) %>
+          <td>
+            <% if check.approved? %>
+              <span style="color:green;">מאושר</span> <i class="icon icon-check-circle-regular"></i>
+            <% else %>
+              <span style="color:red;">עוד לא מאושר</span>
+            <% end %>
+          </td>
+        <% end %>
         <td>
-          <% if check.approved? %>
-            <span style="color:green;">מאושר</span> <i class="icon icon-check-circle-regular"></i>
+          <% if check.created_at > 2.hours.ago || @level > 2 %>
+            <%= link_to "<i class='icon icon-edit-solid'></i>".html_safe, edit_check_path(check), class: "ml-2 text-muted" %>
           <% else %>
-            <span style="color:red;">עוד לא מאושר</span>
+            <span class="ml-2 text-muted"><i class='icon icon-times-solid'></i></span>
           <% end %>
+          <%= link_to "<i class='icon icon-trash-alt-regular'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class:"text-danger" if @level > 1 %>
         </td>
-        <% end %>
-        <td><%= link_to "<i class='icon icon-edit-solid'></i>".html_safe, edit_check_path(check), class: "ml-2 text-muted" %>
-        <% if @level > 1 %>
-        <%= link_to "<i class='icon icon-trash-alt-regular'></i>".html_safe, check, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class:"text-danger" %></td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
