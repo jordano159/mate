@@ -21,30 +21,6 @@ class Kid < ApplicationRecord
     self.full_name
   end
 
-
-  def absences_this_month(month)
-    absences = self.attendances.where(status: 0)
-    checks = Check.where(id: absences.pluck(:check_id), bus_id: nil)
-    checks_this_month = checks.where("EXTRACT(MONTH FROM created_at) = ?", month)
-    checks_this_month.size
-  end
-
-  def attendances_this_month(month)
-    attendances = self.attendances.where(status: 1..2)
-    checks = Check.where(id: attendances.pluck(:check_id), bus_id: nil)
-    checks_this_month = checks.where("EXTRACT(MONTH FROM created_at) = ?", month)
-    checks_this_month.size
-  end
-
-  def checks_this_month(month)
-    attendances = self.attendances.where.not(status: nil)
-    checks = Check.where(id: attendances.pluck(:check_id), bus_id: nil)
-    # this_month =  sprintf '%02d', month
-    # checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
-    checks_this_month = checks.where("EXTRACT(MONTH FROM created_at) = ?", month)
-    checks_this_month.size
-  end
-
   def create_kid_moved_event
     if group_id_changed? && group_id_was.present?
       event = Event.new
@@ -139,4 +115,39 @@ class Kid < ApplicationRecord
       heb_status = "איחר/ה"
     end
   end
+
+
+  def absences_this_month(month)
+    absences = self.attendances.where(status: 0)
+    checks = Check.where(id: absences.pluck(:check_id), bus_id: nil)
+    checks_this_month = checks.where("EXTRACT(MONTH FROM created_at) = ?", month)
+    checks_this_month.size
+  end
+
+  def attendances_this_month(month)
+    attendances = self.attendances.where(status: 1..2)
+    checks = Check.where(id: attendances.pluck(:check_id), bus_id: nil)
+    checks_this_month = checks.where("EXTRACT(MONTH FROM created_at) = ?", month)
+    checks_this_month.size
+  end
+
+  def checks_this_month(month)
+    attendances = self.attendances.where.not(status: nil)
+    checks = Check.where(id: attendances.pluck(:check_id), bus_id: nil)
+    # this_month =  sprintf '%02d', month
+    # checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
+    checks_this_month = checks.where("EXTRACT(MONTH FROM created_at) = ?", month)
+    checks_this_month.size
+  end
+
+  def attendances_on_check(name)
+    attendances = self.attendances.where(status: 1..2)
+    checks = Check.where(name: name, id: attendances.pluck(:check_id))
+    attendance_num = checks.size
+    attendances = self.attendances.where.not(status: nil)
+    checks = Check.where(name: name, id: attendances.pluck(:check_id))
+    checks_num = checks.size
+    return attendance_num, checks_num
+  end
+
 end

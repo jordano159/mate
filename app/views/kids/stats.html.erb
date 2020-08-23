@@ -25,10 +25,16 @@
         <th data-data="full_name" class="">שם מלא</th>
         <th data-data="status" class="">סטטוס</th>
         <th data-data="cause" class="">סיבה</th>
-        <!-- <th data-data="jan" class="">ינואר</th> -->
-
-        <% @month_names.each_with_index do |col,i| %>
-          <th data-data="<%= Date::ABBR_MONTHNAMES[col.first].downcase %>"><%= col.last %></th>
+        <% if params[:stats] == "months" %>
+          <% @month_names.each_with_index do |col,i| %>
+            <th data-data="<%= Date::ABBR_MONTHNAMES[col.first].downcase %>"><%= col.last %></th>
+          <% end %>
+        <% else %>
+          <% names = @mifal.checks.pluck(:name).uniq %>
+          <% names.delete("Blank") %>
+          <% names.each_with_index do |col,i| %>
+            <th data-data="<%= col %>"><%= col %></th>
+          <% end %>
         <% end %>
 
 
