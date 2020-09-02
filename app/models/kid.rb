@@ -3,6 +3,9 @@
 class Kid < ApplicationRecord
   serialize :absences_per_month, Hash
   serialize :total_per_month, Hash
+  serialize :att_hash, Hash
+  serialize :total_att_hash, Hash
+  serialize :late_hash, Hash
   enum fever: [ :has_fever, :no_fever ]
   validates :fever, inclusion: { in: fevers.keys }, allow_nil: true
   belongs_to :mifal
@@ -31,8 +34,6 @@ class Kid < ApplicationRecord
       event.level = "auto"
       event.save
     end
-    # yield #kid.save
-    puts "Success"
   end
 
   def create_kid_left_event
@@ -134,8 +135,6 @@ class Kid < ApplicationRecord
   def checks_this_month(month)
     attendances = self.attendances.where.not(status: nil)
     checks = Check.where(id: attendances.pluck(:check_id), bus_id: nil)
-    # this_month =  sprintf '%02d', month
-    # checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
     checks_this_month = checks.where("EXTRACT(MONTH FROM created_at) = ?", month)
     checks_this_month.size
   end
@@ -148,6 +147,37 @@ class Kid < ApplicationRecord
     checks = Check.where(name: name, id: attendances.pluck(:check_id))
     checks_num = checks.size
     return attendance_num, checks_num
+  end
+  structure = { :a => { :b => 'foo' }}
+
+  def set_att_hashes
+    checks = self.checks.where(bus_id: nil).pluck(:name).uniq
+    self.att_hash = Hash.new
+    self.late_hash = Hash.new
+    self.total_att_hash = Hash.new
+    checks.each do |check|
+      self.attendances.joins(:check).where(attendances: { status: 1 }, checks: { name: check }).each do |attendance|
+        puts "check.to_sym: #{check.to_sym}"
+        puts "attendance.check_id.to_s: #{attendance.check_id.to_s}"
+        puts "attendance.status: #{attendance.status}"
+        self.att_hash[check.to_sym] = Hash.new
+        puts "att_hash: #{self.att_hash}"
+        self.att_hash[check.to_sym][attendance.check_id] = attendance.status
+      end
+      self.attendances.joins(:check).where(attendances: { status: 2 }, checks: { name: check }).each do |attendance|
+        puts "check.to_sym: #{check.to_sym}"
+        puts "attendance.check_id.to_s: #{attendance.check_id.to_s}"
+        puts "attendance.status: #{attendance.status}"
+        hash = {1 => 'one'}
+        self.late_hash[check.to_sym] = Hash.new
+        puts "late_hash: #{self.late_hash}"
+        self.late_hash[check.to_sym][attendance.check_id] = attendance.status
+      end
+      # self.att_hash[check.to_sym] = self.attendances.joins(:check).where(attendances: {status: 1}, checks: {name: check}).size
+      # self.late_hash[check.to_sym] = self.attendances.joins(:check).where(attendances: {status: 2}, checks: {name: check}).size
+      self.total_att_hash[check.to_sym] = self.attendances.joins(:check).where(checks: {name: check}).size
+    end
+    self.save
   end
 
 end
