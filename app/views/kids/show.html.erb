@@ -3,71 +3,77 @@
   <%= link_to '<i class="icon icon-redo-solid"></i>'.html_safe, recover_path(@kid), class: "text-muted icon-size" if @kid.group.hard_name == "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?) %>
 </h1>
 <br>
+<div class="kids-checks">
+	<% @kid.group.checks.each do |check| %>
+	<div class="">
+		<%= check.name %>
+		<%= check.attendances.find_by(kid_id: @kid.id).status %>
 
-
-
-<div id="responsive" class="table-responsive kid-info">
-<table class = "table table-hover" id="dttb">
-  <thead class="thead-grey">
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @level_names[0] %></td>
-      <td><%= link_to @kid.group.name, @kid.group if @kid.group %></td>
-    </tr>
-    <% @kid.mifal.columns.reject { |e| %w(name last_name full_name group status cause absences fever).include?(e) }.each do |column| %>
-      <tr>
-        <td> <%= @column_names[column.to_sym] %> </td>
-        <td> <%= @kid.send(column) if @kid.send(column).present? %>
-        <% if column == "phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&phone=972<%= @kid.phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
-          <a href="tel:0<%= @kid.phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
-        <% elsif column == "parent_1_phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&parent_1_phone=972<%= @kid.parent_1_phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
-          <a href="tel:0<%= @kid.parent_1_phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
-        <% elsif column == "parent_2_phone" && mobile_device? %>
-          <a href="whatsapp://send?text=<%= " " %>&parent_2_phone=972<%= @kid.parent_2_phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
-          <a href="tel:0<%= @kid.parent_2_phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
-        <% end %></td>
-      </tr>
-    <% end %>
-    <tr>
-      <td>חום</td>
-      <% if @kid.fever == "no_fever" %>
-        <td>אין חום</td>
-      <% elsif @kid.fever == "has_fever" %>
-        <td>יש חום</td>
-      <% end %>
-    </tr>
-      <tr>
-        <td>סטטוס עדכני</td>
-        <td><%= if @kid.status.present?
-                  # if @level > 1
-                  #   button_to @kid.heb_status, toggle_path, method: :get, params: { value: 1 - @kid.status, id: @kid.id}
-                  # else
-                    @kid.heb_status
-                  # end
-                end %></td>
-      </tr>
-      <tr>
-        <td>סיבה</td>
-        <td><%= @kid.cause %></td>
-      </tr>
-      <% if @kid.group %>
-        <tr>
-          <td><%= @staff_names[1] %></td>
-            <% @kid.group.staffs.each do |s|%>
-              <td><%= s.name %></td>
-            <% end %>
-        </tr>
-      <% end %>
-  </tbody>
-</table>
-<%# link_to "מחיקת חניך", @kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' },  class:"btn btn-danger" if current_staff.admin? || current_staff.vip? %>
-<%= link_to "מחיקת חניך", @kid, remote: true, id: "leave_button", class:"btn btn-danger" if @kid.group.hard_name != "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?)  %>
-<div id="leave_cause"></div>
+	</div>
+	<% end %>
 </div>
+<div id="responsive" class="table-responsive kid-info" style="overflow-x: inherit">
+	<table class = "table table-hover" id="dttb">
+	  <thead class="thead-grey">
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><%= @level_names[0] %></td>
+	      <td><%= link_to @kid.group.name, @kid.group if @kid.group %></td>
+	    </tr>
+	    <% @kid.mifal.columns.reject { |e| %w(name last_name full_name group status cause absences fever).include?(e) }.each do |column| %>
+	      <tr>
+	        <td> <%= @column_names[column.to_sym] %> </td>
+	        <td> <%= @kid.send(column) if @kid.send(column).present? %>
+	        <% if column == "phone" && mobile_device? %>
+	          <a href="whatsapp://send?text=<%= " " %>&phone=972<%= @kid.phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
+	          <a href="tel:0<%= @kid.phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
+	        <% elsif column == "parent_1_phone" && mobile_device? %>
+	          <a href="whatsapp://send?text=<%= " " %>&parent_1_phone=972<%= @kid.parent_1_phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
+	          <a href="tel:0<%= @kid.parent_1_phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
+	        <% elsif column == "parent_2_phone" && mobile_device? %>
+	          <a href="whatsapp://send?text=<%= " " %>&parent_2_phone=972<%= @kid.parent_2_phone %>" data-action="share/whatsapp/share"><i class="icon icon-whatsapp-brands text-success font-size-whatsapp amx-2" aria-hidden="true" ></i></a>
+	          <a href="tel:0<%= @kid.parent_2_phone %>" ><i class="icon icon-phone-solid icon-size"></i></a>
+	        <% end %></td>
+	      </tr>
+	    <% end %>
+	    <tr>
+	      <td>חום</td>
+	      <% if @kid.fever == "no_fever" %>
+	        <td>אין חום</td>
+	      <% elsif @kid.fever == "has_fever" %>
+	        <td>יש חום</td>
+	      <% end %>
+	    </tr>
+	      <tr>
+	        <td>סטטוס עדכני</td>
+	        <td><%= if @kid.status.present?
+	                  # if @level > 1
+	                  #   button_to @kid.heb_status, toggle_path, method: :get, params: { value: 1 - @kid.status, id: @kid.id}
+	                  # else
+	                    @kid.heb_status
+	                  # end
+	                end %></td>
+	      </tr>
+	      <tr>
+	        <td>סיבה</td>
+	        <td><%= @kid.cause %></td>
+	      </tr>
+	      <% if @kid.group %>
+	        <tr>
+	          <td><%= @staff_names[1] %></td>
+	            <% @kid.group.staffs.each do |s|%>
+	              <td><%= s.name %></td>
+	            <% end %>
+	        </tr>
+	      <% end %>
+	  </tbody>
+	</table>
+	<%# link_to "מחיקת חניך", @kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' },  class:"btn btn-danger" if current_staff.admin? || current_staff.vip? %>
+	<%= link_to "מחיקת חניך", @kid, remote: true, id: "leave_button", class:"btn btn-danger" if @kid.group.hard_name != "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?)  %>
+	<div id="leave_cause"></div>
 </div>
+
 <% if mobile_device? %>
   <% mobile = true %>
   <% else %>

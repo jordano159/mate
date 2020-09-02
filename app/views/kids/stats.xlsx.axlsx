@@ -1,12 +1,24 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: 'Kids') do |sheet|
-  sheet.add_row ['שם', 'כיתה', 'ינואר', 'פברואר', 'מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר']
+  sheet.add_row @headers
+	unless @months
+		names = @mifal.checks.pluck(:name).uniq
+		names.delete("Blank")
+		sheet.add_row @check_times
+	end
   @kids.order('group_id ASC').each do |kid|
-    attributes = [kid.full_name, kid.group.name, kid.absences_per_month[1], kid.absences_per_month[2],
-                   kid.absences_per_month[3], kid.absences_per_month[4], kid.absences_per_month[5],
-                   kid.absences_per_month[6], kid.absences_per_month[7], kid.absences_per_month[8],
-                   kid.absences_per_month[9], kid.absences_per_month[10], kid.absences_per_month[11],
-                   kid.absences_per_month[12]]
+		if @months
+			attributes = [kid.full_name, kid.group.name, kid.absences_per_month[1], kid.absences_per_month[2],
+										 kid.absences_per_month[3], kid.absences_per_month[4], kid.absences_per_month[5],
+										 kid.absences_per_month[6], kid.absences_per_month[7], kid.absences_per_month[8],
+										 kid.absences_per_month[9], kid.absences_per_month[10], kid.absences_per_month[11],
+										 kid.absences_per_month[12]]
+		else
+			attributes = [kid.full_name, kid.group.name]
+			names.each_with_index do |name,i|
+				attributes.append("#{kid.attendances_on_check(name)[0]} / #{kid.attendances_on_check(name)[1]}")
+			end
+		end
     sheet.add_row attributes
   end
 end

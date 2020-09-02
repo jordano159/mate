@@ -50,9 +50,25 @@ def stats
   respond_to do |format|
     format.html
     format.json
-    format.xlsx
+    format.xlsx{
+			if params[:months]
+				@headers = ['שם', @mifal.group_name[:single], 'ינואר', 'פברואר', 'מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר']
+				@months = true
+				response.headers['Content-Disposition'] = 'attachment; filename="stats_by_months.xlsx"'
+			else
+				names = @mifal.checks.pluck(:name).uniq
+				names.delete("Blank")
+				@headers = ['שם', @mifal.group_name[:single], names].flatten
+				@check_times = ["",""]
+				names.each do |name|
+					@check_times.append(@mifal.checks.where(name: name).count)
+				end
+				response.headers['Content-Disposition'] = 'attachment; filename="stats_by_check.xlsx"'
+			end
+		}
   end
 end
+
   # GET /kids/1
   # GET /kids/1.json
   def show

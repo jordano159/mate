@@ -6,7 +6,8 @@
 <div class="d-flex flex-row justify-content-between">
   <div class="p-2">
       <h1 style="font-weight:bold;">מעקב היעדרויות  <%= current_staff.staffable.name %>
-        <%= link_to "<i class='icon icon-download-solid'></i>".html_safe, stats_kids_path(format: :xlsx), style: "font-size: 16px", class: 'p-2 text-dark' if current_staff.vip? %>
+				<%= link_to "<i class='icon icon-download-solid'>כללי</i>".html_safe, stats_kids_path(format: :xlsx), style: "font-size: 16px", class: 'p-2 text-dark' if current_staff.vip? %>
+        <%= link_to "<i class='icon icon-download-solid'>לפי חודש</i>".html_safe, stats_kids_path(format: :xlsx, months: "true"), style: "font-size: 16px", class: 'p-2 text-dark' if current_staff.vip? %>
       </h1>
   </div>
 </div>

@@ -225,6 +225,7 @@ html {
    height: 100%;
    z-index: 9999;
    box-shadow: 0px 45px 13px 10px rgba(0, 0, 0, 0.1);
+	 overflow-y: auto;
 }
 .main {
   right: 15vw;
@@ -408,8 +409,9 @@ body {
 }
 .table-responsive {
     display: block;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
+		overflow-x: inherit;
+    // -webkit-overflow-scrolling: touch;
+    // -ms-overflow-style: -ms-autohiding-scrollbar;
     // height: 84vh;
 }
 .page-wrapper-margin{
