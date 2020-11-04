@@ -1,52 +1,54 @@
-<p>
-  <strong>שם:</strong>
-  <%= @check.name %>
-  <% unless (@check.group && @check.group.mifal.checks_num) || @check.bus %>
+<div class="check-header">
+  <h1>
+    <%= @check.name %>
+    <% unless (@check.group && @check.group.mifal.checks_num) || @check.bus %>
     <%= @check.created_at.strftime("%e.%m") %>
-  <% end %>
-</p>
+    <% end %>
+  </h1>
 
-<% if @check.bus_id.blank? %>
+  <% if @check.bus_id.blank? %>
   <% group = Group.find(@check.group_id) %>
-<% end %>
+  <% end %>
 
-<% if @check.bus_id.blank? %>
-  <p><strong><%= @level_names[0] %>:</strong>
-  <%= group.name %></p>
-  <% if group.mifal.has_approve %>
+  <% if @check.bus_id.blank? %>
+    <h2>
+      <%= group.name %>
+    </h2>
+    <% if group.mifal.has_approve %>
     <p><strong>סטטוס:</strong>
-    <% if @check.approved? %>
+      <% if @check.approved? %>
       <span style="color:green;">מאושר</span> <i class="fa fa-check-circle"></i>
-    <% else %>
+      <% else %>
       <span style="color:red;">עוד לא מאושר</span>
-    <% end %></p>
-  <% end %>
-<% elsif @check.group_id.blank? %>
-  <strong>אוטובוס:</strong>
-  <%= Bus.find(@check.bus_id).name %>
-<% end %>
+      <% end %></p>
+      <% end %>
+      <% elsif @check.group_id.blank? %>
+      <strong>אוטובוס:</strong>
+      <%= Bus.find(@check.bus_id).name %>
+      <% end %>
 
-<p>
-  <strong> נוצר בשעה: </strong>
-  <%= @check.created_at.in_time_zone("Jerusalem").strftime("%H:%M") %>
-</p>
+      <p>
+        <strong> נוצר בשעה: </strong>
+        <%= @check.created_at.in_time_zone("Jerusalem").strftime("%H:%M") %>
+      </p>
 
 
-<div>
-  <%# how_many_attending(@check.kids) %>
-  <% counter = 0 %>
-  <% @check.attendances.each do |attendance| %>
-    <% counter += attendance.status if attendance.status == 1 %>
-  <% end %>
-  <%= counter %> מתוך <%= @check.kids.count %> נוכחים
+      <div>
+        <%# how_many_attending(@check.kids) %>
+        <% counter = 0 %>
+        <% @check.attendances.each do |attendance| %>
+        <% counter += attendance.status if attendance.status == 1 %>
+        <% end %>
+        <%= counter %> מתוך <%= @check.kids.count %> נוכחים
+      </div>
+
+      <!-- <% if @level > 1 %>
+        <button type="button" class="btn btn-success" id="show"> הצגת הנוכחות הקודמת </button>
+        <% end %> -->
+
+        <p>
+
 </div>
-
-<!-- <% if @level > 1 %>
-  <button type="button" class="btn btn-success" id="show"> הצגת הנוכחות הקודמת </button>
-<% end %> -->
-
-<p>
-  <strong>חניכים:</strong>
   <div class="table-responsive">
   <table class = "table table-hover">
     <thead class="thead-grey">

@@ -10,7 +10,7 @@
 	<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
 
 		<hr>
-		<% counter = how_many_attending(@group.kids) %>
+		<% counter = how_many_attending(@group) %>
 		<!-- יש <%# counter %> חניכימות נוכחימות מתוך <%# @kids.count %> -->
 		<% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i if @group.kids.exists? %>
 		<% width = "width:#{percent}%" %>
@@ -63,14 +63,14 @@
                         data-source="<%= url_for(format: :json, controller: 'kids', group_id: @group.id)%>">
       <thead class="thead-grey nowrap">
         <tr>
-					<% column_names = @column_names.reject{|c| c == :name || c == :last_name || c == :group} %>
+					<% column_names = @column_names.reject{|c| c == :name || c == :last_name || c == :groups} %>
           <% if @group.name !=  "סל מחזור #{@group.mifal.name}"%>
 						<% if current_staff.admin? %>
 		          <% column_names.each_with_index do |col,i| %>
-		            <% if col.first != "group" %>
+		            <% if col.first != "groups" %>
 		                <th data-data="<%= col.first %>" class="text-grey"><%= col.last %></th>
 		            <% else %>
-		                <th data-data="group" class="text-grey"><%= @level_names[0] %></th>
+		                <th data-data="groups" class="text-grey"><%= @level_names[1] %></th>
 		            <% end %>
 		          <% end %>
 	        	<% else %>
@@ -79,7 +79,7 @@
 		              <% if col.first != "group" %>
 		                <th data-data="<%= col.first %>" class="text-grey"><%= col.last %></th>
 		              <% else %>
-		                <% if @level > 1 %> <th data-data="group" class="text-grey"><%= @level_names[0] %></th> <% end %>
+		                <% if @level > 1 %> <th data-data="groups" class="text-grey"><%= @level_names[0] %></th> <% end %>
 		              <% end %>
 		            <% end %>
 		          <% end %>

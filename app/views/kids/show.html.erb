@@ -1,25 +1,29 @@
 <h1 class="font-weight-bold"><%= @kid.name %> <%= @kid.last_name %>
   <%= link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_kid_path(@kid), class: "text-muted icon-size" if current_staff.admin? || current_staff.vip? %>
-  <%= link_to '<i class="icon icon-redo-solid"></i>'.html_safe, recover_path(@kid), class: "text-muted icon-size" if @kid.group.hard_name == "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?) %>
+  <%= link_to '<i class="icon icon-redo-solid"></i>'.html_safe, recover_path(@kid), class: "text-muted icon-size" if @kid.groups.pluck(:hard_name).include?("סל מחזור #{@kid.mifal.name}") && (current_staff.admin? || current_staff.vip?) %>
 </h1>
 <br>
-<div class="kids-checks">
-	<% @kid.group.checks.each do |check| %>
-	<div class="">
-		<%= check.name %>
-		<%= check.attendances.find_by(kid_id: @kid.id).status %>
-
-	</div>
-	<% end %>
-</div>
+<!-- <div class="kids-checks">
+	<%# @kid.group.checks.each do |check| %>
+  	<div class="">
+  		<%# check.name %>
+  		<%# check.attendances.find_by(kid_id: @kid.id).status %>
+  	</div>
+	<%# end %>
+</div> -->
 <div id="responsive" class="table-responsive kid-info" style="overflow-x: inherit">
 	<table class = "table table-hover" id="dttb">
 	  <thead class="thead-grey">
 	  </thead>
 	  <tbody>
 	    <tr>
-	      <td><%= @level_names[0] %></td>
-	      <td><%= link_to @kid.group.name, @kid.group if @kid.group %></td>
+	      <td><%= @level_names[1] %></td>
+        <td><% @kid.groups.each do |group| %>
+          <%= link_to group.name, group %>
+          <% unless group == @kid.groups.last %>
+           |
+          <% end %>
+        <% end %></td>
 	    </tr>
 	    <% @kid.mifal.columns.reject { |e| %w(name last_name full_name group status cause absences fever).include?(e) }.each do |column| %>
 	      <tr>
@@ -47,30 +51,42 @@
 	    </tr>
 	      <tr>
 	        <td>סטטוס עדכני</td>
-	        <td><%= if @kid.status.present?
-	                  # if @level > 1
-	                  #   button_to @kid.heb_status, toggle_path, method: :get, params: { value: 1 - @kid.status, id: @kid.id}
-	                  # else
-	                    @kid.heb_status
-	                  # end
-	                end %></td>
+	        <td>
+            <% if @kid.statuses[current_staff.staffable.id.to_s].present? %>
+
+              <%= @kid.heb_status(current_staff.staffable.id) %>
+                <!-- # if @level > 1
+                #   button_to @kid.heb_status, toggle_path, method: :get, params: { value: 1 - @kid.status, id: @kid.id}
+                # else -->
+                <!-- # end -->
+              <% else %>
+                לא נוכח/ת
+            <% end %>
+          </td>
 	      </tr>
 	      <tr>
 	        <td>סיבה</td>
-	        <td><%= @kid.cause %></td>
+	        <td><%= @kid.causes[current_staff.staffable.id.to_s] %></td>
 	      </tr>
-	      <% if @kid.group %>
+	      <% if @kid.groups.present? %>
 	        <tr>
 	          <td><%= @staff_names[1] %></td>
-	            <% @kid.group.staffs.each do |s|%>
-	              <td><%= s.name %></td>
+            <td>
+	            <% @kid.groups.each do |g|%>
+  	            <% g.staffs.each do |s|%>
+  	              <%= s.name %>
+                  <% unless g == @kid.groups.last && s == g.staffs.last  %>
+                    |
+                  <% end %>
+  	            <% end %>
 	            <% end %>
+            </td>
 	        </tr>
 	      <% end %>
 	  </tbody>
 	</table>
 	<%# link_to "מחיקת חניך", @kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' },  class:"btn btn-danger" if current_staff.admin? || current_staff.vip? %>
-	<%= link_to "מחיקת חניך", @kid, remote: true, id: "leave_button", class:"btn btn-danger" if @kid.group.hard_name != "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?)  %>
+	<%= link_to "מחיקת חניך", @kid, remote: true, id: "leave_button", class:"btn btn-danger" if @kid.groups.pluck(:hard_name).exclude?("סל מחזור #{@kid.mifal.name}") && (current_staff.admin? || current_staff.vip?)  %>
 	<div id="leave_cause"></div>
 </div>
 

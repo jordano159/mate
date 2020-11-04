@@ -6,10 +6,14 @@ class Kid < ApplicationRecord
   serialize :att_hash, Hash
   serialize :total_att_hash, Hash
   serialize :late_hash, Hash
+  serialize :causes, Hash
+  serialize :statuses, Hash
   enum fever: [ :has_fever, :no_fever ]
   validates :fever, inclusion: { in: fevers.keys }, allow_nil: true
   belongs_to :mifal
-  belongs_to :group, optional: true
+  # belongs_to :group, optional: true
+  has_many :kid_groups
+  has_many :groups, through: :kid_groups
   # belongs_to :bus, optional: true
   has_and_belongs_to_many :buses
   has_many :attendances, dependent: :destroy
@@ -106,8 +110,8 @@ class Kid < ApplicationRecord
     end
   end
 
-  def heb_status
-    case status
+  def heb_status(group_id)
+    case statuses[group_id.to_s]
     when 0
       heb_status = "לא נוכח/ת"
     when 1

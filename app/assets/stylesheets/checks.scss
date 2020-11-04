@@ -151,3 +151,10 @@ input[value="2"]:checked + .collection_radio_buttons {
 // input[type="submit"]:hover{
 // 	background-color: $green;
 // }
+.check-header{
+  padding: 1rem;
+
+  h1{
+    margin-right: 0;
+  }
+}

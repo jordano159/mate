@@ -29,7 +29,7 @@ def update_attendance
     if approved?
       attendances.each do |a|
         kid = Kid.find(a.kid_id)
-        if kid.status != a.status || kid.cause != a.cause
+        if kid.statuses[self.group.id.to_sym] != a.status || kid.causes[self.group.id.to_sym] != a.cause
             if kid.absences_per_month[this_month].present? && a.status == 0
               absences = kid.absences_per_month[this_month] + 1
             elsif kid.absences_per_month[this_month].present? && a.status != 0
@@ -44,7 +44,7 @@ def update_attendance
             elsif a.status.present?
               total = 1
             end
-          kid.update_columns(status: a.status, cause: a.cause,
+          kid.update_columns(statuses: kid.statuses.merge!(self.group.id.to_s => a.status), causes: kid.causes.merge!(self.group.id.to_s => a.cause),
                        absences_per_month:  kid.absences_per_month.merge!(this_month => absences),
                        total_per_month: kid.total_per_month.merge!(this_month => total))
 
@@ -66,8 +66,8 @@ def update_attendance
         puts "******************* Create #{kid.full_name} נמדד.ה עם חום Event *********************"
       end
     if approved?
-      if kid.status != a.status || kid.cause != a.cause || kid.fever != a.fever
-        kid.update_columns(status: a.status, cause: a.cause, fever: a.fever)
+      if kid.statuses[self.group.id.to_s] != a.status || kid.causes[self.group.id.to_s] != a.cause || kid.fever != a.fever
+        kid.update_columns(statuses: kid.statuses.merge!(self.group.id.to_s => a.status), causes: kid.causes.merge!(self.group.id.to_s => a.cause), fever: a.fever)
         kid.touch
       end
     end

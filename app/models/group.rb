@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
-  has_many :kids
+  has_many :kid_groups
+  has_many :kids, through: :kid_groups
   belongs_to :head, optional: true
   belongs_to :mifal
   has_many :staffs, as: :staffable, dependent: :destroy

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_02_114234) do
+ActiveRecord::Schema.define(version: 2020_11_04_104605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,15 @@ ActiveRecord::Schema.define(version: 2020_09_02_114234) do
     t.index ["name"], name: "index_heads_on_name"
   end
 
+  create_table "kid_groups", force: :cascade do |t|
+    t.bigint "kid_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_kid_groups_on_group_id"
+    t.index ["kid_id"], name: "index_kid_groups_on_kid_id"
+  end
+
   create_table "kids", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -175,8 +184,8 @@ ActiveRecord::Schema.define(version: 2020_09_02_114234) do
     t.string "swim"
     t.text "exits"
     t.text "comments"
-    t.integer "status"
-    t.text "cause"
+    t.text "statuses"
+    t.text "causes"
     t.string "grade"
     t.bigint "taz"
     t.bigint "mifal_id"
@@ -275,5 +284,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_114234) do
   add_foreign_key "events", "staffs"
   add_foreign_key "groups", "mifals"
   add_foreign_key "heads", "mifals"
+  add_foreign_key "kid_groups", "groups"
+  add_foreign_key "kid_groups", "kids"
   add_foreign_key "kids", "mifals"
 end

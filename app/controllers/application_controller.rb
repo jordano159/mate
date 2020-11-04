@@ -44,7 +44,7 @@ def columns_settings
       status: "סטטוס",
       cause: "סיבה",
       fever: "חום",
-      group: "#{@level_names[0]}",
+      groups: "#{@level_names[1]}",
       sex: "מין",
       taz: "תעודת זהות",
       ken: "קן",
@@ -71,7 +71,7 @@ def columns_settings
       "full_name",
       "status",
       "cause",
-      "group",
+      "groups",
       "sex"
     ]
 end

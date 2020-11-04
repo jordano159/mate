@@ -3,9 +3,10 @@
 module ApplicationHelper
   def how_many_attending(object)
     counter = 0
-    object.each do |kid|
-      counter += kid.status unless kid.status.nil? || kid.status == 2
-      if kid.status == 2
+    object.kids.each do |kid|
+      status = kid.statuses[object.id.to_s].to_i
+      counter += status unless status.nil? || status == 2
+      if status == 2
         counter += 1
       end
     end

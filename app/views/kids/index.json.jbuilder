@@ -1,6 +1,7 @@
 json.set! :data do
   json.array! @kids do |kid|
-    if kid.group_id.nil? || kid.group.name != "סל מחזור #{kid.mifal.name}"
+    group = current_staff.staffable
+    if kid.groups.empty? || !(kid.groups.pluck(:name).include?("סל מחזור #{kid.mifal.name}") && kid.last_group == group.id)
 	    json.name "#{link_to kid.name, kid}"
 	    json.last_name "#{kid.last_name}"
 	    if params[:bus_id].present?
@@ -19,8 +20,8 @@ json.set! :data do
 	    json.ken "#{kid.ken}"
 	    json.city "#{kid.city}"
 	    json.exits "#{kid.exits}"
-	    json.status "#{kid.heb_status}"
-	    json.cause "#{kid.cause}"
+	    json.status "#{kid.heb_status(group.id)}"
+	    json.cause "#{kid.causes[group.id.to_s]}"
 	    json.parent_1 "#{kid.parent_1}"
 	    json.parent_1_phone "#{kid.parent_1_phone}"
 	    json.parent_2 "#{kid.parent_2}"
@@ -44,10 +45,11 @@ json.set! :data do
       end
 	    month = Date.current.month
 	    json.absences "נעדר #{kid.absences_per_month[month]} פעמים מתוך #{kid.total_per_month[month]} בחודש #{@month_names[month]}"
-	    if kid.group.present?
-	      json.group "#{link_to kid.group.name, kid.group}"
+	    if kid.groups.present?
+        json.groups kid.groups.map { |g| "#{link_to g.name, g}" }
+	      # json.groups "#{link_to kid.group.name, kid.group}"
 	    else
-	      json.group "אין #{@level_names[0]} משוייכת"
+	      json.groups "אין #{@level_names[1]} משוייכות"
 	    end
   	else
 	    json.full_name "#{link_to kid.full_name, kid}"
@@ -56,10 +58,8 @@ json.set! :data do
   	end
 
     group_hard_name = "סל מחזור #{kid.mifal.name}"
-		# puts "*****************סל מחזור******************"
-		# puts group_hard_name
     json.url  "
-              #{link_to '<i class="icon icon-redo-solid"></i>'.html_safe, recover_path(kid) if kid.group && kid.group.hard_name == group_hard_name}
+              #{link_to '<i class="icon icon-redo-solid"></i>'.html_safe, recover_path(kid) if kid.groups.present? && kid.groups.pluck(:hard_name).include?(group_hard_name)}
               #{link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_kid_path(kid), class:'text-muted mx-2' if current_staff.admin? || current_staff.vip?}
               "
   end
