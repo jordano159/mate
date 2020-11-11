@@ -29,7 +29,7 @@ def update_attendance
     if approved?
       attendances.each do |a|
         kid = Kid.find(a.kid_id)
-        if kid.statuses[self.group.id.to_sym] != a.status || kid.causes[self.group.id.to_sym] != a.cause
+        if kid.statuses[self.group.id.to_s] != a.status || kid.causes[self.group.id.to_s] != a.cause
             if kid.absences_per_month[this_month].present? && a.status == 0
               absences = kid.absences_per_month[this_month] + 1
             elsif kid.absences_per_month[this_month].present? && a.status != 0
