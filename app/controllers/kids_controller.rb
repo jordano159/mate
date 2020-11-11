@@ -134,21 +134,14 @@ end
     else
       kid_groups = KidGroup.where(kid_id: @kid.id, group_id: @mifal.groups.ids)
       kid_groups.update_all(status: :unactive, leave_cause: params[:kid][:leave_cause])
-      kid_groups.touch_all
-      @kid.groups << Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
+      @kid.groups << Group.trash_bin?(mifal)
     end
-    respond_to do |format|
-      format.html { redirect_to kids_url, notice: 'Kid was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to kids_url
   end
 
   def recover
     @kid.undelete
-    respond_to do |format|
-      format.html { redirect_to kids_url, notice: 'Kid was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to kids_url
   end
 
   def import
