@@ -17,7 +17,7 @@ class KidsController < ApplicationController
         @kids = Kid.all.includes(:group)
       else
         if Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
-          @kids = Kid.where(id: KidGroup.where.not(group_id: Group.trash_bin?(@mifal).ids).where(kid_id: current_staff.staffable.kids.ids).pluck(:kid_id))
+          @kids = Kid.where(id: KidGroup.where.not(group_id: Group.trash_bin?(@mifal).id).where(kid_id: current_staff.staffable.kids.ids).pluck(:kid_id))
         else
           @kids = current_staff.staffable.kids.includes(:group)
         end
