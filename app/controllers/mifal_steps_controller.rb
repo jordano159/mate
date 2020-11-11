@@ -125,7 +125,7 @@ class MifalStepsController < ApplicationController
           # diff.times do
             counter += 1
             Group.create(name: "#{ @level_names[0] } #{counter} #{@mifal.name}", hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}",
-                         head_id: head.id, mifal_id: @mifal.id) if Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
+                         head_id: head.id, mifal_id: @mifal.id, trash_bin: :untrash) if Group.find_by(hard_name: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
             next unless Staff.find_by(username: "#{ @level_names[0] } #{counter} #{@mifal.name}").nil?
             # puts  "~~~~~~~~~~~ #{head.name} ~~~~~~~~~~~~~ #{g.name}"
 
@@ -138,7 +138,7 @@ class MifalStepsController < ApplicationController
         end
       end
       Group.create(name: "סל מחזור #{@mifal.name}", hard_name: "סל מחזור #{@mifal.name}",
-                   mifal_id: @mifal.id) if Group.find_by(hard_name: "סל מחזור #{@mifal.name}").nil?
+                   mifal_id: @mifal.id, trash_bin: :trash) if Group.find_by(hard_name: "סל מחזור #{@mifal.name}").nil?
 		end
 		if params[:mifal][:not_new]
 			redirect_to root_path

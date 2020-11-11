@@ -1,4 +1,5 @@
 class Group < ApplicationRecord
+  scope :trash_bin, ->(mifal) { where(trash_bin: :trash, mifal_id: mifal.id) }
   has_many :kid_groups
   has_many :kids, through: :kid_groups
   belongs_to :head, optional: true
@@ -7,9 +8,8 @@ class Group < ApplicationRecord
   has_many :checks, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
   validates :hard_name, uniqueness: true
-
+  enum trash_bin: [ :untrash, :trash ]
   before_destroy :kill_the_kids
-
   def all_events
     events
   end
