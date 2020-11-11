@@ -19,7 +19,19 @@
 	    <tr>
 	      <td><%= @level_names[1] %></td>
         <td><% @kid.groups.each do |group| %>
-          <%= link_to group.name, group %>
+          <% if @level == 1 %>
+            <% if current_staff.staffable_id == group.id %>
+              <%= link_to group.name, group %>
+            <% else %>
+              <%= group.name %>
+            <% end %>
+          <% else %>
+            <% if current_staff.staffable.group_ids.include?(group.id) %>
+              <%= link_to group.name, group %>
+            <% else %>
+              <%= group.name %>
+            <% end %>
+          <% end %>
           <% unless group == @kid.groups.last %>
            |
           <% end %>
