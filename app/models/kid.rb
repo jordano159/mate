@@ -59,8 +59,7 @@ class Kid < ApplicationRecord
     mifal = self.mifal
     kid_groups = KidGroup.where(kid_id: id, group_id: mifal.groups.ids)
     kid_groups.update_all(status: :active, leave_cause: "")
-    kid_groups.touch_all
-    KidGroup.find_by(kid_id: id, group_id: Group.find_by(hard_name: "סל מחזור #{mifal.name}")).destroy
+    KidGroup.find_by(kid_id: id, group_id: Group.trash_bin?(mifal).id).destroy
   end
 
   # ייבוא מאקסל
