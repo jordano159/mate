@@ -17,9 +17,10 @@ class KidsController < ApplicationController
         @kids = Kid.all.includes(:group)
       else
         if Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
-          @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).or(current_staff.staffable.kids.where(group_id: nil)).includes(:group)
-          # Post.where(id: 1).or(Post.where(title: 'Learn Rails'))
-          # @kids = current_staff.staffable.kids.where(group_id: nil).includes(:group)
+          # @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).or(current_staff.staffable.kids.where(group_id: nil)).includes(:kid_group)
+          # @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).or(current_staff.staffable.kids.where(group_id: nil)).includes(:group)
+          # @kids = current_staff.staffable.kids.joins(:kid_groups).joins(:groups).where.not("kid_groups.id = ?", Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id)
+          @kids = current_staff.staffable.kids.joins(:kid_groups).where.not("kid_groups.group_id = ?", Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id)
         else
           @kids = current_staff.staffable.kids.includes(:group)
         end

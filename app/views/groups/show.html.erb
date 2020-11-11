@@ -10,7 +10,7 @@
 	<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
 
 		<hr>
-		<% counter = how_many_attending(@group) %>
+		<% counter = how_many_attending(@group.kids, @group) %>
 		<!-- יש <%# counter %> חניכימות נוכחימות מתוך <%# @kids.count %> -->
 		<% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i if @group.kids.exists? %>
 		<% width = "width:#{percent}%" %>

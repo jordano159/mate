@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def how_many_attending(object)
+  def how_many_attending(objects, group)
     counter = 0
-    object.kids.each do |kid|
-      status = kid.statuses[object.id.to_s].to_i
+
+    objects.each do |object|
+      if object.class == Attendance
+        status = object.status.to_i
+      else
+        status = object.statuses[group.id.to_s].to_i
+      end
       counter += status unless status.nil? || status == 2
       if status == 2
         counter += 1
