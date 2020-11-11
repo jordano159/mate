@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-  scope :trash_bin?, ->(mifal) { where(trash_bin: :trash, mifal_id: mifal.id) }
+  scope :trash_bin?, ->(mifal) { find_by(trash_bin: :trash, mifal_id: mifal.id) }
   has_many :kid_groups
   has_many :kids, through: :kid_groups
   belongs_to :head, optional: true
