@@ -18,12 +18,32 @@
 	  <tbody>
 	    <tr>
 	      <td><%= @level_names[1] %></td>
-        <td><% @kid.groups.each do |group| %>
-          <%= link_to group.name, group %>
-          <% unless group == @kid.groups.last %>
-           |
+        <td>
+          <% @kid.groups.each do |group| %>
+            <% if current_staff.admin? %>
+              <%= link_to group.name, group %>
+            <% else %>
+              <% if current_staff.staffable.mifal.group_ids.include?(group.id) %>
+                <% if @level == 1 %>
+                  <% if current_staff.staffable_id == group.id %>
+                    <%= link_to group.name, group %>
+                  <% else %>
+                    <%= group.name %>
+                  <% end %>
+                <% else %>
+                  <% if current_staff.staffable.group_ids.include?(group.id) %>
+                    <%= link_to group.name, group %>
+                  <% else %>
+                    <%= group.name %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <% unless group == @kid.groups.last %>
+             |
+            <% end %>
           <% end %>
-        <% end %></td>
+        </td>
 	    </tr>
 	    <% @kid.mifal.columns.reject { |e| %w(name last_name full_name group status cause absences fever).include?(e) }.each do |column| %>
 	      <tr>

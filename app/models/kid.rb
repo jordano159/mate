@@ -184,4 +184,8 @@ class Kid < ApplicationRecord
     self.save
   end
 
+  def active_groups
+    self.groups.where(id: KidGroup.where(kid_id: self.id, status: :active).pluck(:group_id))
+  end
+
 end

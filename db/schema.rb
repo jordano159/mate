@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_04_104605) do
+ActiveRecord::Schema.define(version: 2020_11_11_092820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,8 @@ ActiveRecord::Schema.define(version: 2020_11_04_104605) do
     t.bigint "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
+    t.string "leave_cause"
     t.index ["group_id"], name: "index_kid_groups_on_group_id"
     t.index ["kid_id"], name: "index_kid_groups_on_kid_id"
   end
@@ -242,6 +244,11 @@ ActiveRecord::Schema.define(version: 2020_11_04_104605) do
     t.text "head_head_name"
     t.string "alert_message"
     t.text "causes"
+    t.integer "kids_count", default: 0, null: false
+    t.integer "present_kids", default: 0, null: false
+    t.text "city_coords"
+    t.integer "started_kids", default: 0, null: false
+    t.text "check_log"
     t.text "check_names"
     t.boolean "has_other_check_name", default: false, null: false
     t.boolean "check_fever", default: false, null: false
