@@ -131,7 +131,7 @@ end
   # DELETE /kids/1.json
   def destroy
     @mifal = @kid.mifal
-    if current_staff.admin? || !@kid.group || @kid.group.hard_name == "סל מחזור #{@mifal.name}"
+    if current_staff.admin? || @kid.groups.empty? || @kid.groups.hard_name == "סל מחזור #{@mifal.name}"
       @kid.destroy
     else
       @kid.leave_cause = params[:kid][:leave_cause]
