@@ -129,16 +129,13 @@ end
   # DELETE /kids/1.json
   def destroy
     @mifal = @kid.mifal
-    if current_staff.admin? || @kid.groups.empty? || @kid.groups.hard_name == "סל מחזור #{@mifal.name}"
+    if current_staff.admin? || @kid.groups.empty? || @kid.groups.include?(Group.find_by(hard_name: "סל מחזור #{@mifal.name}"))
       @kid.destroy
     else
-      @kid.leave_cause = params[:kid][:leave_cause]
-      # @kid.create_kid_left_event
-      @kid.last_group = @kid.group.id
-      # puts last_group
-      @kid.group_id = Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id
-      # puts group_id
-      @kid.save
+      kid_groups = KidGroup.where(kid_id: @kid.id, group_id: @mifal.groups.ids)
+      kid_groups.update_all(status: :unactive, leave_cause: params[:kid][:leave_cause])
+      kid_groups.touch_all
+      @kid.groups << Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
     end
     respond_to do |format|
       format.html { redirect_to kids_url, notice: 'Kid was successfully destroyed.' }
