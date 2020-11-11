@@ -19,7 +19,7 @@
 	    <tr>
 	      <td><%= @level_names[1] %></td>
         <td>
-          <% @kid.groups.each do |group| %>
+          <% @kid.active_groups.each do |group| %>
             <% if current_staff.admin? %>
               <%= link_to group.name, group %>
             <% else %>

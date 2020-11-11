@@ -9,7 +9,7 @@ class KidsController < ApplicationController
   def index
     @mifal = current_staff.staffable.mifal unless current_staff.admin?
     if params[:group_id].present?
-      @kids = Group.find(params[:group_id]).kids
+      @kids = Kid.where(id: KidGroup.where(group_id: params[:group_id], status: :active).pluck(:kid_id))
     elsif params[:bus_id].present?
       @kids = Bus.find(params[:bus_id]).kids
     else
@@ -17,7 +17,7 @@ class KidsController < ApplicationController
         @kids = Kid.all.includes(:group)
       else
         if Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
-          @kids = Kid.where(id: KidGroup.where.not(group_id: Group.trash_bin?(@mifal).id).where(kid_id: current_staff.staffable.kids.ids).pluck(:kid_id))
+          @kids = Kid.where(id: KidGroup.where(status: :active).where.not(group_id: Group.trash_bin?(@mifal).id).where(kid_id: current_staff.staffable.kids.ids).pluck(:kid_id))
         else
           @kids = current_staff.staffable.kids.includes(:group)
         end
@@ -134,7 +134,7 @@ end
     else
       kid_groups = KidGroup.where(kid_id: @kid.id, group_id: @mifal.groups.ids)
       kid_groups.update_all(status: :unactive, leave_cause: params[:kid][:leave_cause])
-      @kid.groups << Group.trash_bin?(mifal)
+      @kid.groups << Group.trash_bin?(@mifal)
     end
     redirect_to kids_url
   end

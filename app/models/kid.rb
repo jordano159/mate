@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Kid < ApplicationRecord
   serialize :absences_per_month, Hash
   serialize :total_per_month, Hash
