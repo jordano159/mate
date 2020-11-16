@@ -10,6 +10,7 @@ class KidsController < ApplicationController
     @mifal = current_staff.staffable.mifal unless current_staff.admin?
     if params[:group_id].present?
       @kids = Kid.where(id: KidGroup.where(group_id: params[:group_id], status: :active).pluck(:kid_id))
+      @group = Group.find(params[:group_id])
     elsif params[:bus_id].present?
       @kids = Bus.find(params[:bus_id]).kids
     else

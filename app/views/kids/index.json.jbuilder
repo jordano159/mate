@@ -1,9 +1,7 @@
 json.set! :data do
   json.array! @kids do |kid|
-    if params[:group_id]
-      group = Group.find(params[:group_id])
-    end
-    if kid.groups.empty? || !kid.groups.trash_bin?(group.mifal)
+
+    if kid.groups.empty? || !(kid.groups.trash_bin?(@group.mifal) && kid.last_group == @group.id)
 	    json.name "#{link_to kid.name, kid}"
 	    json.last_name "#{kid.last_name}"
 	    if params[:bus_id].present?
