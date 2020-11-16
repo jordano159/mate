@@ -5,8 +5,10 @@
 Group.all.each do |g|
   if g.name.start_with?("סל מחזור")
     g.update(trash_bin: :trash)
+    g.kid_groups.update_all(status: :unactive)
   else
     g.update(trash_bin: :untrash)
+    g.kid_groups.update_all(status: :active)
   end
 end
 
