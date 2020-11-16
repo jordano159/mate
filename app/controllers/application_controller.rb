@@ -216,7 +216,7 @@ end
       end
     when 'kids'
       if params[:id].present?
-        if @level < 5 && ((current_staff.staffable.kids.pluck(:id).exclude?(params[:id].to_i)))
+        if @level < 5 && ((current_staff.staffable.active_kids.pluck(:id).exclude?(params[:id].to_i)))
           redirect_to root_path
         end
       else

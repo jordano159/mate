@@ -41,7 +41,7 @@ class ChecksController < ApplicationController
       @check.group_id = @group.id
       @mifal = @check.group.mifal
       @check.name = "נוכחות חדשה"
-      @kids = @group.kids.order(name: :desc, ken: :asc) # set kids
+      @kids = @group.active_kids.order(name: :desc, ken: :asc) # set kids
       @check.kids << @kids # assoicate kids to check
       unless @group.mifal.has_approve
         @check.approved = true
@@ -54,7 +54,7 @@ class ChecksController < ApplicationController
     if @check.bus_id.blank?
       @group = @check.group
       @mifal = @check.group.mifal
-      @kids = @group.kids.order(name: :desc, ken: :asc)
+      @kids = @group.active_kids.order(name: :desc, ken: :asc)
     elsif @check.group_id.blank?
       @bus = Bus.find(@check.bus_id)
       @check.bus_id = @bus.id

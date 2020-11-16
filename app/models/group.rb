@@ -17,4 +17,9 @@ class Group < ApplicationRecord
   def kill_the_kids
     kids.destroy_all
   end
+
+  def active_kids
+    self.kids.where(id: KidGroup.where(group_id: self.id, status: :active).pluck(:kid_id))
+  end
+
 end
