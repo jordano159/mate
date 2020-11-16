@@ -78,10 +78,10 @@
         <% column_names = @column_names.reject{|c| c == :name || c == :last_name} %>
         <% if current_staff.admin? %>
           <% column_names.each_with_index do |col,i| %>
-            <% if col.first != "group" %>
+            <% if col.first != "groups" %>
                 <th data-data="<%= col.first %>" class="text-grey"><%= col.last %></th>
             <% else %>
-                <th data-data="group" class="text-grey"><%= @level_names[0] %></th>
+                <th data-data="groups" class="text-grey"><%= @level_names[1] %></th>
             <% end %>
           <% end %>
         <% else %>

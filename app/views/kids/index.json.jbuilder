@@ -1,11 +1,7 @@
 json.set! :data do
   json.array! @kids do |kid|
-    # group = Group.find(params[:group_id])
-
     if params[:group_id]
       group = Group.find(params[:group_id])
-    else
-      # group = current_staff.staffable
     end
     if kid.groups.empty? || !(kid.groups.pluck(:name).include?("סל מחזור #{kid.mifal.name}") && kid.last_group == group.id)
 	    json.name "#{link_to kid.name, kid}"
