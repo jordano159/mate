@@ -6,7 +6,7 @@ json.set! :data do
               #{link_to "<i class='icon icon-trash-alt-regular'></i>".html_safe, axis, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class:"mx-2", style: "color: red" if current_staff.admin? || current_staff.vip?}
               "
     json.axis_counter "
-     <strong class='for_sum'>#{how_many_attending(axis.kids)}</strong> מתוך <strong> #{axis.kids.count} </strong>
+     <strong class='for_sum'>#{how_many_attending(axis.kids, axis)}</strong> מתוך <strong> #{axis.kids.count} </strong>
     "
   end
 end
