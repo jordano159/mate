@@ -6,6 +6,10 @@ module ApplicationHelper
     objects.each do |object|
       if object.class == Attendance
         status = object.status.to_i
+        counter += status unless status.nil? || status == 2
+        if status == 2
+          counter += 1
+        end
       else
         if level.class == Group
           status = object.statuses[level.id.to_s].to_i

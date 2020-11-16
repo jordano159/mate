@@ -9,7 +9,7 @@
   <% end %>
       <h5 class="card-title text-wrap"><%= head.name %></h5>
       <div class="cadrd-footer" style="position: absolute; bottom: 12px;">
-        <strong class='card-text'> <%= how_many_attending(head.kids) %> </strong> מתוך <strong> <%= head.kids.count %> </strong>
+        <strong class='card-text'> <%= how_many_attending(head.active_kids, head) %> </strong> מתוך <strong> <%= head.active_kids.count %> </strong>
       </div>
     </div>
     <!-- <div class="card" style="margin-left: 100px;">
@@ -19,7 +19,7 @@
       <div class="card-body">
       </div>
       <div class="card-footer">
-        <strong class='card-text'> <%= how_many_attending(head.kids) %> </strong> מתוך <strong> <%= head.kids.count %> </strong>
+        <strong class='card-text'> <%= how_many_attending(head.active_kids, head) %> </strong> מתוך <strong> <%= head.active_kids.count %> </strong>
       </div>
     </div> -->
     <% head.groups.each do |group| %>
@@ -42,9 +42,11 @@
         <div class="card-body">
           <div class="">
             <% if group.checks.present? %>
-            <% last_check = group.checks.order(created_at: :asc).last %>
+              <% last_check = group.checks.order(created_at: :asc).last %>
+              how_many_attending: <%= how_many_attending(last_check.attendances, nil) %>
+              count: <%= group.active_kids.count %><br>
               <p class="card-text float-right">נוכחות אחרונה: <%= last_check.name %> <%= last_check.updated_at.strftime('%d/%m') %> </p>
-              <% if group.checks.order(created_at: :asc).last.kids.where(status: 0).count > 0 %>
+              <% if how_many_attending(last_check.attendances, nil) != group.active_kids.count %>
                 <a class="float-left" data-toggle="collapse" href="#collapseExample<%= group.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
                   <i class="icon icon-chevron-down-solid"></i>
                 </a>
@@ -58,15 +60,17 @@
             <div class="card card-body">
               <p class="card-text">לא נוכחים:</p>
               <ol class="show-kids mr-2">
-                <% group.kids.where(status: 0).each do |kid| %>
-                <li> <%= kid.full_name %> </li>
+                <% group.active_kids.each do |kid| %>
+                  <% if kid.statuses[group.id.to_s] == 0 %>
+                    <li> <%= kid.full_name %> </li>
+                  <% end %>
                 <% end %>
               </ol>
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <strong class='card-text'> <%= how_many_attending(group.kids) %> </strong> מתוך <strong> <%= group.kids.count %> </strong>
+          <strong class='card-text'> <%= how_many_attending(group.active_kids, group) %> </strong> מתוך <strong> <%= group.active_kids.count %> </strong>
           <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
         </div>
       </div>

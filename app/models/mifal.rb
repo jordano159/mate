@@ -187,6 +187,8 @@ class Mifal < ApplicationRecord
   end
 
   def active_kids
+    puts "******************* Active Kids *********************"
+    puts self.groups.ids
     self.kids.where(id: KidGroup.where(group_id: self.groups.ids, status: :active).pluck(:kid_id))
   end
 
