@@ -1,4 +1,16 @@
 <h1><%= @axis.name %></h1>
+<% @axis.staffs.each do |s|%>
+    <% if s.user? %>
+      <h3 class=""><%= s.name %></h3>
+    <% end %>
+<% end %>
+<% if @level == 3 %>
+<p class="p-total">
+  סה"כ:
+  <strong class="total"></strong> מתוך <strong><%= @axis.mifal.kids.count %></strong>
+</p>
+<%= render 'layouts/latest_events' %>
+<% end %>
 
 <div class="table-responsive">
   <table class="nowrap table table-hover" id="dttb-heads" data-sort="false"
@@ -13,14 +25,6 @@
 
   </table>
 </div>
-
-<% if @level == 3 %>
-<p class="p-total">
-  סה"כ:
-  <strong class="total"></strong> מתוך <strong><%= @axis.mifal.kids.count %></strong>
-</p>
-<%= render 'layouts/latest_events' %>
-<% end %>
 
 
 <script>
@@ -44,16 +48,8 @@
     </thead>
 
     <tbody>
-      <% @axis.staffs.each do |s|%>
-        <tr>
-          <% if s.user? %>
-            <td class = "btn btn-primary-cus"><%= s.name %></td>
-          <% end %>
-        </tr>
-      <% end %>
+
     </tbody>
   </table>
-  <%# link_to "יצירת רכז.ת #{@level_names[4]} חדש.ה", new_axis_staff_path(@axis), class: "btn btn-primary-cus" if current_staff.admin? %>
 
 <%= link_to 'עריכה', edit_axis_path(@axis), class: "btn btn-primary-cus" if current_staff.admin? %>
-<%= link_to 'חזרה לרשימה', axes_path, class: "btn btn-primary-cus" %>
