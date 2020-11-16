@@ -8,7 +8,7 @@ json.set! :data do
               puts "***************** group ***********************"
               puts group
     json.group_counter "
-     <strong class='for_sum'>#{how_many_attending(group.kids, group)}</strong> מתוך <strong> #{group.kids.count} </strong>
+     <strong class='for_sum'>#{how_many_attending(group.active_kids, group)}</strong> מתוך <strong> #{group.active_kids.count} </strong>
     "
     if group.checks.present? && group.checks.last(2).first.present?
       json.previous_group_counter "

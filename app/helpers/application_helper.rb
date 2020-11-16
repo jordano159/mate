@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def how_many_attending(objects, group)
+  def how_many_attending(objects, level)
     counter = 0
     objects.each do |object|
       if object.class == Attendance
         status = object.status.to_i
       else
-        if group.class == Group
-          status = object.statuses[group.id.to_s].to_i
+        if level.class == Group
+          status = object.statuses[level.id.to_s].to_i
           counter += status unless status.nil? || status == 2
           if status == 2
             counter += 1
           end
         else
-          group.groups.each do |g|
+          level.groups.each do |g|
             status = object.statuses[g.id.to_s].to_i
             counter += status unless status.nil? || status == 2
             if status == 2

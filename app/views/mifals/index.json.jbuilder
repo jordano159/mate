@@ -7,7 +7,7 @@ json.set! :data do
               #{link_to "<i class='icon icon-trash-alt-regular'></i>".html_safe, mifal, method: :delete, data: { confirm: 'את/ה בטוח/ה?' },class: "p-2", style: "color: red" if current_staff.admin? || current_staff.vip?}
               "
     json.mifal_counter "
-     <strong class='for_sum'>#{how_many_attending(mifal.kids)}</strong> מתוך <strong> #{mifal.kids.count} </strong>
+     <strong class='for_sum'>#{how_many_attending(mifal.active_kids)}</strong> מתוך <strong> #{mifal.active_kids.count} </strong>
     "
   end
 end
