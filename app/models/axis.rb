@@ -43,4 +43,8 @@ class Axis < ApplicationRecord
   def kill_the_heads
     heads.destroy_all
   end
+
+  def active_kids
+    self.kids.where(id: KidGroup.where(group_id: self.groups.ids, status: :active).pluck(:kid_id))
+  end
 end
