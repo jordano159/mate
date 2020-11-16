@@ -1,5 +1,6 @@
 <div id="head" class="m-3">
 <div>
+  <%= controller_name == "groups" && action_name == "show" %>
   <%# if @level == 1 %>
     <strong class="text-secondary pr-2">
       <%= @group.mifal.name %> <i class="icon icon-angle-left-solid text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? && @group.head %>

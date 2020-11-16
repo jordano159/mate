@@ -27,21 +27,6 @@ module ApplicationHelper
     counter
   end
 
-  # def how_many_attending(objects, group)
-  #   counter = 0
-  #   objects.each do |object|
-  #     if object.class == Attendance
-  #       status = object.status.to_i
-  #     else
-  #       status = object.statuses[group.id.to_s].to_i
-  #     end
-  #     counter += status unless status.nil? || status == 2
-  #     if status == 2
-  #       counter += 1
-  #     end
-  #   end
-  #   counter
-  # end
 
   def mobile_device?
      if session[:mobile_param]

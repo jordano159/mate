@@ -1,6 +1,12 @@
 json.set! :data do
   json.array! @kids do |kid|
-    group = current_staff.staffable
+    # group = Group.find(params[:group_id])
+
+    if params[:group_id]
+      group = Group.find(params[:group_id])
+    else
+      # group = current_staff.staffable
+    end
     if kid.groups.empty? || !(kid.groups.pluck(:name).include?("סל מחזור #{kid.mifal.name}") && kid.last_group == group.id)
 	    json.name "#{link_to kid.name, kid}"
 	    json.last_name "#{kid.last_name}"
@@ -20,8 +26,8 @@ json.set! :data do
 	    json.ken "#{kid.ken}"
 	    json.city "#{kid.city}"
 	    json.exits "#{kid.exits}"
-	    json.status "#{kid.heb_status(group.id)}"
-	    json.cause "#{kid.causes[group.id.to_s]}"
+	    json.status "#{kid.heb_status(kid.checks.last.group.id)}"
+	    json.cause "#{kid.causes[kid.checks.last.group.id.to_s]}"
 	    json.parent_1 "#{kid.parent_1}"
 	    json.parent_1_phone "#{kid.parent_1_phone}"
 	    json.parent_2 "#{kid.parent_2}"

@@ -28,7 +28,7 @@ class MifalStepsController < ApplicationController
 				@mifal.columns += ["parent_1", "parent_1_phone", "parent_2", "parent_2_phone"]
 				@mifal.columns
 			end
-      @mifal.columns.unshift("name", "last_name", "full_name", "taz", "group", "status", "cause")
+      @mifal.columns.unshift("name", "last_name", "full_name", "taz", "groups", "status", "cause")
       group_name_single = params[:mifal][:group_name_single]
       group_name_plural = params[:mifal][:group_name_plural]
       @mifal.group_name = {single: group_name_single, plural: group_name_plural}

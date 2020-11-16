@@ -19,3 +19,9 @@ Kid.all.each do |k|
   # לבדוק שעובד לפני שמריצים
   k.update(statuses: {"#{k.group_id}" => k.attendances.last.status}, causes: {"#{k.group_id}" => k.attendances.last.cause})
 end
+
+
+Mifal.all.each do |m|
+  m.columns.map! { |c| c == 'group' ? 'groups' : c }
+  m.save!
+end
