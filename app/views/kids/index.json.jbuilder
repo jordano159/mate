@@ -3,7 +3,7 @@ json.set! :data do
     if params[:group_id]
       group = Group.find(params[:group_id])
     end
-    if kid.groups.empty? || !(kid.groups.pluck(:name).include?("סל מחזור #{kid.mifal.name}") && kid.last_group == group.id)
+    if kid.groups.empty? || !kid.groups.trash_bin?(group.mifal)
 	    json.name "#{link_to kid.name, kid}"
 	    json.last_name "#{kid.last_name}"
 	    if params[:bus_id].present?
@@ -55,7 +55,7 @@ json.set! :data do
 	    end
   	else
 	    json.full_name "#{link_to kid.full_name, kid}"
-	    json.last_group "#{Group.find(kid.last_group).name}" unless kid.last_group.nil?
+	    json.last_group "#{Group.where(id: kid.kid_groups.where(status: :unactive).pluck(:group_id)).pluck(:name).join(', ') }"
 	    json.leave_cause "#{kid.leave_cause}"
   	end
 
