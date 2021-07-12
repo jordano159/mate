@@ -6,7 +6,7 @@
     display: none;
   }
 </style>
-
+<span id="mifal_fever" class="d-none"><%= @mifal.check_fever %></span>
 <%= simple_form_for(@check) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -145,8 +145,9 @@ $(document).ready(function(){
     $($(this).closest("div.check_div").find(".check_o_input")).val("");
     }
   else {
-    if ($('#name_input').val() == "נוכחות בוקר") {
-      console.log($(this));
+    console.log("mifal_fever:");
+    console.log($('#mifal_fever').text());
+    if ($('#name_input').val() == "נוכחות בוקר" && $('#mifal_fever').text() == "true") {
       $(this).closest("div.check_div").find(".fever").show("blind", 200);
     }
     $(this).closest("div.check_div").find(".check_cause").hide("blind", 400)
