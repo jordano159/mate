@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.7'
+ruby '2.6.8'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
@@ -63,6 +63,7 @@ gem 'jquery-ui-rails'
 gem 'mail_form'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'inline_svg'
+gem 'mimemagic', '~> 0.3.10'
 
 
 

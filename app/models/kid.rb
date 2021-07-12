@@ -21,23 +21,6 @@ class Kid < ApplicationRecord
     self.full_name
   end
 
-
-  # def absences_this_month(month)
-  #   absences = self.attendances.where(status: 0)
-  #   checks = Check.where(id: absences.pluck(:check_id), bus_id: nil)
-  #   this_month =  sprintf '%02d', month
-  #   checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
-  #   checks_this_month.length
-  # end
-  #
-  # def attendances_this_month(month)
-  #   attendances = self.attendances.where.not(status: nil)
-  #   checks = Check.where(id: attendances.pluck(:check_id), bus_id: nil)
-  #   this_month =  sprintf '%02d', month
-  #   checks_this_month = checks.where("date like ?", "%/#{this_month}/%")
-  #   checks_this_month.length
-  # end
-
   def create_kid_moved_event
     if group_id_changed? && group_id_was.present?
       event = Event.new
@@ -48,18 +31,10 @@ class Kid < ApplicationRecord
       event.level = "auto"
       event.save
     end
-    # yield #kid.save
     puts "Success"
   end
 
   def create_kid_left_event
-    # event = Event.new
-    # event.content = "#{full_name} מ#{Group.find(group_id).name} עזב.ה את המפעל"
-    # event.staff_id = mifal.staffs.first.id
-    # event.eventable_type = "Mifal"
-    # event.eventable_id = mifal.id
-    # event.level = "auto"
-    # event.save
     self.last_group = group.id
     puts last_group
     self.group_id = Group.find_by(hard_name: "סל מחזור #{mifal.name}").id
@@ -92,6 +67,8 @@ class Kid < ApplicationRecord
       kid.mifal_id = mifal.id
       kid.city = kid.city.strip if kid.city.present?
       kid.ken = "קן #{kid.ken}" if kid.ken.present?
+      puts "kid.name: #{kid.name}"
+      puts "kid.last_name: #{kid.last_name}"
       kid.save!
     end
   end
@@ -106,7 +83,11 @@ class Kid < ApplicationRecord
   end
 
   def full_name
-    name + ' ' + last_name
+    if name.present?
+      name + ' ' + last_name
+    else
+      name
+    end
   end
 
   def self.filter(filter_column, filter_condition)

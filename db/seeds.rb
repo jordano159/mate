@@ -8,34 +8,34 @@
 # Staff.create!(name: 'הקוד השומרי', email: 'codecircle13@gmail.com', password: 'mered1913', password_confirmation: 'mered1913',
 #   role: 'admin', username: 'codecircle')
 
-280.times do
-  mifal_id = 3
-  Kid.create(
-      name:   Faker::Name.first_name     ,
-      last_name:   Faker::Name.last_name   ,
-      sex:   Faker::Gender.type ,
-      phone:   Faker::PhoneNumber.cell_phone ,
-      medical:  Faker::Food.fruits   ,
-      meds:   Faker::Food.ingredient   ,
-      food: Faker::Food.fruits    ,
-      city:   Faker::Address.city  ,
-      ken:  Faker::Address.city   ,
-      parent_1: Faker::Name.name      ,
-      parent_1_phone:    Faker::PhoneNumber.cell_phone ,
-      parent_2:     Faker::Name.name  ,
-      parent_2_phone:    Faker::PhoneNumber.cell_phone ,
-      size:  Faker::Alphanumeric.alphanumeric(number: 1)   ,
-      shabat:    Faker::Alphanumeric.alphanumeric(number: 1)  ,
-      parents:   Faker::Lorem.word  ,
-      swim:   Faker::Lorem.word  ,
-      exits:   Faker::Lorem.word  ,
-      comments:    Faker::Lorem.word ,
-      grade:   Faker::Lorem.word  ,
-      taz:     Faker::Number.unique.number(digits: 10),
-      mifal_id:    mifal_id ,
-      group_id: rand(Mifal.find(mifal_id).groups.first.id..Mifal.find(mifal_id).groups.last(2).first.id)
-  )
-end
+# 280.times do
+#   mifal_id = 3
+#   Kid.create(
+#       name:   Faker::Name.first_name     ,
+#       last_name:   Faker::Name.last_name   ,
+#       sex:   Faker::Gender.type ,
+#       phone:   Faker::PhoneNumber.cell_phone ,
+#       medical:  Faker::Food.fruits   ,
+#       meds:   Faker::Food.ingredient   ,
+#       food: Faker::Food.fruits    ,
+#       city:   Faker::Address.city  ,
+#       ken:  Faker::Address.city   ,
+#       parent_1: Faker::Name.name      ,
+#       parent_1_phone:    Faker::PhoneNumber.cell_phone ,
+#       parent_2:     Faker::Name.name  ,
+#       parent_2_phone:    Faker::PhoneNumber.cell_phone ,
+#       size:  Faker::Alphanumeric.alphanumeric(number: 1)   ,
+#       shabat:    Faker::Alphanumeric.alphanumeric(number: 1)  ,
+#       parents:   Faker::Lorem.word  ,
+#       swim:   Faker::Lorem.word  ,
+#       exits:   Faker::Lorem.word  ,
+#       comments:    Faker::Lorem.word ,
+#       grade:   Faker::Lorem.word  ,
+#       taz:     Faker::Number.unique.number(digits: 10),
+#       mifal_id:    mifal_id ,
+#       group_id: rand(Mifal.find(mifal_id).groups.first.id..Mifal.find(mifal_id).groups.last(2).first.id)
+#   )
+# end
 
 # # Create Mifal
 # puts "What's the name of your new and awesome factory?"
@@ -48,12 +48,12 @@ end
 #                 role: 'vip', username: 'Gilad', staffable_type: 'Mifal', staffable_id: Mifal.find_by(name: name).id)
 # end
 #
-# # Seeding Admin
-# puts 'Creating Admin...'
-# if Staff.find_by(username: 'Jordan').nil?
-  # Staff.create!(name: 'ירדן', email: 'yarden11111@gmail.com', password: '12341234', password_confirmation: '12341234',
-  #               role: 'admin', username: 'Jordan', staffable_type: 'Mifal', staffable_id: Mifal.find_by(name: name).id)
-# end
+# Seeding Admin
+puts 'Creating Admin...'
+if Staff.find_by(username: 'Jordan').nil?
+  Staff.create!(name: 'ירדן', email: 'yarden11111@gmail.com', password: '12341234', password_confirmation: '12341234',
+                role: 'admin', username: 'Jordan')
+end
 #
 # # Seeding Axes
 # puts 'How Many Axes?'
