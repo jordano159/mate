@@ -8,9 +8,13 @@
 		<span>הוספת חניך</span>
 	<% end %>
 	<%= link_to mifal_step_path(:imported_kids), class:"btn btn-primary-cus-outline font-weight-bold" do %>
-	 <i class='icon icon-file-excel-solid'></i>
-	 <span>ייבוא מטבלה</span>
+    <i class='icon icon-file-excel-solid'></i>
+    <span>ייבוא מטבלה</span>
 	<% end %>
+  <%= link_to kids_path(format: :xlsx), class:"btn btn-primary-cus-outline font-weight-bold" do %>
+    <i class='icon icon-file-excel-solid'></i>
+    <span>ייצוא המפעל</span>
+  <% end %>
 <% end %>
 <%= link_to 'חזרה לרשימה', mifals_path, class: "btn btn-primary-cus" if current_staff.admin? %>
 
