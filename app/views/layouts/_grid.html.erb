@@ -1,4 +1,3 @@
-
   <% if mobile_device? %>
     <div class="card-deck mx-2 mt-4 ">
       <div class="card-header mb-2" style="background-color: #54ffefa6; position: relative; width: 100%;">
@@ -12,17 +11,7 @@
         <strong class='card-text'> <%= how_many_attending(head.kids) %> </strong> מתוך <strong> <%= head.kids.count %> </strong>
       </div>
     </div>
-    <!-- <div class="card" style="margin-left: 100px;">
-      <div class="card-header">
-        <h5 class="card-title"><%= head.name %></h5>
-      </div>
-      <div class="card-body">
-      </div>
-      <div class="card-footer">
-        <strong class='card-text'> <%= how_many_attending(head.kids) %> </strong> מתוך <strong> <%= head.kids.count %> </strong>
-      </div>
-    </div> -->
-    <% head.groups.each do |group| %>
+    <% head.groups.order(:hard_name).includes(:kids).each do |group| %>
       <div class="card w-50">
         <% if group.checks.exists? %>
           <% if group.checks.order(created_at: :asc).last.approved? %>
