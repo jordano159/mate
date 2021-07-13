@@ -18,7 +18,7 @@ class Check < ApplicationRecord
   end
 
   def delete_blank_checks
-    Check.where("name = ? and group_id = ?", "נוכחות חדשה", self.group_id).destroy_all
+    Check.where("name = ? and group_id = ?", "נוכחות חדשה", self.group_id).destroy_all 
   end
 end
 
