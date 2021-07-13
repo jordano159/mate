@@ -10,8 +10,8 @@ class GroupsController < ApplicationController
       @groups = Group.all.order(:hard_name).includes(:kids)
       @heads = Head.all.order(:hard_name).includes(:kids)
     else
-      @groups = current_staff.staffable.groups.where.not(name: "סל מחזור #{current_staff.staffable.mifal.name}")
-      @heads = current_staff.staffable.heads if @level > 2
+      @groups = current_staff.staffable.groups.where.not(name: "סל מחזור #{current_staff.staffable.mifal.name}").order(:hard_name).includes(:kids)
+      @heads = current_staff.staffable.heads.order(:hard_name).includes(:kids) if @level > 2
     end
   end
 
