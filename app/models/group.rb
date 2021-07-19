@@ -6,6 +6,7 @@ class Group < ApplicationRecord
   has_many :checks, dependent: :destroy
   has_many :events, as: :eventable, dependent: :destroy
   validates :hard_name, uniqueness: true
+  # before_validate :strip
 
   before_destroy :kill_the_kids
 
@@ -16,4 +17,12 @@ class Group < ApplicationRecord
   def kill_the_kids
     kids.destroy_all
   end
+
+  # def strip
+  #   Group.columns.each do |c|
+  #     puts "************ self.send(c) = #{self.send(c)}****************************"
+  #     self.send(c) = self.send(c).strip
+  #     puts "************ self.send(c) after = #{self.send(c)}****************************"
+  #   end
+  # end
 end
