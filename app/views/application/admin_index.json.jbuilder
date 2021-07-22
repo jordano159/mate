@@ -19,5 +19,10 @@ json.set! :data do
     else
       json.phone "אין מספר במערכת"
     end
+    if staff.staffable.present?
+      json.staffable staff.staffable.name
+    else
+      json.staffable "חסר אחריות"
+    end
   end
 end
