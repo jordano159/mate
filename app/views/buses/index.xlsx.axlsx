@@ -1,14 +1,14 @@
 wb = xlsx_package.workbook
 @buses.each do |bus|
   wb.add_worksheet(name: bus.name ) do |sheet|
-    sheet.add_row ['שם מלא', 'שם קבוצה', 'טלפון', 'קן', 'ישוב', 'כניסות ויציאות', 'סטטוס', 'סיבה']
+    sheet.add_row ['שם אוטובוס', 'שם מלא', 'שם קבוצה', 'טלפון', 'קן', 'ישוב', 'כניסות ויציאות', 'סטטוס', 'סיבה']
     bus.kids.each do |kid|
       if kid.group
         group = kid.group.name
       else
         group = ""
       end
-      attributes = [kid.full_name, group, kid.phone, kid.ken, kid.city, kid.exits, kid.heb_status, kid.cause]
+      attributes = [bus.name, kid.full_name, group, kid.phone, kid.ken, kid.city, kid.exits, kid.heb_status, kid.cause]
       sheet.add_row attributes
     end
   end
