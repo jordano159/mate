@@ -54,7 +54,9 @@
         <th>שם</th>
         <th>סטטוס</th>
         <th>סיבה</th>
-        <th>חום</th>
+        <% if @check.group.mifal.check_fever %>
+          <th>חום</th>
+        <% end %>
         <!-- <% if @check.previous_check %> -->
           <!-- <th class="previous" style="display:none;">סטטוס קודם</th>
           <th class="previous" style="display:none;">סיבה קודמת</th> -->
@@ -103,14 +105,18 @@
               <%# end %></td>
               <td class="previous" style="display:none;"><%# @check.previous_check.attendances.find_by(kid_id: kid.id).cause %></td>
             <%# end %> -->
-          <% fever_heb = {
-            has_fever: "יש חום",
-            no_fever: "אין חום"
-            } %>
-            <% if @check.attendances.find_by(kid_id: kid.id).fever.present? %>
-              <td><%= fever_heb[@check.attendances.find_by(kid_id: kid.id).fever.to_sym] %></td>
+            <% if @check.group.mifal.check_fever %>
+              <% fever_heb = {
+                has_fever: "יש חום",
+                no_fever: "אין חום"
+              } %>
+              <td>
+                <% if @check.attendances.find_by(kid_id: kid.id).fever.present? %>
+                  <%= fever_heb[@check.attendances.find_by(kid_id: kid.id).fever.to_sym] %>
+                <% end %>
+              </td>
             <% end %>
-            <td></td>
+
           <% if current_staff.admin? %>
             <td><%= link_to 'עריכה', edit_kid_path(kid), class: "btn btn-warning" %></td>
             <td><%= link_to 'מחיקה', kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: "btn btn-danger" %></td>
