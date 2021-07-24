@@ -18,6 +18,10 @@ class Group < ApplicationRecord
     kids.destroy_all
   end
 
+  def last_check
+    self.checks.order(created_at: :asc).where.not(name: 'נוכחות חדשה').last
+  end
+
   # def strip
   #   Group.columns.each do |c|
   #     puts "************ self.send(c) = #{self.send(c)}****************************"

@@ -16,16 +16,18 @@ json.set! :data do
       json.previous_group_counter "אין נוכחות קודמת"
     end
     if group.checks.exists?
-      puts "*******************  group.checks.last: #{group.checks.last.name}  *********************"
-      puts "*******************  group.checks: #{group.checks.pluck(:name)}  *********************"
-      puts "*******************b  group.checks.last: #{group.checks.order(created_at: :asc).last.name}  *********************"
-      puts "*******************b  group.checks: #{group.checks.order(created_at: :asc).pluck(:name)}  *********************"
-      last_check = group.checks.order(created_at: :asc).last
-      if last_check.approved?
+      # puts "*******************  group.checks.last: #{group.checks.last.name}  *********************"
+      # puts "*******************  group.checks: #{group.checks.pluck(:name)}  *********************"
+      # puts "*******************b  group.checks.last: #{group.checks.order(created_at: :asc).last.name}  *********************"
+      # puts "*******************b  group.checks: #{group.checks.order(created_at: :asc).pluck(:name)}  *********************"
+      last_check = group.last_check
+      if last_check.present? && last_check.approved?
         json.last_attendence "<span class='check-approved' style=''><i class='icon icon-check-circle-regular'></i> #{link_to last_check.name, check_path(Check.find(last_check.id)), class: ""} #{last_check.updated_at.strftime('%d/%m')}</span>"
         puts "********************  Last Attendance: #{last_check.name} of #{group.name}  ********************"
-      else
+      elsif last_check.present?
        json.last_attendence "<span class='check-not-approved' style=''>  #{link_to last_check.name, check_path(Check.find(last_check.id)), class: ""} #{last_check.updated_at.strftime('%d/%m')} </span>"
+      else
+        json.last_attendence "<span class='' style=''>לא נעשתה עדיין נוכחות...	</span>"
       end
     else
       json.last_attendence "לא נעשתה עדיין נוכחות..."
