@@ -16,10 +16,8 @@
     <% end %>
     <% if current_staff.admin? %>
     <%= f.input :kind, collection: Mifal.all.pluck(:event_kinds), label: "סוג" %>
-      <!-- true -->
     <% else %>
-    <%= f.input :kind, collection: current_staff.staffable.mifal.event_kinds || Mifal.all.pluck(:event_kinds), label: "סוג" %>
-      <!-- false -->
+    <%= f.input :kind, collection: current_staff.staffable.mifal.event_kinds || Mifal.all.pluck(:event_kinds), label: "סוג", required: true %>
     <% end %>
     <%= f.input :level, label: "דרגה", collection: [['regular', 'רגיל'], ['critical', 'חמור']], label_method: :second, value_method: :first, required: true %>
   </div>

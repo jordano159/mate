@@ -322,10 +322,10 @@ $(document).ready(function() {
     <%# form.collection_check_boxes :causes, preset_causes, :first, :last %>
   <% if @mifal.event_kinds.present? %>
     <% @mifal.event_kinds.reject{|c| c == "אחר"}.each do |c| %>
-      <%= form.text_field :event_kinds, multiple: true, value: c, class: "inline form-control w-25 m-1" %>
+      <%= form.text_field :event_kinds, multiple: true, value: c, class: "inline form-control w-25 m-1", id: c %>
     <% end %>
   <% else %>
-    <%= form.text_field :event_kinds, multiple: true, class: "inline form-control w-25 m-1" %>
+    <%= form.text_field :event_kinds, multiple: true, class: "inline form-control w-25 m-1", id: "event-kind-0" %>
   <% end %>
   <div class="event_kind inline" id="event_kinds">
   </div>
@@ -335,6 +335,7 @@ $(document).ready(function() {
   <script>
     $(".event_kind_button").click(function(){
       $('.event_kind').append("<%= j (render partial: 'event_kind', locals: {form:form}) %>")
+      $("#NEW_EVENT_KIND").attr("id", Date.now)
     });
     $("#preset_event_kind").click(function(){
       $('.event_kind').append("<%= j (render partial: 'event_kind', locals: {form:form}) %>")
