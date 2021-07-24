@@ -65,7 +65,7 @@
     <div class="card-deck">
       <% @groups.each do |group| %>
         <div class="card">
-          <% if group.checks.exists? %>
+          <% if group.checks.exists? &&  group.last_check.present? %>
             <% if group.last_check.approved? %>
               <div class="card-header bg-success">
                 <h5 class="card-title"><%= link_to group.name, group, class: "text-white" %> <i class='icon icon-check-circle-regular text-white'></i></h5>
