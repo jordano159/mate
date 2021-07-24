@@ -22,10 +22,10 @@ json.set! :data do
       puts "*******************b  group.checks: #{group.checks.order(created_at: :asc).pluck(:name)}  *********************"
       last_check = group.checks.order(created_at: :asc).last
       if last_check.approved?
-        json.last_attendence "<span style='color:green;'><i class='icon icon-check-circle-regular'></i> #{link_to last_check.name, check_path(Check.find(last_check.id)), class: "check-link"} #{last_check.updated_at.strftime('%d/%m')}</span>"
+        json.last_attendence "<span class='check-approved' style=''><i class='icon icon-check-circle-regular'></i> #{link_to last_check.name, check_path(Check.find(last_check.id)), class: ""} #{last_check.updated_at.strftime('%d/%m')}</span>"
         puts "********************  Last Attendance: #{last_check.name} of #{group.name}  ********************"
       else
-       json.last_attendence "<span style='color:red;'>  #{link_to last_check.name, check_path(Check.find(last_check.id)), class: "check-link"} #{last_check.updated_at.strftime('%d/%m')} </span>"
+       json.last_attendence "<span class='check-not-approved' style=''>  #{link_to last_check.name, check_path(Check.find(last_check.id)), class: ""} #{last_check.updated_at.strftime('%d/%m')} </span>"
       end
     else
       json.last_attendence "לא נעשתה עדיין נוכחות..."

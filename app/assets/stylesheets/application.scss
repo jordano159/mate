@@ -23,7 +23,30 @@ $breadcrumb-divider: quote(">");
   text-decoration: none;
   color: red;
 }
+.check-approved{
+  color: red;
+  a{
+    text-decoration: none;
+    color: red;
 
+  }
+  *{
+    text-decoration: none;
+    color: red;
+  }
+}
+.check-not-approved{
+  color: green;
+  a{
+    text-decoration: none;
+    color: green;
+
+  }
+  *{
+    text-decoration: none;
+    color: green;
+  }
+}
 .block{
   display: block;
 }
