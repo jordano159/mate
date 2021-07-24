@@ -13,8 +13,8 @@
     </div>
     <% head.groups.order(:hard_name).includes(:kids).each do |group| %>
       <div class="card w-50">
-        <% if group.checks.exists? %>
-          <% if group.last_check.present? && group.last_check.approved? %>
+        <% if group.checks.exists? &&  group.last_check.present? %>
+          <% if  group.last_check.approved? %>
             <div class="card-header bg-success">
               <h5 class="card-title"><%= link_to group.name, group, class: "text-white" %> <i class='icon icon-check-circle-regular text-white'></i></h5>
             </div>
