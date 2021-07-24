@@ -10,8 +10,16 @@
     <% else %>
       <%= f.input :eventable_type, as: :hidden %>
       <%= f.input :eventable_id, as: :hidden %>
+      <%= f.label "קבוצה" %>
       <%= select_tag "outcome_based", content_tag(:option,'נא לבחור',:value=>"") +
-        grouped_options_for_select(options), class:"form-control" %>
+        grouped_options_for_select(options), class:"form-control inline" %>
+    <% end %>
+    <% if current_staff.admin? %>
+    <%= f.input :kind, collection: Mifal.all.pluck(:event_kinds), label: "סוג" %>
+      <!-- true -->
+    <% else %>
+    <%= f.input :kind, collection: current_staff.staffable.mifal.event_kinds || Mifal.all.pluck(:event_kinds), label: "סוג" %>
+      <!-- false -->
     <% end %>
     <%= f.input :level, label: "דרגה", collection: [['regular', 'רגיל'], ['critical', 'חמור']], label_method: :second, value_method: :first, required: true %>
   </div>

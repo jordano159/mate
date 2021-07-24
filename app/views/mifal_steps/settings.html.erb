@@ -313,6 +313,40 @@ $(document).ready(function() {
   </div>
 </div>
 <hr>
+<h3><%= form.label :event_kinds, "סוגי אירועים" %>
+
+</h3>
+<div class="container">
+  <!-- <button type="button" name="preset_cause" id="preset_cause" class="btn">ברירת מחדל</button> -->
+  <%# preset_causes = [["היעדרות מסיבה רפואית", "היעדרות מסיבה רפואית"], ["היעדרות מסיבה אישית", "היעדרות מסיבה אישית"]] %>
+    <%# form.collection_check_boxes :causes, preset_causes, :first, :last %>
+  <% if @mifal.event_kinds.present? %>
+    <% @mifal.event_kinds.reject{|c| c == "אחר"}.each do |c| %>
+      <%= form.text_field :event_kinds, multiple: true, value: c, class: "inline form-control w-25 m-1" %>
+    <% end %>
+  <% else %>
+    <%= form.text_field :event_kinds, multiple: true, class: "inline form-control w-25 m-1" %>
+  <% end %>
+  <div class="event_kind inline" id="event_kinds">
+  </div>
+  <div class="btn btn-primary-cus btn-sm btn-round event_kind_button" id="event_kind_button">
+    <i class="icon icon-plus-solid"></i>
+  </div>
+  <script>
+    $(".event_kind_button").click(function(){
+      $('.event_kind').append("<%= j (render partial: 'event_kind', locals: {form:form}) %>")
+    });
+    $("#preset_event_kind").click(function(){
+      $('.event_kind').append("<%= j (render partial: 'event_kind', locals: {form:form}) %>")
+      $('.event_kinds').last().val("Hello");
+    });
+    $(".delete_button").click(function(){
+      $('.event_kind').remove("<%= j (render partial: 'event_kind', locals: {form:form}) %>")
+    });
+  </script>
+</div>
+</div>
+<hr>
   <div class="field">
     <h3><%= form.label :columns, "איזה מידע צריך להיות על חניכים:" %>
 			<a tabindex="0" role="button"  class="text-muted icon-size" data-toggle="popover" data-placement="left" data-trigger="focus" data-content="שם פרטי, שם משפחה ותעודת זהות כלולים באופן אוטומטי">

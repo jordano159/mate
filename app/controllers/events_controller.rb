@@ -81,10 +81,11 @@ class EventsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
+    @mifal = current_staff.staffable.mifal || Mifal.first
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:content, :staff_id, :eventable_id, :eventable_type, :level)
+    params.require(:event).permit(:content, :staff_id, :eventable_id, :eventable_type, :level, :kind)
   end
 end

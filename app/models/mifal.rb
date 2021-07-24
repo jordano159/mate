@@ -9,6 +9,7 @@ class Mifal < ApplicationRecord
   serialize :head_head_name, Hash
   serialize :check_names, Array
   serialize :causes, Array
+  serialize :event_kinds, Array
   has_many :axes, dependent: :destroy
   # has_many :heads, through: :axes
   has_many :heads

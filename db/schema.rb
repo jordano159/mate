@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_062027) do
+ActiveRecord::Schema.define(version: 2021_07_24_095912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_062027) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "level"
+    t.string "kind"
     t.index ["content"], name: "index_events_on_content"
     t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id"
     t.index ["staff_id"], name: "index_events_on_staff_id"
@@ -150,6 +151,17 @@ ActiveRecord::Schema.define(version: 2020_06_14_062027) do
     t.index ["axis_id"], name: "index_heads_on_axis_id"
     t.index ["mifal_id"], name: "index_heads_on_mifal_id"
     t.index ["name"], name: "index_heads_on_name"
+  end
+
+  create_table "kid_groups", force: :cascade do |t|
+    t.bigint "kid_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status"
+    t.string "leave_cause"
+    t.index ["group_id"], name: "index_kid_groups_on_group_id"
+    t.index ["kid_id"], name: "index_kid_groups_on_kid_id"
   end
 
   create_table "kids", force: :cascade do |t|
@@ -238,6 +250,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_062027) do
     t.text "check_names"
     t.boolean "has_other_check_name", default: false, null: false
     t.boolean "check_fever", default: false, null: false
+    t.text "event_kinds"
   end
 
   create_table "staffs", force: :cascade do |t|

@@ -10,6 +10,7 @@ json.set! :data do
     json.date "#{event.created_at.in_time_zone('Jerusalem').strftime('%H:%M | %e.%m')}"
     json.made "#{event.staff.name}"
     json.belongs "#{link_to event.eventable.name, event.eventable if event.eventable}"
+    json.kind "#{event.kind}"
     if event.level.present?
       json.level "#{event_levels[event.level.to_sym]}"
     else
