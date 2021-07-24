@@ -24,18 +24,6 @@ $breadcrumb-divider: quote(">");
   color: red;
 }
 .check-approved{
-  color: red;
-  a{
-    text-decoration: none;
-    color: red;
-
-  }
-  *{
-    text-decoration: none;
-    color: red;
-  }
-}
-.check-not-approved{
   color: green;
   a{
     text-decoration: none;
@@ -45,6 +33,18 @@ $breadcrumb-divider: quote(">");
   *{
     text-decoration: none;
     color: green;
+  }
+}
+.check-not-approved{
+  color: red;
+  a{
+    text-decoration: none;
+    color: red;
+
+  }
+  *{
+    text-decoration: none;
+    color: red;
   }
 }
 .block{
