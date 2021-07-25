@@ -54,7 +54,7 @@
         <th>שם</th>
         <th>סטטוס</th>
         <th>סיבה</th>
-        <% if @check.group.mifal.check_fever %>
+        <% if @check.group && @check.group.mifal && @check.group.mifal.check_fever %>
           <th>חום</th>
         <% end %>
         <!-- <% if @check.previous_check %> -->
