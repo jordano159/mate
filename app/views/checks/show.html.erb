@@ -105,7 +105,7 @@
               <%# end %></td>
               <td class="previous" style="display:none;"><%# @check.previous_check.attendances.find_by(kid_id: kid.id).cause %></td>
             <%# end %> -->
-            <% if @check.group.mifal.check_fever %>
+            <% if @check.group && @check.group.mifal && @check.group.mifal.check_fever %>
               <% fever_heb = {
                 has_fever: "יש חום",
                 no_fever: "אין חום"
