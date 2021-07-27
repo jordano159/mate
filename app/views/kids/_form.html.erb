@@ -21,7 +21,7 @@
         <% batch.each do | col | %>
         <% if col == "group" %>
         <div class="column ml-2">
-          <%= form.input :group_id, collection: @groups, label: "#{@level_names[0]}" %>
+          <%= form.input :group_id, collection: @groups, label: "#{@level_names[0]}", input_html: { class: "select2" } %>
         </div>
         <% else %>
         <div class="column ml-2">
@@ -51,3 +51,12 @@
     <%= form.submit "עדכון פרטים", class: "btn btn-success" %>
   </div>
 <% end %>
+
+<script>
+    $(document).ready(function() {
+       $(".select2").select2({
+          language: "he",
+          theme: "bootstrap"
+      }); });
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+</script>
