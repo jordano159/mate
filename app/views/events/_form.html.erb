@@ -12,7 +12,7 @@
       <%= f.input :eventable_id, as: :hidden %>
       <%= f.label "קבוצה" %>
       <%= select_tag "outcome_based", content_tag(:option,'נא לבחור',:value=>"") +
-        grouped_options_for_select(options), class:"form-control inline" %>
+        grouped_options_for_select(options), class:"form-control inline select2" %>
     <% end %>
     <% if current_staff.admin? %>
     <%= f.input :kind, collection: Mifal.all.pluck(:event_kinds), label: "סוג" %>
@@ -45,4 +45,10 @@ $('#outcome_based').change(function(){
     $('#event_eventable_type').val("Mifal")
   }
 });
+  $(document).ready(function() {
+     $(".select2").select2({
+        language: "he",
+        theme: "bootstrap"
+    }); });
+  $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 </script>
