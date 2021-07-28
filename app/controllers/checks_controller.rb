@@ -5,17 +5,17 @@ class ChecksController < ApplicationController
     if params[:delete_in_progress]
       current_staff.staffable.delete_in_progress
     end
-    @checks = if params[:search]
-                Check.search(params[:search]).order('created_at DESC')
-              elsif params[:buses]
-                Check.where.not(bus_id: [nil, ""]).order('created_at DESC')
-              elsif params[:show_all] && !current_staff.admin? && !current_staff.vip?
-                current_staff.staffable.checks.where(bus_id: [nil, ""]).order('created_at DESC')
-              elsif current_staff.admin?
-                Check.all.where(bus_id: [nil, ""]).order('created_at DESC')
-              else
-                current_staff.staffable.checks.where(bus_id: [nil, ""]).order('created_at DESC')
-              end
+    if params[:search].present?
+      @checks = Check.search(params[:search]).order('created_at DESC')
+    elsif params[:buses].present?
+      @checks = Check.where.not(bus_id: nil).order('created_at DESC')
+    elsif params[:show_all].present? && !current_staff.admin? && !current_staff.vip?
+      @checks = Check.where(bus_id: nil).order('created_at DESC')
+    elsif current_staff.admin?
+      @checks = Check.where(bus_id: nil).order('created_at DESC')
+    else
+      @checks = current_staff.staffable.checks.where(bus_id: nil).order('created_at DESC')
+    end
 
     respond_to do |format|
       format.html
