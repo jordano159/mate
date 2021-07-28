@@ -51,9 +51,10 @@
   </div>
   <div class="field">
     <%= form.label :kid_ids, "החניכים: (מתעדכן לאחר שמירה)" %>
-    <% kids = @mifal.kids %>
+    <% bin = Group.find_by(hard_name: "סל מחזור #{@mifal.name}") %>
+    <% kids = @mifal.kids.where.not(group: bin) %>
     <%# form.select :kid_ids, options_for_select(kids), {}, {multiple: true, class: "select"} %>
-    <%= form.collection_select(:kid_ids, @mifal.kids, :id, :full_name, {}, {multiple: true, class: "select", style: "width: 100%"}) %>
+    <%= form.collection_select(:kid_ids, kids, :id, :full_name, {}, {multiple: true, class: "select", style: "width: 100%"}) %>
   </div>
   <div class="form-actions">
     <%= form.submit "המשך", class: "btn btn-primary-cus" %>
