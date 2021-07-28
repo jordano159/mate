@@ -7,7 +7,6 @@ class Kid < ApplicationRecord
   validates :fever, inclusion: { in: fevers.keys }, allow_nil: true
   belongs_to :mifal
   belongs_to :group, optional: true
-  # belongs_to :bus, optional: true
   has_and_belongs_to_many :buses
   has_many :attendances, dependent: :destroy
   has_many :checks, through: :attendances

@@ -119,11 +119,9 @@ end
       @kid.destroy
     else
       @kid.leave_cause = params[:kid][:leave_cause]
-      # @kid.create_kid_left_event
       @kid.last_group = @kid.group.id
-      # puts last_group
       @kid.group_id = Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id
-      # puts group_id
+      @kid.buses.clear
       @kid.save
     end
     respond_to do |format|
