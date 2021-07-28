@@ -31,7 +31,9 @@
       <%= form.input_field :head_id, collection: @heads, input_html: { class: 'select' } %>
     </div>
     <div class="my-2 field">
-      <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "mx-2 select"}, collection: @mifal.kids, label_method: :full_name, value_method: :id %>
+      <% bin = Group.find_by(hard_name: "סל מחזור #{@mifal.name}") %>
+      <% kids = @mifal.kids.where.not(group: bin) %>
+      <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "mx-2 select"}, collection: kids, label_method: :full_name, value_method: :id %>
     </div>
   <% end %>
   <div class="actions">

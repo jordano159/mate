@@ -53,7 +53,6 @@
     <%= form.label :kid_ids, "החניכים: (מתעדכן לאחר שמירה)" %>
     <% bin = Group.find_by(hard_name: "סל מחזור #{@mifal.name}") %>
     <% kids = @mifal.kids.where.not(group: bin) %>
-    <%# form.select :kid_ids, options_for_select(kids), {}, {multiple: true, class: "select"} %>
     <%= form.collection_select(:kid_ids, kids, :id, :full_name, {}, {multiple: true, class: "select", style: "width: 100%"}) %>
   </div>
   <div class="form-actions">
