@@ -14,7 +14,11 @@ class MifalsController < ApplicationController
   def show
     @mifal = Mifal.find(params[:id])
     @kids = @mifal.kids
-    @events = @mifal.events
+    if current_staff.admin?
+      @events = Event.all.order('created_at DESC').includes(:staff, :eventable)
+    else
+      @events = current_staff.staffable.all_events.sort_by {|event| event.created_at}.reverse!
+    end
     respond_to do |format|
       format.html
       format.json

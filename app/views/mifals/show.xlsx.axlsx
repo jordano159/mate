@@ -6,6 +6,7 @@ wb.add_worksheet(name: 'חניכים') do |sheet|
       export_columns << @column_names[col.to_sym]
     end
   end
+  export_columns << "סיבת עזיבה"
   export_columns << @level_names[0]
   export_columns << "נוכחויות"
   sheet.add_row export_columns
@@ -20,12 +21,14 @@ wb.add_worksheet(name: 'חניכים') do |sheet|
                   kid.food, kid.city, kid.ken, kid.parent_1, kid.parent_1_phone, kid.parent_2,
                   kid.parent_2_phone, kid.size, kid.shabat, kid.parents,
                   kid.swim, kid.exits, kid.comments]
-    if kid.fever == "no_fever"
-      export_attributes << "אין חום"
-    elsif kid.fever == "has_fever"
-      export_attributes << "יש חום"
-    else
-      export_attributes << ""
+    if @mifal.check_fever
+      if kid.fever == "no_fever"
+        export_attributes << "אין חום"
+      elsif kid.fever == "has_fever"
+        export_attributes << "יש חום"
+      else
+        export_attributes << ""
+      end
     end
     if kid.group
       export_attributes << Group.find(kid.group_id).name
@@ -43,9 +46,9 @@ wb.add_worksheet(name: 'חניכים') do |sheet|
 end
 
 wb.add_worksheet(name: 'יומן אירועים') do |sheet|
-  sheet.add_row ['פירוט', 'תאריך', 'שייך ל', 'נוצר על ידי']
-  @events.order('created_at DESC').each do |event|
-    export_attributes = [event.content, event.created_at.strftime('%H:%M | %e.%m'), event.eventable.name, event.staff.name]
+  sheet.add_row ['פירוט', 'סוג', 'דרגה', 'תאריך', 'שייך ל', 'נוצר על ידי']
+  @events.each do |event|
+    export_attributes = [event.content, event.kind, event.level, event.created_at.strftime('%H:%M | %e.%m'), event.eventable.name, event.staff.name]
     sheet.add_row export_attributes
   end
 end
