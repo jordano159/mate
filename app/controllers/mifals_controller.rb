@@ -22,7 +22,11 @@ class MifalsController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      format.xlsx
+      format.xlsx {
+        response.headers[
+          'Content-Disposition'
+        ] = "attachment; filename=ייצוא #{@mifal.name}.xlsx"
+      }
     end
   end
 
