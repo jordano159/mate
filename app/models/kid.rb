@@ -34,10 +34,8 @@ class Kid < ApplicationRecord
   end
 
   def create_kid_left_event
-    self.last_group = group.id
-    puts last_group
+    self.last_group = group.id if group.present?
     self.group_id = Group.find_by(hard_name: "סל מחזור #{mifal.name}").id
-    puts group_id
     self.save
   end
 
