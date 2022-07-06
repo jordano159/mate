@@ -88,7 +88,7 @@ class Kid < ApplicationRecord
   end
 
   def full_name
-    self&.name + " " + self.last_name
+    self&.name + " " + self&.last_name
   end
 
   def self.filter(filter_column, filter_condition)
