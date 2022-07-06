@@ -88,11 +88,7 @@ class Kid < ApplicationRecord
   end
 
   def full_name
-    if name.present? && last_name.present?
-      name + ' ' + last_name
-    else
-      name
-    end
+    self&.name + " " + self.last_name
   end
 
   def self.filter(filter_column, filter_condition)
