@@ -265,7 +265,7 @@ GEM
     public_suffix (3.0.2)
     puma (3.11.4)
     racc (1.5.2)
-    rack (2.2.3)
+    rack (2.2.4)
     rack-protection (2.0.5)
       rack
     rack-test (1.1.0)
