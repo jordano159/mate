@@ -66,7 +66,7 @@
   </tbody>
 </table>
 <%# link_to "מחיקת חניך", @kid, method: :delete, data: { confirm: 'את/ה בטוח/ה?' },  class:"btn btn-danger" if current_staff.admin? || current_staff.vip? %>
-<%= link_to "מחיקת חניך", @kid, remote: true, id: "leave_button", class:"btn btn-danger" if @kid.group && @kid.group.hard_name != "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?)  %>
+<%= link_to "מחיקת חניך", @kid, remote: true, id: "leave_button", class:"btn btn-danger" if @kid&.group.hard_name != "סל מחזור #{@kid.mifal.name}" && (current_staff.admin? || current_staff.vip?)  %>
 <div id="leave_cause"></div>
 </div>
 </div>
