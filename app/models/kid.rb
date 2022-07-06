@@ -82,7 +82,7 @@ class Kid < ApplicationRecord
   end
 
   def full_name
-    if name.present?
+    if name.present? && last_name.present?
       name + ' ' + last_name
     else
       name
