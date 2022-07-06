@@ -88,7 +88,15 @@ class Kid < ApplicationRecord
   end
 
   def full_name
-    self&.name + " " + self&.last_name
+    if name.present? && last_name.present?
+      name + " " + last_name
+    elsif name.nil? && last_name.present?
+      last_name
+    elsif name.present? && last_name.nil?
+      name
+    else
+      "לא הוזן שם"
+    end
   end
 
   def self.filter(filter_column, filter_condition)
