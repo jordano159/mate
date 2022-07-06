@@ -86,7 +86,7 @@ class Kid < ApplicationRecord
     else raise "Unknown file type: #{file.original_filename}"
     end
   end
- 
+
   def full_name
     self&.name + " " + self.last_name
   end
