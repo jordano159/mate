@@ -137,7 +137,6 @@ ActiveRecord::Schema.define(version: 2021_07_24_095912) do
     t.integer "head_id"
     t.bigint "mifal_id"
     t.string "hard_name"
-    t.integer "trash_bin"
     t.index ["mifal_id"], name: "index_groups_on_mifal_id"
     t.index ["name"], name: "index_groups_on_name"
   end
@@ -152,17 +151,6 @@ ActiveRecord::Schema.define(version: 2021_07_24_095912) do
     t.index ["axis_id"], name: "index_heads_on_axis_id"
     t.index ["mifal_id"], name: "index_heads_on_mifal_id"
     t.index ["name"], name: "index_heads_on_name"
-  end
-
-  create_table "kid_groups", force: :cascade do |t|
-    t.bigint "kid_id"
-    t.bigint "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status"
-    t.string "leave_cause"
-    t.index ["group_id"], name: "index_kid_groups_on_group_id"
-    t.index ["kid_id"], name: "index_kid_groups_on_kid_id"
   end
 
   create_table "kids", force: :cascade do |t|
@@ -188,8 +176,8 @@ ActiveRecord::Schema.define(version: 2021_07_24_095912) do
     t.string "swim"
     t.text "exits"
     t.text "comments"
-    t.text "statuses"
-    t.text "causes"
+    t.integer "status"
+    t.text "cause"
     t.string "grade"
     t.bigint "taz"
     t.bigint "mifal_id"
@@ -198,9 +186,6 @@ ActiveRecord::Schema.define(version: 2021_07_24_095912) do
     t.text "total_per_month"
     t.string "leave_cause"
     t.integer "fever"
-    t.text "att_hash"
-    t.text "total_att_hash"
-    t.text "late_hash"
     t.index ["city"], name: "index_kids_on_city"
     t.index ["comments"], name: "index_kids_on_comments"
     t.index ["exits"], name: "index_kids_on_exits"
@@ -246,11 +231,6 @@ ActiveRecord::Schema.define(version: 2021_07_24_095912) do
     t.text "head_head_name"
     t.string "alert_message"
     t.text "causes"
-    t.integer "kids_count", default: 0, null: false
-    t.integer "present_kids", default: 0, null: false
-    t.text "city_coords"
-    t.integer "started_kids", default: 0, null: false
-    t.text "check_log"
     t.text "check_names"
     t.boolean "has_other_check_name", default: false, null: false
     t.boolean "check_fever", default: false, null: false
@@ -289,7 +269,5 @@ ActiveRecord::Schema.define(version: 2021_07_24_095912) do
   add_foreign_key "events", "staffs"
   add_foreign_key "groups", "mifals"
   add_foreign_key "heads", "mifals"
-  add_foreign_key "kid_groups", "groups"
-  add_foreign_key "kid_groups", "kids"
   add_foreign_key "kids", "mifals"
 end
