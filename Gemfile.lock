@@ -451,7 +451,7 @@ DEPENDENCIES
   geocoder
   google_drive
   hirb
-  honeybadger (~> 4.9)
+  honeybadger (~> 4.0)
   inline_svg
   jbuilder (~> 2.5)
   jquery-datatables
