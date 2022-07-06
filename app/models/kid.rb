@@ -23,7 +23,15 @@ class Kid < ApplicationRecord
   def create_kid_moved_event
     if group_id_changed? && group_id_was.present?
       event = Event.new
-      event.content = "#{full_name} עבר.ה מ#{Group.find(group_id_was).name} אל #{Group.find(group_id).name}"
+      if group_id_was.present? && group_id.present?
+        event.content = "#{full_name} עבר.ה מ#{Group.find(group_id_was).name} אל #{Group.find(group_id).name}"
+      elsif group_id_was.present? && group_id.nil?
+        event.content = "#{full_name} עבר.ה מ#{Group.find(group_id_was).name} ללהיות בלי קבוצה"
+      elsif group_id_was.nil? && group_id.present?
+        event.content = "#{full_name} לא היה בקבוצה ועבר.ה אל #{Group.find(group_id).name}"
+      elsif group_id_was.nil? && group_id.nil?
+        event.content = "מעבר מחוסר קבוצה אל חוסר קבוצה"
+      end
       event.staff_id = mifal.staffs.first.id
       event.eventable_type = "Mifal"
       event.eventable_id = mifal.id
