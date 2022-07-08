@@ -16,8 +16,10 @@ class KidsController < ApplicationController
       if current_staff.admin?
         @kids = Kid.all.includes(:group)
       else
-        if Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
-          @kids = current_staff.staffable.kids.where.not(group_id: Group.find_by(hard_name: "סל מחזור #{@mifal.name}").id).or(current_staff.staffable.kids.where(group_id: nil)).includes(:group)
+        bin = Group.find_by(hard_name: "סל מחזור #{@mifal.name}")
+        if bin.present?
+          @kids = current_staff.staffable.kids.where.not(group: bin)
+              .or(current_staff.staffable.kids.where(group_id: nil)).includes(:group)
           # Post.where(id: 1).or(Post.where(title: 'Learn Rails'))
           # @kids = current_staff.staffable.kids.where(group_id: nil).includes(:group)
         else

@@ -32,7 +32,7 @@
     </div>
     <div class="my-2 field">
       <% bin = Group.find_by(hard_name: "סל מחזור #{@mifal.name}") %>
-      <% kids = @mifal.kids.where.not(group: bin) %>
+      <% kids = @mifal.kids.where.not(group: bin).or(@mifal.kids.where(group_id: nil)).includes(:group) %>
       <%= form.input_field :kid_ids, as: :select, multiple: "multiple",  input_html: {class: "mx-2 select"}, collection: kids, label_method: :full_name, value_method: :id %>
     </div>
   <% end %>
