@@ -86,7 +86,7 @@ class BusesController < ApplicationController
     def populate_bus(cities, kens, groups)
       mifal = Mifal.find(current_staff.staffable.id)
       bin = Group.find_by(hard_name: "סל מחזור #{mifal.name}")
-      kids = mifal.kids.where.not(group: bin)
+      kids = mifal.kids.where.not(group: bin).or(mifal.kids.where(group_id: nil))
       cities.each do |city|
         unless city.blank?
           kids.where("city = ?", city).each do |k|

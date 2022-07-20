@@ -20,8 +20,6 @@ class KidsController < ApplicationController
         if bin.present?
           @kids = current_staff.staffable.kids.where.not(group: bin)
               .or(current_staff.staffable.kids.where(group_id: nil)).includes(:group)
-          # Post.where(id: 1).or(Post.where(title: 'Learn Rails'))
-          # @kids = current_staff.staffable.kids.where(group_id: nil).includes(:group)
         else
           @kids = current_staff.staffable.kids.includes(:group)
         end

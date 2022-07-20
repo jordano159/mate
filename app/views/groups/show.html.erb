@@ -1,71 +1,67 @@
 <div id="head" class="m-3">
-<div>
-  <%# if @level == 1 %>
-    <strong class="text-secondary pr-2">
-      <%= @group.mifal.name %> <i class="icon icon-angle-left-solid text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? && @group.head %>
-    </strong>
-    <%= render 'layouts/latest_events' if @level == 1 %>
-  <%# end %>
-  <h1 class="font-weight-bold text-center"><%= @group.name.sub(" #{@group.mifal.name}", "") %></h1>
-	<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
-
-		<hr>
-		<% counter = how_many_attending(@group.kids) %>
-		<!-- יש <%# counter %> חניכימות נוכחימות מתוך <%# @kids.count %> -->
-		<% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i if @group.kids.exists? %>
-		<% width = "width:#{percent}%" %>
-
-    <div class="check-container">
-      <div class="check-title text-right"><strong class="mr-2">נוכחות אחרונה:</strong></div>
-        <% if @group.checks.last.present?  %>
-        <div class="check-stat">
-        <% if @group.checks.last.approved? %>
-          <i class="icon icon-check-circle-regular icon-lg mt-2" style="color:#07E39A"></i>
-        <% else %>
-        <i class="icon icon-times-circle-regular icon-lg mt-2" style="color:#FF5E63"></i>
-        <% end %>
-      </div>
-        <div class="check-data text-right">
-          <div class="mr-2">
-            <ul style="list-style-type:none; padding-right: 0; line-height:120%">
-              <li></li>
-              <li><%= @group.checks.last.name %></li>
-              <li><%= counter %> מתוך <%= @group.kids.count %></li>
-              <li class="date-text"><%= @group.checks.last.created_at.strftime("%d.%m.%Y") %></li>
-            </ul>
-          </div>
-        </div>
-          <% else %>
-          <div class="check-data text-right">
-            <div class="mr-2">
-              <ul style="list-style-type:none; padding-right: 0; line-height:120%">
-                <li></li>
-                <li>עדיין לא נעשתה נוכחות</li>
-                <li>0 מתוך <%= @group.kids.count %></li>
-              </ul>
-            </div>
-          </div>
-          <% end %>
-          <% g_id = @group.id %>
-          <div class="check-new">
-            <%= link_to "<i class='icon icon-plus-solid plus-icon'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary-cus btn-plus" %>
-          </div>
+	<div>
+		<strong class="text-secondary pr-2">
+			<%= @group.mifal.name %> <i class="icon icon-angle-left-solid text-dark"></i> <%= @group.head.name.sub(" #{@group.mifal.name}", "") if @group.kids.exists? && @group.head %>
+		</strong>
+		<%= render 'layouts/latest_events' if @level == 1 %>
+  		<h1 class="font-weight-bold text-center"><%= @group.name.sub(" #{@group.mifal.name}", "") %></h1>
+		<% unless @group.name ==  "סל מחזור #{@group.mifal.name}"%>
+			<hr>
+			<% counter = how_many_attending(@group.kids) %>
+			<!-- יש <%# counter %> חניכימות נוכחימות מתוך <%# @kids.count %> -->
+			<% percent = (counter.to_f / @group.kids.count.to_i * 100).to_i if @group.kids.exists? %>
+			<% width = "width:#{percent}%" %>
+			<div class="check-container">
+				<div class="check-title text-right"><strong class="mr-2">נוכחות אחרונה:</strong></div>
+					<% if @group.checks.last.present?  %>
+						<div class="check-stat">
+							<% if @group.checks.last.approved? %>
+								<i class="icon icon-check-circle-regular icon-lg mt-2" style="color:#07E39A"></i>
+							<% else %>
+								<i class="icon icon-times-circle-regular icon-lg mt-2" style="color:#FF5E63"></i>
+							<% end %>
+						</div>
+						<div class="check-data text-right">
+							<div class="mr-2">
+								<ul style="list-style-type:none; padding-right: 0; line-height:120%">
+								<li></li>
+								<li><%= @group.checks.last.name %></li>
+								<li><%= counter %> מתוך <%= @group.kids.count %></li>
+								<li class="date-text"><%= @group.checks.last.created_at.strftime("%d.%m.%Y") %></li>
+								</ul>
+							</div>
+						</div>
+					<% else %>
+					<div class="check-data text-right">
+						<div class="mr-2">
+							<ul style="list-style-type:none; padding-right: 0; line-height:120%">
+								<li></li>
+								<li>עדיין לא נעשתה נוכחות</li>
+								<li>0 מתוך <%= @group.kids.count %></li>
+							</ul>
+						</div>
+					</div>
+					<% end %>
+					<% g_id = @group.id %>
+					<div class="check-new">
+						<%= link_to "<i class='icon icon-plus-solid plus-icon'></i>".html_safe, new_check_path(:g_id => g_id), class: "btn btn-lg btn-primary-cus btn-plus" %>
+					</div>
+				</div>
 			</div>
+		<% end %>
     </div>
-
-    </div>
-		<hr>
-<% end %>
+</div>
+<hr>
 
 <p>
   <div class="table-responsive-lg">
     <table class="table table-hover" id="dttb-kids" data-sort="true"
-                        data-source="<%= url_for(format: :json, controller: 'kids', group_id: @group.id)%>">
+           data-source="<%= url_for(format: :json, controller: 'kids', group_id: @group.id)%>">
       <thead class="thead-grey nowrap">
         <tr>
-					<% column_names = @column_names.reject{|c| c == :name || c == :last_name || c == :group} %>
-          <% if @group.name !=  "סל מחזור #{@group.mifal.name}"%>
-						<% if current_staff.admin? %>
+			<% column_names = @column_names.reject{|c| c == :name || c == :last_name || c == :group} %>
+          	<% if @group.name !=  "סל מחזור #{@group.mifal.name}"%>
+				<% if current_staff.admin? %>
 		          <% column_names.each_with_index do |col,i| %>
 		            <% if col.first != "group" %>
 		                <th data-data="<%= col.first %>" class="text-grey"><%= col.last %></th>
@@ -83,7 +79,7 @@
 		              <% end %>
 		            <% end %>
 		          <% end %>
-						<% end %>
+				<% end %>
           <% else %>
             <th data-data="full_name">שם מלא</th>
             <th data-data="last_group"><%= @level_names[0] %></th>
@@ -101,11 +97,6 @@
 <% if Group.exists?(next_id) && (current_staff.admin? || current_staff.vip?) %>
   <%= link_to "ה#{@level_names[0]} הבאה", group_path(next_id), class: "btn btn-primary-cus" %>
 <% end %>
-
-  <%# link_to "יצירת #{@staff_names[0]} חדש.ה", new_group_staff_path(@group), class: "btn btn-primary-cus"  if current_staff.admin? %> <br>
-
-
-
 
 <script>
 	if(<%= @level == 1 %>){
