@@ -1,6 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: 'חניכים') do |sheet|
   export_columns = ["שם פרטי", "שם משפחה"]
+  export_columns << @level_names[0]
   @mifal.columns.each do |col|
     unless ["full_name", "name", "last_name", "group", "status", "cause"].include?(col)
       export_columns << @column_names[col.to_sym]
@@ -9,20 +10,23 @@ wb.add_worksheet(name: 'חניכים') do |sheet|
   export_columns << "סטטוס בעת הייצוא"
   export_columns << "סיבת היעדרות"
   export_columns << "סיבת מחיקה"
-  export_columns << @level_names[0]
   export_columns << "נוכחויות"
   sheet.add_row export_columns
   @kids.order('group_id ASC').each do |kid|
     export_attributes = []
+    if kid.group
+      group = Group.find(kid.group_id).name
+    else
+      group = ""
+    end
+    export_attributes << kid.name
+    export_attributes << kid.last_name
+    export_attributes << group
     @mifal.columns.each do |col|
-      unless ["full_name", "group", "status", "cause", "fever"].include?(col)
+      unless ["full_name", "name", "last_name", "group", "status", "cause", "fever"].include?(col)
         export_attributes << kid.send(col)
       end
     end
-    attributes = [kid.name, kid.last_name, kid.sex, kid.phone, kid.medical, kid.meds, kid.grade, kid.taz,
-                  kid.food, kid.city, kid.ken, kid.parent_1, kid.parent_1_phone, kid.parent_2,
-                  kid.parent_2_phone, kid.size, kid.shabat, kid.parents,
-                  kid.swim, kid.exits, kid.comments]
     export_attributes << kid.heb_status
     export_attributes << kid.cause
     export_attributes << kid.leave_cause
@@ -34,9 +38,6 @@ wb.add_worksheet(name: 'חניכים') do |sheet|
       else
         export_attributes << ""
       end
-    end
-    if kid.group
-      export_attributes << Group.find(kid.group_id).name
     end
     kid.attendances.each do |a|
       if a.check
