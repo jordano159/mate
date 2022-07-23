@@ -17,8 +17,8 @@ json.set! :data do
       json.level "לא הוכנסה דרגה"
     end
     json.url  "
-              #{link_to 'עריכה', edit_event_path(event), class: 'btn btn-warning'}
-              #{link_to 'מחיקה', event, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, class: 'btn btn-danger' if current_staff.admin? || current_staff.vip?}
+              #{link_to '<i class="icon icon-edit-solid"></i>'.html_safe, edit_event_path(event), style: 'color: grey; margin-right: 30px;'}
+              #{link_to '<i class="icon icon-trash-alt-regular"></i>'.html_safe, event, method: :delete, data: { confirm: 'את/ה בטוח/ה?' }, style: 'color: red' if current_staff.admin? || current_staff.vip?}
               "
   end
 end
